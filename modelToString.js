@@ -1,25 +1,8 @@
 // Function to test function below.
 var randomColor = function() {
-	switch (Math.floor((Math.random() * 6) + 1)){
-		case 1:
-			return 'Gul';
-			break;
-		case 2:
-			return 'Röd';
-			break;
-		case 3:
-			return 'Lilla';
-			break;
-		case 4:
-			return 'Blå';
-			break;
-		case 5:
-			return '';
-			break;
-		case 6:
-			return 'Orange';
-			break;
-	}
+	var colorToReturn = ['Gul', 'Röd', 'Lilla', 'Blå', '', 'Orange'];
+	var number = Math.floor((Math.random() * 5));
+	return colorToReturn[number];
 };
 
 // Function to creating a url string.
