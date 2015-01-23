@@ -6,27 +6,84 @@ var randomColor = function() {
 };
 
 // Function to creating a url string.
-var modelToString = function(cubeArray){
+var modelToString = function(modelArray){
 	var output = '';
 	var quantity = 1;
 
-	for(i = 0; i < input.length; i++){
-		if(input[i+1] == input[i]){
+	for(var i = 0; i < modelArray.length; i++){
+		if(modelArray[i+1] == modelArray[i]){
 			quantity++;
 		}else{
 			if(quantity > 1){
 				output += quantity;
 				quantity = 1;
 			}
-			if(input[i] === ''){
-				output += '0';
+			if(modelArray[i] === ''){
+				output += 'E';
 			}else {
-				output += input[i].charAt(0);
+				output += modelArray[i].charAt(0);
 			}
 		}
 	}
 	return output;
 };
+
+var stringToModal = function(modelString){
+	var output = [];
+	for(var i = 0; i < modelString.length; i++){
+		var next = i;
+		var quantity = 0;
+		while(!isNaN(modelString.charAt(next))){
+			if(quantity > 0) {
+				quantity = "" + quantity + modelString.charAt(next);
+			}else{
+				quantity = +modelString.charAt(next);
+			}
+			next++;
+		}
+		// Checks if quantity is 0
+		if(quantity === 0){
+			quantity = 1;
+		// Else adding number of chars that have been past to i.
+		}else{
+			i += next - i;
+		}
+
+		// Fetching color with char.
+		var toPush = getColorFromChar(modelString.charAt(next));
+		// Pushing number of colors that are in row.
+		for(var x = 1; x <= +quantity; x++ ){
+			output.push(toPush);
+		}
+	}
+	return output;
+};
+
+// Switching char to color.
+function getColorFromChar(char){
+	var returnChar = '';
+	switch (char){
+		case 'G':
+			returnChar = 'Gul';
+			break;
+		case  'R':
+			returnChar = 'Röd';
+			break;
+		case  'L':
+			returnChar = 'Lilla';
+			break;
+		case  'B':
+			returnChar = 'Blå';
+			break;
+		case  "E":
+			returnChar = '';
+			break;
+		case  'O':
+			returnChar = 'Orange';
+			break;
+	}
+	return returnChar;
+}
 
 // Code to run test.
 var input = [];
@@ -34,5 +91,6 @@ for(i = 0; i < 125;i++){
 	input.push(randomColor());
 }
 
-console.log(input);
+input = ['Gul', 'Gul', '', 'Lilla', 'Röd', 'Röd', 'Lilla', 'Blå', '', 'Orange'];
 console.log(modelToString(input));
+console.log(stringToModal(modelToString(input)));
