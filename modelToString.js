@@ -28,7 +28,7 @@ var modelToString = function(modelArray){
 	return output;
 };
 
-var stringToModal = function(modelString){
+var stringToModel = function(modelString){
 	var output = [];
 	for(var i = 0; i < modelString.length; i++){
 		var next = i;
@@ -93,4 +93,4 @@ for(i = 0; i < 125;i++){
 
 input = ['Gul', 'Gul', '', 'Lilla', 'Röd', 'Röd', 'Lilla', 'Blå', '', 'Orange'];
 console.log(modelToString(input));
-console.log(stringToModal(modelToString(input)));
+console.log(stringToModel(modelToString(input)));
