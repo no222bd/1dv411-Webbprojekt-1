@@ -71,9 +71,9 @@ var createScene = function () {
 	function changeBlockVisibility(currentBlock){
 		if(currentBlock.visibility){
 			// Check if block above is visible.
-			var blockabove = currentBlock.number + (number * number);
-			blockabove = blocksArray[blockabove];
-			currentBlock.visibility = blockabove.visibility;
+			var blockAbove = currentBlock.number + (number * number);
+			blockAbove = blocksArray[blockAbove];
+			currentBlock.visibility = blockAbove.visibility;
 		}else{
 			var blockBelow = currentBlock.number - (number * number);
 			if(blockBelow < 0){
