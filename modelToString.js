@@ -28,6 +28,7 @@ var modelToString = function(modelArray){
 	return output;
 };
 
+// Function to creating a color array from url string.
 var stringToModel = function(modelString){
 	var output = [];
 	for(var i = 0; i < modelString.length; i++){
@@ -59,7 +60,7 @@ var stringToModel = function(modelString){
 	return output;
 };
 
-// Switching char to color.
+// Function to switching char to color.
 function getColorFromChar(char){
 	var returnChar = '';
 	switch (char){
@@ -85,12 +86,21 @@ function getColorFromChar(char){
 	return returnChar;
 }
 
+// Function to get cubes side length.
+function calcSideByVolume(colorArray){
+	return Math.cbrt(colorArray.length);
+}
+
 // Code to run test.
 var input = [];
 for(i = 0; i < 125;i++){
 	input.push(randomColor());
 }
 
-input = ['Gul', 'Gul', '', 'Lilla', 'Röd', 'Röd', 'Lilla', 'Blå', '', 'Orange'];
+input = ['Gul', 'Gul', '', 'Lilla', 'Röd', 'Blå', '', 'Orange'];
+// Should be 2GELRBEO
 console.log(modelToString(input));
+// Should be ['Gul', 'Gul', '', 'Lilla', 'Röd', 'Blå', '', 'Orange']
 console.log(stringToModel(modelToString(input)));
+// Should be 2
+console.log(calcSideByVolume(input));

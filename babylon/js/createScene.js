@@ -32,7 +32,7 @@ var createScene = function () {
 	cubeWallMaterial.emissiveTexture = new BABYLON.Texture("textures/block.png", scene);
 
 	// Creating all blocks.
-	var numberOfBlocks = number * number * number;
+	var numberOfBlocks = Math.pow(number, 3);
 	for(var i = 0; i < numberOfBlocks; i++){
 		var cube = BABYLON.Mesh.CreateBox("cube", BLOCK_SIZE, scene);
 		cube.material = cubeWallMaterial;
@@ -72,7 +72,7 @@ var createScene = function () {
 		if(currentBlock.visibility){
 			// Check if block above is visible.
 			var blockAbove = currentBlock.number + (number * number);
-			if(blockAbove > (number * number * number)){
+			if(blockAbove > Math.pow(number, 3)){
 				currentBlock.visibility = false;
 			}else {
 				blockAbove = blocksArray[blockAbove];
