@@ -93,17 +93,43 @@ var createScene = function () {
 		}
 	}
 
+	// Stores camera postion before mouse been clicked
+	var cameraBeforeClick  = [];
+
+	// Adding camera x,y,z position to cameraBeforeClick array on mouse down.
+	window.addEventListener("mousedown", function() {
+		cameraBeforeClick[0] = camera.position.x;
+		cameraBeforeClick[1] = camera.position.y;
+		cameraBeforeClick[2] = camera.position.z;
+	});
+
+	// Function checks if camera position have changed.
+	function cameraPositionHaveChanged(){
+		// Check if camera x position have changed.
+		var cameraPositionXChanged = cameraBeforeClick[0] !== camera.position.x;
+		// Check if camera y position have changed.
+		var cameraPositionYChanged = cameraBeforeClick[1] !== camera.position.y;
+		// Check if camera z position have changed.
+		var cameraPositionZChanged = cameraBeforeClick[2] !== camera.position.z;
+
+		// Check if camera position have changed.
+		return cameraPositionXChanged && cameraPositionYChanged && cameraPositionZChanged;
+	}
+
 	//When click event is raised
 	window.addEventListener("click", function () {
-		// We try to pick an object
-		var pickResult = scene.pick(scene.pointerX, scene.pointerY);
-		// Check if object exists.
-		if(pickResult.pickedMesh){
-			var currentBlock = pickResult.pickedMesh;
-			var cubeWallMaterial = new BABYLON.StandardMaterial("block", scene);
-			cubeWallMaterial.emissiveTexture = new BABYLON.Texture("textures/blockRed.png", scene);
-			currentBlock.material = cubeWallMaterial;
-			changeBlockVisibility(currentBlock);
+		// Checks if camera have been rotated or not.
+		if(!cameraPositionHaveChanged()) {
+			// We try to pick an object
+			var pickResult = scene.pick(scene.pointerX, scene.pointerY);
+			// Check if object exists.
+			if (pickResult.pickedMesh) {
+				var currentBlock = pickResult.pickedMesh;
+				var cubeWallMaterial = new BABYLON.StandardMaterial("block", scene);
+				cubeWallMaterial.emissiveTexture = new BABYLON.Texture("textures/blockRed.png", scene);
+				currentBlock.material = cubeWallMaterial;
+				changeBlockVisibility(currentBlock);
+			}
 		}
 	});
 
