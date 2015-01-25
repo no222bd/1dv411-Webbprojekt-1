@@ -12,9 +12,9 @@
 <body>
     <div id="ThreeJScontainer"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
-    <script src="http://mrdoob.github.io/three.js/examples/js/renderers/Projector.js"></script>
-    <script src="http://mrdoob.github.io/three.js/examples/js/controls/OrthographicTrackballControls.js"></script>
-    <script src="http://mrdoob.github.io/three.js/examples/js/libs/stats.min.js"></script>
+    <script src="http://threejs.org/examples/js/renderers/Projector.js"></script>
+    <script src="http://threejs.org/examples/js/controls/OrbitControls.js"></script>
+    <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
     <script>
             var controls;
 			var container;
@@ -46,9 +46,7 @@
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
 				camera.position.set( 500, 800, 1300 );
 				camera.lookAt( new THREE.Vector3() );
-                controls = new THREE.OrthographicTrackballControls(camera);
-                controls.damping = 1.2;
-                controls.addEventListener("change", render);
+                controls = new THREE.OrbitControls( camera );
 				scene = new THREE.Scene();
 
 				// roll-over helpers
@@ -115,7 +113,7 @@
 				container.appendChild( renderer.domElement );
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				document.addEventListener( 'mouseup', onDocumentMouseDown, false );
 				document.addEventListener( 'keydown', onDocumentKeyDown, false );
 				document.addEventListener( 'keyup', onDocumentKeyUp, false );
 
@@ -158,6 +156,7 @@
 			}
 
 			function onDocumentMouseDown( event ) {
+				console.log(event);
 
 				event.preventDefault();
 
@@ -173,7 +172,7 @@
 
 					// delete cube
 
-					if ( isShiftDown ) {
+					if ( event.button == 2 ) {
 
 						if ( intersect.object != plane ) {
 
@@ -228,90 +227,6 @@
 
 			}
     </script>
-    <!--<script>
-        var container, scene, camera, camera2, renderer;
-        init();
-        animate();
-         // FUNCTIONS //
-        function init() {
-            scene = new THREE.Scene();
-            // CAMERA //
-            var SCREEN_WIDTH = window.innerWidth,
-                SCREEN_HEIGHT = window.innerHeight;
-            var VIEW_ANGLE = 110,
-                ASPECT = (0.5 * SCREEN_WIDTH) / SCREEN_HEIGHT,
-                NEAR = 0.1,
-                FAR = 20000;
-            camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
-            camera2 = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
-            scene.add(camera);
-            scene.add(camera2);
-            
-            camera.position.set(0, 0, 500);
-            camera2.position.set(0, 500, 0);
-            
-            camera.lookAt(scene.position);
-            camera2.lookAt(scene.position);
-            // RENDERER NEW
-            renderer = new THREE.WebGLRenderer();
-            renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-            renderer.setClearColor( 0xff00ff );
-            //...Either create a div element to contain the renderer        ==> container = document.createElement( 'div' );
-            container = document.getElementById('ThreeJScontainer'); //...OR reference predefined container in the html
-            container.appendChild(renderer.domElement);
-            //Hmmmm   THREEx.WindowResize(renderer, camera);
-            var light = new THREE.PointLight(0xffffff, 1);
-            light.position.set(0, 250, 0);
-            scene.add(light);
-            var ambientLight = new THREE.AmbientLight(0x404040);
-            //ambientLight.position.set(0, 500, 0);
-            scene.add(ambientLight);
-            var sphereGeometry = new THREE.BoxGeometry(50, 50, 50);
-            // use a "lambert" material rather than "basic" for realistic lighting.//(don't forget to add >= 1 light!)
-            var sphereMaterial = new THREE.MeshPhongMaterial({
-                color: 0xffffff
-            });
-            var sphere1 = new THREE.Mesh(sphereGeometry, sphereMaterial);
-            sphere1.position.set(-60, 0, 50);
-            scene.add(sphere1);
-            var sphere2 = new THREE.Mesh(sphereGeometry, sphereMaterial);
-            sphere2.position.set(0, 0, -50);
-            scene.add(sphere2);
-            var sphere3 = new THREE.Mesh(sphereGeometry, sphereMaterial);
-            sphere3.position.set(60, 0, 50);
-            scene.add(sphere3);
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            render();
-        }
-
-        function render() {
-            var SCREEN_WIDTH = window.innerWidth,
-                SCREEN_HEIGHT = window.innerHeight;
-            camera.aspect = (0.5 * SCREEN_WIDTH) / SCREEN_HEIGHT;
-            camera.updateProjectionMatrix();
-            camera2.aspect = (0.5 * SCREEN_WIDTH) / SCREEN_HEIGHT;
-            camera2.updateProjectionMatrix();
-            var mar = 100
-            var panelX1min = mar
-            var panelWidth = Math.floor(0.5 * SCREEN_WIDTH) - (2 * mar)
-            var panelX2min = panelWidth + 3*mar;
-            var panelYmin = mar;
-            var panelHeight = SCREEN_HEIGHT - (2 * mar)
-            //...LEFT SIDE 
-            renderer.setViewport(1, 1, 0.5 * SCREEN_WIDTH -2, SCREEN_HEIGHT - 2);
-            renderer.render(scene, camera);
-            renderer.autoClear = false;
-            //...RIGHT SIDE
-
-            // ***** if you comment out the next two lines then the left side viewport will be shown *****
-
-            renderer.setViewport(0.5 * SCREEN_WIDTH, 1, 0.5 * SCREEN_WIDTH - 2, SCREEN_HEIGHT - 2);
-            renderer.render(scene, camera2);
-        }
-    </script>-->
 </body>
 
 </html>
