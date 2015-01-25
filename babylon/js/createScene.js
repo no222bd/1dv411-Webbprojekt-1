@@ -19,8 +19,12 @@ var createScene = function () {
 	camera.attachControl(canvas, true);
 
 	// Ground
-	var ground = BABYLON.Mesh.CreateGround("ground", (number*BLOCK_SIZE), (number*BLOCK_SIZE), 1, scene, true);
+	var ground = BABYLON.Mesh.CreateGround("ground", (number*BLOCK_SIZE), (number*BLOCK_SIZE), 1, scene);
 	ground.position.y = BLOCK_SIZE / 2;
+	if(number % 2 === 0){
+		ground.position.x += BLOCK_SIZE / 2;
+		ground.position.z += BLOCK_SIZE / 2;
+	}
 	var groundMaterial = new BABYLON.StandardMaterial("ground", scene);
 	groundMaterial.emissiveTexture = new BABYLON.Texture("textures/ground.png", scene);
 	groundMaterial.emissiveTexture.uScale = number;
