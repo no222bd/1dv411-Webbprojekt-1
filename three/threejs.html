@@ -27,6 +27,7 @@
 			var cubeGeo, cubeMaterial;
 			var stats;
 			var objects = [];
+			var mouseposition;
 
 			init();
 			render();
@@ -58,7 +59,7 @@ document.body.appendChild( stats.domElement );
 				camera.lookAt( new THREE.Vector3() );
                 controls = new THREE.OrbitControls( camera );
 				scene = new THREE.Scene();
-
+				mouseposition = new THREE.Vector2();
 				// roll-over helpers
 
 				rollOverGeo = new THREE.BoxGeometry( 50, 50, 50 );
@@ -126,6 +127,10 @@ document.body.appendChild( stats.domElement );
 				document.addEventListener( 'mouseup', onDocumentMouseDown, false );
 				document.addEventListener( 'keydown', onDocumentKeyDown, false );
 				document.addEventListener( 'keyup', onDocumentKeyUp, false );
+				document.addEventListener( 'mousedown', function(event){
+					mouseposition.x = event.x;
+					mouseposition.y = event.y;
+				});
 
 				//
 
@@ -166,7 +171,10 @@ document.body.appendChild( stats.domElement );
 			}
 
 			function onDocumentMouseDown( event ) {
-
+				console.log(mouseposition, event);
+				if(mouseposition.x != event.x || mouseposition.y != event.y){
+					return;
+				}
 				event.preventDefault();
 
 				mouse.set( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
@@ -232,14 +240,12 @@ document.body.appendChild( stats.domElement );
 
 			function render() {
 
-    stats.begin();
-
     // monitored code goes here
 
 				
 				
     renderer.render( scene, camera );
-    stats.end();
+    stats.update();
     requestAnimationFrame(render);
 			}
     </script>
