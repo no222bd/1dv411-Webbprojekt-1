@@ -184,7 +184,7 @@
 
 					// create cube
 
-					} else {
+					} else if (event.button == 0) {
 
 						var voxel = new THREE.Mesh( cubeGeo, cubeMaterial );
 						voxel.position.copy( intersect.point ).add( intersect.face.normal );
