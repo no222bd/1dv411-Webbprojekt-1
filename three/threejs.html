@@ -3,6 +3,7 @@
 
 <head>
     <title>My first Three.js app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <style>
         body { margin: 0; }
         			canvas { width: 100%; height: 100% }
@@ -24,12 +25,12 @@
 
 			var rollOverMesh, rollOverMaterial;
 			var cubeGeo, cubeMaterial;
-
+			var stats;
 			var objects = [];
 
 			init();
 			render();
-
+			
 			function init() {
 
 				container = document.createElement( 'div' );
@@ -43,6 +44,15 @@
 				info.innerHTML = '<a href="http://threejs.org" target="_blank">three.js</a> - voxel painter - webgl<br><strong>click</strong>: add voxel, <strong>shift + click</strong>: remove voxel';
 				container.appendChild( info );
 
+				stats = new Stats();
+			stats.setMode(0); // 0: fps, 1: ms
+
+// align top-left
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.left = '0px';
+stats.domElement.style.top = '0px';
+
+document.body.appendChild( stats.domElement );
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
 				camera.position.set( 500, 800, 1300 );
 				camera.lookAt( new THREE.Vector3() );
@@ -151,7 +161,7 @@
 
 				}
 
-				render();
+				//render();
 
 			}
 
@@ -194,7 +204,7 @@
 
 					}
 
-					render();
+					//render();
 
 				}
 
@@ -222,8 +232,15 @@
 
 			function render() {
 
-				renderer.render( scene, camera );
+    stats.begin();
 
+    // monitored code goes here
+
+				
+				
+    renderer.render( scene, camera );
+    stats.end();
+    requestAnimationFrame(render);
 			}
     </script>
 </body>
