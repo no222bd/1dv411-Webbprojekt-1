@@ -123,7 +123,7 @@ var createScene = function () {
 	}
 
 	//When click event is raised
-	window.addEventListener("click", function () {
+	window.addEventListener("pointerup", function () {
 		// Checks if camera have been rotated or not.
 		if(!cameraPositionHaveChanged()) {
 			// We try to pick an object
