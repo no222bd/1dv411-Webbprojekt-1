@@ -21,14 +21,16 @@ var createScene = function () {
 	// Ground
 	var ground = BABYLON.Mesh.CreateGround("ground", (number*BLOCK_SIZE), (number*BLOCK_SIZE), 1, scene);
 	ground.position.y = BLOCK_SIZE / 2;
-	if(number % 2 === 0){
-		ground.position.x += BLOCK_SIZE / 2;
-		ground.position.z += BLOCK_SIZE / 2;
-	}
 	var groundMaterial = new BABYLON.StandardMaterial("ground", scene);
 	groundMaterial.emissiveTexture = new BABYLON.Texture("textures/ground.png", scene);
 	groundMaterial.emissiveTexture.uScale = number;
 	groundMaterial.emissiveTexture.vScale = number;
+	if(number % 2 === 0){
+		ground.position.x += BLOCK_SIZE / 2;
+		ground.position.z += BLOCK_SIZE / 2;
+		groundMaterial.emissiveTexture.vOffset = 0.5 / number;
+		groundMaterial.emissiveTexture.uOffset = 0.5 / number;
+	}
 	ground.material = groundMaterial;
 
 	// Block colors
