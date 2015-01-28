@@ -35,7 +35,7 @@ function init() {
 	scene.add(rollOverMesh);
 	// cubes
 	cubeGeo = new THREE.BoxGeometry(50, 50, 50);
-	cubeMaterial = new THREE.MeshLambertMaterial({color: 0xfeb74c, ambient: 0x00ff80, shading: THREE.FlatShading});
+	cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xFFD52D, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } );
 	cubeMaterial.ambient = cubeMaterial.color;
 	// grid
 	var size = 500, step = 50;
@@ -64,7 +64,7 @@ function init() {
 	var directionalLight = new THREE.DirectionalLight(0xffffff);
 	directionalLight.position.set(1, 0.75, 0.5).normalize();
 	scene.add(directionalLight);
-	renderer = Detector.webgl ? new THREE.WebGLRenderer() : new THREE.CanvasRenderer();
+	renderer = Detector.webgl ? new THREE.WebGLRenderer({antialias: true}) : new THREE.CanvasRenderer();
 	renderer.setClearColor(0xc0c0c0);
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(window.innerWidth, window.innerHeight);
