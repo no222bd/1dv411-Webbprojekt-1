@@ -25,6 +25,7 @@ function init() {
 	camera.position.set(500, 800, 1300);
 	camera.lookAt(new THREE.Vector3());
 	controls = new THREE.OrbitControls(camera);
+	controls.maxPolarAngle = Math.PI/2 * 85/90;
 	scene = new THREE.Scene();
 	mouseposition = new THREE.Vector2();
 	// roll-over helpers
