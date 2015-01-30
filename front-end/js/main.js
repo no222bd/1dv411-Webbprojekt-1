@@ -9,6 +9,7 @@ var stats;
 var objects = [];
 var mouseposition;
 var fov = 45;
+var size = 500, step = 50;
 
 init();
 animate();
@@ -47,7 +48,6 @@ function init() {
 	cubeMaterial.ambient = cubeMaterial.color;
 
 	// grid
-	var size = 500, step = 50;
 	var geometry = new THREE.Geometry();
 
 	for (var i = -size; i <= size; i += step) {
@@ -139,11 +139,20 @@ function onDocumentMouseDown(event) {
 			}
 			// create cube
 		} else if (event.button == 0) {
-			var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
-			voxel.position.copy(intersect.point).add(intersect.face.normal);
-			voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
-			scene.add(voxel);
-			objects.push(voxel);
+				// Checks if cubes positon will be outside of the plane or higher then allowed.
+				if( Math.round(intersect.point.z) < size
+					&& Math.round(intersect.point.z) > (0 - size)
+					&& Math.round(intersect.point.x) < size
+					&& Math.round(intersect.point.x) > (0 - size)
+					&& Math.round(intersect.point.y) < (step * (size / (step/2)))
+				) {
+					var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
+					voxel.position.copy(intersect.point).add(intersect.face.normal);
+					voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+					scene.add(voxel);
+					objects.push(voxel);
+				}
+
 		}
 		//render();
 	}
