@@ -1,3 +1,7 @@
+body{
+	margin: 0;
+}
+/*
 body {
 	margin: 0;
 	position: absolute;
@@ -24,3 +28,4 @@ canvas {
 	width: 100% !important;
 	height: 100% !important
 }
+*/

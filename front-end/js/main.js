@@ -40,7 +40,7 @@ function init() {
 	rollOverGeo = new THREE.BoxGeometry(50, 50, 50);
 	rollOverMaterial = new THREE.MeshBasicMaterial({color: 0xff0000, opacity: 0.5, transparent: true});
 	rollOverMesh = new THREE.Mesh(rollOverGeo, rollOverMaterial);
-	scene.add(rollOverMesh);
+	//scene.add(rollOverMesh);
 
 	// cubes
 	cubeGeo = new THREE.BoxGeometry(50, 50, 50);
