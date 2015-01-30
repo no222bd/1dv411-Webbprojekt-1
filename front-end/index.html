@@ -1,18 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>My first Three.js app</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-		<link rel="stylesheet" href="./css/main.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<!--<link rel="stylesheet" href="./css/main.css"/>-->
 	</head>
 	<body>
 		<div id="ThreeJScontainer"></div>
+		<script src="./js/typedarrays.js"></script>
+		<script src="./js/requestAnimationFramePolyfill.js"></script>
 		<script src="./js/vendor/three.min.js"></script>
-		<script src="./js/vendor/CanvasRenderer.js"></script>
 		<script src="./js/vendor/Projector.js"></script>
+		<script src="./js/vendor/Detector.js"></script>
+		<script src="./js/vendor/CanvasRenderer.js"></script>
 		<script src="./js/vendor/OrbitControls.js"></script>
 		<script src="./js/vendor/stats.min.js"></script>
-		<script src="./js/vendor/Detector.js"></script>
 		<script src="./js/main.js"></script>
 	</body>
 </html>
