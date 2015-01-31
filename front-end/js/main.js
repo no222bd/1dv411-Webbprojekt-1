@@ -93,8 +93,8 @@ function init() {
 	document.addEventListener('keydown', onDocumentKeyDown, false);
 	document.addEventListener('keyup', onDocumentKeyUp, false);
 	document.addEventListener('mousedown', function (event) {
-		mouseposition.x = event.x;
-		mouseposition.y = event.y;
+		mouseposition.x = event.clientX;
+		mouseposition.y = event.clientY;
 	});
 	//
 	window.addEventListener('resize', onWindowResize, false);
