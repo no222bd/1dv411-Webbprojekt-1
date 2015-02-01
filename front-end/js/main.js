@@ -1,14 +1,12 @@
 var controls;
 var container;
 var camera, scene, renderer;
-var plane, cube;
-var mouse, raycaster, isShiftDown = false;
+var plane, cubeGeo, cubeMaterial;
+var mouse, raycaster = false;
 var rollOverMesh, rollOverMaterial;
-var cubeGeo, cubeMaterial;
 var stats;
 var objects = [];
 var mouseposition;
-var fov = 45;
 var size = 500, step = 50;
 
 init();
@@ -33,7 +31,7 @@ function init() {
 
 	controls = new THREE.OrbitControls(camera);
 	controls.noPan = true;
-	controls.maxPolarAngle = Math.PI/2 * 85/90;
+	controls.maxPolarAngle = Math.PI / 2 * 85 / 90;
 	scene = new THREE.Scene();
 	mouseposition = new THREE.Vector2();
 
@@ -45,7 +43,12 @@ function init() {
 
 	// cubes
 	cubeGeo = new THREE.BoxGeometry(50, 50, 50);
-	cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xFFD52D, specular: 0x009900, shininess: 30, shading: THREE.FlatShading } );
+	cubeMaterial = new THREE.MeshLambertMaterial({
+		color: 0xFFD52D,
+		specular: 0x009900,
+		shininess: 30,
+		shading: THREE.FlatShading
+	});
 	cubeMaterial.ambient = cubeMaterial.color;
 
 	// grid
@@ -90,8 +93,6 @@ function init() {
 
 	document.addEventListener('mousemove', onDocumentMouseMove, false);
 	document.addEventListener('mouseup', onDocumentMouseDown, false);
-	document.addEventListener('keydown', onDocumentKeyDown, false);
-	document.addEventListener('keyup', onDocumentKeyUp, false);
 	document.addEventListener('mousedown', function (event) {
 		mouseposition.x = event.clientX;
 		mouseposition.y = event.clientY;
@@ -140,51 +141,33 @@ function onDocumentMouseDown(event) {
 			}
 			// create cube
 		} else if (event.button == 0) {
-				// Checks if cubes positon will be outside of the plane or higher then allowed.
-				if( Math.round(intersect.point.z) < size
-					&& Math.round(intersect.point.z) > (0 - size)
-					&& Math.round(intersect.point.x) < size
-					&& Math.round(intersect.point.x) > (0 - size)
-					&& Math.round(intersect.point.y) < (step * (size / (step/2)))
-				) {
-					var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
-					voxel.position.copy(intersect.point).add(intersect.face.normal);
-					voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
-					scene.add(voxel);
-					objects.push(voxel);
-				}
+			// Checks if cubes positon will be outside of the plane or higher then allowed.
+			if (Math.round(intersect.point.z) < size
+				&& Math.round(intersect.point.z) > (0 - size)
+				&& Math.round(intersect.point.x) < size
+				&& Math.round(intersect.point.x) > (0 - size)
+				&& Math.round(intersect.point.y) < (step * (size / (step / 2)))
+			) {
+				var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
+				voxel.position.copy(intersect.point).add(intersect.face.normal);
+				voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+				scene.add(voxel);
+				objects.push(voxel);
+			}
 
 		}
 		//render();
 	}
 }
-function onDocumentKeyDown(event) {
-	switch (event.keyCode) {
-		case 16:
-			isShiftDown = true;
-			break;
-	}
-}
-function onDocumentKeyUp(event) {
-	switch (event.keyCode) {
-		case 16:
-			isShiftDown = false;
-			break;
-	}
-}
 function animate() {
 
-				requestAnimationFrame( animate );
+	requestAnimationFrame(animate);
 
-				render();
-				stats.update();
+	render();
+	stats.update();
 
-			}
+}
 function render() {
 	// monitored code goes here
 	renderer.render(scene, camera);
 }
-/*
-function log(){
-	console.log(arguments);
-}*/
