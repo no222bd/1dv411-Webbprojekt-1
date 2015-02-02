@@ -92,8 +92,8 @@ function init() {
 	container.appendChild(renderer.domElement);
 
 	document.addEventListener('mousemove', onDocumentMouseMove, false);
-	document.addEventListener('mouseup touchend', onDocumentMouseDown, false);
-	document.addEventListener('mousedown touchstart', function (event) {
+	document.addEventListener('mouseup', onDocumentMouseDown, false);
+	document.addEventListener('mousedown', function (event) {
 		mouseposition.x = event.clientX;
 		mouseposition.y = event.clientY;
 	});
@@ -124,30 +124,23 @@ function onDocumentMouseMove(event) {
 }
 function onDocumentMouseDown(event) {
 	console.log(mouseposition, event);
-	alert(1);
 	if (mouseposition.x != event.clientX || mouseposition.y != event.clientY) {
-		alert(0);
 		return;
 	}
-	alert(2);
 	event.preventDefault();
 	mouse.set(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1);
 	raycaster.setFromCamera(mouse, camera);
 	var intersects = raycaster.intersectObjects(objects);
-	alert(3);
 	if (intersects.length > 0) {
-		alert(4);
 		var intersect = intersects[0];
 		// delete cube
 		if (event.button == 2) {
-			alert(5);
 			if (intersect.object != plane) {
 				scene.remove(intersect.object);
 				objects.splice(objects.indexOf(intersect.object), 1);
 			}
 			// create cube
 		} else if (event.button == 0) {
-			alert(6);
 			// Checks if cubes positon will be outside of the plane or higher then allowed.
 			if (Math.round(intersect.point.z) < size
 				&& Math.round(intersect.point.z) > (0 - size)
@@ -162,8 +155,6 @@ function onDocumentMouseDown(event) {
 				objects.push(voxel);
 			}
 
-		}else{
-			alert(7);
 		}
 		//render();
 	}
