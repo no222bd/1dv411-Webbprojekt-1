@@ -124,7 +124,7 @@ function onDocumentMouseMove(event) {
 }
 function onDocumentMouseDown(event) {
 	console.log(mouseposition, event);
-	if (mouseposition.x != event.x || mouseposition.y != event.y) {
+	if (mouseposition.x != event.clientX || mouseposition.y != event.clientY) {
 		return;
 	}
 	event.preventDefault();
