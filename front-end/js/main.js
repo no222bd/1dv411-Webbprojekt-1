@@ -89,30 +89,33 @@ function init() {
 	$("#ThreeJScontainer").append(renderer.domElement);
 
 	//$("#ThreeJScontainer").mousedown(onDocumentMouseTouchDown);
-	$(document).on("touchstart mousedown", onDocumentMouseTouchDown);
+	//$("#ThreeJScontainer").on("touchstart mousedown", onDocumentMouseTouchDown);
+	document.getElementById("ThreeJSContainer").addEventListener("mousedown", onDocumentMouseTouchDown);
 	
 	//$("#ThreeJScontainer").mouseup(onDocumentMouseTouchUp);
-	$(document).on("touchend  mouseup", onDocumentMouseTouchUp);
+	//$("#ThreeJScontainer").on("touchend mouseup", onDocumentMouseTouchUp);
+	document.getElementById("ThreeJSContainer").addEventListener("mouseup", onDocumentMouseTouchUp);
 	
-	$(window).resize(onWindowResize);
+	//$(window).resize(onWindowResize);
+	window.addEventListener("resize", onWindowResize);
 }
 
 function onWindowResize(event) {
-	//console.log(window.innerWidth, window.innerHeight);
-	//console.log(event);
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
 	renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function onDocumentMouseTouchDown(event) {
+	event.preventDefault();
+	
 	mouseposition.x = event.clientX;
 	mouseposition.y = event.clientY;
 }
 
 function onDocumentMouseTouchUp(event) {
 	event.preventDefault();
-		
+	
 	// if mouse has moved since mousedown event
 	if (mouseposition.x != event.clientX || mouseposition.y != event.clientY) {
 		return;
