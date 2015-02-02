@@ -13,17 +13,14 @@ init();
 animate();
 
 function init() {
-
-	container = document.createElement('div');
-	document.getElementById("ThreeJScontainer").appendChild(container);
-
+	
 	stats = new Stats();
 	stats.setMode(0); // 0: fps, 1: ms
 	// align top-left
 	stats.domElement.style.position = 'absolute';
 	stats.domElement.style.left = '0px';
 	stats.domElement.style.top = '0px';
-	document.body.appendChild(stats.domElement);
+	$("body").append($(stats.domElement));
 
 	camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
 	camera.position.set(500, 800, 1300);
@@ -36,9 +33,9 @@ function init() {
 	mouseposition = new THREE.Vector2();
 
 	// roll-over helpers
-	rollOverGeo = new THREE.BoxGeometry(50, 50, 50);
-	rollOverMaterial = new THREE.MeshBasicMaterial({color: 0xff0000, opacity: 0.5, transparent: true});
-	rollOverMesh = new THREE.Mesh(rollOverGeo, rollOverMaterial);
+	//rollOverGeo = new THREE.BoxGeometry(50, 50, 50);
+	//rollOverMaterial = new THREE.MeshBasicMaterial({color: 0xff0000, opacity: 0.5, transparent: true});
+	//rollOverMesh = new THREE.Mesh(rollOverGeo, rollOverMaterial);
 	//scene.add(rollOverMesh);
 
 	// cubes
@@ -89,84 +86,87 @@ function init() {
 	renderer.setPixelRatio(window.devicePixelRatio || 1);
 	renderer.setSize(window.innerWidth, window.innerHeight);
 
-	container.appendChild(renderer.domElement);
+	$("#ThreeJScontainer").append(renderer.domElement);
 
-	document.addEventListener('mousemove', onDocumentMouseMove, false);
-	document.addEventListener('mouseup', onDocumentMouseDown, false);
-	document.addEventListener('mousedown', function (event) {
-		mouseposition.x = event.clientX;
-		mouseposition.y = event.clientY;
-	});
-	//
-	window.addEventListener('resize', onWindowResize, false);
-	console.log("We get here 6");
+	//$("#ThreeJScontainer").mousedown(onDocumentMouseTouchDown);
+	//$("#ThreeJScontainer").on("touchstart mousedown", onDocumentMouseTouchDown);
+	document.getElementById("ThreeJScontainer").addEventListener("mousedown", onDocumentMouseTouchDown);
+	
+	//$("#ThreeJScontainer").mouseup(onDocumentMouseTouchUp);
+	//$("#ThreeJScontainer").on("touchend mouseup", onDocumentMouseTouchUp);
+	document.getElementById("ThreeJScontainer").addEventListener("mouseup", onDocumentMouseTouchUp);
+	
+	//$(window).resize(onWindowResize);
+	window.addEventListener("resize", onWindowResize);
 }
+
 function onWindowResize(event) {
-	console.log(window.innerWidth, window.innerHeight);
-	console.log(event);
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
 	renderer.setSize(window.innerWidth, window.innerHeight);
 }
-function onDocumentMouseMove(event) {
+
+function onDocumentMouseTouchDown(event) {
 	event.preventDefault();
-	mouse.set(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1);
-	raycaster.setFromCamera(mouse, camera);
-	var intersects = raycaster.intersectObjects(objects);
-	if (intersects.length > 0) {
-		var intersect = intersects[0];
-		rollOverMesh.position.copy(intersect.point).add(intersect.face.normal);
-		//console.log(rollOverMesh);
-		rollOverMesh.position.divideScalar(50);
-		rollOverMesh.position.floor().multiplyScalar(50).addScalar(25);
-	}
-	//render();
+	
+	mouseposition.x = event.clientX;
+	mouseposition.y = event.clientY;
 }
-function onDocumentMouseDown(event) {
-	console.log(mouseposition, event);
+
+function onDocumentMouseTouchUp(event) {
+	event.preventDefault();
+	
+	// if mouse has moved since mousedown event
 	if (mouseposition.x != event.clientX || mouseposition.y != event.clientY) {
 		return;
-	}
-	event.preventDefault();
-	mouse.set(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1);
-	raycaster.setFromCamera(mouse, camera);
-	var intersects = raycaster.intersectObjects(objects);
-	if (intersects.length > 0) {
-		var intersect = intersects[0];
-		// delete cube
-		if (event.button == 2) {
-			if (intersect.object != plane) {
-				scene.remove(intersect.object);
-				objects.splice(objects.indexOf(intersect.object), 1);
+	} else {
+		mouse.set(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1);
+		raycaster.setFromCamera(mouse, camera);
+		var intersects = raycaster.intersectObjects(objects);
+		
+		if (intersects.length > 0) { 
+			var intersect = intersects[0];
+			switch(event.button) {
+				case 0:
+					addCube(intersect);
+					break;
+				case 2:
+					removeCube(intersect);
+					break;
 			}
-			// create cube
-		} else if (event.button == 0) {
-			// Checks if cubes positon will be outside of the plane or higher then allowed.
-			if (Math.round(intersect.point.z) < size
-				&& Math.round(intersect.point.z) > (0 - size)
-				&& Math.round(intersect.point.x) < size
-				&& Math.round(intersect.point.x) > (0 - size)
-				&& Math.round(intersect.point.y) < (step * (size / (step / 2)))
-			) {
-				var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
-				voxel.position.copy(intersect.point).add(intersect.face.normal);
-				voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
-				scene.add(voxel);
-				objects.push(voxel);
-			}
-
 		}
-		//render();
 	}
 }
+
+function addCube(intersect) {
+	// Checks if cubes positon will be outside of the plane or higher then allowed.
+	if (Math.round(intersect.point.z) < size
+		&& Math.round(intersect.point.z) > (0 - size)
+		&& Math.round(intersect.point.x) < size
+		&& Math.round(intersect.point.x) > (0 - size)
+		&& Math.round(intersect.point.y) < (step * (size / (step / 2)))
+	) {
+		var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
+		voxel.position.copy(intersect.point).add(intersect.face.normal);
+		voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+		scene.add(voxel);
+		objects.push(voxel);
+	}
+}
+
+function removeCube(intersect) {
+	if (intersect.object != plane) {
+		scene.remove(intersect.object);
+		objects.splice(objects.indexOf(intersect.object), 1);
+	}
+}
+
 function animate() {
-
 	requestAnimationFrame(animate);
-
 	render();
 	stats.update();
-
 }
+
 function render() {
 	// monitored code goes here
 	renderer.render(scene, camera);
