@@ -92,7 +92,7 @@ function init() {
 	$("#ThreeJScontainer").bind("touchstart", onDocumentMouseTouchDown);
 	
 	//$("#ThreeJScontainer").mouseup(onDocumentMouseTouchUp);
-	$("#ThreeJScontainer").bind("touchstart", onDocumentMouseTouchUp);
+	$("#ThreeJScontainer").bind("touchend", onDocumentMouseTouchUp);
 	
 	$(window).resize(onWindowResize);
 }
