@@ -88,10 +88,11 @@ function init() {
 
 	$("#ThreeJScontainer").append(renderer.domElement);
 
-	$("#ThreeJScontainer").mousedown(onDocumentMouseTouchDown);
-	$("#ThreeJScontainer").mouseup(onDocumentMouseTouchUp);
-	$("#ThreeJScontainer").on("touchstart", onDocumentMouseTouchDown);
-	$("#ThreeJScontainer").on("touchend", onDocumentMouseTouchUp);
+	//$("#ThreeJScontainer").mousedown(onDocumentMouseTouchDown);
+	$("#ThreeJScontainer").bind("touchstart", onDocumentMouseTouchDown);
+	
+	//$("#ThreeJScontainer").mouseup(onDocumentMouseTouchUp);
+	$("#ThreeJScontainer").bind("touchstart", onDocumentMouseTouchUp);
 	
 	$(window).resize(onWindowResize);
 }
