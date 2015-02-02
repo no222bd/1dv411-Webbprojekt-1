@@ -92,8 +92,8 @@ function init() {
 	container.appendChild(renderer.domElement);
 
 	document.addEventListener('mousemove', onDocumentMouseMove, false);
-	document.addEventListener('mouseup', onDocumentMouseDown, false);
-	document.addEventListener('mousedown', function (event) {
+	document.addEventListener('mouseup touchend', onDocumentMouseDown, false);
+	document.addEventListener('mousedown touchstart', function (event) {
 		mouseposition.x = event.clientX;
 		mouseposition.y = event.clientY;
 	});
