@@ -90,11 +90,11 @@ function init() {
 
 	//$("#ThreeJScontainer").mousedown(onDocumentMouseTouchDown);
 	//$("#ThreeJScontainer").on("touchstart mousedown", onDocumentMouseTouchDown);
-	document.getElementById("ThreeJSContainer").addEventListener("mousedown", onDocumentMouseTouchDown);
+	document.getElementById("ThreeJScontainer").addEventListener("mousedown", onDocumentMouseTouchDown);
 	
 	//$("#ThreeJScontainer").mouseup(onDocumentMouseTouchUp);
 	//$("#ThreeJScontainer").on("touchend mouseup", onDocumentMouseTouchUp);
-	document.getElementById("ThreeJSContainer").addEventListener("mouseup", onDocumentMouseTouchUp);
+	document.getElementById("ThreeJScontainer").addEventListener("mouseup", onDocumentMouseTouchUp);
 	
 	//$(window).resize(onWindowResize);
 	window.addEventListener("resize", onWindowResize);
