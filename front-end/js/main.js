@@ -28,7 +28,7 @@ function init() {
 
 	controls = new THREE.OrbitControls(camera);
 	controls.noPan = true;
-	controls.maxPolarAngle = Math.PI / 2 * 85 / 90;
+	//controls.maxPolarAngle = Math.PI / 2 * 85 / 90;
 	scene = new THREE.Scene();
 	mouseposition = new THREE.Vector2();
 
