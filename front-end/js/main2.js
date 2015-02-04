@@ -26,8 +26,6 @@ function CubeBuilder() {
 	var renderer = createRenderer();
 	var scene = createScene();
 	
-	
-	
 	// private functions
 	function createScene() {
 		var scene = new THREE.Scene();
@@ -177,6 +175,7 @@ function CubeBuilder() {
 			voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
 			scene.add(voxel);
 			objects.push(voxel);
+			updateCounter();
 		}
 	}
 
@@ -185,6 +184,7 @@ function CubeBuilder() {
 		if (intersect.object != plane) {
 			scene.remove(intersect.object);
 			objects.splice(objects.indexOf(intersect.object), 1);
+			updateCounter();
 		}
 	}
 	
@@ -192,6 +192,16 @@ function CubeBuilder() {
 	function render() {
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
+	}
+
+	function updateCounter() {
+		var count = objects.length -1;
+
+		var counter = document.getElementById('counter');
+		counter.innerHTML = "";
+
+		var display = document.createTextNode(count);
+		counter.appendChild(display);
 	}
 	
 	// Constructor code. Adds eventhandlers and DOM-element
