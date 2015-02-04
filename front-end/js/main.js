@@ -2,9 +2,9 @@ var CUBEBUILDER = CUBEBUILDER || {};
 
 CUBEBUILDER = {
 	mouse : new THREE.Vector2(),
-	
+
 	mouseposition : new THREE.Vector2(),
-	
+
 	init : function() {
 
 		this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
@@ -40,7 +40,6 @@ CUBEBUILDER = {
 			opacity : 0.2,
 			transparent : true
 		});
-		
 		var line = new THREE.Line(geometry, material, THREE.LinePieces);
 		this.scene.add(line);
 
@@ -84,9 +83,8 @@ CUBEBUILDER = {
 			CUBEBUILDER.mouseposition.x = event.clientX;
 			CUBEBUILDER.mouseposition.y = event.clientY;
 		} else if (event.type === "mouseup") {
-			
+			// if mouse has moved since mousedown event
 			if (CUBEBUILDER.mouseposition.x != event.clientX || CUBEBUILDER.mouseposition.y != event.clientY) {
-				// if mouse has moved since mousedown event
 				return;
 			} else {
 				CUBEBUILDER.mouse.set((event.clientX / window.innerWidth ) * 2 - 1, -(event.clientY / window.innerHeight ) * 2 + 1);
@@ -94,21 +92,19 @@ CUBEBUILDER = {
 				var intersects = CUBEBUILDER.raycaster.intersectObjects(CUBEBUILDER.objects);
 
 				if (intersects.length > 0) {
-					// if click was inside 3D object
 					var intersect = intersects[0];
 					switch(event.button) {
 					case 0:
-						// left mouse button adds cube
 						CUBEBUILDER.addCube(intersect);
 						break;
 					case 2:
-					 	// right mouse button removes cube
 						CUBEBUILDER.removeCube(intersect);
 						break;
 					}
 				}
 			}
 		}
+
 	},
 
 	onWindowResize : function(event) {
@@ -149,8 +145,10 @@ CUBEBUILDER = {
 CUBEBUILDER.controls;
 CUBEBUILDER.camera, CUBEBUILDER.scene, CUBEBUILDER.renderer;
 CUBEBUILDER.plane, CUBEBUILDER.cubeGeo, CUBEBUILDER.cubeMaterial;
+CUBEBUILDER.mouse = new THREE.Vector2();
 CUBEBUILDER.raycaster = false;
 CUBEBUILDER.objects = [];
+CUBEBUILDER.mouseposition = new THREE.Vector2();
 CUBEBUILDER.size = 500, CUBEBUILDER.step = 50;
 
 CUBEBUILDER.init();
