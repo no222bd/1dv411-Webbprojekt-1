@@ -142,7 +142,7 @@ CUBEBUILDER = {
 	}
 };
 
-CUBEBUILDER.controls;
+//CUBEBUILDER.controls;
 CUBEBUILDER.camera, CUBEBUILDER.scene, CUBEBUILDER.renderer;
 CUBEBUILDER.plane, CUBEBUILDER.cubeGeo, CUBEBUILDER.cubeMaterial;
 CUBEBUILDER.mouse = new THREE.Vector2();

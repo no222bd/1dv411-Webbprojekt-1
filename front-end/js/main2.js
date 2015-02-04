@@ -1,15 +1,18 @@
 function CubeBuilder() {
 	// private members
+	var objects = [];
+	var size = 500;
+	var step = 50;
+	var mouseposition = new THREE.Vector2();
+	var mouse = new THREE.Vector2();
+	
 	var camera = createCamera();
-	var cubeGeo = createCubeGeo();
+	var cubeGeo = new THREE.BoxGeometry(step, step, step);
 	var cubeMaterial = createCubeMaterial();
 	var renderer = createRenderer();
 	var raycaster = new THREE.Raycaster();
-	var objects = [];
-	var size = 500, step = 50;
-	var mouseposition = new THREE.Vector2();
-	var mouse = new THREE.Vector2();
 	var scene = createScene();
+	var plane = createPlane();
 	
 	// private functions
 	function createScene() {
@@ -17,11 +20,10 @@ function CubeBuilder() {
 
 		scene.add(createGrid());
 
-		var plane = createPlane();
 		scene.add(plane);
 		objects.push(plane);
 
-		scene.add(createAmbientLight());
+		scene.add(new THREE.AmbientLight(0x606060));
 		scene.add(createDirectionalLight());
 
 		return scene;
@@ -31,7 +33,7 @@ function CubeBuilder() {
 		var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
 		camera.position.set(500, 800, 1300);
 		camera.lookAt(new THREE.Vector3());
-		var controls = new THREE.OrbitControls(camera);
+		controls = new THREE.OrbitControls(camera);
 		controls.noPan = true;
 		
 		return camera;
@@ -44,10 +46,6 @@ function CubeBuilder() {
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		
 		return renderer;
-	}
-	
-	function createCubeGeo() {
-		return new THREE.BoxGeometry(step, step, step);
 	}
 	
 	function createCubeMaterial() {
@@ -65,11 +63,11 @@ function CubeBuilder() {
 	function createGrid() {
 		var grid = new THREE.Geometry();
 
-		for (var i = -this.size; i <= this.size; i += this.step) {
-			grid.vertices.push(new THREE.Vector3(-this.size, 0, i));
-			grid.vertices.push(new THREE.Vector3(this.size, 0, i));
-			grid.vertices.push(new THREE.Vector3(i, 0, -this.size));
-			grid.vertices.push(new THREE.Vector3(i, 0, this.size));
+		for (var i = -size; i <= size; i += step) {
+			grid.vertices.push(new THREE.Vector3(-size, 0, i));
+			grid.vertices.push(new THREE.Vector3(size, 0, i));
+			grid.vertices.push(new THREE.Vector3(i, 0, -size));
+			grid.vertices.push(new THREE.Vector3(i, 0, size));
 		}
 		
 		var material = new THREE.LineBasicMaterial({
@@ -89,10 +87,6 @@ function CubeBuilder() {
 		plane.visible = false;
 		
 		return plane;
-	}
-	
-	function createAmbientLight() {
-		return new THREE.AmbientLight(0x606060);
 	}
 	
 	function createDirectionalLight() {
@@ -145,8 +139,8 @@ function CubeBuilder() {
 
 	function addCube(intersect) {
 		// Checks if cubes positon will be outside of the plane or higher then allowed.
-		if (Math.round(intersect.point.z) < this.size && Math.round(intersect.point.z) > (0 - this.size) && Math.round(intersect.point.x) < this.size && Math.round(intersect.point.x) > (0 - this.size) && Math.round(intersect.point.y) < (this.step * (this.size / (this.step / 2)))) {
-			var voxel = new THREE.Mesh(this.cubeGeo, this.cubeMaterial);
+		if (Math.round(intersect.point.z) < size && Math.round(intersect.point.z) > (0 - size) && Math.round(intersect.point.x) < size && Math.round(intersect.point.x) > (0 - size) && Math.round(intersect.point.y) < (step * (size / (step / 2)))) {
+			var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
 			voxel.position.copy(intersect.point).add(intersect.face.normal);
 			voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
 			scene.add(voxel);
@@ -155,7 +149,7 @@ function CubeBuilder() {
 	}
 
 	function removeCube(intersect) {
-		if (intersect.object != this.plane) {
+		if (intersect.object != plane) {
 			scene.remove(intersect.object);
 			objects.splice(objects.indexOf(intersect.object), 1);
 		}
@@ -168,9 +162,15 @@ function CubeBuilder() {
 	
 	// constructor code
 	$("#ThreeJScontainer").append(renderer.domElement);
+
 	document.getElementById("ThreeJScontainer").addEventListener("mousedown", onDocumentMouseTouch);
 	document.getElementById("ThreeJScontainer").addEventListener("mouseup", onDocumentMouseTouch);
 	window.addEventListener("resize", onWindowResize);
+	
+	//console.log(camera);
+	//console.log(renderer);
+	//console.log(raycaster);
+	//console.log(scene);
 	
 	render();
 }
