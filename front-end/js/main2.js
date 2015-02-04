@@ -1,4 +1,7 @@
 function CubeBuilder() {
+	// DOM-element to place canvas
+	var JQueryThreeContainer = $("#ThreeJScontainer");
+	
 	// private members
 	var objects = [];
 	
@@ -23,6 +26,8 @@ function CubeBuilder() {
 	var renderer = createRenderer();
 	var scene = createScene();
 	
+	
+	
 	// private functions
 	function createScene() {
 		var scene = new THREE.Scene();
@@ -37,7 +42,7 @@ function CubeBuilder() {
 	
 	// This method chould be used to create view cameras also
 	function createCamera() {
-		var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+		var camera = new THREE.PerspectiveCamera(45, JQueryThreeContainer.width() / JQueryThreeContainer.height(), 1, 10000);
 		camera.position.set(500, 800, 1300);
 		camera.lookAt(new THREE.Vector3());
 		var controls = new THREE.OrbitControls(camera);
@@ -51,7 +56,8 @@ function CubeBuilder() {
 		var renderer = Detector.webgl ? new THREE.WebGLRenderer({ antialias : true }) : new THREE.CanvasRenderer();
 		renderer.setClearColor(0xc0c0c0);
 		renderer.setPixelRatio(window.devicePixelRatio || 1);
-		renderer.setSize(window.innerWidth, window.innerHeight);
+		// change window.innerWidth and window.inner.Height to #ThreeJScontainer.innerWidth and #ThreeJScontainer.innerHeight
+		renderer.setSize(JQueryThreeContainer.width(), JQueryThreeContainer.height());
 		
 		return renderer;
 	}
@@ -110,17 +116,23 @@ function CubeBuilder() {
 	// Hanldes both mousedown and mouseup
 	function onDocumentMouseTouch(event) {
 		event.preventDefault();
+		
+		var elementOffsetX = JQueryThreeContainer.offset().left;
+		var elementOffsetY = JQueryThreeContainer.offset().top;
+		var elementWidth = JQueryThreeContainer.width();
+		var elementHeight = JQueryThreeContainer.height();
+		var eventElementPosition = getEventPositionInDiv(elementOffsetX, elementOffsetY, event.pageX, event.pageY);
 
 		if (event.type === "mousedown") {
 			// save mouse position
-			mouseposition.x = event.clientX;
-			mouseposition.y = event.clientY;
+			mouseposition.x = eventElementPosition.x;
+			mouseposition.y = eventElementPosition.y;
 		} else if (event.type === "mouseup") {
-			if (mouseposition.x != event.clientX || mouseposition.y != event.clientY) {
+			if (mouseposition.x != eventElementPosition.x || mouseposition.y != eventElementPosition.y) {
 				// if mouse has moved since mousedown event
 				return;
 			} else {
-				mouse.set((event.clientX / window.innerWidth ) * 2 - 1, -(event.clientY / window.innerHeight ) * 2 + 1);
+				mouse.set((eventElementPosition.x / elementWidth ) * 2 - 1, -(eventElementPosition.y / elementHeight ) * 2 + 1);
 				raycaster.setFromCamera(mouse, camera);
 				var intersects = raycaster.intersectObjects(objects);
 
@@ -141,12 +153,19 @@ function CubeBuilder() {
 			}
 		}
 	}
+	
+	function getEventPositionInDiv(elementX, elementY, eventPageX, eventPageY) {
+		var eventElementX = eventPageX - elementX;
+		var eventElementY = eventPageY - elementY;
+		
+		return { x: eventElementX, y: eventElementY };
+	}
 
 	// Rerenders when size changes 
 	function onWindowResize(event) {
-		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.aspect = JQueryThreeContainer.width() / JQueryThreeContainer.height();
 		camera.updateProjectionMatrix();
-		renderer.setSize(window.innerWidth, window.innerHeight);
+		renderer.setSize(JQueryThreeContainer.width(), JQueryThreeContainer.height());
 	}
 
 	// Checks if cube can be added and adds cube
