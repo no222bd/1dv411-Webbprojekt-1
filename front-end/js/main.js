@@ -15,7 +15,7 @@ animate();
 function init() {
 	
 	stats = new Stats();
-	stats.setMode(0); // 0: fps, 1: ms
+	stats.setMode(0);
 	// align top-left
 	stats.domElement.style.position = 'absolute';
 	stats.domElement.style.left = '0px';
@@ -28,15 +28,8 @@ function init() {
 
 	controls = new THREE.OrbitControls(camera);
 	controls.noPan = true;
-	//controls.maxPolarAngle = Math.PI / 2 * 85 / 90;
 	scene = new THREE.Scene();
 	mouseposition = new THREE.Vector2();
-
-	// roll-over helpers
-	//rollOverGeo = new THREE.BoxGeometry(50, 50, 50);
-	//rollOverMaterial = new THREE.MeshBasicMaterial({color: 0xff0000, opacity: 0.5, transparent: true});
-	//rollOverMesh = new THREE.Mesh(rollOverGeo, rollOverMaterial);
-	//scene.add(rollOverMesh);
 
 	// cubes
 	cubeGeo = new THREE.BoxGeometry(50, 50, 50);
@@ -88,15 +81,9 @@ function init() {
 
 	$("#ThreeJScontainer").append(renderer.domElement);
 
-	//$("#ThreeJScontainer").mousedown(onDocumentMouseTouchDown);
-	//$("#ThreeJScontainer").on("touchstart mousedown", onDocumentMouseTouchDown);
 	document.getElementById("ThreeJScontainer").addEventListener("mousedown", onDocumentMouseTouchDown);
-	
-	//$("#ThreeJScontainer").mouseup(onDocumentMouseTouchUp);
-	//$("#ThreeJScontainer").on("touchend mouseup", onDocumentMouseTouchUp);
 	document.getElementById("ThreeJScontainer").addEventListener("mouseup", onDocumentMouseTouchUp);
-	
-	//$(window).resize(onWindowResize);
+
 	window.addEventListener("resize", onWindowResize);
 }
 
