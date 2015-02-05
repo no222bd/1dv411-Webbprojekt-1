@@ -1,31 +1,10 @@
 body{
 	margin: 0;
 }
-/*
-body {
-	margin: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-}
 
 #ThreeJScontainer {
-	height: 100%;
+	margin: 100px;
+	
+	height: 600px;
+	width: 1000px;
 }
-
-#ThreeJScontainer > * {
-	height: 100%;
-}
-
-div {
-	height: auto;
-	width: auto;
-}
-
-canvas {
-	width: 100% !important;
-	height: 100% !important
-}
-*/
