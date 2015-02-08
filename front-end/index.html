@@ -9,15 +9,21 @@
 	</head>
 	<body>
 
-		<div id="menu">
-	        <a id="cube" class="menuItem" href=""></a>
-	        <a id="erase" class="menuItem" href=""></a>
-	        <a id="base" class="menuItem popup" href=""></a>
-	        <a id="perspective" class="menuItem popup" href="#perspective"></a>
-	        <div id="splitMenu" class="menuItem">
-	            <a id="settings" class="smallMenuItem popup" href="#settings"></a>
-	            <a id="colors" class="smallMenuItem popup" href="#colors"></a>
-	        </div>
+		<ul id="menu">
+	        <li><a id="cube" href=""></a></li>
+	        <li><a id="erase"href=""></a></li>
+	        <li><a id="base" class="popup" href="#base"></a></li>
+	        <li><a id="perspective" class="popup" href="#perspective"></a></li>
+	        <li>
+	        	<ul id="splitMenu" >
+		        	<li><a id="settings" class="popup" href="#settings"></a></li>
+		        	<li><a id="colors" class="popup" href="#colors"></a></li>
+		        </ul>
+	        </li>           
+		</ul>
+		
+		<div class="counter"> 
+		<p>Antal block: <span id="counter"></span></p> 
 		</div>
 
 		<div id="ThreeJScontainer" onclick="void(0)"></div>
@@ -31,13 +37,11 @@
 		<script src="./js/vendor/CanvasRenderer.js"></script>
 		<script src="./js/vendor/OrbitControls.js"></script>
 		<script src="./js/vendor/stats.min.js"></script>
-		<script src="./js/main_new.js"></script>
-		
+		<script src="./js/Builder.js"></script>
 		
 		<script>
 			var cb = new BUILDER.CubeBuilder();
-			//cb.init();
 		</script>
-		<script src="./js/index.js"></script>
+		<script src="./js/navigation.js"></script>
 	</body>
 </html>

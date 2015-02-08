@@ -7,7 +7,7 @@ BUILDER.CubeBuilder = function() {
 	//public members
 
 	//perspective of view in menubar
-	//this.perspective
+	//this.perspective = function() {};
 
 	//public functions
 
@@ -28,17 +28,39 @@ BUILDER.CubeBuilder = function() {
 	this.setMouseUpAction = function() {
 	};
 
-	var construction = BUILDER.ConstructionArea($("#ThreeJScontainer"));
+	var construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"));
 
+	//render all perspectives in menu
+	this.renderPerspectives = function(element) {
+		construction.renderPerspectives(element);
+	};
+
+	// Freeze model if popup menu is open
+	this.enableOrDisableOrbit = function() {
+		construction.enableOrDisableOrbit();
+	};
 };
 
 BUILDER.ConstructionArea = function(jQueryContainer) {
-	var step, baseSize, objects, cubeGeo, scene, camera, renderer, cubeMaterial, raycaster,
-		mouseposition, mouse, baseGrid, basePlane, controls, views;
+	var step,
+	    baseSize,
+	    objects,
+	    cubeGeo,
+	    scene,
+	    camera,
+	    renderer,
+	    cubeMaterial,
+	    raycaster,
+	    mouseposition,
+	    mouse,
+	    baseGrid,
+	    basePlane,
+	    controls,
+	    views;
 
 	self = this;
 
-	function init() {
+	function init() {// TODO - Make this public ?
 		self.setCubeMaterial(0xFFD52D);
 
 		step = 50;
@@ -50,7 +72,8 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		mouseposition = new THREE.Vector2();
 		mouse = new THREE.Vector2();
 
-		baseSize = 500; //( step/2 ) * antal block i bredd
+		baseSize = 500;
+		//( step/2 ) * antal block i bredd
 		setBase();
 
 		scene = createScene();
@@ -58,80 +81,37 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		controls = new THREE.OrbitControls(camera);
 		controls.noPan = true;
 		renderer = createRenderer(jQueryContainer, true);
-		
+
 		jQueryContainer.append(renderer.domElement);
-		
-		// creating the top-view
-		var element = $("#top-view"); 
-		var aspectRatio = element.width() / element.height(); 
-		var viewSize = 1200;
-		var cam = new THREE.OrthographicCamera( -aspectRatio * viewSize / 2, aspectRatio * viewSize / 2, -viewSize / 2, viewSize / 2 ); 
-		cam.position.set(0, 500, 0); 
-		cam.lookAt(new THREE.Vector3()); 
-		var ren = createRenderer(element); 
-		views.push(new BUILDER.View(ren, cam, element, scene)); 
-
-		// creating the blue-view 
-		element = $("#blue-view");
-		cam = new THREE.OrthographicCamera( aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2 ); 
-		cam.position.set(0, 500, -500); 
-		cam.lookAt(new THREE.Vector3(0, 500, 0)); 
-		ren = createRenderer(element);
-		views.push(new BUILDER.View(ren, cam, element, scene)); 
-
-		// creating the red-view 
-		element = $("#red-view");
-		cam = new THREE.OrthographicCamera( aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2 ); 
-		cam.position.set(500, 500, 0); 
-		cam.lookAt(new THREE.Vector3(0, 500, 0)); 
-		ren = createRenderer(element); 
-		views.push(new BUILDER.View(ren, cam, element, scene)); 
-
-		// creating the yellow-view 
-		element = $("#yellow-view");
-		cam = new THREE.OrthographicCamera( aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2 ); 
-		cam.position.set(0, 500, 500); 
-		cam.lookAt(new THREE.Vector3(0, 500, 0)); 
-		ren = createRenderer(element); 
-		views.push(new BUILDER.View(ren, cam, element, scene)); 
-
-		// creating the green-view 
-		element = $("#green-view");
-		cam = new THREE.OrthographicCamera( aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2 ); 
-		cam.position.set(-500, 500, 0); 
-		cam.lookAt(new THREE.Vector3(0, 500, 0)); 
-		ren = createRenderer(element); 
-		views.push(new BUILDER.View(ren, cam, element, scene)); 
 
 		document.getElementById("ThreeJScontainer").addEventListener("mousedown", onDocumentMouseTouch);
 		document.getElementById("ThreeJScontainer").addEventListener("mouseup", onDocumentMouseTouch);
 		window.addEventListener("resize", onWindowResize);
-		
-		views.forEach(function(element, index, array) {
-			element.init();
-		});
 
 		render();
 	}
 
-	// Rerenders when size changes 
+	// Rerenders when size changes
 	function onWindowResize(event) {
 		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
 		camera.updateProjectionMatrix();
-		
+
 		views.forEach(function(element, index, array) {
 			element.setSize();
 		});
-		
+
 		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
 	}
 
 	// Hanldes both mousedown and mouseup
 	function onDocumentMouseTouch(event) {
-		event.preventDefault(); //FUNGERAR INTE
-		
-		var targetPosition = { x: event.pageX - jQueryContainer.offset().left, 
-			y:  event.pageY - jQueryContainer.offset().top };
+		event.preventDefault();
+		//FUNGERAR INTE
+
+		var targetPosition = {
+			x : event.pageX - jQueryContainer.offset().left,
+			y : event.pageY - jQueryContainer.offset().top
+		};
 
 		if (event.type === "mousedown") {
 			// save mouse position
@@ -155,7 +135,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 						addCube(intersect);
 						break;
 					case 2:
-					 	// right mouse button removes cube
+						// right mouse button removes cube
 						removeCube(intersect);
 						break;
 					}
@@ -167,10 +147,8 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	// Checks if cube can be added and adds cube
 	function addCube(intersect) {
 		// Checks if cubes positon will be outside of the plane or higher then allowed.
-		if (Math.round(intersect.point.z) < baseSize && Math.round(intersect.point.z) > (0 - baseSize) 
-			&& Math.round(intersect.point.x) < baseSize && Math.round(intersect.point.x) > (0 - baseSize) 
-			&& Math.round(intersect.point.y) < (step * (baseSize / (step / 2)))) {
-			
+		if (Math.round(intersect.point.z) < baseSize && Math.round(intersect.point.z) > (0 - baseSize) && Math.round(intersect.point.x) < baseSize && Math.round(intersect.point.x) > (0 - baseSize) && Math.round(intersect.point.y) < (step * (baseSize / (step / 2)))) {
+
 			var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
 			voxel.position.copy(intersect.point).add(intersect.face.normal);
 			voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
@@ -204,7 +182,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		var scene = new THREE.Scene();
 		scene.add(baseGrid);
 		scene.add(basePlane);
-		
+
 		createColorLines().forEach(function(element, index, array) {
 			scene.add(element);
 		});
@@ -215,13 +193,15 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		return scene;
 	};
-	
+
 	function createRenderer(JQueryElement, checkWebGL) {
 		checkWebGL = checkWebGL || false;
 		var renderer;
 
 		if (checkWebGL) {
-			renderer = Detector.webgl ? new THREE.WebGLRenderer({ antialias : true }) : new THREE.CanvasRenderer();
+			renderer = Detector.webgl ? new THREE.WebGLRenderer({
+				antialias : true
+			}) : new THREE.CanvasRenderer();
 		} else {
 			renderer = new THREE.CanvasRenderer();
 		}
@@ -271,35 +251,43 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	function createColorLines() {
 		var lines = [];
-		
+
 		// green line
 		var line = new THREE.Geometry();
 		line.vertices.push(new THREE.Vector3(520, 0, 500));
 		line.vertices.push(new THREE.Vector3(520, 0, -500));
-		var material = new THREE.LineBasicMaterial({ color: 0x00ff00 });
-		lines.push( new THREE.Line(line, material, THREE.LinePieces));
-		
+		var material = new THREE.LineBasicMaterial({
+			color : 0x00ff00
+		});
+		lines.push(new THREE.Line(line, material, THREE.LinePieces));
+
 		// red line
 		line = new THREE.Geometry();
 		line.vertices.push(new THREE.Vector3(-520, 0, 500));
 		line.vertices.push(new THREE.Vector3(-520, 0, -500));
-		material = new THREE.LineBasicMaterial({ color: 0xff0000 });
-		lines.push( new THREE.Line(line, material, THREE.LinePieces));
-		
+		material = new THREE.LineBasicMaterial({
+			color : 0xff0000
+		});
+		lines.push(new THREE.Line(line, material, THREE.LinePieces));
+
 		// blue line
 		line = new THREE.Geometry();
 		line.vertices.push(new THREE.Vector3(500, 0, 520));
 		line.vertices.push(new THREE.Vector3(-500, 0, 520));
-		material = new THREE.LineBasicMaterial({ color: 0x0000ff });
-		lines.push( new THREE.Line(line, material, THREE.LinePieces));
-		
+		material = new THREE.LineBasicMaterial({
+			color : 0x0000ff
+		});
+		lines.push(new THREE.Line(line, material, THREE.LinePieces));
+
 		// yellow line
 		line = new THREE.Geometry();
 		line.vertices.push(new THREE.Vector3(500, 0, -520));
 		line.vertices.push(new THREE.Vector3(-500, 0, -520));
-		material = new THREE.LineBasicMaterial({ color: 0xffff00 });
-		lines.push( new THREE.Line(line, material, THREE.LinePieces));
-		
+		material = new THREE.LineBasicMaterial({
+			color : 0xffff00
+		});
+		lines.push(new THREE.Line(line, material, THREE.LinePieces));
+
 		return lines;
 	};
 
@@ -317,23 +305,80 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	//Updates counter if there's a counter element.
 	function updateCounter() {
-		var count = objects.length == 1 ? "0" : objects.length -1;
+		var count = objects.length == 1 ? "0" : objects.length - 1;
 		var counter = $("#counter");
 		if (counter.length) {
 			counter.text(count);
 		}
 	}
-	
+
 	// Called to render object
 	function render() {
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
-		
+
 		views.forEach(function(element, index, array) {
 			element.render();
 		});
 	};
-	
+
+	this.renderPerspectives = function() {
+		var topView = $("#topView");
+		var blueView = $("#blueView");
+		var redView = $("#redView");
+		var yellowView = $("#yellowView");
+		var greenView = $("#greenView");
+
+		// creating the top-view
+		var aspectRatio = topView.width() / topView.height();
+		var viewSize = 1200;
+		var cam = new THREE.OrthographicCamera(-aspectRatio * viewSize / 2, aspectRatio * viewSize / 2, -viewSize / 2, viewSize / 2);
+		cam.position.set(0, 500, 0);
+		cam.lookAt(new THREE.Vector3());
+		var ren = createRenderer(topView);
+		views.push(new BUILDER.View(ren, cam, topView, scene));
+
+		// creating the blue-view
+		cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
+		cam.position.set(0, 500, -500);
+		cam.lookAt(new THREE.Vector3(0, 500, 0));
+		ren = createRenderer(blueView);
+		views.push(new BUILDER.View(ren, cam, blueView, scene));
+
+		// creating the red-view
+		cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
+		cam.position.set(500, 500, 0);
+		cam.lookAt(new THREE.Vector3(0, 500, 0));
+		ren = createRenderer(redView);
+		views.push(new BUILDER.View(ren, cam, redView, scene));
+
+		// creating the yellow-view
+		cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
+		cam.position.set(0, 500, 500);
+		cam.lookAt(new THREE.Vector3(0, 500, 0));
+		ren = createRenderer(yellowView);
+		views.push(new BUILDER.View(ren, cam, yellowView, scene));
+
+		// creating the green-view
+		cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
+		cam.position.set(-500, 500, 0);
+		cam.lookAt(new THREE.Vector3(0, 500, 0));
+		ren = createRenderer(greenView);
+		views.push(new BUILDER.View(ren, cam, greenView, scene));
+
+		views.forEach(function(element, index, array) {
+			element.init();
+		});
+	};
+
+	this.enableOrDisableOrbit = function() {
+
+		if (controls.enabled)
+			controls.enabled = false;
+		else
+			controls.enabled = true;
+	};
+
 	init();
 };
 
@@ -358,3 +403,4 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 		JQueryElement.append(renderer.domElement);
 	};
 };
+

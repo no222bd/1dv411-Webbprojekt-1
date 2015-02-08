@@ -10,9 +10,9 @@ html, body {
 	margin: 0;
 }
 
-body{
+body {
 	background: #E1F5FF;
-	overflow:hidden;
+	overflow: hidden;
 }
 
 #ThreeJScontainer {
@@ -21,10 +21,9 @@ body{
 	height: 100%;
 }
 
-
 /** -- PopUp -- **
----------------------------------------------------------------------- */	
-#popUp{
+ ---------------------------------------------------------------------- */
+#popUp {
 	display: block;
 	position: absolute;
 	background: rgba(0,0,0,0.75);
@@ -34,29 +33,29 @@ body{
 	top: 0;
 	bottom: 0;
 	z-index: 999;
-	height:100%;
+	height: 100%;
 }
-.container{
+.container {
 	width: 90%;
 	margin: auto auto;
 	height: 100%;
 }
-#popup .button{
+#popup .button {
 	width: 10%;
 	margin-left: 2%;
 	float: left;
 }
-#popup .container > *{
-	
+#popup .container > * {
+
 }
 
-#settings_colors{
+#settings_colors {
 	margin-top: 15px;
 	width: 90%;
 	margin-left: 5%;
 	text-align: center;
 }
-#settings_colors a{
+#settings_colors a {
 	width: 50%;
 	font-size: 32px;
 	color: #000000;
@@ -64,11 +63,11 @@ body{
 	float: left;
 	text-align: center;
 }
-.clear{
+.clear {
 	clear: both;
 }
 
-.button{
+.button {
 	display: block;
 	text-align: center;
 	margin-top: 15px;
@@ -77,106 +76,118 @@ body{
 	text-decoration: none;
 }
 
+/** -- Menu -- **
+ ---------------------------------------------------------------------- */
 
-		/** -- Menu -- **
----------------------------------------------------------------------- */	
-
-#menu{
+#menu {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
 	width: 10%;
 	float: left;
 	height: 100%;
 }
 
-.menuItem {
-    width: 100%;
-    padding-top: 100%;
-    position: relative;
+#menu a {
 	display: block;
+	width: 60px;
+	width: 100%;
+	padding-top: 100%;
+	position: relative;
+}
+#splitMenu {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+#splitMenu li {
+	display: block inline;
+	float: left;
+	width: 50%;
 }
 
 #splitMenu {
-    width: 100%;
-    padding-top: 50%;
-}
-
-.smallMenuItem {
-    width: 50%;
-    padding-top: 50%;
-    position: absolute;
-    top: 50%;
+	width: 100%;
 }
 
 #cube, #erase, #base, #perspective, #settings, #colors {
-    background-image: url('../img/Ikoner.png');
-    background-size: 250%;
+	background-image: url('../img/Ikoner.png');
+	background-size: 250%;
 }
 
 #cube {
-    background-position: 4% 0;
+	background-position: 4% 0;
 }
 #erase {
-    background-position: 102% 0;
+	background-position: 102% 0;
 }
 #base {
-    background-position: 0% 198%;
-    background-size: 220%;
+	background-position: 0% 198%;
+	background-size: 220%;
 }
 #perspective {
-    background-position: 3% 241%;
+	background-position: 3% 241%;
 }
 #settings {
-    background-position: 93% 50%;
-    background-size: 350%;
+	background-position: 93% 50%;
+	background-size: 350%;
 }
 #colors {
-    background-position: 93% 96%;
-    background-size: 350%;
-    left: 50%;
+	background-position: 93% 96%;
+	background-size: 350%;
 }
 
-
-		/** -- Perspective (views)  + counter --**
----------------------------------------------------------------------- */	
-
-.counter,
-.frame {
-	margin: 0;
-	padding: 0;
-	border:7px solid #FFF;
-}
+/** -- Counter -- **
+ ---------------------------------------------------------------------- */
 
 .counter {
-	height: 5%;
+	width: 150px;
+	height: 40px;
+	position: absolute;
+	z-index: 5;
+	top: 1em;
+	right: 1em;
+	font-weight: 900;
+	font-size: 1em;
 }
 
-.counter p,
-.frame p {
+.counter p {
 	margin: 0 0 2px 2px;
 }
 
+/** -- Perspective (views) -- **
+ ---------------------------------------------------------------------- */
+
+.frame {
+	margin: 0;
+	padding: 0;
+	border: 7px solid #FFF;
+}
+
 .view {
-	margin-top:40px;
-	width:400px;
+	margin-top: 40px;
+	width: 400px;
 	height: 400px;
-	color:#000;
-	background:#c0c0c0;
+	color: #000;
+	background: #c0c0c0;
+	float: left;
+	margin: 5px;
 }
 .view .title {
-	display:block;
-	text-align:center;
-	font-weight:900;
-	height:40px;
-	line-height:40px;
+	display: block;
+	text-align: center;
+	font-weight: 900;
+	height: 40px;
+	line-height: 40px;
 }
 .view-container {
 	height: 84%;
 }
 
-
-		/** -- Portrait mode -- **
----------------------------------------------------------------------- */	
+/** -- Portrait mode -- **
+ ---------------------------------------------------------------------- */
 @media (max-width: 750px) {
-	#menu{
+	#menu {
 		width: 100%;
 		height: auto;
 	}
@@ -198,7 +209,7 @@ body{
 
 	.smallMenuItem {
 		height: 50%;
-		padding-left:20%;
+		padding-left: 20%;
 		padding-top: 20%;
 		top: 0;
 		width: 100%;
