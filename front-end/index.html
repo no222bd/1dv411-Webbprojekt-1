@@ -5,9 +5,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<link rel="stylesheet" href="./css/main.css"/>
+		<link rel="stylesheet" href="./css/fontello.css"/>
 	</head>
 	<body>
-	<div id="counter"></div>
+
+		<div id="menu">
+	        <a id="cube" class="menuItem" href=""></a>
+	        <a id="erase" class="menuItem" href=""></a>
+	        <a id="base" class="menuItem popup" href=""></a>
+	        <a id="perspective" class="menuItem popup" href="#perspective"></a>
+	        <div id="splitMenu" class="menuItem">
+	            <a id="settings" class="smallMenuItem popup" href="#settings"></a>
+	            <a id="colors" class="smallMenuItem popup" href="#colors"></a>
+	        </div>
+		</div>
+
 		<div id="ThreeJScontainer" onclick="void(0)"></div>
 		
 		<script src="js/vendor/jquery-1.11.2.min.js"></script>
@@ -21,8 +33,11 @@
 		<script src="./js/vendor/stats.min.js"></script>
 		<script src="./js/main.js"></script>
 		
+		
 		<script>
-			new CubeBuilder();
+			var cb = new BUILDER.CubeBuilder();
+			cb.init();
 		</script>
+		<script src="./js/index.js"></script>
 	</body>
 </html>
