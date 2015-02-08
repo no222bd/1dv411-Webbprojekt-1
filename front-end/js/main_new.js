@@ -33,54 +33,137 @@ BUILDER.CubeBuilder = function() {
 };
 
 BUILDER.ConstructionArea = function(jQueryContainer) {
+	var step, baseSize, objects, cubeGeo, scene, camera, renderer, cubeMaterial, raycaster,
+		mouseposition, mouse, baseGrid, basePlane, controls;
 
-	//private members
+		self = this;
 
-	// Size of cubes
-	var step = 50;
+	function init() {
+		self.setCubeMaterial(0xFFD52D);
 
-	//size of base plane
-	var baseSize = 500;
+		step = 50;
+		baseSize = 500; //( step/2 ) * antal block i bredd
+		objects = [];
+		cubeGeo = new THREE.BoxGeometry(step, step, step);
 
-	var objects = [];
+		raycaster = new THREE.Raycaster();
+		mouseposition = new THREE.Vector2();
+		mouse = new THREE.Vector2();
 
-	var cubeGeo = new THREE.BoxGeometry(step, step, step);
+		setBase();
 
-	// material for cube
-	var cubeMaterial;
+		scene = createScene();
+		camera = createCamera();
+		renderer = createRenderer();
+
+		controls = new THREE.OrbitControls(camera);
+		controls.noPan = true;
+		
+		jQueryContainer.append(renderer.domElement);
+
+		document.getElementById("ThreeJScontainer").addEventListener("mousedown", onDocumentMouseTouch);
+		document.getElementById("ThreeJScontainer").addEventListener("mouseup", onDocumentMouseTouch);
+		window.addEventListener("resize", onWindowResize);
+		render();
+	}
+
+	// Rerenders when size changes 
+	function onWindowResize(event) {
+		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
+		camera.updateProjectionMatrix();
+		
+		/**views.forEach(function(element, index, array) {
+			element.setSize();
+		});*/
+		
+		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
+	}
+
+	// Hanldes both mousedown and mouseup
+	function onDocumentMouseTouch(event) {
+		event.preventDefault(); //FUNGERAR INTE
+		
+		var targetPosition = { x: event.pageX - jQueryContainer.offset().left, 
+			y:  event.pageY - jQueryContainer.offset().top };
+
+		if (event.type === "mousedown") {
+			// save mouse position
+			mouseposition.x = targetPosition.x;
+			mouseposition.y = targetPosition.y;
+		} else if (event.type === "mouseup") {
+			if (mouseposition.x != targetPosition.x || mouseposition.y != targetPosition.y) {
+				// if mouse has moved since mousedown event
+				return;
+			} else {
+				mouse.set((targetPosition.x / jQueryContainer.width() ) * 2 - 1, -(targetPosition.y / jQueryContainer.height() ) * 2 + 1);
+				raycaster.setFromCamera(mouse, camera);
+				var intersects = raycaster.intersectObjects(objects);
+
+				if (intersects.length > 0) {
+					// if click was inside 3D object
+					var intersect = intersects[0];
+					switch(event.button) {
+					case 0:
+						// left mouse button adds cube
+						addCube(intersect);
+						break;
+					case 2:
+					 	// right mouse button removes cube
+						removeCube(intersect);
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	// Checks if cube can be added and adds cube
+	function addCube(intersect) {
+		// Checks if cubes positon will be outside of the plane or higher then allowed.
+		if (Math.round(intersect.point.z) < baseSize && Math.round(intersect.point.z) > (0 - baseSize) 
+			&& Math.round(intersect.point.x) < baseSize && Math.round(intersect.point.x) > (0 - baseSize) 
+			&& Math.round(intersect.point.y) < (step * (baseSize / (step / 2)))) {
+			
+			var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
+			voxel.position.copy(intersect.point).add(intersect.face.normal);
+			voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+			scene.add(voxel);
+			objects.push(voxel);
+		}
+	}
+
+	// Checks is cube can be removed and removes cube
+	function removeCube(intersect) {
+		if (intersect.object != basePlane) {
+			scene.remove(intersect.object);
+			objects.splice(objects.indexOf(intersect.object), 1);
+		}
+	}
 
 	// set material for cube
 	this.setCubeMaterial = function(colorHex) {
+		cubeMaterial = new THREE.MeshLambertMaterial({
+			color : colorHex,
+			specular : 0x009900,
+			shininess : 30,
+			shading : THREE.FlatShading
+		});
+		cubeMaterial.ambient = cubeMaterial.color;
 	};
 
 	//mouse
 	//this.mouseUpAction
-
-	var raycaster = new THREE.Raycaster();
-	var mouseposition = new THREE.Vector2();
-	var mouse = new THREE.Vector2();
-
-	// base and plane
-	var baseGrid;
-	var basePlane;
 
 	function createScene() {
 		var scene = new THREE.Scene();
 		scene.add(baseGrid);
 		scene.add(basePlane);
 		
-		
-		var lines = createColorLines();
-
-
-		lines.forEach(function(element, index, array) {
+		createColorLines().forEach(function(element, index, array) {
 			scene.add(element);
 		});
 
-		
-		var lights = createLights();
-
-		lights.forEach(function(element, index, array) {
+		createLights().forEach(function(element, index, array) {
 			scene.add(element);
 		});
 
@@ -107,9 +190,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	function setBase() {
 		//create grid
 		var grid = new THREE.Geometry();
-		
-		console.log(baseSize);
-		console.log(step);
 
 		for (var i = -baseSize; i <= baseSize; i += step) {
 			grid.vertices.push(new THREE.Vector3(-baseSize, 0, i));
@@ -176,15 +256,12 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	// Creates lights and shadows
 	function createLights() {
 		var lights = [];
-
 		lights.push(new THREE.AmbientLight(0x606060));
 
 		var directionalLight = new THREE.DirectionalLight(0xffffff);
-
 		directionalLight.position.set(1, 0.75, 0.5).normalize();
 
 		lights.push(directionalLight);
-
 		return lights;
 	};
 	
@@ -198,19 +275,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	}); */
 	};
 	
-	setBase();
-	
-	var scene = createScene();
-	var camera = createCamera();
-	var renderer = createRenderer();
-	
-	jQueryContainer.append(renderer.domElement);
-	
-	//console.log(camera);
-	//console.log(renderer);
-	
-	render();
-
+	init();
 };
 
 BUILDER.View = function(renderer, camera, JQueryElement, scene) {
