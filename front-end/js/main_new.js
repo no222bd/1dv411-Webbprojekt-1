@@ -7,7 +7,7 @@ BUILDER.CubeBuilder = function() {
 	//public members
 
 	//perspective of view in menubar
-	this.perspective
+	//this.perspective
 
 	//public functions
 
@@ -28,6 +28,8 @@ BUILDER.CubeBuilder = function() {
 	this.setMouseUpAction = function() {
 	};
 
+	var construction = BUILDER.ConstructionArea($("#ThreeJScontainer"));
+
 };
 
 BUILDER.ConstructionArea = function(jQueryContainer) {
@@ -38,7 +40,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	var step = 50;
 
 	//size of base plane
-	var baseSize;
+	var baseSize = 500;
 
 	var objects = [];
 
@@ -62,20 +64,23 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	var baseGrid;
 	var basePlane;
 
-	var camera = createCamera();
-	var renderer = createRenderer();
-	var scene = createScene();
-
 	function createScene() {
 		var scene = new THREE.Scene();
 		scene.add(baseGrid);
 		scene.add(basePlane);
+		
+		
+		var lines = createColorLines();
 
-		createColorLines().forEach(function(element, index, array) {
+
+		lines.forEach(function(element, index, array) {
 			scene.add(element);
 		});
 
-		createLights().forEach(function(element, index, array) {
+		
+		var lights = createLights();
+
+		lights.forEach(function(element, index, array) {
 			scene.add(element);
 		});
 
@@ -102,6 +107,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	function setBase() {
 		//create grid
 		var grid = new THREE.Geometry();
+		
+		console.log(baseSize);
+		console.log(step);
 
 		for (var i = -baseSize; i <= baseSize; i += step) {
 			grid.vertices.push(new THREE.Vector3(-baseSize, 0, i));
@@ -116,7 +124,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			transparent : true
 		});
 
-		baseGrid = grid;
+		baseGrid = new THREE.Line(grid, material, THREE.LinePieces);
 
 		// create plane
 		var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
@@ -132,40 +140,35 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	function createColorLines() {
 
 		var lines = [];
-
-		var line = new THREE.Geometry();
-
-		var material = new THREE.LineBasicMaterial();
-
+		
 		// green line
+		var line = new THREE.Geometry();
 		line.vertices.push(new THREE.Vector3(520, 0, 500));
 		line.vertices.push(new THREE.Vector3(520, 0, -500));
-		material.color = 0x00ff00;
-		lines.push(new THREE.Line(line, material, THREE.LinePieces));
-
+		var material = new THREE.LineBasicMaterial({ color: 0x00ff00 });
+		lines.push( new THREE.Line(line, material, THREE.LinePieces));
+		
 		// red line
-		line.vertices = [];
+		line = new THREE.Geometry();
 		line.vertices.push(new THREE.Vector3(-520, 0, 500));
 		line.vertices.push(new THREE.Vector3(-520, 0, -500));
-		material = new THREE.LineBasicMaterial({
-			color : 0xff0000
-		});
-		lines.push(new THREE.Line(line, material, THREE.LinePieces));
-
+		material = new THREE.LineBasicMaterial({ color: 0xff0000 });
+		lines.push( new THREE.Line(line, material, THREE.LinePieces));
+		
 		// blue line
-		line.vertices = [];
+		line = new THREE.Geometry();
 		line.vertices.push(new THREE.Vector3(500, 0, 520));
 		line.vertices.push(new THREE.Vector3(-500, 0, 520));
-		material.color = 0x0000ff;
-		lines.push(new THREE.Line(line, material, THREE.LinePieces));
-
+		material = new THREE.LineBasicMaterial({ color: 0x0000ff });
+		lines.push( new THREE.Line(line, material, THREE.LinePieces));
+		
 		// yellow line
-		line.vertices = [];
+		line = new THREE.Geometry();
 		line.vertices.push(new THREE.Vector3(500, 0, -520));
 		line.vertices.push(new THREE.Vector3(-500, 0, -520));
-		material.color = 0xffff00;
-		lines.push(new THREE.Line(line, material, THREE.LinePieces));
-
+		material = new THREE.LineBasicMaterial({ color: 0xffff00 });
+		lines.push( new THREE.Line(line, material, THREE.LinePieces));
+		
 		return lines;
 
 	};
@@ -174,7 +177,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	function createLights() {
 		var lights = [];
 
-		lights.push(THREE.AmbientLight(0x606060));
+		lights.push(new THREE.AmbientLight(0x606060));
 
 		var directionalLight = new THREE.DirectionalLight(0xffffff);
 
@@ -194,6 +197,17 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			element.render();
 	}); */
 	};
+	
+	setBase();
+	
+	var scene = createScene();
+	var camera = createCamera();
+	var renderer = createRenderer();
+	
+	jQueryContainer.append(renderer.domElement);
+	
+	//console.log(camera);
+	//console.log(renderer);
 	
 	render();
 
