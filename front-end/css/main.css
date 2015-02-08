@@ -12,6 +12,7 @@ html, body {
 
 body{
 	background: #E1F5FF;
+	overflow:hidden;
 }
 
 #ThreeJScontainer {

@@ -45,7 +45,7 @@ BUILDER.CubeBuilder = function() {
 		scene.add(plane);
 		objects.push(plane);
 		scene.add(new THREE.AmbientLight(0x606060));
-		scene.add(createDirectionalLight());
+		scene.add(());
 
 		return scene;
 	}	
