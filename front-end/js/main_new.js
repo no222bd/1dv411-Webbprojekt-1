@@ -34,36 +34,83 @@ BUILDER.CubeBuilder = function() {
 
 BUILDER.ConstructionArea = function(jQueryContainer) {
 	var step, baseSize, objects, cubeGeo, scene, camera, renderer, cubeMaterial, raycaster,
-		mouseposition, mouse, baseGrid, basePlane, controls;
+		mouseposition, mouse, baseGrid, basePlane, controls, views;
 
-		self = this;
+	self = this;
 
 	function init() {
 		self.setCubeMaterial(0xFFD52D);
 
 		step = 50;
-		baseSize = 500; //( step/2 ) * antal block i bredd
 		objects = [];
+		views = [];
 		cubeGeo = new THREE.BoxGeometry(step, step, step);
 
 		raycaster = new THREE.Raycaster();
 		mouseposition = new THREE.Vector2();
 		mouse = new THREE.Vector2();
 
+		baseSize = 500; //( step/2 ) * antal block i bredd
 		setBase();
 
 		scene = createScene();
 		camera = createCamera();
-		renderer = createRenderer();
-
 		controls = new THREE.OrbitControls(camera);
 		controls.noPan = true;
+		renderer = createRenderer(jQueryContainer, true);
 		
 		jQueryContainer.append(renderer.domElement);
+		
+		// creating the top-view
+		var element = $("#top-view"); 
+		var aspectRatio = element.width() / element.height(); 
+		var viewSize = 1200;
+		var cam = new THREE.OrthographicCamera( -aspectRatio * viewSize / 2, aspectRatio * viewSize / 2, -viewSize / 2, viewSize / 2 ); 
+		cam.position.set(0, 500, 0); 
+		cam.lookAt(new THREE.Vector3()); 
+		var ren = createRenderer(element); 
+		views.push(new BUILDER.View(ren, cam, element, scene)); 
+
+		// creating the blue-view 
+		element = $("#blue-view");
+		cam = new THREE.OrthographicCamera( aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2 ); 
+		cam.position.set(0, 500, -500); 
+		cam.lookAt(new THREE.Vector3(0, 500, 0)); 
+		ren = createRenderer(element);
+		views.push(new BUILDER.View(ren, cam, element, scene)); 
+
+		// creating the red-view 
+		element = $("#red-view");
+		cam = new THREE.OrthographicCamera( aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2 ); 
+		cam.position.set(500, 500, 0); 
+		cam.lookAt(new THREE.Vector3(0, 500, 0)); 
+		ren = createRenderer(element); 
+		views.push(new BUILDER.View(ren, cam, element, scene)); 
+
+		// creating the yellow-view 
+		element = $("#yellow-view");
+		cam = new THREE.OrthographicCamera( aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2 ); 
+		cam.position.set(0, 500, 500); 
+		cam.lookAt(new THREE.Vector3(0, 500, 0)); 
+		ren = createRenderer(element); 
+		views.push(new BUILDER.View(ren, cam, element, scene)); 
+
+		// creating the green-view 
+		element = $("#green-view");
+		cam = new THREE.OrthographicCamera( aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2 ); 
+		cam.position.set(-500, 500, 0); 
+		cam.lookAt(new THREE.Vector3(0, 500, 0)); 
+		ren = createRenderer(element); 
+		views.push(new BUILDER.View(ren, cam, element, scene)); 
 
 		document.getElementById("ThreeJScontainer").addEventListener("mousedown", onDocumentMouseTouch);
 		document.getElementById("ThreeJScontainer").addEventListener("mouseup", onDocumentMouseTouch);
 		window.addEventListener("resize", onWindowResize);
+		
+		views.forEach(function(element, index, array) {
+			element.init();
+		});
+
 		render();
 	}
 
@@ -72,9 +119,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
 		camera.updateProjectionMatrix();
 		
-		/**views.forEach(function(element, index, array) {
+		views.forEach(function(element, index, array) {
 			element.setSize();
-		});*/
+		});
 		
 		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
 	}
@@ -129,6 +176,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
 			scene.add(voxel);
 			objects.push(voxel);
+			updateCounter();
 		}
 	}
 
@@ -137,6 +185,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		if (intersect.object != basePlane) {
 			scene.remove(intersect.object);
 			objects.splice(objects.indexOf(intersect.object), 1);
+			updateCounter();
 		}
 	}
 
@@ -150,9 +199,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		});
 		cubeMaterial.ambient = cubeMaterial.color;
 	};
-
-	//mouse
-	//this.mouseUpAction
 
 	function createScene() {
 		var scene = new THREE.Scene();
@@ -168,15 +214,21 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		});
 
 		return scene;
-
 	};
 	
-	function createRenderer() {
-		var renderer = Detector.webgl ? new THREE.WebGLRenderer({ antialias : true }) : new THREE.CanvasRenderer();
-		//var renderer = new THREE.CanvasRenderer();
+	function createRenderer(JQueryElement, checkWebGL) {
+		checkWebGL = checkWebGL || false;
+		var renderer;
+
+		if (checkWebGL) {
+			renderer = Detector.webgl ? new THREE.WebGLRenderer({ antialias : true }) : new THREE.CanvasRenderer();
+		} else {
+			renderer = new THREE.CanvasRenderer();
+		}
+
 		renderer.setClearColor(0xc0c0c0);
 		renderer.setPixelRatio(window.devicePixelRatio || 1);
-		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
+		renderer.setSize(JQueryElement.width(), JQueryElement.height());
 		return renderer;
 	};
 
@@ -184,6 +236,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		var camera = new THREE.PerspectiveCamera(45, jQueryContainer.width() / jQueryContainer.height(), 1, 10000);
 		camera.position.set(500, 800, 1300);
 		camera.lookAt(new THREE.Vector3());
+
 		return camera;
 	};
 
@@ -214,11 +267,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		objects[0] = plane;
 		basePlane = plane;
-
 	};
 
 	function createColorLines() {
-
 		var lines = [];
 		
 		// green line
@@ -250,7 +301,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		lines.push( new THREE.Line(line, material, THREE.LinePieces));
 		
 		return lines;
-
 	};
 
 	// Creates lights and shadows
@@ -264,15 +314,24 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		lights.push(directionalLight);
 		return lights;
 	};
+
+	//Updates counter if there's a counter element.
+	function updateCounter() {
+		var count = objects.length == 1 ? "0" : objects.length -1;
+		var counter = $("#counter");
+		if (counter.length) {
+			counter.text(count);
+		}
+	}
 	
 	// Called to render object
 	function render() {
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 		
-	/*	views.forEach(function(element, index, array) {
+		views.forEach(function(element, index, array) {
 			element.render();
-	}); */
+		});
 	};
 	
 	init();
@@ -284,7 +343,15 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 	};
 
 	this.setSize = function() {
+		var viewSite = 1200;
+		var aspectRation = JQueryElement.width() / JQueryElement.height();
 		renderer.setSize(JQueryElement.width(), JQueryElement.height());
+
+		camera.left = aspectRation * viewSite / 2;
+		camera.right = -aspectRation * viewSite / 2;
+		camera.top = viewSite / 2;
+		camera.bottom = -viewSite / 2;
+		camera.updateProjectionMatrix();
 	};
 
 	this.init = function() {
