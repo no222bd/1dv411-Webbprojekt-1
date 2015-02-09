@@ -56,9 +56,8 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	    baseGrid,
 	    basePlane,
 	    controls,
-	    views;
-
-	self = this;
+	    views,
+		self = this;
 
 	function init() {// TODO - Make this public ?
 		self.setCubeMaterial(0xFFD52D);
@@ -83,9 +82,8 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		renderer = createRenderer(jQueryContainer, true);
 
 		jQueryContainer.append(renderer.domElement);
-
-		document.getElementById("ThreeJScontainer").addEventListener("mousedown", onDocumentMouseTouch);
-		document.getElementById("ThreeJScontainer").addEventListener("mouseup", onDocumentMouseTouch);
+		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
+		jQueryContainer.on( "mouseup", onDocumentMouseTouch);
 		window.addEventListener("resize", onWindowResize);
 
 		render();
