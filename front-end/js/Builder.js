@@ -145,14 +145,21 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	// Checks if cube can be added and adds cube
 	function addCube(intersect) {
 		// Checks if cubes positon will be outside of the plane or higher then allowed.
-		if (Math.round(intersect.point.z) < baseSize && Math.round(intersect.point.z) > (0 - baseSize) && Math.round(intersect.point.x) < baseSize && Math.round(intersect.point.x) > (0 - baseSize) && Math.round(intersect.point.y) < (step * (baseSize / (step / 2)))) {
-
+		if (
+			Math.round(intersect.point.z) < baseSize
+			&& Math.round(intersect.point.z) > (0 - baseSize)
+			&& Math.round(intersect.point.x) < baseSize
+			&& Math.round(intersect.point.x) > (0 - baseSize)
+			&& Math.round(intersect.point.y) < (step * (baseSize / (step / 2)))
+		) {
 			var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
 			voxel.position.copy(intersect.point).add(intersect.face.normal);
 			voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
-			scene.add(voxel);
-			objects.push(voxel);
-			updateCounter();
+			if(voxel.position.y > 0) {
+				scene.add(voxel);
+				objects.push(voxel);
+				updateCounter();
+			}
 		}
 	}
 
