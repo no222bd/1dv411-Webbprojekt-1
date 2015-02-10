@@ -1,29 +1,73 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>My first Three.js app</title>
+		<title>CubeBuilder</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" href="./css/normalize.css"/>
 		<link rel="stylesheet" href="./css/main.css"/>
 		<link rel="stylesheet" href="./css/fontello.css"/>
 	</head>
 	<body>
+		<div id="modal" class="modal">
+			<div id="settingsContainer">
+				<div id="settingsModal">
+					<div><a class="innerBox" href=""></a></div>
+					<div><a class="innerBox" href="">Hämta</a></div>
+					<div><a class="innerBox" href="">Hjälp</a></div>
+					<div><a class="innerBox" href="">Spara</a></div>
+				</div>
+			</div>
+			<div id="baseContainer">
+				<div id="baseModal">
+					<div><a class="innerBox" href=""></a></div>
+				</div>
+			</div>
+			<div id="perspectiveContainer">
+				<div id="perspectiveModal">
+					<div></div>
+				</div>
+			</div>
+			<div id="colorsContainer">
+				<div id="colorsModal">
+					<a id="colorBlue" href=""></a>
+					<a id="colorBlack" href=""></a>
+					<a id="colorWhite" href=""></a>
+					<a id="colorYellow" href=""></a>
+					<a id="colorGreen" href=""></a>
+
+					<a id="colorPink" href=""></a>
+					<a id="colorOrange" href=""></a>
+					<a id="colorRed" href=""></a>
+					<a id="colorPurple" href=""></a>
+					<a id="colorLime" href=""></a>
+
+					<a id="colorBlue" href=""></a>
+					<a id="colorBlack" href=""></a>
+					<a id="colorWhite" href=""></a>
+					<a id="colorYellow" href=""></a>
+					<a id="colorGreen" href=""></a>
+
+					<a id="colorPink" href=""></a>
+					<a id="colorOrange" href=""></a>
+					<a id="colorRed" href=""></a>
+					<a id="colorPurple" href=""></a>
+					<a id="colorLime" href=""></a>
+				</div>
+			</div>
+		</div>
 
 		<ul id="menu">
 	        <li><a id="cube" href=""></a></li>
-	        <li><a id="erase"href=""></a></li>
+	        <!-------------- <li><a id="erase" href=""></a></li> ---------------->
 	        <li><a id="base" class="popup" href="#base"></a></li>
 	        <li><a id="perspective" class="popup" href="#perspective"></a></li>
-	        <li>
-	        	<ul id="splitMenu" >
-		        	<li><a id="settings" class="popup" href="#settings"></a></li>
-		        	<li><a id="colors" class="popup" href="#colors"></a></li>
-		        </ul>
-	        </li>           
+        	<li><a id="settings" class="popup" href="#settings"></a></li>
+        	<li><a id="colors" class="popup" href="#colors"></a></li>   
 		</ul>
 		
 		<div class="counter"> 
-		<p>Antal block: <span id="counter"></span></p> 
+			<p>Antal block: <span id="counter"></span></p> 
 		</div>
 
 		<div id="ThreeJScontainer" onclick="void(0)"></div>
