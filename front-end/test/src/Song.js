@@ -1,8 +1,17 @@
 function Song() {
 }
 
+function testBoolean(value){
+	if(value === true || value === false){
+		return true;
+	}
+	return false;
+}
+
 Song.prototype.persistFavoriteStatus = function(value) {
-  this.favorite = value;
+	if(testBoolean(value)) {
+		this.favorite = value;
+	}
 };
 
 Song.prototype.setStatus = function(status){
