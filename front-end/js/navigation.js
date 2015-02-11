@@ -1,5 +1,49 @@
 jQuery(document).ready(function($) {
 
+
+
+var oldhref = "";
+
+	$(".modalOption").click(function (event) {
+		event.preventDefault();
+		var href = $(this).attr("href");
+		var id = $(this).attr("id");
+		
+		if (oldhref === href || oldhref === "") {
+			
+			$('#modal').toggleClass('open');
+			$(href).toggleClass('open');
+			
+			if (id == "perspective") {
+					viewPerspectives();
+				}
+			
+			//make sure user can't rotate model if popup is open
+				cb.enableOrDisableOrbit();
+
+			if (oldhref === "") {
+				oldhref = href;
+			} else {
+				oldhref = "";
+			}
+		}else{
+			$(oldhref).removeClass('open');
+			$('#modal').removeClass('open');
+			oldhref = "";
+			$(this).trigger('click');
+		}
+
+});
+
+
+function viewPerspectives() {
+
+		cb.renderPerspectives();
+	}
+
+});
+
+/*
 	var button = $("#menu a");
 
 	//Handles menu events
@@ -45,16 +89,7 @@ jQuery(document).ready(function($) {
 
 	}
 
-	function viewPerspectives() {
-
-		createViewDiv("topView", "topView");
-		createViewDiv("blueView", "blueView");
-		createViewDiv("redView", "redView");
-		createViewDiv("yellowView", "yellowView");
-		createViewDiv("greenView", "greenView");
-
-		cb.renderPerspectives();
-	}
+	
 
 	function createViewDiv(id, title) {
 		var container = $(".container");
@@ -73,6 +108,5 @@ jQuery(document).ready(function($) {
 		div.appendChild(titleDiv);
 		frame.appendChild(div);
 		container.append(frame);
-	}
+	}*/
 
-});

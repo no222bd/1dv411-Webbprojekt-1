@@ -31,8 +31,8 @@ BUILDER.CubeBuilder = function() {
 	var construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"));
 
 	//render all perspectives in menu
-	this.renderPerspectives = function(element) {
-		construction.renderPerspectives(element);
+	this.renderPerspectives = function() {
+		construction.renderPerspectives();
 	};
 
 	// Freeze model if popup menu is open
@@ -405,6 +405,7 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 	};
 
 	this.init = function() {
+		JQueryElement.empty();
 		JQueryElement.append(renderer.domElement);
 	};
 };
