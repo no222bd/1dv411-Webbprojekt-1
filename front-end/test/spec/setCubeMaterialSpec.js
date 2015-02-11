@@ -15,5 +15,5 @@ describe("Builder.ConstructionArea", function () {
 			builder._setCubeMaterial('0x0000FF');
 			expect(builder._cubeMaterial.ambient.getHexString()).toBe('0000ff');
 		});
-	})
+	});
 });

@@ -64,7 +64,8 @@ describe("Builder.ConstructionArea", function () {
 				expect(line.geometry.vertices[0]).toEqual(Vector3);
 				Vector3.x = -Vector3.x;
 				expect(line.geometry.vertices[1]).toEqual(Vector3);
-			})
+			});
+
 		});
-	})
+	});
 });
