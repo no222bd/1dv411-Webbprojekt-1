@@ -1,11 +1,10 @@
 jQuery(document).ready(function($) {
 
-
-
-var oldhref = "";
+	var oldhref = "";
 
 	$(".modalOption").click(function (event) {
-		event.preventDefault();
+		event.preventDefault(); //Isn't this still NOT working and unnecessary?
+		
 		var href = $(this).attr("href");
 		var id = $(this).attr("id");
 		
@@ -13,13 +12,26 @@ var oldhref = "";
 			
 			$('#modal').toggleClass('open');
 			$(href).toggleClass('open');
-			
-			if (id == "perspective") {
-					viewPerspectives();
-				}
+
+			//Switches function to call depending on the id of the chosen menu link.
+			switch(id) {
+				case "perspective":
+					cb.renderPerspectives();
+					break;
+				case "base":
+					//cb function for base.
+					break;
+				case "settings":
+					//cb function for settings.
+					break;
+				case "colors":
+					//cb function that changes color.
+					break;
+				default:
+			};
 			
 			//make sure user can't rotate model if popup is open
-				cb.enableOrDisableOrbit();
+			cb.enableOrDisableOrbit();
 
 			if (oldhref === "") {
 				oldhref = href;
@@ -32,81 +44,6 @@ var oldhref = "";
 			oldhref = "";
 			$(this).trigger('click');
 		}
-
-});
-
-
-function viewPerspectives() {
-
-		cb.renderPerspectives();
-	}
-
-});
-
-/*
-	var button = $("#menu a");
-
-	//Handles menu events
-	button.click(function(event) {
-		event.preventDefault();
-		var oldhref = "";
-		var href = $(this).attr("href");
-		var id = $(this).attr("id");
-
-		if (oldhref === href || oldhref === "") {
-
-			if ($(this).hasClass("popup")) {
-
-				viewOrHidePopup();
-
-				if (id == "perspective") {
-					viewPerspectives();
-				}
-
-				//make sure user can't rotate model if popup is open
-				cb.enableOrDisableOrbit();
-			}
-
-			if (oldhref === "") {
-				oldhref = href;
-			} else {
-				oldhref = "";
-			}
-		} else {
-			oldhref = "";
-			$(this).trigger('click');
-		}
 	});
 
-	function viewOrHidePopup() {
-
-		var popUp = $("#popUp");
-
-		if (popUp.length)
-			popUp.remove();
-		else
-			$('body').append('<div id="popUp"><div class="container"><div><div>');
-
-	}
-
-	
-
-	function createViewDiv(id, title) {
-		var container = $(".container");
-
-		var frame = document.createElement("div");
-		frame.className = "view frame";
-
-		var div = document.createElement("div");
-		div.className = "view-container";
-		div.id = id;
-
-		var titleDiv = document.createElement('div');
-		titleDiv.className = 'title';
-		titleDiv.innerHTML = title;
-
-		div.appendChild(titleDiv);
-		frame.appendChild(div);
-		container.append(frame);
-	}*/
-
+});

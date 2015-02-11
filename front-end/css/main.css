@@ -181,6 +181,27 @@ body{
 	font-size: 6vw;
 }
 
+#colorsContainer {
+	text-align: center;
+	width: 65%;
+	margin: auto auto;
+	height: 100%;
+}
+
+#colorsModal {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#colorsModal a {
+	display:inline-block;
+	border: 10px solid #333;
+	border-radius: 15px;
+	margin: 10px;
+	width: 14%;
+	padding-top: 14%;
+}
+
 #perspectiveContainer {
 	text-align: center;
 	width: 65%;
@@ -196,11 +217,10 @@ body{
 #perspectiveModal > div {
 	display: inline-block;
 	position: relative;
-	ve rtical-align: middle;
+	vertical-align: middle;
 
 	width: 25%;
 	height: 25%;
-	pad ding-top: 25%;
 	margin: 1%;
 
 	background-color: #555;
@@ -217,6 +237,7 @@ body{
 .title {
 	height:9%;
 	padding:3% 0;
+	text-transform: uppercase;
 }
 .canvasWrapper {
 	height:85%;
@@ -228,6 +249,44 @@ body{
 }
 .blue {
 	color:#0000ff;
+}
+.yellow {
+	color: yellow;
+}
+.green {
+	color: green;
+}
+
+/* Colors for colormodal options */
+.color.blue {
+	background-color: blue;
+}
+.color.black {
+	background-color: black;
+}
+.color.white {
+	background-color: white;
+}
+.color.yellow {
+	background-color: yellow;
+}
+.color.green {
+	background-color: green;
+}
+.color.pink {
+	background-color: pink;
+}
+.color.orange {
+	background-color: orange;
+}	
+.color.red {
+	background-color: red;
+}
+.color.purple {
+	background-color: purple;
+}
+.color.lime {
+	background-color: lime;
 }
 
 
@@ -276,28 +335,6 @@ body{
 		font-weight: bold;
 		font-size: 4vw;
 		line-height: 23vw;
-}
-
-#colorsContainer {
-	display:none;
-	text-align: center;
-	width: 90%;
-	margin: auto auto;
-	height: 100%;
-}
-
-#colorsModal {
-	display: table-cell;
-	vertical-align: middle;
-}
-
-#colorsModal a {
-	display:inline-block;
-	border: 10px solid #333;
-	border-radius: 15px;
-	margin: 10px;
-	width: 14%;
-	padding-top: 14%;
 }
 
 
