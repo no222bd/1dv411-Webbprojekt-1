@@ -3,6 +3,7 @@
 var BUILDER = BUILDER || {};
 
 BUILDER.CubeBuilder = function() {
+	var construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"));
 
 	//public members
 
@@ -16,19 +17,21 @@ BUILDER.CubeBuilder = function() {
 	};
 
 	//size of base plane
-	this.setBaseSize = function() {
+	this.setBaseSize = function(size) {
+		// Lägg till validering här eller i nästa steg?
 		// är det delbart med step/2?
+		construction.setBaseSize(size);
 	};
 
 	// set color
-	this.setColor = function() {
+	this.setColor = function(colorHex) {
+		//colorHex arrives without #.
+		//construction.setCubeMaterial(colorHex);
 	};
 
 	// set action for mouse up
 	this.setMouseUpAction = function() {
 	};
-
-	var construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"));
 
 	//render all perspectives in menu
 	this.renderPerspectives = function() {
@@ -88,6 +91,10 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		render();
 	}
+
+	this.setBaseSize = function(size) {
+		//NEEDS CODE FOR SETTING A NEW BASE SIZE
+	};
 
 	// Rerenders when size changes
 	function onWindowResize(event) {

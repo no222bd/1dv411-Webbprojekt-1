@@ -111,35 +111,44 @@ body{
 	visibility: hidden;
 }
 
-#editContainer {
+#baseContainer {
 	text-align: center;
 	width: 90%;
 	margin: auto auto;
 	height: 100%;
 }
 
-#editModal {
-	
+#baseModal {
 	display: table-cell;
 	vertical-align: middle;
-	display:none;
-	
 }
 
-#editModal > div {
+#baseModal > div {
 	width: 40%;
 	padding-top: 40%;
 	margin: 1%;
 	display: inline-block;
-
 	position: relative;
 }
 
-#editModal > div:first-child {
-
+input {
+	width: 100%;
 }
 
-#editModal > div:first-child a {
+#baseModal div div a, #baseModal div div input {
+	display: block;
+	height: 27%;
+	margin-bottom: 2%;
+
+	background-color: #555;
+	border: 2px solid #333;
+	border-radius: 40px;
+
+	color: white;
+	font-size: 6vw;
+}
+
+#baseModal > div:first-child a {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -153,6 +162,14 @@ body{
 	background-color: #555;
 	border: 10px solid #333;
 	border-radius: 40px;
+}
+
+.innerBox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
 
 #sizeWrapper {
@@ -289,14 +306,12 @@ body{
 	background-color: lime;
 }
 
-
 #settingsContainer {
 	width: 65%;
 	text-align: center;
 
 	margin: auto auto;
 	height: 100%;
-	display:none;
 }
 
 #settingsModal {
@@ -332,6 +347,7 @@ body{
 		color: white;
 		font-family: Arial, "MS Trebuchet", sans-serif;
 		text-decoration: none;
+		text-transform: uppercase;
 		font-weight: bold;
 		font-size: 4vw;
 		line-height: 23vw;

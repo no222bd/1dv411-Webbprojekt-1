@@ -18,6 +18,7 @@ jQuery(document).ready(function($) {
 			openModal = href;
 
 			//Switches function to call depending on the id of the chosen menu link.
+			//Needs cases for switching between cube and eraser.
 			switch(id) {
 				case "perspective":
 					cb.renderPerspectives();
@@ -26,11 +27,10 @@ jQuery(document).ready(function($) {
 					//cb.setBaseSize(send in base-size here!);
 					break;
 				case "settings":
-					//Should be able to handle different cases since settings-modal 
-					//should have multiple choices and functions.
+					settings();
 					break;
 				case "colors":
-					//cb.setColor(send in the color here!);
+					colors();
 					break;
 				default:
 			};
@@ -45,3 +45,22 @@ jQuery(document).ready(function($) {
 		cb.enableOrDisableOrbit(true);
 	}
 });
+
+/**
+ * Function for handling users choice of color.
+ */
+function colors() {
+	$(".color").click(function (event) { 
+		console.log($(this).attr("href"));
+		var colorHex = $(this).attr("href");
+		cb.setColor(colorHex);
+		//Success message or just close modal?
+	});
+}
+
+/**
+ * Function for handling different settings options.
+ */
+function settings() {
+
+}
