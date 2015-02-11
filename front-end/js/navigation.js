@@ -1,17 +1,21 @@
 jQuery(document).ready(function($) {
 
-	var oldhref = "";
+	var openModal = null;
 
 	$(".modalOption").click(function (event) {
 		event.preventDefault(); //Isn't this still NOT working and unnecessary?
-		
 		var href = $(this).attr("href");
-		var id = $(this).attr("id");
+
+		if (href === openModal) {
+			closeModal();
+		} else {
+			closeModal();
+
+			var id = $(this).attr("id");
 		
-		if (oldhref === href || oldhref === "") {
-			
 			$('#modal').toggleClass('open');
 			$(href).toggleClass('open');
+			openModal = href;
 
 			//Switches function to call depending on the id of the chosen menu link.
 			switch(id) {
@@ -19,31 +23,25 @@ jQuery(document).ready(function($) {
 					cb.renderPerspectives();
 					break;
 				case "base":
-					//cb function for base.
+					//cb.setBaseSize(send in base-size here!);
 					break;
 				case "settings":
-					//cb function for settings.
+					//Should be able to handle different cases since settings-modal 
+					//should have multiple choices and functions.
 					break;
 				case "colors":
-					//cb function that changes color.
+					//cb.setColor(send in the color here!);
 					break;
 				default:
 			};
-			
-			//make sure user can't rotate model if popup is open
-			cb.enableOrDisableOrbit();
-
-			if (oldhref === "") {
-				oldhref = href;
-			} else {
-				oldhref = "";
-			}
-		}else{
-			$(oldhref).removeClass('open');
-			$('#modal').removeClass('open');
-			oldhref = "";
-			$(this).trigger('click');
+			cb.enableOrDisableOrbit(false);
 		}
 	});
 
+	function closeModal() {
+		$(openModal).removeClass('open');
+		$('#modal').removeClass('open');
+		openModal = null;
+		cb.enableOrDisableOrbit(true);
+	}
 });

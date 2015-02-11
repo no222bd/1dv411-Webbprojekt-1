@@ -36,8 +36,8 @@ BUILDER.CubeBuilder = function() {
 	};
 
 	// Freeze model if popup menu is open
-	this.enableOrDisableOrbit = function() {
-		construction.enableOrDisableOrbit();
+	this.enableOrDisableOrbit = function(setting) {
+		construction.enableOrDisableOrbit(setting);
 	};
 };
 
@@ -376,12 +376,8 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		});
 	};
 
-	this.enableOrDisableOrbit = function() {
-
-		if (controls.enabled)
-			controls.enabled = false;
-		else
-			controls.enabled = true;
+	this.enableOrDisableOrbit = function(setting) {
+		controls.enabled = setting;
 	};
 
 	init();
