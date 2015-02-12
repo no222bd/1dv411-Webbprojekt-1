@@ -400,6 +400,48 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	};
 
 	init();
+	
+	/* OBS. For testing only! Do not use in application!!! */
+	/* Remove before deploying */
+	
+	// members
+	this._jQueryContainer = jQueryContainer;
+	this._step = step;
+	this._baseSize = baseSize;
+	this._objects = objects;
+	this._cubeGeo = cubeGeo;
+	this._scene = scene;
+	this._camera = camera;
+	this._renderer = renderer;
+	this._cubeMaterial = cubeMaterial;
+	this._raycaster = raycaster;
+	this._mouseposition = mouseposition;
+	this._mouse = mouse;
+	this._baseGrid = baseGrid;
+	this._basePlane = basePlane;
+	this._controls = controls;
+	this._views = views;
+	this._self = self;
+	
+	// functions
+	this._init = init;
+	this._onWindowResize = onWindowResize;
+	this._onDocumentMouseTouch = onDocumentMouseTouch;
+	this._addCube = addCube;
+	this._removeCube = removeCube;
+	this._setCubeMaterial = this.setCubeMaterial;
+	this._createScene = createScene;
+	this._createRenderer = createRenderer;
+	this._createCamera = createCamera;
+	this._setBase = setBase;
+	this._createColorLines = createColorLines;
+	this._createLights = createLights;
+	this._updateCounter = updateCounter;
+	this._render = render;
+	this._renderPerspectives = this.renderPerspectives;
+	this._enableOrDisableOrbit = this.enableOrDisableOrbit;
+	
+	/**/
 };
 
 BUILDER.View = function(renderer, camera, JQueryElement, scene) {
