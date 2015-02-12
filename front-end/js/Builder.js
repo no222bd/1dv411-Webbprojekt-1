@@ -28,7 +28,6 @@ BUILDER.CubeBuilder = function() {
 	this.setMouseUpAction = function() {
 	};
 
-	//this.construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"));
 	var construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"));
 
 	//render all perspectives in menu
