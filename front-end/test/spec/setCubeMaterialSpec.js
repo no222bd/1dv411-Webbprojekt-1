@@ -11,8 +11,9 @@ describe("Builder.ConstructionArea", function () {
 			expect(builder._cubeMaterial.ambient.getHexString()).toBe('ffd52d');
 		});
 
-		xit("should have color of new color: 0000ff ", function () {
+		it("should have new color of 0000ff", function () {
 			builder._setCubeMaterial('0x0000FF');
+			expect(builder._cubeMaterial.color.getHexString()).toBe('0000ff');
 			expect(builder._cubeMaterial.ambient.getHexString()).toBe('0000ff');
 		});
 	});
