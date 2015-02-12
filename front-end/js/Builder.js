@@ -65,6 +65,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	    basePlane,
 	    controls,
 	    views,
+	    stats,
 		self = this;
 
 	// BuildMode Add or Remove cube
@@ -72,6 +73,14 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	function init() {// TODO - Make this public ?
 		self.setCubeMaterial('FFD52D');
+
+		stats = new Stats();
+		stats.setMode(1); // 0: fps, 1: ms
+
+		// align top-left
+		stats.domElement.style.position = 'absolute';
+		stats.domElement.style.left = '0px';
+		stats.domElement.style.top = '0px';
 
 		step = 50;
 		objects = [];
@@ -96,6 +105,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
 		jQueryContainer.on( "mouseup", onDocumentMouseTouch);
 		window.addEventListener("resize", onWindowResize);
+		document.body.appendChild( stats.domElement );
 
 		render();
 	}
@@ -344,6 +354,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	// Called to render object
 	function render() {
+		stats.update();
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 	};
