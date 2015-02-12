@@ -143,8 +143,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 					// if click was inside 3D object
 					var intersect = intersects[0];
 
-					console.log(self.buildMode);
-
 					switch(event.button) {
 					case 0:
 						// left mouse button adds cube if buildMode == true, removes if false ------------------------------------------------------------
