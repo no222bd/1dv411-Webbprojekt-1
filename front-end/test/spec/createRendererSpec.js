@@ -14,9 +14,9 @@ describe("Builder.ConstructionArea", function () {
 			
 			// assert
 			if (supportsWebGL) {
-				expect(renderer.resetGLState).not.toEqual(undefined);
+				expect(renderer instanceof THREE.WebGLRenderer).toBeTruthy();
 			} else {
-				expect(renderer.resetGLState).toEqual(undefined);
+				expect(renderer instanceof THREE.CanvasRenderer).toBeTruthy();
 			}
 		});
 		
@@ -25,7 +25,7 @@ describe("Builder.ConstructionArea", function () {
 			var renderer = builder._createRenderer($("#ThreeJScontainer"));
 			
 			// assert
-			expect(renderer.resetGLState).toEqual(undefined);
+			expect(renderer instanceof THREE.CanvasRenderer).toBeTruthy();
 		});
 		
 		it("should create CanvasRenderer if checkWebGL is false", function () {
@@ -33,7 +33,7 @@ describe("Builder.ConstructionArea", function () {
 			var renderer = builder._createRenderer($("#ThreeJScontainer"), false);
 			
 			// assert
-			expect(renderer.resetGLState).toEqual(undefined);
+			expect(renderer instanceof THREE.CanvasRenderer).toBeTruthy();
 		});
 		
 	});
