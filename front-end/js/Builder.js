@@ -275,11 +275,12 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	function createColorLines() {
 		var lines = [];
+		var gridOffset = 20;
 
 		// green line
 		var line = new THREE.Geometry();
-		line.vertices.push(new THREE.Vector3(520, 0, 500));
-		line.vertices.push(new THREE.Vector3(520, 0, -500));
+		line.vertices.push(new THREE.Vector3(baseSize + gridOffset, 0, baseSize));
+		line.vertices.push(new THREE.Vector3(baseSize + gridOffset, 0, -baseSize));
 		var material = new THREE.LineBasicMaterial({
 			color : 0x00ff00
 		});
@@ -287,8 +288,8 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		// red line
 		line = new THREE.Geometry();
-		line.vertices.push(new THREE.Vector3(-520, 0, 500));
-		line.vertices.push(new THREE.Vector3(-520, 0, -500));
+		line.vertices.push(new THREE.Vector3(-(baseSize + gridOffset), 0, baseSize));
+		line.vertices.push(new THREE.Vector3(-(baseSize + gridOffset), 0, -baseSize));
 		material = new THREE.LineBasicMaterial({
 			color : 0xff0000
 		});
@@ -296,8 +297,8 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		// blue line
 		line = new THREE.Geometry();
-		line.vertices.push(new THREE.Vector3(500, 0, 520));
-		line.vertices.push(new THREE.Vector3(-500, 0, 520));
+		line.vertices.push(new THREE.Vector3(baseSize, 0, baseSize + gridOffset));
+		line.vertices.push(new THREE.Vector3(-baseSize, 0, baseSize + gridOffset));
 		material = new THREE.LineBasicMaterial({
 			color : 0x0000ff
 		});
@@ -305,8 +306,8 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		// yellow line
 		line = new THREE.Geometry();
-		line.vertices.push(new THREE.Vector3(500, 0, -520));
-		line.vertices.push(new THREE.Vector3(-500, 0, -520));
+		line.vertices.push(new THREE.Vector3(baseSize, 0, -(baseSize + gridOffset)));
+		line.vertices.push(new THREE.Vector3(-baseSize, 0, -(baseSize + gridOffset)));
 		material = new THREE.LineBasicMaterial({
 			color : 0xffff00
 		});
@@ -400,10 +401,10 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	};
 
 	init();
-	
+
 	/* OBS. For testing only! Do not use in application!!! */
 	/* Remove before deploying */
-	
+
 	// members
 	this._jQueryContainer = jQueryContainer;
 	this._step = step;
@@ -422,7 +423,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._controls = controls;
 	this._views = views;
 	this._self = self;
-	
+
 	// functions
 	this._init = init;
 	this._onWindowResize = onWindowResize;
@@ -440,7 +441,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._render = render;
 	this._renderPerspectives = this.renderPerspectives;
 	this._enableOrDisableOrbit = this.enableOrDisableOrbit;
-	
+
 	/**/
 };
 
