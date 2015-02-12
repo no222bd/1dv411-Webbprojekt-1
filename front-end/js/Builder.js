@@ -42,6 +42,11 @@ BUILDER.CubeBuilder = function() {
 	this.enableOrDisableOrbit = function(setting) {
 		construction.enableOrDisableOrbit(setting);
 	};
+
+	// Toggle buildMode Add/Remove ---------------------------------------------------------------------------------------
+	this.toggleBuildMode = function() {
+		construction.buildMode = construction.buildMode === true ? false : true;
+	}
 };
 
 BUILDER.ConstructionArea = function(jQueryContainer) {
@@ -61,6 +66,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	    controls,
 	    views,
 		self = this;
+
+	// BuildMode Add or Remove cube -------------------------------------------------------------------------
+	this.buildMode = true;
 
 	function init() {// TODO - Make this public ?
 		self.setCubeMaterial('FFD52D');
@@ -134,10 +142,13 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 				if (intersects.length > 0) {
 					// if click was inside 3D object
 					var intersect = intersects[0];
+
+					console.log(self.buildMode);
+
 					switch(event.button) {
 					case 0:
-						// left mouse button adds cube
-						addCube(intersect);
+						// left mouse button adds cube if buildMode == true, removes if false ------------------------------------------------------------
+						self.buildMode ? addCube(intersect) : removeCube(intersect);
 						break;
 					case 2:
 						// right mouse button removes cube
