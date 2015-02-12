@@ -390,6 +390,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	/* Remove before deploying */
 	
 	// members
+	this._jQueryContainer = jQueryContainer;
 	this._step = step;
 	this._baseSize = baseSize;
 	this._objects = objects;
