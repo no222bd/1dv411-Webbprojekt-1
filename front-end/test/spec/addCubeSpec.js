@@ -17,8 +17,6 @@ describe("Builder.ConstructionArea", function () {
 			// act
 			builder._addCube(intersect);
 			
-			console.log(builder._objects[1].position.x);
-			
 			// assert
 			expect(builder._objects.length).toBe(2);
 		});
