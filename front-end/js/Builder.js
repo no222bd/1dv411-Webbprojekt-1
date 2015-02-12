@@ -23,7 +23,7 @@ BUILDER.CubeBuilder = function() {
 		construction.setBaseSize(size);
 	};
 
-	// set color -------------------------------------------------------------------------------------------
+	// set color
 	this.setColor = function(colorHex) {
 		//colorHex arrives as string without #.
 		construction.setCubeMaterial(colorHex);
@@ -88,9 +88,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		scene = createScene();
 		camera = createCamera();
-		controls = new THREE.OrbitControls(camera);
-		controls.noPan = true;
 		renderer = createRenderer(jQueryContainer, true);
+		controls = new THREE.OrbitControls(camera, renderer.domElement);
+		controls.noPan = true;
 
 		jQueryContainer.append(renderer.domElement);
 		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
@@ -400,10 +400,10 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	};
 
 	init();
-	
+
 	/* OBS. For testing only! Do not use in application!!! */
 	/* Remove before deploying */
-	
+
 	// members
 	this._jQueryContainer = jQueryContainer;
 	this._step = step;
@@ -422,7 +422,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._controls = controls;
 	this._views = views;
 	this._self = self;
-	
+
 	// functions
 	this._init = init;
 	this._onWindowResize = onWindowResize;
@@ -440,7 +440,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._render = render;
 	this._renderPerspectives = this.renderPerspectives;
 	this._enableOrDisableOrbit = this.enableOrDisableOrbit;
-	
+
 	/**/
 };
 
