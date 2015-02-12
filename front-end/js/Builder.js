@@ -189,13 +189,17 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	// set material for cube
 	this.setCubeMaterial = function(colorHex) {
-		cubeMaterial = new THREE.MeshLambertMaterial({
-			color : parseInt(colorHex, 16),
-			specular : 0x009900,
-			shininess : 30,
-			shading : THREE.FlatShading
-		});
-		cubeMaterial.ambient = cubeMaterial.color;
+			if(cubeMaterial === undefined) {
+					cubeMaterial = new THREE.MeshLambertMaterial({
+							color: parseInt(colorHex, 16),
+							specular: 0x009900,
+							shininess: 30,
+							shading: THREE.FlatShading
+					});
+			}else {
+					cubeMaterial.color.setHex(parseInt(colorHex, 16));
+			}
+			cubeMaterial.ambient = cubeMaterial.color;
 	};
 
 	function createScene() {
