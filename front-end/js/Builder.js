@@ -159,6 +159,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 				scene.add(voxel);
 				objects.push(voxel);
 				updateCounter();
+				views.forEach(function(element, index, array) {
+					element.render();
+				});
 			}
 		}
 	}
@@ -169,6 +172,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			scene.remove(intersect.object);
 			objects.splice(objects.indexOf(intersect.object), 1);
 			updateCounter();
+			views.forEach(function(element, index, array) {
+				element.render();
+			});
 		}
 	}
 
@@ -321,10 +327,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	function render() {
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
-
-		views.forEach(function(element, index, array) {
-			element.render();
-		});
 	};
 
 	this.renderPerspectives = function() {
