@@ -25,6 +25,7 @@ body{
 	width: 10%;
 	float: left;
 	height: 100%;
+	background: #C2E9F9;
 }
 
 #menu a {
@@ -241,7 +242,7 @@ input {
 	margin: 1%;
 	background-color: #555;
 	border-radius: 5%;
-	background:#C0C0C0;
+	background:#C2E9F9;
 }
 
 .canvasWrapper {
@@ -261,13 +262,13 @@ input {
 	border:10px solid #E60012;
 }
 .blue {
-	border:10px solid #0000ff;
+	border:10px solid #0068B7;
 }
 .yellow {
-	border:10px solid #ffff00;
+	border:10px solid #F39800;
 }
 .green {
-	border:10px solid #00ff00;
+	border:10px solid #009944;
 }
 .top {
 	border:10px solid #000;
@@ -393,34 +394,43 @@ input {
 /* Portrait orientation */
 
 @media (orientation: portrait) {
-	#menu{
-		width: 100%;
-		height: auto;
-	}
+ #menu {
+  width: 100%;
+  height: auto;
+ }
 
-	#ThreeJScontainer {
-		width: 100%;
-	}
+ #menu li {
+  float: left;
+  width: 12%;
+  margin-top: 12%;
+ }
 
+ #ThreeJScontainer {
+  width: 100%;
+ }
 
-	/* Modals */
-	.modal {
-		border-left: none;
-		border-top: 2px solid rgba(0,0,0,0.75);
-		left: 0;
-		top: 15%;
-	}
+ /* Modals */
+ .modal {
+  border-left: none;
+  border-top: 2px solid rgba(0,0,0,0.75);
+  left: 0;
+  margin-top: 24%;
+ }
 
-	#settingsContainer, #perspectiveContainer, #colorsContainer {
-		width: 100%;
-	}
+ #settingsContainer, #perspectiveContainer, #colorsContainer {
+  width: 100%;
+ }
 
-	#settingsModal div a {
-		line-height: 38vw;
-	}
-	
-	/* perspectives */
-	.red, .blue, .green , .top , .yellow {
-		border-width:5px;
-	}
+ #settingsModal div a {
+  line-height: 38vw;
+ }
+ 
+ /* perspectives */
+ .red, .blue, .green , .top , .yellow {
+  border-width:5px;
+ }
+
+ #colors {
+  top: 50%;
+ }
 }
