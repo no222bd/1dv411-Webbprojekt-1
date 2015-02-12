@@ -23,10 +23,10 @@ BUILDER.CubeBuilder = function() {
 		construction.setBaseSize(size);
 	};
 
-	// set color
+	// set color -------------------------------------------------------------------------------------------
 	this.setColor = function(colorHex) {
-		//colorHex arrives without #.
-		//construction.setCubeMaterial(colorHex);
+		//colorHex arrives as string without #.
+		construction.setCubeMaterial(colorHex);
 	};
 
 	// set action for mouse up
@@ -43,7 +43,7 @@ BUILDER.CubeBuilder = function() {
 		construction.enableOrDisableOrbit(setting);
 	};
 
-	// Toggle buildMode Add/Remove ---------------------------------------------------------------------------------------
+	// Toggle buildMode Add/Remove
 	this.toggleBuildMode = function() {
 		construction.buildMode = construction.buildMode === true ? false : true;
 	}
@@ -67,7 +67,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	    views,
 		self = this;
 
-	// BuildMode Add or Remove cube -------------------------------------------------------------------------
+	// BuildMode Add or Remove cube
 	this.buildMode = true;
 
 	function init() {// TODO - Make this public ?
@@ -142,12 +142,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 				if (intersects.length > 0) {
 					// if click was inside 3D object
 					var intersect = intersects[0];
-
-					console.log(self.buildMode);
-
 					switch(event.button) {
 					case 0:
-						// left mouse button adds cube if buildMode == true, removes if false ------------------------------------------------------------
+						// left mouse button adds cube if buildMode == true, removes if false
 						self.buildMode ? addCube(intersect) : removeCube(intersect);
 						break;
 					case 2:
