@@ -1,78 +1,66 @@
 jQuery(document).ready(function($) {
 
-	var button = $("#menu a");
+	var openModal = null;
 
-	//Handles menu events
-	button.click(function(event) {
-		event.preventDefault();
-		var oldhref = "";
+	$(".modalOption").click(function (event) {
+		event.preventDefault(); //Isn't this still NOT working and unnecessary?
 		var href = $(this).attr("href");
-		var id = $(this).attr("id");
 
-		if (oldhref === href || oldhref === "") {
-
-			if ($(this).hasClass("popup")) {
-
-				viewOrHidePopup();
-
-				if (id == "perspective") {
-					viewPerspectives();
-				}
-
-				//make sure user can't rotate model if popup is open
-				cb.enableOrDisableOrbit();
-			}
-
-			if (oldhref === "") {
-				oldhref = href;
-			} else {
-				oldhref = "";
-			}
+		if (href === openModal) {
+			closeModal();
 		} else {
-			oldhref = "";
-			$(this).trigger('click');
+			closeModal();
+
+			var id = $(this).attr("id");
+		
+			$('#modal').toggleClass('open');
+			$(href).toggleClass('open');
+			openModal = href;
+
+			//Switches function to call depending on the id of the chosen menu link.
+			//Needs cases for switching between cube and eraser.
+			switch(id) {
+				case "perspective":
+					cb.renderPerspectives();
+					break;
+				case "base":
+					//cb.setBaseSize(send in base-size here!);
+					break;
+				case "settings":
+					settings();
+					break;
+				case "colors":
+					colors();
+					break;
+				default:
+			};
+			cb.enableOrDisableOrbit(false);
 		}
 	});
 
-	function viewOrHidePopup() {
-
-		var popUp = $("#popUp");
-
-		if (popUp.length)
-			popUp.remove();
-		else
-			$('body').append('<div id="popUp"><div class="container"><div><div>');
-
+	function closeModal() {
+		$(openModal).removeClass('open');
+		$('#modal').removeClass('open');
+		openModal = null;
+		cb.enableOrDisableOrbit(true);
 	}
-
-	function viewPerspectives() {
-
-		createViewDiv("topView", "topView");
-		createViewDiv("blueView", "blueView");
-		createViewDiv("redView", "redView");
-		createViewDiv("yellowView", "yellowView");
-		createViewDiv("greenView", "greenView");
-
-		cb.renderPerspectives();
-	}
-
-	function createViewDiv(id, title) {
-		var container = $(".container");
-
-		var frame = document.createElement("div");
-		frame.className = "view frame";
-
-		var div = document.createElement("div");
-		div.className = "view-container";
-		div.id = id;
-
-		var titleDiv = document.createElement('div');
-		titleDiv.className = 'title';
-		titleDiv.innerHTML = title;
-
-		div.appendChild(titleDiv);
-		frame.appendChild(div);
-		container.append(frame);
-	}
-
 });
+
+/**
+ * Function for handling users choice of color.
+ */
+function colors() {
+	$(".color").click(function (event) { 
+		console.log($(this).attr("href"));
+		var colorHex = $(this).attr("href");
+		cb.setColor(colorHex);
+		//Success message or just close modal?
+	});
+}
+
+/**
+ * Function for handling different settings options.
+ */
+function settings() {
+
+}

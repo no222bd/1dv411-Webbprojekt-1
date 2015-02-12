@@ -1,33 +1,152 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>My first Three.js app</title>
+		<meta charset="utf-8">
+		<title>CubeBuilder</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="stylesheet" href="./css/normalize.css"/>
 		<link rel="stylesheet" href="./css/main.css"/>
 		<link rel="stylesheet" href="./css/fontello.css"/>
 	</head>
 	<body>
+		<!-- *** MODAL *** -->
+		<div id="modal" class="modal">
+			<!-- BASE -->
+			<div id="baseContainer">
+				<div id="baseModal">
+					<div>
+						<a class="innerBox" href=""></a>
+					</div>
+					<div>
+						<div class="innerBox">
+							<a class="" href="">&#8679;</a>
+							<input type="text">
+							<a class="" href="">&#8681;</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- PERSPECTIVE -->
+			<div id="perspectiveContainer">
+				<div id="perspectiveModal">
+					<div>
+						<div class="title red">
+							Röd
+						</div>
+						<div id="redView" class="canvasWrapper">
+							<!--canvas></canvas-->
+						</div>
+					</div>
+					<div>
+						<div class="title blue">
+						 Blå
+						</div>
+						<div id="blueView" class="canvasWrapper">
+							<!--canvas></canvas-->
+						</div>
+					</div>
+					<div>
+						<div class="title">
+							Ovan
+						</div>
+						<div id="topView" class="canvasWrapper">
+							<!--canvas></canvas-->
+						</div>
+					</div>
+					<div>
+						<div class="title yellow">
+							Gul
+						</div>
+						<div id="yellowView" class="canvasWrapper">
+							<!--canvas></canvas-->
+						</div>
+					</div>	
+					<div>
+						<div class="title green">
+							Grön
+						</div>
+						<div id="greenView"  class="canvasWrapper">
+							<!--canvas></canvas-->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- COLORS -->
+			<div id="colorsContainer">
+				<div id="colorsModal">
+					<a id="colorBlue" class="color blue" href="#blue"></a>
+					<a id="colorBlack" class="color black" href=""></a>
+					<a id="colorWhite" class="color white" href=""></a>
+					<a id="colorYellow" class="color yellow" href=""></a>
+					<a id="colorGreen" class="color green" href=""></a>
 
-		<ul id="menu">
-	        <li><a id="cube" href=""></a></li>
-	        <li><a id="erase"href=""></a></li>
-	        <li><a id="base" class="popup" href="#base"></a></li>
-	        <li><a id="perspective" class="popup" href="#perspective"></a></li>
-	        <li>
-	        	<ul id="splitMenu" >
-		        	<li><a id="settings" class="popup" href="#settings"></a></li>
-		        	<li><a id="colors" class="popup" href="#colors"></a></li>
-		        </ul>
-	        </li>           
-		</ul>
+					<a id="colorPink" class="color pink" href=""></a>
+					<a id="colorOrange" class="color orange" href=""></a>
+					<a id="colorRed" class="color red" href=""></a>
+					<a id="colorPurple" class="color purple" href=""></a>
+					<a id="colorLime" class="color lime" href=""></a>
+
+					<a id="colorBlue" class="color blue" href=""></a>
+					<a id="colorBlack" class="color black" href=""></a>
+					<a id="colorWhite" class="color white" href=""></a>
+					<a id="colorYellow" class="color yellow" href=""></a>
+					<a id="colorGreen" class="color green" href=""></a>
+
+					<a id="colorPink" class="color pink" href=""></a>
+					<a id="colorOrange" class="color orange" href=""></a>
+					<a id="colorRed" class="color red" href=""></a>
+					<a id="colorPurple" class="color purple" href=""></a>
+					<a id="colorLime" class="color lime" href=""></a>
+				</div>
+			</div>
+			<!-- SETTINGS -->
+			<div id="settingsContainer">
+				<div id="settingsModal">
+					<div>
+						<a class="innerBox" href=""></a>
+					</div>
+					<div>
+						<a class="innerBox" href="#import">Hämta</a>
+					</div>
+					<div>
+						<a class="innerBox" href="#help">Hjälp</a>
+					</div>
+					<div>
+						<a class="innerBox" href="#save">Spara</a>
+					</div>
+				</div>
+			</div>
+		</div>
 		
-		<div class="counter"> 
-		<p>Antal block: <span id="counter"></span></p> 
+		<!-- *** MENU *** -->
+		<ul id="menu">
+			<li>
+				<a id="cube" href=""></a>
+			</li>
+			<!-------------- <li><a id="erase" href=""></a></li> ---------------->
+			<li>
+				<a id="base" class="modalOption" href="#baseContainer"></a>
+			</li>
+			<li>
+				<a id="perspective" class="modalOption" href="#perspectiveContainer"></a>
+			</li>
+			<li>
+				<a id="colors" class="modalOption" href="#colorsContainer"></a>
+			</li>
+			<li>
+				<a id="settings" class="modalOption" href="#settingsContainer"></a>
+			</li>
+		</ul>
+
+		<div class="counter">
+			<p>
+				Antal block: <span id="counter">0</span>
+			</p>
 		</div>
 
 		<div id="ThreeJScontainer" onclick="void(0)"></div>
-		
+
 		<script src="js/vendor/jquery-1.11.2.min.js"></script>
 		<script src="./js/typedarrays.js"></script>
 		<script src="./js/requestAnimationFramePolyfill.js"></script>
@@ -38,7 +157,7 @@
 		<script src="./js/vendor/OrbitControls.js"></script>
 		<script src="./js/vendor/stats.min.js"></script>
 		<script src="./js/Builder.js"></script>
-		
+
 		<script>
 			var cb = new BUILDER.CubeBuilder();
 		</script>

@@ -1,18 +1,11 @@
-div {
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-}
-
-html, body {
+html{
 	height: 100%;
-	width: 100%;
-	margin: 0;
 }
-
-body {
+body{
+	margin: 0;
+	height: 100%;
 	background: #E1F5FF;
-	overflow: hidden;
+	overflow:hidden;
 }
 
 #ThreeJScontainer {
@@ -21,60 +14,6 @@ body {
 	height: 100%;
 }
 
-/** -- PopUp -- **
- ---------------------------------------------------------------------- */
-#popUp {
-	display: block;
-	position: absolute;
-	background: rgba(0,0,0,0.75);
-	border-left: 2px solid rgba(0,0,0,0.75);
-	left: 10%;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	z-index: 999;
-	height: 100%;
-}
-.container {
-	width: 90%;
-	margin: auto auto;
-	height: 100%;
-}
-#popup .button {
-	width: 10%;
-	margin-left: 2%;
-	float: left;
-}
-#popup .container > * {
-
-}
-
-#settings_colors {
-	margin-top: 15px;
-	width: 90%;
-	margin-left: 5%;
-	text-align: center;
-}
-#settings_colors a {
-	width: 50%;
-	font-size: 32px;
-	color: #000000;
-	display: block;
-	float: left;
-	text-align: center;
-}
-.clear {
-	clear: both;
-}
-
-.button {
-	display: block;
-	text-align: center;
-	margin-top: 15px;
-	font-size: 64px;
-	color: #000;
-	text-decoration: none;
-}
 
 /** -- Menu -- **
  ---------------------------------------------------------------------- */
@@ -94,20 +33,6 @@ body {
 	width: 100%;
 	padding-top: 100%;
 	position: relative;
-}
-#splitMenu {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-}
-#splitMenu li {
-	display: block inline;
-	float: left;
-	width: 50%;
-}
-
-#splitMenu {
-	width: 100%;
 }
 
 #cube, #erase, #base, #perspective, #settings, #colors {
@@ -155,39 +80,285 @@ body {
 	margin: 0 0 2px 2px;
 }
 
-/** -- Perspective (views) -- **
+
+/** -- Modal -- **
  ---------------------------------------------------------------------- */
-
-.frame {
-	margin: 0;
-	padding: 0;
-	border: 7px solid #FFF;
+.modal{
+	display: none;
+	position: absolute;
+	background: rgba(0,0,0,0.5);
+	border-left: 2px solid rgba(0,0,0,0.75);
+	left: 10%;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	cursor:default;
 }
 
-.view {
-	margin-top: 40px;
-	width: 400px;
-	height: 400px;
-	color: #000;
-	background: #c0c0c0;
-	float: left;
-	margin: 5px;
+.modal > div {
+	display: none;
 }
-.view .title {
+
+.open {
 	display: block;
-	text-align: center;
-	font-weight: 900;
-	height: 40px;
-	line-height: 40px;
-}
-.view-container {
-	height: 84%;
 }
 
-/** -- Portrait mode -- **
- ---------------------------------------------------------------------- */
-@media (max-width: 750px) {
-	#menu {
+.modal .open{
+	display: table;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+#baseContainer {
+	text-align: center;
+	width: 90%;
+	margin: auto auto;
+	height: 100%;
+}
+
+#baseModal {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#baseModal > div {
+	width: 40%;
+	padding-top: 40%;
+	margin: 1%;
+	display: inline-block;
+	position: relative;
+}
+
+input {
+	width: 100%;
+}
+
+#baseModal div div a, #baseModal div div input {
+	display: block;
+	height: 27%;
+	margin-bottom: 2%;
+
+	background-color: #555;
+	border: 2px solid #333;
+	border-radius: 40px;
+
+	color: white;
+	font-size: 6vw;
+}
+
+#baseModal > div:first-child a {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	background-image: url('../img/Ikoner.png');
+	background-position: 0% 198%;
+	background-size: 220%;
+
+	background-color: #555;
+	border: 10px solid #333;
+	border-radius: 40px;
+}
+
+.innerBox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+#sizeWrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+#sizeWrapper a, #sizeWrapper input {
+	display: block;
+
+	height: 27%;
+
+	background-color: #555;
+	border: 2px solid #333;
+	border-radius: 40px;
+
+	margin-bottom: 2%;
+
+	color: white;
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 6vw;
+}
+
+#colorsContainer {
+	text-align: center;
+	width: 65%;
+	margin: auto auto;
+	height: 100%;
+}
+
+#colorsModal {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#colorsModal a {
+	display:inline-block;
+	border: 10px solid #333;
+	border-radius: 15px;
+	margin: 10px;
+	width: 14%;
+	padding-top: 14%;
+}
+
+#perspectiveContainer {
+	text-align: center;
+	width: 65%;
+	margin: auto auto;
+	height: 100%;
+}
+
+#perspectiveModal {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#perspectiveModal > div {
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+
+	width: 25%;
+	height: 25%;
+	margin: 1%;
+
+	background-color: #555;
+	border: 10px solid #333;
+	border-radius: 40px;
+
+	
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	font-weight: bold;
+	font-size: 1.5vw;
+	overflow:hidden;
+	background:#C0C0C0;
+}
+.title {
+	height:9%;
+	padding:3% 0;
+	text-transform: uppercase;
+}
+.canvasWrapper {
+	height:85%;
+}
+
+/* colors for the titles*/ 
+.red {
+	color:#ff0000;
+}
+.blue {
+	color:#0000ff;
+}
+.yellow {
+	color: yellow;
+}
+.green {
+	color: green;
+}
+
+/* Colors for colormodal options */
+.color.blue {
+	background-color: blue;
+}
+.color.black {
+	background-color: black;
+}
+.color.white {
+	background-color: white;
+}
+.color.yellow {
+	background-color: yellow;
+}
+.color.green {
+	background-color: green;
+}
+.color.pink {
+	background-color: pink;
+}
+.color.orange {
+	background-color: orange;
+}	
+.color.red {
+	background-color: red;
+}
+.color.purple {
+	background-color: purple;
+}
+.color.lime {
+	background-color: lime;
+}
+
+#settingsContainer {
+	width: 65%;
+	text-align: center;
+
+	margin: auto auto;
+	height: 100%;
+}
+
+#settingsModal {
+	display:none;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#settingsModal div {
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+
+	width: 40%;
+	padding-top: 40%;
+	margin: 2%;
+
+	background-color: #555;
+	border: 10px solid #333;
+	border-radius: 40px;
+
+}
+
+#settingsModal div a {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+
+		margin: auto auto;
+
+		color: white;
+		font-family: Arial, "MS Trebuchet", sans-serif;
+		text-decoration: none;
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: 4vw;
+		line-height: 23vw;
+}
+
+
+
+/* Portrait orientation */
+
+@media (orientation: portrait) {
+	#menu{
 		width: 100%;
 		height: auto;
 	}
@@ -196,28 +367,20 @@ body {
 		width: 100%;
 	}
 
-	.menuItem {
-		width: 20%;
-		padding-top: 20%;
-		float: left;
+
+	/* Modals */
+	.modal {
+		border-left: none;
+		border-top: 2px solid rgba(0,0,0,0.75);
+		left: 0;
+		top: 15%;
 	}
 
-	#splitMenu {
-		width: 10%;
-		padding-top: 20%;
-	}
-
-	.smallMenuItem {
-		height: 50%;
-		padding-left: 20%;
-		padding-top: 20%;
-		top: 0;
+	#settingsContainer, #perspectiveContainer, #colorsContainer {
 		width: 100%;
-		padding: 0;
-		left: 50%;
 	}
 
-	#colors {
-		top: 50%;
+	#settingsModal div a {
+		line-height: 38vw;
 	}
 }
