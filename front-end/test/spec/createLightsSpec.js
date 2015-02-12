@@ -10,12 +10,12 @@ describe("Builder.ConstructionArea", function () {
 
 		it("should have an Ambient Light", function () {
 			var light = lights[0];
-			expect(light.type).toEqual("AmbientLight")
+			expect(light.type).toEqual("AmbientLight");
 		});
 
-		it("should have an Directional Light", function () {
+		it("should have a Directional Light", function () {
 			var light = lights[1];
-			expect(light.type).toEqual("DirectionalLight")
+			expect(light.type).toEqual("DirectionalLight");
 		});
 
 	});
