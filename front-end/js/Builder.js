@@ -63,7 +63,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		self = this;
 
 	function init() {// TODO - Make this public ?
-		self.setCubeMaterial(0xFFD52D);
+		self.setCubeMaterial('FFD52D');
 
 		step = 50;
 		objects = [];
@@ -182,7 +182,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	// set material for cube
 	this.setCubeMaterial = function(colorHex) {
 		cubeMaterial = new THREE.MeshLambertMaterial({
-			color : colorHex,
+			color : parseInt(colorHex, 16),
 			specular : 0x009900,
 			shininess : 30,
 			shading : THREE.FlatShading
@@ -412,4 +412,3 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 		JQueryElement.append(renderer.domElement);
 	};
 };
-
