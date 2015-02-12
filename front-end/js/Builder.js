@@ -46,7 +46,7 @@ BUILDER.CubeBuilder = function() {
 	// Toggle buildMode Add/Remove
 	this.toggleBuildMode = function() {
 		construction.buildMode = construction.buildMode === true ? false : true;
-	}
+	};
 };
 
 BUILDER.ConstructionArea = function(jQueryContainer) {
