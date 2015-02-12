@@ -7,7 +7,7 @@ describe("Builder.ConstructionArea", function () {
 
 	describe("enableOrDisableOrbit", function () {
 
-		it("should disable orbit control", function () {
+		it("should disable when orbit control is enabled", function () {
 			// arrange
 			builder._controls.enabled = true;
 			
@@ -18,7 +18,7 @@ describe("Builder.ConstructionArea", function () {
 			expect(builder._controls.enabled).toBe(false);
 		});
 		
-		it("should enable orbit control", function () {
+		it("should enable when orbit control is disabled", function () {
 			// arrange
 			builder._controls.enabled = false;
 			
