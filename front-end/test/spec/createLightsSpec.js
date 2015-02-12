@@ -8,14 +8,21 @@ describe("Builder.ConstructionArea", function () {
 
 	describe("createLights", function () {
 
+		function typeExists(type){
+			for(var i= 0; i < lights.length; i++){
+				if(lights[i].type == type){
+					return true;
+				}
+			}
+			return false;
+		}
+
 		it("should have an Ambient Light", function () {
-			var light = lights[0];
-			expect(light.type).toEqual("AmbientLight");
+			expect(typeExists("AmbientLight")).toBeTruthy();
 		});
 
 		it("should have a Directional Light", function () {
-			var light = lights[1];
-			expect(light.type).toEqual("DirectionalLight");
+			expect(typeExists("DirectionalLight")).toBeTruthy();
 		});
 
 	});
