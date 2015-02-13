@@ -12,10 +12,10 @@ describe("Builder.ConstructionArea", function () {
 			builder._controls.enabled = true;
 			
 			// act
-			builder._enableOrDisableOrbit();
+			builder._enableOrDisableOrbit(false);
 			
 			// assert
-			expect(builder._controls.enabled).toBe(false);
+			expect(builder._controls.enabled).toBeFalsy();
 		});
 		
 		it("should enable when orbit control is disabled", function () {
@@ -23,10 +23,10 @@ describe("Builder.ConstructionArea", function () {
 			builder._controls.enabled = false;
 			
 			// act
-			builder._enableOrDisableOrbit();
+			builder._enableOrDisableOrbit(true);
 			
 			// assert
-			expect(builder._controls.enabled).toBe(true);
+			expect(builder._controls.enabled).toBeTruthy();
 		});
 		
 	});
