@@ -18,12 +18,7 @@ BUILDER.CubeBuilder = function() {
 
 	//size of base plane - size: width of base
 	this.setBaseSize = function(size) {
-		if($.isNumeric(size) && size >= 2 && size <= 20) {
-			construction.setBaseSize(size);
-			return true;
-		}
-
-		return false;
+		return construction.setBaseSize(size);
 	};
 
 	// set color
@@ -48,6 +43,17 @@ BUILDER.CubeBuilder = function() {
 	// Toggle buildMode Add/Remove
 	this.toggleBuildMode = function() {
 		construction.buildMode = construction.buildMode === true ? false : true;
+	};
+
+	// Save model to JSON string
+	this.saveModel = function() {
+		var jsonString = construction.saveModel();
+		console.log(jsonString); // Temp
+	};
+
+	// Load model from JSON string
+	this.loadModel = function(jsonString) {
+		construction.loadModel(jsonString);
 	};
 };
 
@@ -115,11 +121,17 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	// Changes the size of the base and creates new scene
 	this.setBaseSize = function(size) {
-		baseSize = (step / 2) * size;
-		objects = [];
-		setBase();
-		updateCounter();
-		scene = createScene();
+		if($.isNumeric(size) && size >= 2 && size <= 20) {
+			baseSize = (step / 2) * size;
+			objects = [];
+			setBase();
+			updateCounter();
+			scene = createScene();
+
+			return true;
+		}
+
+		return false;
 	};
 
 	// Rerenders when size changes
@@ -432,6 +444,59 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	this.enableOrDisableOrbit = function(setting) {
 		controls.enabled = setting;
+	};
+
+	// Save model to JSON
+	this.saveModel = function() {
+		function Cube(color, x, y, z) {
+			this.color = color;
+			this.x = x;
+			this.y = y;
+			this.z = z;
+		}
+
+		var model = {
+			baseSize: objects[0].geometry.parameters.height / 2,
+			cubes: []
+		};
+
+		for(var i = 1; i < objects.length; i++) {
+			model.cubes.push(new Cube(objects[i].material.color.getHexString(), objects[i].position.x, objects[i].position.y, objects[i].position.z));
+		}
+
+		return JSON.stringify(model);
+	};
+
+	// Load model from JSON
+	this.loadModel = function(jsonString) {
+		var model = JSON.parse(jsonString);
+		var voxel;
+		var material;
+		objects = [];
+		baseSize = model.baseSize;
+
+		setBase();
+		scene = createScene();
+
+		for(var i = 0, cubes = model.cubes.length; i < cubes; i++) {
+			material = new THREE.MeshLambertMaterial({specular: 0x009900, shininess: 30, shading: THREE.FlatShading});	//Dependency
+			material.color.setHex('0x' + model.cubes[i].color);
+			material.ambient = material.color;
+
+			voxel = new THREE.Mesh(cubeGeo, material);
+			voxel.position.x = model.cubes[i].x;
+			voxel.position.y = model.cubes[i].y;
+			voxel.position.z = model.cubes[i].z;
+
+			scene.add(voxel);
+			objects.push(voxel);
+		}
+
+		updateCounter();
+
+		views.forEach(function(element, index, array) {
+			element.render();
+		});
 	};
 
 	init();
