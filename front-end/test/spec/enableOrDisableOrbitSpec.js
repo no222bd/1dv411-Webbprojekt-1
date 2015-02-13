@@ -28,6 +28,40 @@ describe("Builder.ConstructionArea", function () {
 			// assert
 			expect(builder._controls.enabled).toBeTruthy();
 		});
-		
+
+		it("should not accept an string", function () {
+			// arrange
+			builder._controls.enabled = false;
+
+			// act
+			builder._enableOrDisableOrbit('hej');
+
+			// assert
+			expect(builder._controls.enabled).toBeFalsy();
+		});
+
+
+		it("should not accept a number", function () {
+			// arrange
+			builder._controls.enabled = false;
+
+			// act
+			builder._enableOrDisableOrbit(5);
+
+			// assert
+			expect(builder._controls.enabled).toBeFalsy();
+
+			// act
+			builder._enableOrDisableOrbit(0);
+
+			// assert
+			expect(builder._controls.enabled).toBeTruthy();
+		});
+
+		it("should return true/false", function(){
+			expect(builder._enableOrDisableOrbit(5)).toBeFalsy();
+			expect(builder._enableOrDisableOrbit(false)).toBeTruthy();
+		});
+
 	});
 });
