@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
 					perspective();
 					break;
 				case "base":
-					//cb.setBaseSize(send in base-size here!);
+					baseSize();
 					break;
 				case "settings":
 					settings();
@@ -67,14 +67,36 @@ jQuery(document).ready(function($) {
 	}
 
 	/**
-	 * Function for handling users choice of perspective.
+	 * Function for handling users choice of baseSize.
 	 */
-	function perspective() {
-		$(".perspective").click(function (event) {
+	function baseSize() {
+		$("#reset").click(function (event) {
 			event.preventDefault();
-			var perspective = $(this).attr("href");
-			cb.perspective(perspective);
+			cb.reset();
 			closeModal();
+		});
+
+		$(".sizeControl").click(function (event) {
+			event.preventDefault();
+			var href = $(this).attr("href");
+			var currentSize = $('#sizePreview').text();
+
+			switch(href) {
+				case "#up":
+					if (currentSize != 20) {
+						currentSize = parseInt(currentSize) + 2;
+					}
+					break;
+				case "#down":
+					if (currentSize != 2) {
+						currentSize = parseInt(currentSize) - 2;
+					}
+					break;
+				default:
+			};
+
+			$('#sizePreview').text(currentSize);
+			cb.setBaseSize(currentSize);
 		});
 	}
 
