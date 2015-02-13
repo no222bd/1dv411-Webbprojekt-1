@@ -16,11 +16,14 @@ BUILDER.CubeBuilder = function() {
 	this.reset = function() {
 	};
 
-	//size of base plane
+	//size of base plane - size: width of base
 	this.setBaseSize = function(size) {
-		// Lägg till validering här eller i nästa steg?
-		// är det delbart med step/2?
-		construction.setBaseSize(size);
+		if($.isNumeric(size) && size >= 2 && size <= 20) {
+			construction.setBaseSize(size);
+			return true;
+		}
+
+		return false;
 	};
 
 	// set color
@@ -110,8 +113,13 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		render();
 	}
 
+	// Changes the size of the base and creates new scene
 	this.setBaseSize = function(size) {
-		//NEEDS CODE FOR SETTING A NEW BASE SIZE
+		baseSize = (step / 2) * size;
+		objects = [];
+		setBase();
+		updateCounter();
+		scene = createScene();
 	};
 
 	// Rerenders when size changes
@@ -212,12 +220,12 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			shading: THREE.FlatShading
 		});
 		cubeMaterial.ambient = cubeMaterial.color;
-		
+
 		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 		/* Remove before deploy! */
-		
+
 		this._cubeMaterial = cubeMaterial;
-		
+
 		/* End of testing code */
 	};
 
@@ -250,7 +258,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			renderer = new THREE.CanvasRenderer();
 		}
 
-		renderer.setClearColor(0xE1F5FF); 
+		renderer.setClearColor(0xE1F5FF);
 		renderer.setPixelRatio(window.devicePixelRatio || 1);
 		renderer.setSize(JQueryElement.width(), JQueryElement.height());
 		return renderer;
@@ -273,7 +281,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		});
 		var f = new THREE.Mesh(geo, m);
 		foundation = f;
-		
+
 		//create grid
 		var grid = new THREE.Geometry();
 
