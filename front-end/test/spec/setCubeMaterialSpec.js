@@ -7,14 +7,14 @@ describe("Builder.ConstructionArea", function () {
 
 	describe("setCubeMaterial", function () {
 
-		it("should have color of FFD52D after init", function () {
-			expect(builder._cubeMaterial.ambient.getHexString()).toBe('ffd52d');
+		it("should have color of FED06F after init", function () {
+			expect(builder._cubeMaterial.ambient.getHexString()).toBe('fed06f');
 		});
 
-		it("should have new color of 0000ff", function () {
-			builder._setCubeMaterial('0x0000FF');
-			expect(builder._cubeMaterial.color.getHexString()).toBe('0000ff');
-			expect(builder._cubeMaterial.ambient.getHexString()).toBe('0000ff');
+		it("should have new color of E60012", function () {
+			builder._setCubeMaterial('#E60012');
+			expect(builder._cubeMaterial.color.getHexString()).toBe('e60012');
+			expect(builder._cubeMaterial.ambient.getHexString()).toBe('e60012');
 		});
 	});
 });
