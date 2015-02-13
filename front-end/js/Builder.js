@@ -25,7 +25,6 @@ BUILDER.CubeBuilder = function() {
 
 	// set color
 	this.setColor = function(colorHex) {
-		//colorHex arrives as string without #.
 		construction.setCubeMaterial(colorHex);
 	};
 
@@ -61,6 +60,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	    raycaster,
 	    mouseposition,
 	    mouse,
+	    foundation,
 	    baseGrid,
 	    basePlane,
 	    controls,
@@ -72,7 +72,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this.buildMode = true;
 
 	function init() {// TODO - Make this public ?
-		self.setCubeMaterial('FFD52D');
+		self.setCubeMaterial('#FED06F');
 
 		stats = new Stats();
 		stats.setMode(1); // 0: fps, 1: ms
@@ -205,21 +205,18 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	// set material for cube
 	this.setCubeMaterial = function(colorHex) {
-			if(cubeMaterial === undefined) {
-					cubeMaterial = new THREE.MeshLambertMaterial({
-							color: parseInt(colorHex, 16),
-							specular: 0x009900,
-							shininess: 30,
-							shading: THREE.FlatShading
-					});
-			}else {
-					cubeMaterial.color.setHex(parseInt(colorHex, 16));
-			}
-			cubeMaterial.ambient = cubeMaterial.color;
+		cubeMaterial = new THREE.MeshLambertMaterial({
+			color: colorHex,
+			specular: 0x009900,
+			shininess: 30,
+			shading: THREE.FlatShading
+		});
+		cubeMaterial.ambient = cubeMaterial.color;
 	};
 
 	function createScene() {
 		var scene = new THREE.Scene();
+		scene.add(foundation);
 		scene.add(baseGrid);
 		scene.add(basePlane);
 
@@ -246,7 +243,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			renderer = new THREE.CanvasRenderer();
 		}
 
-		renderer.setClearColor(0xc0c0c0);
+		renderer.setClearColor(0xE1F5FF); 
 		renderer.setPixelRatio(window.devicePixelRatio || 1);
 		renderer.setSize(JQueryElement.width(), JQueryElement.height());
 		return renderer;
@@ -261,6 +258,15 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	};
 
 	function setBase() {
+		// create foundation
+		var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
+		geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+		var m = new THREE.MeshBasicMaterial({
+			color : 0xA0E0B9
+		});
+		var f = new THREE.Mesh(geo, m);
+		foundation = f;
+		
 		//create grid
 		var grid = new THREE.Geometry();
 
@@ -298,7 +304,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		line.vertices.push(new THREE.Vector3(baseSize + gridOffset, 0, baseSize));
 		line.vertices.push(new THREE.Vector3(baseSize + gridOffset, 0, -baseSize));
 		var material = new THREE.LineBasicMaterial({
-			color : 0x00ff00
+			color : 0x009944
 		});
 		lines.push(new THREE.Line(line, material, THREE.LinePieces));
 
@@ -307,7 +313,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		line.vertices.push(new THREE.Vector3(-(baseSize + gridOffset), 0, baseSize));
 		line.vertices.push(new THREE.Vector3(-(baseSize + gridOffset), 0, -baseSize));
 		material = new THREE.LineBasicMaterial({
-			color : 0xff0000
+			color : 0xE60012
 		});
 		lines.push(new THREE.Line(line, material, THREE.LinePieces));
 
@@ -316,7 +322,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		line.vertices.push(new THREE.Vector3(baseSize, 0, baseSize + gridOffset));
 		line.vertices.push(new THREE.Vector3(-baseSize, 0, baseSize + gridOffset));
 		material = new THREE.LineBasicMaterial({
-			color : 0x0000ff
+			color : 0x0068B7
 		});
 		lines.push(new THREE.Line(line, material, THREE.LinePieces));
 
@@ -325,7 +331,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		line.vertices.push(new THREE.Vector3(baseSize, 0, -(baseSize + gridOffset)));
 		line.vertices.push(new THREE.Vector3(-baseSize, 0, -(baseSize + gridOffset)));
 		material = new THREE.LineBasicMaterial({
-			color : 0xffff00
+			color : 0xF39800
 		});
 		lines.push(new THREE.Line(line, material, THREE.LinePieces));
 

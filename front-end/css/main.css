@@ -25,6 +25,7 @@ body{
 	width: 10%;
 	float: left;
 	height: 100%;
+	background: #C2E9F9;
 }
 
 #menu a {
@@ -235,76 +236,107 @@ input {
 	display: inline-block;
 	position: relative;
 	vertical-align: middle;
-
 	width: 25%;
-	height: 25%;
+	padding-bottom:25%;
+	height: 0;
 	margin: 1%;
-
 	background-color: #555;
-	border: 10px solid #333;
-	border-radius: 40px;
+	border-radius: 5%;
+	background:#C2E9F9;
+}
 
-	
-	font-family: Arial, "MS Trebuchet", sans-serif;
-	font-weight: bold;
-	font-size: 1.5vw;
-	overflow:hidden;
-	background:#C0C0C0;
-}
-.title {
-	height:9%;
-	padding:3% 0;
-	text-transform: uppercase;
-}
 .canvasWrapper {
-	height:85%;
+	height:90%;
+	width:100%;
+	padding:5% 0;
+	position: absolute;
+	left:0;
+	border-radius: 5%;
+	overflow: hidden; 
 }
-
-/* colors for the titles*/ 
+#perspectiveModal .green {
+	display:block; margin:0 auto;
+}
+/* colors for the view-frames*/ 
 .red {
-	color:#ff0000;
+	border:10px solid #E60012;
 }
 .blue {
-	color:#0000ff;
+	border:10px solid #0068B7;
 }
 .yellow {
-	color: yellow;
+	border:10px solid #F39800;
 }
 .green {
-	color: green;
+	border:10px solid #009944;
+}
+.top {
+	border:10px solid #000;
 }
 
 /* Colors for colormodal options */
-.color.blue {
-	background-color: blue;
-}
-.color.black {
-	background-color: black;
-}
-.color.white {
-	background-color: white;
-}
-.color.yellow {
-	background-color: yellow;
-}
-.color.green {
-	background-color: green;
-}
-.color.pink {
-	background-color: pink;
+.color.red {
+	background-color:#E60012;
 }
 .color.orange {
-	background-color: orange;
-}	
-.color.red {
-	background-color: red;
+	background-color:#F39800;
+}
+.color.yellow {
+	background-color:#FFF100;
+}
+.color.lgreen 
+{
+	background-color:#8FC31F;
+}
+.color.green {
+	background-color:#009944;
+}
+.color.blueGreen {
+	background-color:#009E96;
+}
+.color.lblue {
+	background-color:#00A0E9;
+}
+.color.blue {
+	background-color:#0068B7;
 }
 .color.purple {
-	background-color: purple;
+	background-color:#601986;
 }
-.color.lime {
-	background-color: lime;
+.color.brown {
+	background-color:#7F3E09;
 }
+.color.llPink {
+	background-color:#F7C6EB;
+}
+.color.pink {
+	background-color:#BE0081;
+}
+.color.vanilla {
+	background-color:#FDE3C5;
+}
+.color.lPink {
+	background-color:#E27BFE;
+}
+.color.lRed {
+	background-color:#E5004F;
+}
+.color.random {
+	bac kground-color:#BE0081;
+}
+.color.turquoise {
+	background-color:#C6FFF0;
+}
+.color.dYellow {
+	background-color:#FED06F;
+}
+.color.black {
+	background-color:#000;
+}
+.color.white {
+	background-color:#FFF;
+}
+
 
 #settingsContainer {
 	width: 65%;
@@ -353,34 +385,52 @@ input {
 		line-height: 23vw;
 }
 
-
+/* Smaller devices orientation */
+@media (orientation: landscape) and (max-width:1200px) {
+	.red, .blue, .green , .top , .yellow {
+		border-width:5px;}
+}
 
 /* Portrait orientation */
 
 @media (orientation: portrait) {
-	#menu{
-		width: 100%;
-		height: auto;
-	}
+ #menu {
+  width: 100%;
+  height: auto;
+ }
 
-	#ThreeJScontainer {
-		width: 100%;
-	}
+ #menu li {
+  float: left;
+  width: 12%;
+  margin-top: 12%;
+ }
 
+ #ThreeJScontainer {
+  width: 100%;
+ }
 
-	/* Modals */
-	.modal {
-		border-left: none;
-		border-top: 2px solid rgba(0,0,0,0.75);
-		left: 0;
-		top: 15%;
-	}
+ /* Modals */
+ .modal {
+  border-left: none;
+  border-top: 2px solid rgba(0,0,0,0.75);
+  left: 0;
+  margin-top: 24%;
+ }
 
-	#settingsContainer, #perspectiveContainer, #colorsContainer {
-		width: 100%;
-	}
+ #settingsContainer, #perspectiveContainer, #colorsContainer {
+  width: 100%;
+ }
 
-	#settingsModal div a {
-		line-height: 38vw;
-	}
+ #settingsModal div a {
+  line-height: 38vw;
+ }
+ 
+ /* perspectives */
+ .red, .blue, .green , .top , .yellow {
+  border-width:5px;
+ }
+
+ #colors {
+  top: 50%;
+ }
 }

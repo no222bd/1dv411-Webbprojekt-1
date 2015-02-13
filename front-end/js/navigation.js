@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
 	var openModal = null;
 
 	$(".modalOption").click(function (event) {
-		event.preventDefault(); //Isn't this still NOT working and unnecessary?
+		event.preventDefault();
 		var href = $(this).attr("href");
 
 		if (href === openModal) {
@@ -44,23 +44,23 @@ jQuery(document).ready(function($) {
 		openModal = null;
 		cb.enableOrDisableOrbit(true);
 	}
+
+	/**
+	 * Function for handling users choice of color.
+	 */
+	function colors() {
+		$(".color").click(function (event) {
+			event.preventDefault();
+			var colorHex = $(this).attr("href");
+			cb.setColor(colorHex);
+			closeModal();
+		});
+	}
+
+	/**
+	 * Function for handling different settings options.
+	 */
+	function settings() {
+
+	}
 });
-
-/**
- * Function for handling users choice of color.
- */
-function colors() {
-	$(".color").click(function (event) { 
-		console.log($(this).attr("href"));
-		var colorHex = $(this).attr("href");
-		cb.setColor(colorHex);
-		//Success message or just close modal?
-	});
-}
-
-/**
- * Function for handling different settings options.
- */
-function settings() {
-
-}
