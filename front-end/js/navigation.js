@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
 	var openModal = null;
 
 	$(".modalOption").click(function (event) {
-		event.preventDefault(); //Isn't this still NOT working and unnecessary?
+		event.preventDefault();
 		var href = $(this).attr("href");
 
 		if (href === openModal) {
@@ -50,6 +50,7 @@ jQuery(document).ready(function($) {
 	 */
 	function colors() {
 		$(".color").click(function (event) {
+			event.preventDefault();
 			var colorHex = $(this).attr("href");
 			cb.setColor(colorHex);
 			closeModal();
