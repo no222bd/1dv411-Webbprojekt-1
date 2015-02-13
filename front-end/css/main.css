@@ -255,7 +255,7 @@ body{
 	border-radius: 5%;
 	overflow: hidden; 
 }
-#perspectiveModal .green {
+#perspectiveModal .red {
 	display:block; margin:0 auto;
 }
 /* colors for the view-frames*/ 
