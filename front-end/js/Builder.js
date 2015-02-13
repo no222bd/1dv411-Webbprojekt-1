@@ -1,6 +1,8 @@
-"use strict";
+(function(outerWindow){
+	"use strict";
 
-var BUILDER = BUILDER || {};
+outerWindow.BUILDER = outerWindow.BUILDER || {};
+var BUILDER = outerWindow.BUILDER;
 
 BUILDER.CubeBuilder = function() {
 	var construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"));
@@ -590,3 +592,5 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 		JQueryElement.append(renderer.domElement);
 	};
 };
+
+}(window))
