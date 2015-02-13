@@ -46,7 +46,7 @@ BUILDER.CubeBuilder = function() {
 
 	// Toggle buildMode Add/Remove
 	this.toggleBuildMode = function() {
-		construction.buildMode = construction.buildMode === true ? false : true;
+		construction.toggleBuildMode();// = construction.buildMode === true ? false : true;
 	};
 
 	// Save model to JSON string
@@ -79,11 +79,14 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	    controls,
 	    views,
 	    stats,
+	    buildMode = true,
 		self = this;
 
 	// BuildMode Add or Remove cube
-	this.buildMode = true;
-
+	//this.buildMode = true;
+	this.toggleBuildMode = function(){
+		buildMode = !buildMode;
+	}
 	function init() {// TODO - Make this public ?
 		self.setCubeMaterial('#FED06F');
 
@@ -228,8 +231,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 					var intersect = intersects[0];
 					switch(event.button) {
 					case 0:
+						console.log(buildMode);
 						// left mouse button adds cube if buildMode == true, removes if false
-						self.buildMode ? addCube(intersect) : removeCube(intersect);
+						buildMode ? addCube(intersect) : removeCube(intersect);
 						break;
 					case 2:
 						// right mouse button removes cube
