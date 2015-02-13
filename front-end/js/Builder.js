@@ -456,12 +456,19 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		}
 
 		var model = {
-			baseSize: objects[0].geometry.parameters.height / 2,
+			baseSize: objects[0].geometry.parameters.height / step,
 			cubes: []
 		};
 
 		for(var i = 1; i < objects.length; i++) {
-			model.cubes.push(new Cube(objects[i].material.color.getHexString(), objects[i].position.x, objects[i].position.y, objects[i].position.z));
+			model.cubes.push(
+				new Cube(
+					objects[i].material.color.getHexString(),
+					objects[i].position.x,
+					objects[i].position.y,
+					objects[i].position.z
+				)
+			);
 		}
 
 		return JSON.stringify(model);
@@ -469,11 +476,18 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	// Load model from JSON
 	this.loadModel = function(jsonString) {
-		var model = JSON.parse(jsonString);
+		var model;
 		var voxel;
 		var material;
+
+		if(typeof jsonString === "object"){
+			model = jsonString
+		}else {
+			model = JSON.parse(jsonString);
+		}
+
 		objects = [];
-		baseSize = model.baseSize;
+		baseSize = model.baseSize * (step / 2);
 
 		setBase();
 		scene = createScene();
