@@ -8,7 +8,9 @@ BUILDER.CubeBuilder = function() {
 	//public members
 
 	//perspective of view in menubar
-	//this.perspective = function() {};
+	this.perspective = function(perspective) {
+		//green, blue, top, yellow, red
+	};
 
 	//public functions
 

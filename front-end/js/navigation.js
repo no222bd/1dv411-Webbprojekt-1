@@ -22,6 +22,7 @@ jQuery(document).ready(function($) {
 			switch(id) {
 				case "perspective":
 					cb.renderPerspectives();
+					perspective();
 					break;
 				case "base":
 					//cb.setBaseSize(send in base-size here!);
@@ -43,6 +44,18 @@ jQuery(document).ready(function($) {
 		$('#modal').removeClass('open');
 		openModal = null;
 		cb.enableOrDisableOrbit(true);
+	}
+
+	/**
+	 * Function for handling users choice of perspective.
+	 */
+	function perspective() {
+		$(".perspective").click(function (event) {
+			event.preventDefault();
+			var perspective = $(this).attr("href");
+			cb.perspective(perspective);
+			closeModal();
+		});
 	}
 
 	/**
