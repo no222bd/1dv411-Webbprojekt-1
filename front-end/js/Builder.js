@@ -73,7 +73,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	    raycaster,
 	    mouseposition,
 	    mouse,
-	    foundation,
+	    //foundation,
 	    baseGrid,
 	    basePlane,
 	    controls,
@@ -268,7 +268,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	function createScene() {
 		var scene = new THREE.Scene();
-		scene.add(foundation);
+		//scene.add(foundation);
 		scene.add(baseGrid);
 		scene.add(basePlane);
 
@@ -311,13 +311,13 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	function setBase() {
 		// create foundation
-		var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
-		geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
-		var m = new THREE.MeshBasicMaterial({
-			color : 0xA0E0B9
-		});
-		var f = new THREE.Mesh(geo, m);
-		foundation = f;
+		//var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
+		//geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+		//var m = new THREE.MeshBasicMaterial({
+		//	color : 0xA0E0B9
+		//});
+		//var f = new THREE.Mesh(geo, m);
+		//foundation = f;
 
 		//create grid
 		var grid = new THREE.Geometry();
