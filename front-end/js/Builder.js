@@ -173,21 +173,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		});
 	}
 
-	// Changes the size of the base and creates new scene
-	this.setBaseSize = function(size) {
-		if($.isNumeric(size) && size >= 2 && size <= 20) {
-			baseSize = (step / 2) * size;
-			objects = [];
-			setBase();
-			updateCounter();
-			scene = createScene();
-
-			return true;
-		}
-
-		return false;
-	};
-
 	// Rerenders when size changes
 	function onWindowResize(event) {
 		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
@@ -276,24 +261,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			});
 		}
 	}
-
-	// set material for cube
-	this.setCubeMaterial = function(colorHex) {
-		cubeMaterial = new THREE.MeshLambertMaterial({
-			color: colorHex,
-			specular: 0x009900,
-			shininess: 30,
-			shading: THREE.FlatShading
-		});
-		cubeMaterial.ambient = cubeMaterial.color;
-
-		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
-		/* Remove before deploy! */
-
-		this._cubeMaterial = cubeMaterial;
-
-		/* End of testing code */
-	};
 
 	function createScene() {
 		var scene = new THREE.Scene();
@@ -447,6 +414,24 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		renderer.render(scene, camera);
 	};
 
+	// set material for cube
+	this.setCubeMaterial = function(colorHex) {
+		cubeMaterial = new THREE.MeshLambertMaterial({
+			color: colorHex,
+			specular: 0x009900,
+			shininess: 30,
+			shading: THREE.FlatShading
+		});
+		cubeMaterial.ambient = cubeMaterial.color;
+
+		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+		/* Remove before deploy! */
+
+		this._cubeMaterial = cubeMaterial;
+
+		/* End of testing code */
+	};
+
 	this.renderPerspectives = function() {
 		views.forEach(function(element, index, array) {
             element.setSize();
@@ -523,6 +508,20 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		views.forEach(function(element, index, array) {
 			element.render();
 		});
+	};
+	// Changes the size of the base and creates new scene
+	this.setBaseSize = function(size) {
+		if($.isNumeric(size) && size >= 2 && size <= 20) {
+			baseSize = (step / 2) * size;
+			objects = [];
+			setBase();
+			updateCounter();
+			scene = createScene();
+
+			return true;
+		}
+
+		return false;
 	};
 
 	init();
