@@ -18,6 +18,10 @@ body{
 /** -- Menu -- **
  ---------------------------------------------------------------------- */
 
+.chosen {
+	border: 5px solid red;
+}
+
 #menu {
 	list-style-type: none;
 	margin: 0;
@@ -30,10 +34,21 @@ body{
 
 #menu a {
 	display: block;
-	width: 60px;
 	width: 100%;
 	padding-top: 100%;
 	position: relative;
+}
+
+.clear {
+	clear: both;
+}
+
+#menu .buildOption {
+	width: 45%;
+	height: 45%;
+	margin-top: 35%;
+	padding-top:45%;
+	float: left;
 }
 
 #cube, #erase, #base, #perspective, #settings, #colors {

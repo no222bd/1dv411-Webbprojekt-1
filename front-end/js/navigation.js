@@ -46,13 +46,13 @@ jQuery(document).ready(function($) {
 		//Switches function to call depending on the id of the chosen menu link.
 		switch(id) {
 			case "cube":
-				$(this).parent().toggleClass('chosen');
-				$('#erase').parent().removeClass('chosen');
+				$(this).toggleClass('chosen');
+				$('#erase').removeClass('chosen');
 				cb.toggleBuildMode();
 				break;
 			case "erase":
-				$(this).parent().toggleClass('chosen');
-				$('#cube').parent().removeClass('chosen');
+				$(this).toggleClass('chosen');
+				$('#cube').removeClass('chosen');
 				cb.toggleBuildMode();
 				break;
 			default:
