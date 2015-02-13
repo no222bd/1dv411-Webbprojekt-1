@@ -18,7 +18,6 @@ jQuery(document).ready(function($) {
 			openModal = href;
 
 			//Switches function to call depending on the id of the chosen menu link.
-			//Needs cases for switching between cube and eraser.
 			switch(id) {
 				case "perspective":
 					cb.renderPerspectives();
@@ -36,6 +35,27 @@ jQuery(document).ready(function($) {
 			};
 			cb.enableOrDisableOrbit(false);
 		}
+	});
+
+	$(".buildOption").click(function (event) {
+		event.preventDefault();
+		var href = $(this).attr("href");
+		var id = $(this).attr("id");
+
+		//Switches function to call depending on the id of the chosen menu link.
+		switch(id) {
+			case "cube":
+				$(this).parent().toggleClass('chosen');
+				$('#erase').parent().removeClass('chosen');
+				cb.toggleBuildMode();
+				break;
+			case "erase":
+				$(this).parent().toggleClass('chosen');
+				$('#cube').parent().removeClass('chosen');
+				cb.toggleBuildMode();
+				break;
+			default:
+		};
 	});
 
 	function closeModal() {
