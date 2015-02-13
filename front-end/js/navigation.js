@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
 					cb.renderPerspectives();
 					break;
 				case "base":
-					//cb.setBaseSize(send in base-size here!);
+					baseSize();
 					break;
 				case "settings":
 					settings();
@@ -43,6 +43,40 @@ jQuery(document).ready(function($) {
 		$('#modal').removeClass('open');
 		openModal = null;
 		cb.enableOrDisableOrbit(true);
+	}
+
+	/**
+	 * Function for handling users choice of baseSize.
+	 */
+	function baseSize() {
+		$("#reset").click(function (event) {
+			event.preventDefault();
+			cb.reset();
+			closeModal();
+		});
+
+		$(".sizeControl").click(function (event) {
+			event.preventDefault();
+			var href = $(this).attr("href");
+			var currentSize = $('#sizePreview').text();
+
+			switch(href) {
+				case "#up":
+					if (currentSize != 20) {
+						currentSize = parseInt(currentSize) + 2;
+					}
+					break;
+				case "#down":
+					if (currentSize != 2) {
+						currentSize = parseInt(currentSize) - 2;
+					}
+					break;
+				default:
+			};
+
+			$('#sizePreview').text(currentSize);
+			cb.setBaseSize(currentSize);
+		});
 	}
 
 	/**

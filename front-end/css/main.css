@@ -132,11 +132,11 @@ body{
 	position: relative;
 }
 
-input {
+#sizePreview {
 	width: 100%;
 }
 
-#baseModal div div a, #baseModal div div input {
+#baseModal div div a, #baseModal div div #sizePreview {
 	display: block;
 	height: 27%;
 	margin-bottom: 2%;
@@ -181,7 +181,7 @@ input {
 	bottom: 0;
 }
 
-#sizeWrapper a, #sizeWrapper input {
+#sizeWrapper a, #sizeWrapper #sizePreview {
 	display: block;
 
 	height: 27%;
