@@ -212,6 +212,13 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			shading: THREE.FlatShading
 		});
 		cubeMaterial.ambient = cubeMaterial.color;
+		
+		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+		/* Remove before deploy! */
+		
+		this._cubeMaterial = cubeMaterial;
+		
+		/* End of testing code */
 	};
 
 	function createScene() {
@@ -461,7 +468,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._renderPerspectives = this.renderPerspectives;
 	this._enableOrDisableOrbit = this.enableOrDisableOrbit;
 
-	/**/
+	/* End of testing code */
 };
 
 BUILDER.View = function(renderer, camera, JQueryElement, scene) {
