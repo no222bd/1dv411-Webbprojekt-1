@@ -8,7 +8,9 @@ BUILDER.CubeBuilder = function() {
 	//public members
 
 	//perspective of view in menubar
-	//this.perspective = function() {};
+	this.perspective = function(perspective) {
+		//green, blue, top, yellow, red
+	};
 
 	//public functions
 
@@ -116,7 +118,57 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		window.addEventListener("resize", onWindowResize);
 		document.body.appendChild( stats.domElement );
 
+		createPerspectives();
 		render();
+	}
+
+	function createPerspectives() {
+		var topView = $("#topView");
+		var blueView = $("#blueView");
+		var redView = $("#redView");
+		var yellowView = $("#yellowView");
+		var greenView = $("#greenView");
+
+		// creating the top-view
+		var aspectRatio = topView.width() / topView.height();
+		var viewSize = 1200;
+		var cam = new THREE.OrthographicCamera(-aspectRatio * viewSize / 2, aspectRatio * viewSize / 2, -viewSize / 2, viewSize / 2);
+		cam.position.set(0, 500, 0);
+		cam.lookAt(new THREE.Vector3());
+		var ren = createRenderer(topView);
+		views.push(new BUILDER.View(ren, cam, topView, scene));
+
+		// creating the blue-view
+		cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
+		cam.position.set(0, 500, -500);
+		cam.lookAt(new THREE.Vector3(0, 500, 0));
+		ren = createRenderer(blueView);
+		views.push(new BUILDER.View(ren, cam, blueView, scene));
+
+		// creating the red-view
+		cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
+		cam.position.set(500, 500, 0);
+		cam.lookAt(new THREE.Vector3(0, 500, 0));
+		ren = createRenderer(redView);
+		views.push(new BUILDER.View(ren, cam, redView, scene));
+
+		// creating the yellow-view
+		cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
+		cam.position.set(0, 500, 500);
+		cam.lookAt(new THREE.Vector3(0, 500, 0));
+		ren = createRenderer(yellowView);
+		views.push(new BUILDER.View(ren, cam, yellowView, scene));
+
+		// creating the green-view
+		cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
+		cam.position.set(-500, 500, 0);
+		cam.lookAt(new THREE.Vector3(0, 500, 0));
+		ren = createRenderer(greenView);
+		views.push(new BUILDER.View(ren, cam, greenView, scene));
+
+		views.forEach(function(element, index, array) {
+			element.init();
+		});
 	}
 
 	// Changes the size of the base and creates new scene
@@ -394,52 +446,10 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	};
 
 	this.renderPerspectives = function() {
-		var topView = $("#topView");
-		var blueView = $("#blueView");
-		var redView = $("#redView");
-		var yellowView = $("#yellowView");
-		var greenView = $("#greenView");
-
-		// creating the top-view
-		var aspectRatio = topView.width() / topView.height();
-		var viewSize = 1200;
-		var cam = new THREE.OrthographicCamera(-aspectRatio * viewSize / 2, aspectRatio * viewSize / 2, -viewSize / 2, viewSize / 2);
-		cam.position.set(0, 500, 0);
-		cam.lookAt(new THREE.Vector3());
-		var ren = createRenderer(topView);
-		views.push(new BUILDER.View(ren, cam, topView, scene));
-
-		// creating the blue-view
-		cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
-		cam.position.set(0, 500, -500);
-		cam.lookAt(new THREE.Vector3(0, 500, 0));
-		ren = createRenderer(blueView);
-		views.push(new BUILDER.View(ren, cam, blueView, scene));
-
-		// creating the red-view
-		cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
-		cam.position.set(500, 500, 0);
-		cam.lookAt(new THREE.Vector3(0, 500, 0));
-		ren = createRenderer(redView);
-		views.push(new BUILDER.View(ren, cam, redView, scene));
-
-		// creating the yellow-view
-		cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
-		cam.position.set(0, 500, 500);
-		cam.lookAt(new THREE.Vector3(0, 500, 0));
-		ren = createRenderer(yellowView);
-		views.push(new BUILDER.View(ren, cam, yellowView, scene));
-
-		// creating the green-view
-		cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
-		cam.position.set(-500, 500, 0);
-		cam.lookAt(new THREE.Vector3(0, 500, 0));
-		ren = createRenderer(greenView);
-		views.push(new BUILDER.View(ren, cam, greenView, scene));
-
 		views.forEach(function(element, index, array) {
-			element.init();
-		});
+            element.setSize();
+            element.render();
+        });
 	};
 
 	this.enableOrDisableOrbit = function(setting) {
