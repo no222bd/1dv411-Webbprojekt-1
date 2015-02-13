@@ -101,6 +101,18 @@ jQuery(document).ready(function($) {
 	}
 
 	/**
+	 * Function for handling users choice of perspective.
+	 */
+	function perspective() {
+		$(".perspective").click(function (event) {
+			event.preventDefault();
+			var perspective = $(this).attr("href");
+			cb.perspective(perspective);
+			closeModal();
+		});
+	}
+
+	/**
 	 * Function for handling users choice of color.
 	 */
 	function colors() {
