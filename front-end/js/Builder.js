@@ -435,6 +435,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	this.renderPerspectives = function() {
 		views.forEach(function(element, index, array) {
+            element.setSize();
             element.render();
         });
 	};

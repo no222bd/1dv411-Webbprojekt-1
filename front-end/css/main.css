@@ -248,7 +248,6 @@ input {
 .canvasWrapper {
 	height:100%;
 	width:100%;
-	padding:5% 0;
 	position: absolute;
 	left:0;
 	border-radius: 5%;
