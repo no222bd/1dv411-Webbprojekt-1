@@ -132,6 +132,9 @@ body{
 	position: relative;
 }
 
+.chosen {
+	display: none;
+}
 input {
 	width: 100%;
 }
