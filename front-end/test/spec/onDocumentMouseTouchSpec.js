@@ -52,7 +52,7 @@ describe("Builder.ConstructionArea", function () {
 			builder._mouseposition.y = 500;
 			builder._onDocumentMouseTouch(event);
 			expect(builder._objects.length).toEqual(2);
-			builder.buildMode = false;
+			builder.toggleBuildMode();
 			builder._onDocumentMouseTouch(event);
 			// Testing removeCube have been called.
 			expect(builder._objects.length).toEqual(1);
