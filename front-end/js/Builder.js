@@ -88,6 +88,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		buildMode = !buildMode;
 	}
 	function init() {// TODO - Make this public ?
+		if(!(jQueryContainer instanceof jQuery)){
+			throw new Error();
+		}
 		self.setCubeMaterial('#FED06F');
 
 		stats = new Stats();
@@ -420,20 +423,25 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	// set material for cube
 	this.setCubeMaterial = function(colorHex) {
-		cubeMaterial = new THREE.MeshLambertMaterial({
-			color: colorHex,
-			specular: 0x009900,
-			shininess: 30,
-			shading: THREE.FlatShading
-		});
-		cubeMaterial.ambient = cubeMaterial.color;
+		var pattern = new RegExp("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
+		if(pattern.test(colorHex)) {
+			cubeMaterial = new THREE.MeshLambertMaterial({
+				color: colorHex,
+				specular: 0x009900,
+				shininess: 30,
+				shading: THREE.FlatShading
+			});
+			cubeMaterial.ambient = cubeMaterial.color;
 
-		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
-		/* Remove before deploy! */
+			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+			/* Remove before deploy! */
 
-		this._cubeMaterial = cubeMaterial;
+			this._cubeMaterial = cubeMaterial;
 
-		/* End of testing code */
+			/* End of testing code */
+			return true;
+		}
+		return false;
 	};
 
 	this.renderPerspectives = function() {
@@ -444,7 +452,11 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	};
 
 	this.enableOrDisableOrbit = function(setting) {
-		controls.enabled = setting;
+		if(typeof setting === 'boolean'){
+			controls.enabled = setting;
+			return true;
+		}
+		return false;
 	};
 
 	// Save model to JSON
@@ -515,12 +527,19 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	};
 	// Changes the size of the base and creates new scene
 	this.setBaseSize = function(size) {
-		if($.isNumeric(size) && size >= 2 && size <= 20) {
+		if(!isNaN(size) && size >= 2 && size <= 20) {
 			baseSize = (step / 2) * size;
 			objects = [];
 			setBase();
 			updateCounter();
 			scene = createScene();
+
+			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+			/* Remove before deploy! */
+
+			this._baseSize = baseSize;
+
+			/* End of testing code */
 
 			return true;
 		}

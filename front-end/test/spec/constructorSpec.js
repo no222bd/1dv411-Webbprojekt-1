@@ -12,7 +12,9 @@ describe("Builder.ConstructionArea", function () {
 
 		it("should throw exception if argument is not JQuery element", function () {
 			// assert
-			expect(new BUILDER.ConstructionArea("<div></div>")).toThrowError();
+			expect(function(){
+				new BUILDER.ConstructionArea("<div></div>")
+			}).toThrowError();
 		});
 
 	});

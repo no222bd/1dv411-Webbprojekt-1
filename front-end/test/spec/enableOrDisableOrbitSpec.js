@@ -55,7 +55,7 @@ describe("Builder.ConstructionArea", function () {
 			builder._enableOrDisableOrbit(0);
 
 			// assert
-			expect(builder._controls.enabled).toBeTruthy();
+			expect(builder._controls.enabled).toBeFalsy();
 		});
 
 		it("should return true/false", function(){
