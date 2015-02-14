@@ -131,12 +131,14 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	}
 
 	function createPerspectives() {
-		function createOrthoCamera(x,y,z){
-			var aspectRatio = topView.width() / topView.height();
+		function createView(x,y,z, view){
+			var viewSize = 1200;
+			var aspectRatio = view.width() / view.height();
 			var cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
 			cam.position.set(x,y,z);
 			cam.lookAt(new THREE.Vector3(0, baseSize, 0));
-			return cam;
+			var ren = createRenderer(view);
+			return new BUILDER.View(ren, cam, view, scene);
 		}
 		var topView = $("#topView");
 		var blueView = $("#blueView");
@@ -144,32 +146,11 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		var yellowView = $("#yellowView");
 		var greenView = $("#greenView");
 
-		// creating the top-view
-		var aspectRatio = topView.width() / topView.height();
-		var viewSize = 1200;
-		var cam = createOrthoCamera(0,500,0);
-		var ren = createRenderer(topView);
-		views.push(new BUILDER.View(ren, cam, topView, scene));
-
-		// creating the blue-view
-		cam = createOrthoCamera(0,500,-500);
-		ren = createRenderer(blueView);
-		views.push(new BUILDER.View(ren, cam, blueView, scene));
-
-		// creating the red-view
-		cam = createOrthoCamera(500,500,0);
-		ren = createRenderer(redView);
-		views.push(new BUILDER.View(ren, cam, redView, scene));
-
-		// creating the yellow-view
-		cam = createOrthoCamera(0, 500, 500);
-		ren = createRenderer(yellowView);
-		views.push(new BUILDER.View(ren, cam, yellowView, scene));
-
-		// creating the green-view
-		cam = createOrthoCamera(-500, 500, 0);
-		ren = createRenderer(greenView);
-		views.push(new BUILDER.View(ren, cam, greenView, scene));
+		views.push(createView(0,500,0, topView));
+		views.push(createView(0,500,-500, blueView));
+		views.push(createView(500,500,0, redView));
+		views.push(createView(0,500,500, yellowView));
+		views.push(createView(-500,500,0, greenView));
 
 		views.forEach(function(element, index, array) {
 			element.init();
