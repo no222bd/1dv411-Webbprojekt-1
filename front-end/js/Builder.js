@@ -5,19 +5,39 @@ outerWindow.BUILDER = outerWindow.BUILDER || {};
 var BUILDER = outerWindow.BUILDER;
 
 BUILDER.CubeBuilder = function() {
+	// private members
 	var construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"));
 
-	//public members
+	//public functions
+
+	// Freeze model if popup menu is open
+	this.enableOrDisableOrbit = function(setting) {
+		construction.enableOrDisableOrbit(setting);
+	};
+	
+	// Load model from JSON string
+	this.loadModel = function(jsonString) {
+		construction.loadModel(jsonString);
+	};
 
 	//perspective of view in menubar
 	this.perspective = function(perspective) {
 		//green, blue, top, yellow, red
 	};
-
-	//public functions
+	
+	//render all perspectives in menu
+	this.renderPerspectives = function() {
+		construction.renderPerspectives();
+	};
 
 	//reset
 	this.reset = function() {
+	};
+	
+	// Save model to JSON string
+	this.saveModel = function() {
+		var jsonString = construction.saveModel();
+		console.log(jsonString); // Temp
 	};
 
 	//size of base plane - size: width of base
@@ -33,32 +53,19 @@ BUILDER.CubeBuilder = function() {
 	// set action for mouse up
 	this.setMouseUpAction = function() {
 	};
-
-	//render all perspectives in menu
-	this.renderPerspectives = function() {
-		construction.renderPerspectives();
-	};
-
-	// Freeze model if popup menu is open
-	this.enableOrDisableOrbit = function(setting) {
-		construction.enableOrDisableOrbit(setting);
-	};
-
+	
 	// Toggle buildMode Add/Remove
 	this.toggleBuildMode = function() {
 		construction.toggleBuildMode();// = construction.buildMode === true ? false : true;
 	};
 
-	// Save model to JSON string
-	this.saveModel = function() {
-		var jsonString = construction.saveModel();
-		console.log(jsonString); // Temp
-	};
+	/* OBS. For testing only! Do not use in application!!! */
+	// TODO: Remove before deploying
 
-	// Load model from JSON string
-	this.loadModel = function(jsonString) {
-		construction.loadModel(jsonString);
-	};
+	// members
+	this._construction = construction;
+
+	/* End of testing code */
 };
 
 BUILDER.ConstructionArea = function(jQueryContainer) {

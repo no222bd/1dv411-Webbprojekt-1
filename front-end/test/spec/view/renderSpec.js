@@ -3,7 +3,9 @@ describe("Builder.View", function () {
 	var JQueryElement;
 
 	beforeEach(function () {
-		JQueryElement = $("<div style='width: 130px, height: 100px;'></div>");
+		JQueryElement = $("<div></div>");
+		JQueryElement.width(130);
+		JQueryElement.height(100);
 		var viewSize = 1200;
 		var aspectRatio = JQueryElement.width() / JQueryElement.height();
 		var builder = new BUILDER.ConstructionArea($("<div></div>"));
