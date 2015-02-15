@@ -9,7 +9,9 @@ describe("Builder.ConstructionArea", function () {
 
 		beforeEach(function() {
 			var cube = new THREE.Mesh(builder._cubeGeo, builder._cubeMaterial);
-			cube.position = new THREE.Vector3(-25, 25, -25);
+			cube.position.x = -25;
+			cube.position.y = 25;
+			cube.position.z = -25;
 			builder._objects[1] = cube;
 		});
 

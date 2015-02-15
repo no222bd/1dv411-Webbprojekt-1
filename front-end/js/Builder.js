@@ -576,6 +576,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._render = render;
 	this._renderPerspectives = this.renderPerspectives;
 	this._enableOrDisableOrbit = this.enableOrDisableOrbit;
+	this._saveModel = this.saveModel;
 
 	/* End of testing code */
 };
