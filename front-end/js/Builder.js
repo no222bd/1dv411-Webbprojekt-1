@@ -587,6 +587,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._saveModel = this.saveModel;
 	this._loadModel = this.loadModel;
 	this._toggleBuildMode = this.toggleBuildMode;
+	this._createPerspectives = createPerspectives;
 
 	/* End of testing code */
 };
@@ -612,6 +613,17 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 		JQueryElement.empty();
 		JQueryElement.append(renderer.domElement);
 	};
+	
+	/* OBS. For testing only! Do not use in application!!! */
+	// TODO: Remove before deploying
+
+	// members
+	this._renderer = renderer;
+	this._camera = camera;
+	this._JQueryElement = JQueryElement;
+	this._scene = scene;
+
+	/* End of testing code */
 };
 
 }(window));

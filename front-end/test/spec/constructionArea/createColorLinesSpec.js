@@ -16,9 +16,9 @@ describe("Builder.ConstructionArea", function () {
 			expect(lines.length).toBe(4);
 		});
 
-		describe("lines have correct colors and positions", function () {
+		describe("lines should have correct colors and positions", function () {
 
-			it("should green and have correct position", function () {
+			it("should be green and have correct position", function () {
 				var line = lines[0];
 
 				var Vector3 = new THREE.Vector3((builder._baseSize + 20), 0, builder._baseSize);
@@ -27,7 +27,7 @@ describe("Builder.ConstructionArea", function () {
 				expect(line.geometry.vertices[1]).toEqual(Vector3);
 			});
 
-			it("should red and have correct position", function () {
+			it("should be red and have correct position", function () {
 				var line = lines[1];
 
 				var Vector3 = new THREE.Vector3(-(builder._baseSize + 20), 0, builder._baseSize);
@@ -36,7 +36,7 @@ describe("Builder.ConstructionArea", function () {
 				expect(line.geometry.vertices[1]).toEqual(Vector3);
 			});
 
-			it("should blue and have correct position", function () {
+			it("should be blue and have correct position", function () {
 				var line = lines[2];
 
 				var Vector3 = new THREE.Vector3(builder._baseSize, 0, (builder._baseSize + 20));
@@ -45,7 +45,7 @@ describe("Builder.ConstructionArea", function () {
 				expect(line.geometry.vertices[1]).toEqual(Vector3);
 			});
 
-			it("should yellow and have correct position", function () {
+			it("should be yellow and have correct position", function () {
 				var line = lines[3];
 
 				var Vector3 = new THREE.Vector3(builder._baseSize, 0, -(builder._baseSize + 20));
