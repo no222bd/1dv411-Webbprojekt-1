@@ -233,6 +233,13 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	// BuildMode Add or Remove cube
 	this.toggleBuildMode = function() {
 		buildMode = !buildMode;
+
+		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+		// TODO: Remove before deploying
+
+		this._buildMode = buildMode;
+
+		/* End of testing code */
 	};
 	
 	/* Private functions */
