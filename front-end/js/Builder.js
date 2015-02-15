@@ -133,6 +133,13 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		views.forEach(function(element, index, array) {
 			element.render();
 		});
+		
+		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+		// TODO: Remove before deploying
+
+		this._objects = objects;
+
+		/* End of testing code */
 	};
 	
 	// Renders model perspectives
@@ -206,7 +213,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			cubeMaterial.ambient = cubeMaterial.color;
 
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
-			/* Remove before deploy! */
+			// TODO: Remove before deploying
 
 			this._cubeMaterial = cubeMaterial;
 
@@ -538,7 +545,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	init();
 
 	/* OBS. For testing only! Do not use in application!!! */
-	/* Remove before deploying */
+	// TODO: Remove before deploying
 
 	// members
 	this._jQueryContainer = jQueryContainer;
@@ -577,6 +584,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._renderPerspectives = this.renderPerspectives;
 	this._enableOrDisableOrbit = this.enableOrDisableOrbit;
 	this._saveModel = this.saveModel;
+	this._loadModel = this.loadModel;
 
 	/* End of testing code */
 };
