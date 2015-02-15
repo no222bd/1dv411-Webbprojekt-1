@@ -382,6 +382,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		var yellowView = $("#yellowView");
 		var greenView = $("#greenView");
 
+		views = []; //If this turns out to be a problem, use views.length = 0;
 		views.push(createView(0,500,0, topView));
 		views.push(createView(0,500,-500, blueView));
 		views.push(createView(500,500,0, redView));
