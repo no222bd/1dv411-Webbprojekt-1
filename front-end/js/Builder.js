@@ -224,7 +224,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	};
 
 	// BuildMode Add or Remove cube
-	this.toggleBuildMode = function(){
+	this.toggleBuildMode = function() {
 		buildMode = !buildMode;
 	};
 	
@@ -565,6 +565,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._controls = controls;
 	this._views = views;
 	this._self = self;
+	this._buildMode = buildMode;
 
 	// functions
 	this._init = init;
@@ -585,6 +586,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._enableOrDisableOrbit = this.enableOrDisableOrbit;
 	this._saveModel = this.saveModel;
 	this._loadModel = this.loadModel;
+	this._toggleBuildMode = this.toggleBuildMode;
 
 	/* End of testing code */
 };
