@@ -5,17 +5,17 @@ describe("Builder.CubeBuilder", function () {
 		cubeBuilder = new BUILDER.CubeBuilder();
 	});
 
-	describe("loadModel", function () {
+	describe("renderPerspectives", function () {
 
 		it("should call construction.loadModel", function () {
 			// arrange
-			spyOn(cubeBuilder._construction, 'loadModel');
+			spyOn(cubeBuilder._construction, 'renderPerspectives');
 			
 			// act
-			cubeBuilder.loadModel();
+			cubeBuilder.renderPerspectives();
 			
 			// assert
-			expect(cubeBuilder._construction.loadModel).toHaveBeenCalled();
+			expect(cubeBuilder._construction.renderPerspectives).toHaveBeenCalled();
 		});
 
 	});
