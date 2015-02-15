@@ -7,7 +7,7 @@ describe("Builder.CubeBuilder", function () {
 
 	describe("renderPerspectives", function () {
 
-		it("should call construction.loadModel", function () {
+		it("should call construction.renderPerspectives", function () {
 			// arrange
 			spyOn(cubeBuilder._construction, 'renderPerspectives');
 			
