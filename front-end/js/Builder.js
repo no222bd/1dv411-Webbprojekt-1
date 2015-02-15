@@ -599,11 +599,11 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 
 	this.setSize = function() {
 		var viewSite = 1200;
-		var aspectRation = JQueryElement.width() / JQueryElement.height();
+		var aspectRatio = JQueryElement.width() / JQueryElement.height();
 		renderer.setSize(JQueryElement.width(), JQueryElement.height());
 
-		camera.left = aspectRation * viewSite / 2;
-		camera.right = -aspectRation * viewSite / 2;
+		camera.left = aspectRatio * viewSite / 2;
+		camera.right = -aspectRatio * viewSite / 2;
 		camera.top = viewSite / 2;
 		camera.bottom = -viewSite / 2;
 		camera.updateProjectionMatrix();
