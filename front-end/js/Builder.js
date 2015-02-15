@@ -62,6 +62,9 @@ BUILDER.CubeBuilder = function() {
 };
 
 BUILDER.ConstructionArea = function(jQueryContainer) {
+	
+	/* Private members */
+	
 	var step,
 	    baseSize,
 	    objects,
@@ -82,11 +85,144 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	    buildMode = true,
 		self = this;
 
+	/* Public functions */
+
+	// Enable or disable camera rotating and zooming
+	this.enableOrDisableOrbit = function(setting) {
+		if(typeof setting === 'boolean'){
+			controls.enabled = setting;
+			return true;
+		}
+		return false;
+	};
+	
+	// Load model from JSON
+	this.loadModel = function(jsonString) {
+		var model;
+		var voxel;
+		var material;
+
+		if(typeof jsonString === "object"){
+			model = jsonString;
+		} else {
+			model = JSON.parse(jsonString);
+		}
+
+		objects = [];
+		baseSize = model.baseSize * (step / 2);
+
+		setBase();
+		scene = createScene();
+
+		for(var i = 0, cubes = model.cubes.length; i < cubes; i++) {
+			material = new THREE.MeshLambertMaterial({specular: 0x009900, shininess: 30, shading: THREE.FlatShading});	//Dependency
+			material.color.setHex('0x' + model.cubes[i].color);
+			material.ambient = material.color;
+
+			voxel = new THREE.Mesh(cubeGeo, material);
+			voxel.position.x = model.cubes[i].x;
+			voxel.position.y = model.cubes[i].y;
+			voxel.position.z = model.cubes[i].z;
+
+			scene.add(voxel);
+			objects.push(voxel);
+		}
+
+		updateCounter();
+
+		views.forEach(function(element, index, array) {
+			element.render();
+		});
+	};
+	
+	// Renders model perspectives
+	this.renderPerspectives = function() {
+		views.forEach(function(element, index, array) {
+            element.setSize();
+            element.render();
+        });
+	};
+	
+	// Save model to JSON
+	this.saveModel = function() {
+		function Cube(color, x, y, z) {
+			this.color = color;
+			this.x = x;
+			this.y = y;
+			this.z = z;
+		}
+
+		var model = {
+			baseSize: objects[0].geometry.parameters.height / step,
+			cubes: []
+		};
+
+		for(var i = 1; i < objects.length; i++) {
+			model.cubes.push(
+				new Cube(
+					objects[i].material.color.getHexString(),
+					objects[i].position.x,
+					objects[i].position.y,
+					objects[i].position.z
+				)
+			);
+		}
+
+		return JSON.stringify(model);
+	};
+	
+	// Changes the size of the base and creates new scene
+	this.setBaseSize = function(size) {
+		if(!isNaN(size) && size >= 2 && size <= 20) {
+			baseSize = (step / 2) * size;
+			objects = [];
+			setBase();
+			updateCounter();
+			scene = createScene();
+
+			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+			/* Remove before deploy! */
+
+			this._baseSize = baseSize;
+
+			/* End of testing code */
+
+			return true;
+		}
+
+		return false;
+	};
+	
+	// set material for cube
+	this.setCubeMaterial = function(colorHex) {
+		var pattern = new RegExp("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
+		if(pattern.test(colorHex)) {
+			cubeMaterial = new THREE.MeshLambertMaterial({
+				color: colorHex,
+				specular: 0x009900,
+				shininess: 30,
+				shading: THREE.FlatShading
+			});
+			cubeMaterial.ambient = cubeMaterial.color;
+
+			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+			/* Remove before deploy! */
+
+			this._cubeMaterial = cubeMaterial;
+
+			/* End of testing code */
+			return true;
+		}
+		return false;
+	};
+
 	// BuildMode Add or Remove cube
-	//this.buildMode = true;
 	this.toggleBuildMode = function(){
 		buildMode = !buildMode;
-	}
+	};
+	
+	/* Private functions */
+
 	function init() {// TODO - Make this public ?
 		if(!(jQueryContainer instanceof jQuery)){
 			throw new Error();
@@ -129,87 +265,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		createPerspectives();
 		render();
 	}
-
-	function createPerspectives() {
-		function createView(x,y,z, view){
-			var viewSize = 1200;
-			var aspectRatio = view.width() / view.height();
-			var cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
-			cam.position.set(x,y,z);
-			cam.lookAt(new THREE.Vector3(0, baseSize, 0));
-			var ren = createRenderer(view);
-			return new BUILDER.View(ren, cam, view, scene);
-		}
-		var topView = $("#topView");
-		var blueView = $("#blueView");
-		var redView = $("#redView");
-		var yellowView = $("#yellowView");
-		var greenView = $("#greenView");
-
-		views.push(createView(0,500,0, topView));
-		views.push(createView(0,500,-500, blueView));
-		views.push(createView(500,500,0, redView));
-		views.push(createView(0,500,500, yellowView));
-		views.push(createView(-500,500,0, greenView));
-
-		views.forEach(function(element, index, array) {
-			element.init();
-		});
-	}
-	// Rerenders when size changes
-	function onWindowResize(event) {
-		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
-		camera.updateProjectionMatrix();
-
-		views.forEach(function(element, index, array) {
-			element.setSize();
-		});
-
-		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
-	}
-
-	// Hanldes both mousedown and mouseup
-	function onDocumentMouseTouch(event) {
-		event.preventDefault();
-		//FUNGERAR INTE
-
-		var targetPosition = {
-			x : event.pageX - jQueryContainer.offset().left,
-			y : event.pageY - jQueryContainer.offset().top
-		};
-
-		if (event.type === "mousedown") {
-			// save mouse position
-			mouseposition.x = targetPosition.x;
-			mouseposition.y = targetPosition.y;
-		} else if (event.type === "mouseup") {
-			if (mouseposition.x != targetPosition.x || mouseposition.y != targetPosition.y) {
-				// if mouse has moved since mousedown event
-				return;
-			} else {
-				mouse.set((targetPosition.x / jQueryContainer.width() ) * 2 - 1, -(targetPosition.y / jQueryContainer.height() ) * 2 + 1);
-				raycaster.setFromCamera(mouse, camera);
-				var intersects = raycaster.intersectObjects(objects);
-
-				if (intersects.length > 0) {
-					// if click was inside 3D object
-					var intersect = intersects[0];
-					switch(event.button) {
-					case 0:
-						console.log(buildMode);
-						// left mouse button adds cube if buildMode == true, removes if false
-						buildMode ? addCube(intersect) : removeCube(intersect);
-						break;
-					case 2:
-						// right mouse button removes cube
-						removeCube(intersect);
-						break;
-					}
-				}
-			}
-		}
-	}
-
+	
 	// Checks if cube can be added and adds cube
 	function addCube(intersect) {
 		// Checks if cubes positon will be outside of the plane or higher then allowed.
@@ -234,53 +290,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		}
 	}
 
-	// Checks is cube can be removed and removes cube
-	function removeCube(intersect) {
-		if (intersect.object != basePlane) {
-			scene.remove(intersect.object);
-			objects.splice(objects.indexOf(intersect.object), 1);
-			updateCounter();
-			views.forEach(function(element, index, array) {
-				element.render();
-			});
-		}
-	}
-
-	function createScene() {
-		var scene = new THREE.Scene();
-		//scene.add(foundation);
-		scene.add(baseGrid);
-		scene.add(basePlane);
-
-		createColorLines().forEach(function(element, index, array) {
-			scene.add(element);
-		});
-
-		createLights().forEach(function(element, index, array) {
-			scene.add(element);
-		});
-
-		return scene;
-	};
-
-	function createRenderer(JQueryElement, checkWebGL) {
-		checkWebGL = checkWebGL || false;
-		var renderer;
-
-		if (checkWebGL) {
-			renderer = Detector.webgl ? new THREE.WebGLRenderer({
-				antialias : true
-			}) : new THREE.CanvasRenderer();
-		} else {
-			renderer = new THREE.CanvasRenderer();
-		}
-
-		renderer.setClearColor(0xE1F5FF);
-		renderer.setPixelRatio(window.devicePixelRatio || 1);
-		renderer.setSize(JQueryElement.width(), JQueryElement.height());
-		return renderer;
-	};
-
 	function createCamera() {
 		var camera = new THREE.PerspectiveCamera(45, jQueryContainer.width() / jQueryContainer.height(), 1, 10000);
 		camera.position.set(500, 800, 1300);
@@ -288,45 +297,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		return camera;
 	};
-
-	function setBase() {
-		// create foundation
-		//var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
-		//geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
-		//var m = new THREE.MeshBasicMaterial({
-		//	color : 0xA0E0B9
-		//});
-		//var f = new THREE.Mesh(geo, m);
-		//foundation = f;
-
-		//create grid
-		var grid = new THREE.Geometry();
-
-		for (var i = -baseSize; i <= baseSize; i += step) {
-			grid.vertices.push(new THREE.Vector3(-baseSize, 0, i));
-			grid.vertices.push(new THREE.Vector3(baseSize, 0, i));
-			grid.vertices.push(new THREE.Vector3(i, 0, -baseSize));
-			grid.vertices.push(new THREE.Vector3(i, 0, baseSize));
-		}
-
-		var material = new THREE.LineBasicMaterial({
-			color : 0x000000,
-			opacity : 0.2,
-			transparent : true
-		});
-
-		baseGrid = new THREE.Line(grid, material, THREE.LinePieces);
-
-		// create plane
-		var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
-		geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
-		var plane = new THREE.Mesh(geo);
-		plane.visible = false;
-
-		objects[0] = plane;
-		basePlane = plane;
-	};
-
+	
 	function createColorLines() {
 		var lines = [];
 		var gridOffset = 20;
@@ -369,8 +340,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		return lines;
 	};
-
-	// Creates lights and shadows
+	
 	function createLights() {
 		var lights = [];
 		lights.push(new THREE.AmbientLight(0x606060));
@@ -382,12 +352,77 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		return lights;
 	};
 
-	//Updates counter if there's a counter element.
-	function updateCounter() {
-		var count = objects.length == 1 ? "0" : objects.length - 1;
-		var counter = $("#counter");
-		if (counter.length) {
-			counter.text(count);
+	function createPerspectives() {
+		function createView(x,y,z, view){
+			var viewSize = 1200;
+			var aspectRatio = view.width() / view.height();
+			var cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
+			cam.position.set(x,y,z);
+			cam.lookAt(new THREE.Vector3(0, baseSize, 0));
+			var ren = createRenderer(view);
+			return new BUILDER.View(ren, cam, view, scene);
+		}
+		var topView = $("#topView");
+		var blueView = $("#blueView");
+		var redView = $("#redView");
+		var yellowView = $("#yellowView");
+		var greenView = $("#greenView");
+
+		views.push(createView(0,500,0, topView));
+		views.push(createView(0,500,-500, blueView));
+		views.push(createView(500,500,0, redView));
+		views.push(createView(0,500,500, yellowView));
+		views.push(createView(-500,500,0, greenView));
+
+		views.forEach(function(element, index, array) {
+			element.init();
+		});
+	}
+	
+	function createRenderer(JQueryElement, checkWebGL) {
+		checkWebGL = checkWebGL || false;
+		var renderer;
+
+		if (checkWebGL) {
+			renderer = Detector.webgl ? new THREE.WebGLRenderer({
+				antialias : true
+			}) : new THREE.CanvasRenderer();
+		} else {
+			renderer = new THREE.CanvasRenderer();
+		}
+
+		renderer.setClearColor(0xE1F5FF);
+		renderer.setPixelRatio(window.devicePixelRatio || 1);
+		renderer.setSize(JQueryElement.width(), JQueryElement.height());
+		return renderer;
+	};
+
+	function createScene() {
+		var scene = new THREE.Scene();
+
+		scene.add(baseGrid);
+		scene.add(basePlane);
+
+		createColorLines().forEach(function(element, index, array) {
+			scene.add(element);
+		});
+
+		createLights().forEach(function(element, index, array) {
+			scene.add(element);
+		});
+
+		return scene;
+	};
+
+	// Checks is cube can be removed and removes cube
+	function removeCube(intersect) {
+		if (intersect.object != basePlane) {
+			scene.remove(intersect.object);
+			objects.splice(objects.indexOf(intersect.object), 1);
+			updateCounter();
+			views.forEach(function(element, index, array) {
+				element.render();
+			});
 		}
 	}
 
@@ -397,132 +432,108 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 	};
+	
+	function setBase() {
+		// create foundation
+		//var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
+		//geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+		//var m = new THREE.MeshBasicMaterial({
+		// color : 0xA0E0B9
+		//});
+		//var f = new THREE.Mesh(geo, m);
+		//foundation = f;
+		
+		var grid = new THREE.Geometry();
 
-	// set material for cube
-	this.setCubeMaterial = function(colorHex) {
-		var pattern = new RegExp("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
-		if(pattern.test(colorHex)) {
-			cubeMaterial = new THREE.MeshLambertMaterial({
-				color: colorHex,
-				specular: 0x009900,
-				shininess: 30,
-				shading: THREE.FlatShading
-			});
-			cubeMaterial.ambient = cubeMaterial.color;
-
-			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
-			/* Remove before deploy! */
-
-			this._cubeMaterial = cubeMaterial;
-
-			/* End of testing code */
-			return true;
-		}
-		return false;
-	};
-
-	this.renderPerspectives = function() {
-		views.forEach(function(element, index, array) {
-            element.setSize();
-            element.render();
-        });
-	};
-
-	this.enableOrDisableOrbit = function(setting) {
-		if(typeof setting === 'boolean'){
-			controls.enabled = setting;
-			return true;
-		}
-		return false;
-	};
-
-	// Save model to JSON
-	this.saveModel = function() {
-		function Cube(color, x, y, z) {
-			this.color = color;
-			this.x = x;
-			this.y = y;
-			this.z = z;
+		for (var i = -baseSize; i <= baseSize; i += step) {
+			grid.vertices.push(new THREE.Vector3(-baseSize, 0, i));
+			grid.vertices.push(new THREE.Vector3(baseSize, 0, i));
+			grid.vertices.push(new THREE.Vector3(i, 0, -baseSize));
+			grid.vertices.push(new THREE.Vector3(i, 0, baseSize));
 		}
 
-		var model = {
-			baseSize: objects[0].geometry.parameters.height / step,
-			cubes: []
+		var material = new THREE.LineBasicMaterial({
+			color : 0x000000,
+			opacity : 0.2,
+			transparent : true
+		});
+
+		baseGrid = new THREE.Line(grid, material, THREE.LinePieces);
+
+		// create plane
+		var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
+		geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+		var plane = new THREE.Mesh(geo);
+		plane.visible = false;
+
+		objects[0] = plane;
+		basePlane = plane;
+	};
+	
+	//Updates counter if there's a counter element.
+	function updateCounter() {
+		var count = objects.length == 1 ? "0" : objects.length - 1;
+		var counter = $("#counter");
+		if (counter.length) {
+			counter.text(count);
+		}
+	}
+	
+	/* Event handlers */
+
+	// Hanldes both mousedown and mouseup
+	function onDocumentMouseTouch(event) {
+		event.preventDefault();
+		//FUNGERAR INTE
+
+		var targetPosition = {
+			x : event.pageX - jQueryContainer.offset().left,
+			y : event.pageY - jQueryContainer.offset().top
 		};
 
-		for(var i = 1; i < objects.length; i++) {
-			model.cubes.push(
-				new Cube(
-					objects[i].material.color.getHexString(),
-					objects[i].position.x,
-					objects[i].position.y,
-					objects[i].position.z
-				)
-			);
+		if (event.type === "mousedown") {
+			// save mouse position
+			mouseposition.x = targetPosition.x;
+			mouseposition.y = targetPosition.y;
+		} else if (event.type === "mouseup") {
+			if (mouseposition.x != targetPosition.x || mouseposition.y != targetPosition.y) {
+				// if mouse has moved since mousedown event
+				return;
+			} else {
+				mouse.set((targetPosition.x / jQueryContainer.width() ) * 2 - 1, -(targetPosition.y / jQueryContainer.height() ) * 2 + 1);
+				raycaster.setFromCamera(mouse, camera);
+				var intersects = raycaster.intersectObjects(objects);
+
+				if (intersects.length > 0) {
+					// if click was inside 3D object
+					var intersect = intersects[0];
+					switch(event.button) {
+					case 0:
+						console.log(buildMode);
+						// left mouse button adds cube if buildMode == true, removes if false
+						buildMode ? addCube(intersect) : removeCube(intersect);
+						break;
+					case 2:
+						// right mouse button removes cube
+						removeCube(intersect);
+						break;
+					}
+				}
+			}
 		}
-
-		return JSON.stringify(model);
-	};
-
-	// Load model from JSON
-	this.loadModel = function(jsonString) {
-		var model;
-		var voxel;
-		var material;
-
-		if(typeof jsonString === "object"){
-			model = jsonString
-		}else {
-			model = JSON.parse(jsonString);
-		}
-
-		objects = [];
-		baseSize = model.baseSize * (step / 2);
-
-		setBase();
-		scene = createScene();
-
-		for(var i = 0, cubes = model.cubes.length; i < cubes; i++) {
-			material = new THREE.MeshLambertMaterial({specular: 0x009900, shininess: 30, shading: THREE.FlatShading});	//Dependency
-			material.color.setHex('0x' + model.cubes[i].color);
-			material.ambient = material.color;
-
-			voxel = new THREE.Mesh(cubeGeo, material);
-			voxel.position.x = model.cubes[i].x;
-			voxel.position.y = model.cubes[i].y;
-			voxel.position.z = model.cubes[i].z;
-
-			scene.add(voxel);
-			objects.push(voxel);
-		}
-
-		updateCounter();
+	}
+	
+	// Rerenders when size changes
+	function onWindowResize(event) {
+		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
+		camera.updateProjectionMatrix();
 
 		views.forEach(function(element, index, array) {
-			element.render();
+			element.setSize();
 		});
-	};
-	// Changes the size of the base and creates new scene
-	this.setBaseSize = function(size) {
-		if(!isNaN(size) && size >= 2 && size <= 20) {
-			baseSize = (step / 2) * size;
-			objects = [];
-			setBase();
-			updateCounter();
-			scene = createScene();
 
-			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
-			/* Remove before deploy! */
-
-			this._baseSize = baseSize;
-
-			/* End of testing code */
-
-			return true;
-		}
-
-		return false;
-	};
+		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
+	}
 
 	init();
 
@@ -592,4 +603,4 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 	};
 };
 
-}(window))
+}(window));
