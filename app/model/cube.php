@@ -55,32 +55,55 @@ Class Cube{
 	 * @throws \Exception
 	 */
 	private function validatePosition($position, $type){
-		$inValid = true;
+		$valid = false;
+		$range = range((0-($this->base - $this->step)), ($this->base - $this->step), $this->step);
 		switch($type){
 			case 'z':
+				if(in_array($position, $range) && $position > $this->step && ($position % $this->step = 0)){
+					$valid = true;
+				}
 				break;
 			case 'x':
+				if(in_array($position, $range) && $position > $this->step && ($position % $this->step = 0)){
+					$valid = true;
+				}
 				break;
 			case 'y':
+				if($position > $this->step && $position <= ($this->base -  $this->step) && ($position % $this->step = 0)){
+					$valid = true;
+				}
 				break;
 			default:
 				Throw new \Exception();
 				break;
 		}
-		if($inValid){
-			return 0;
-		}
-		return $position;
+		return $valid;
 	}
 
 	/**
 	 * @param $cube
 	 */
-	public function set($cube){
-		$this->x = $cube['x'];
-		$this->y = $cube['y'];
-		$this->z = $cube['z'];
-		$this->color = $cube['color'];
+	public function set($cubes){
+		try {
+			foreach($cubes as $key => $value) {
+				if($key != 'color') {
+					if($this->validatePosition($value, $key)) {
+						$this->$key = $value;
+					} else {
+						Throw new \Exception();
+					}
+				} else {
+					if(preg_match("^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$", $value)){
+						$this->$key = $value;
+					}else{
+						Throw new \Exception();
+					}
+				}
+			}
+			return true;
+		} catch (\Exception $e){
+			return false;
+		}
 	}
 
 	/**

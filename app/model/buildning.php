@@ -66,9 +66,19 @@ Class Buildning{
 		$errors = array();
 		$key = 'model';
 		if(strlen($model) >= 65) {
-			$this->removeError($key);
-			$this->model = $model;
-			return true;
+			$modelarray = json_decode($model, true);
+			$cube = new Cube($modelarray['baseSize'], 25);
+			for($i = 0; $i < count($modelarray['cubes']); $i++){
+				if(!$cube->set($modelarray['cubes'][$i])){
+					$i = count($modelarray['cubes']);
+					$errors[] = 'All cubes are not in a correct position';
+				}
+			}
+			if(count($errors) > 0) {
+				$this->removeError($key);
+				$this->model = $model;
+				return true;
+			}
 		}else{
 			$errors[] = 'Your  model can minimum have 65 characters';
 		}
