@@ -72,7 +72,7 @@ jQuery(document).ready(function($) {
 	function baseSize() {
 		$("#reset").click(function (event) {
 			event.preventDefault();
-			cb.reset();
+			cb.clearCubes();
 			closeModal();
 		});
 
