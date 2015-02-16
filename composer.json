@@ -1,0 +1,11 @@
+{
+  "require": {
+    "silex/silex": "~1.2"
+  },
+  "autoload": {
+    "classmap": [
+      "app/controller",
+      "app/model"
+    ]
+  }
+}
