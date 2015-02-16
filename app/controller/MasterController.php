@@ -2,24 +2,41 @@
 namespace app\controller;
 use \Silex\Application;
 
+/**
+ * Class MasterController
+ * @package app\controller
+ */
 class MasterController{
 
+	/**
+	 * @var Application
+	 */
 	private $app;
 
+	/**
+	 *
+	 */
 	public function __construct(){
 		$this->app = new Application();
-		$this->app->get('/', '\app\controller\CubeController::index');
-		$this->app->get('/{id}', '\app\controller\CubeController::show');
-		$this->app->post('/', '\app\controller\CubeController::create');
+		$this->app->get('/', '\app\controller\CubeController::frontend');
+		$this->app->get('/api', '\app\controller\CubeController::index');
+		$this->app->get('/api/{id}', '\app\controller\CubeController::show');
+		$this->app->post('/api', '\app\controller\CubeController::create');
 		$this->config();
 		//$this->createFilters();
 		$this->app->run();
 	}
 
+	/**
+	 *
+	 */
 	private function config(){
 		$this->app['debug'] = true;
 	}
 
+	/**
+	 *
+	 */
 	private function createFilters(){
 		$this->app->before(function() {
 			// Source: http://davidwalsh.name/detect-ajax

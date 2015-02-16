@@ -1,19 +1,45 @@
 <?php
 namespace app\model;
 
+/**
+ * Class Buildning
+ * @package app\model
+ */
 Class Buildning{
+	/**
+	 * @var
+	 */
 	private $name;
+	/**
+	 * @var
+	 */
 	private $model;
+	/**
+	 * @var
+	 */
 	private $errors;
+	/**
+	 * @var
+	 */
 	private $date;
+	/**
+	 * @var
+	 */
 	private $dateFormat;
 
+	/**
+	 *
+	 */
 	public function __constuct(){
 		$this->dateFormat = 'Y-m-d';
 		$this->setDate(Date($this->dateFormat));
 		$this->errors = array();
 	}
 
+	/**
+	 * @param $name
+	 * @return bool
+	 */
 	public function setName($name){
 		$errors = array();
 		$key = 'name';
@@ -32,6 +58,10 @@ Class Buildning{
 		return false;
 	}
 
+	/**
+	 * @param $model
+	 * @return bool
+	 */
 	public function setModel($model){
 		$errors = array();
 		$key = 'model';
@@ -46,6 +76,10 @@ Class Buildning{
 		return false;
 	}
 
+	/**
+	 * @param $date
+	 * @return bool
+	 */
 	private function setDate($date){
 		$errors = array();
 		$key = 'date';
@@ -61,26 +95,45 @@ Class Buildning{
 		return false;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function haveErrors(){
 		return (count($this->getErrors()) > 0);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getErrors(){
 		return $this->errors;
 	}
 
+	/**
+	 * @param $key
+	 * @param $value
+	 */
 	private function addError($key, $value){
 		$this->errors[$key] = $value;
 	}
 
+	/**
+	 * @param $key
+	 */
 	private function removeError($key){
 		unset($this->errors[$key]);
 	}
 
+	/**
+	 * @return string
+	 */
 	public function getJson(){
 		return json_encode(array('name' => $this->name, 'model' => $this->model, 'date' => $this->date));
 	}
 
+	/**
+	 * @param $json
+	 */
 	public function loadJson($json){
 		$model = json_decode($json, true);
 		$this->setName($model['name']);
