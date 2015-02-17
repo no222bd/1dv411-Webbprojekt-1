@@ -58,6 +58,14 @@ jQuery(document).ready(function($) {
 			default:
 		};
 	});
+	
+	$(window).resize(function(event) {
+		cb.setSize();
+		
+		if ($("#perspectiveContainer").attr("class") == "open") {
+			cb.setPerspectiveSize();
+		}
+	});
 
 	function closeModal() {
 		$(openModal).removeClass('open');
