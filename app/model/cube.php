@@ -55,27 +55,13 @@ Class Cube{
 	 * @throws \Exception
 	 */
 	private function validatePosition($position, $type){
-		$valid = false;
-		$range = range((0-($this->base - $this->step)), ($this->base - $this->step), $this->step);
-		switch($type){
-			case 'z':
-				if(in_array($position, $range) && ($position % $this->step == 0)){
-					$valid = true;
-				}
-				break;
-			case 'x':
-				if(in_array($position, $range) && ($position % $this->step == 0)){
-					$valid = true;
-				}
-				break;
-			case 'y':
-				if($position >= $this->step && $position <= ($this->base -  $this->step) && ($position % $this->step == 0)){
-					$valid = true;
-				}
-				break;
-			default:
-				Throw new \Exception();
-				break;
+		if($type == 'z' || $type == 'x'){
+			$range = range((0-($this->base - $this->step)), ($this->base - $this->step), $this->step);
+			$valid = in_array($position, $range) && ($position % $this->step == 0);
+		}elseif($type == 'y'){
+			$valid = $position >= $this->step && $position <= ($this->base -  $this->step) && ($position % $this->step == 0);
+		}else{
+			Throw new \Exception();
 		}
 		return $valid;
 	}
