@@ -40,6 +40,11 @@ jQuery(document).ready(function($) {
 
 	$(".buildOption").click(function (event) {
 		event.preventDefault();
+		
+		if ($(this).hasClass('chosen')) {
+			return;
+		}
+		
 		var href = $(this).attr("href");
 		var id = $(this).attr("id");
 
