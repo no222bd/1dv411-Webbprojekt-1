@@ -1,6 +1,7 @@
 {
   "require": {
-    "silex/silex": "~1.2"
+    "silex/silex": "~1.2",
+    "vlucas/phpdotenv": "1.*"
   },
   "autoload": {
     "classmap": [

@@ -17,14 +17,20 @@ class MasterController{
 	 *
 	 */
 	public function __construct(){
+		\Dotenv::load('./');
 		$this->app = new Application();
-		$this->app->get('/', '\app\controller\CubeController::frontend');
-		$this->app->get('/api', '\app\controller\CubeController::index');
-		$this->app->get('/api/{id}', '\app\controller\CubeController::show');
-		$this->app->post('/api', '\app\controller\CubeController::create');
+		$this->route();
 		$this->config();
 		//$this->createFilters();
 		$this->app->run();
+	}
+
+	private function route(){
+		$subfolderOnLocalhost = $_ENV['BASE_DIR'];
+		$this->app->get('/', '\app\controller\CubeController::frontend');
+		$this->app->get($subfolderOnLocalhost.'/api', '\app\controller\CubeController::index');
+		$this->app->get($subfolderOnLocalhost.'/api/{id}', '\app\controller\CubeController::show');
+		$this->app->post($subfolderOnLocalhost.'/api', '\app\controller\CubeController::create');
 	}
 
 	/**
