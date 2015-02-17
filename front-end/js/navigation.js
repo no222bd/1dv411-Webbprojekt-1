@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
 					perspective();
 					break;
 				case "base":
-					baseSize();
+					
 					break;
 				case "settings":
 					settings();
@@ -58,46 +58,46 @@ jQuery(document).ready(function($) {
 			default:
 		};
 	});
+	
+	/**
+	 * Add click event handler for reset button (in modal #baseContainer)
+	 */
+	$("#reset").click(function (event) {
+		event.preventDefault();
+		cb.reset();
+		closeModal();
+	});
+
+	/**
+	 * Add click event handler for sizeControl buttons (in modal #baseContainer)
+	 */
+	$(".sizeControl").click(function (event) {
+		event.preventDefault();
+		var href = $(this).attr("href");
+		var currentSize = $('#sizePreview').text();
+
+		switch(href) {
+			case "#up":
+				if (currentSize < 20) {
+					currentSize = parseInt(currentSize) + 1;
+				}
+				break;
+			case "#down":
+				if (currentSize > 2) {
+					currentSize = parseInt(currentSize) - 1;
+				}
+				break;
+		};
+
+		$('#sizePreview').text(currentSize);
+		cb.setBaseSize(currentSize);
+	});
 
 	function closeModal() {
 		$(openModal).removeClass('open');
 		$('#modal').removeClass('open');
 		openModal = null;
 		cb.enableOrDisableOrbit(true);
-	}
-
-	/**
-	 * Function for handling users choice of baseSize.
-	 */
-	function baseSize() {
-		$("#reset").click(function (event) {
-			event.preventDefault();
-			cb.reset();
-			closeModal();
-		});
-
-		$(".sizeControl").click(function (event) {
-			event.preventDefault();
-			var href = $(this).attr("href");
-			var currentSize = $('#sizePreview').text();
-
-			switch(href) {
-				case "#up":
-					if (currentSize != 20) {
-						currentSize = parseInt(currentSize) + 2;
-					}
-					break;
-				case "#down":
-					if (currentSize != 2) {
-						currentSize = parseInt(currentSize) - 2;
-					}
-					break;
-				default:
-			};
-
-			$('#sizePreview').text(currentSize);
-			cb.setBaseSize(currentSize);
-		});
 	}
 
 	/**
