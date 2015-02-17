@@ -613,6 +613,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._loadModel = this.loadModel;
 	this._toggleBuildMode = this.toggleBuildMode;
 	this._createPerspectives = createPerspectives;
+	this._clearCubes = this.clearCubes;
 
 	/* End of testing code */
 };
