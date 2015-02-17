@@ -210,8 +210,10 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			baseSize = (step / 2) * size;
 			objects = [];
 			setBase();
-			updateCounter();
+			
 			scene = createScene();
+			createPerspectives();
+			updateCounter();
 
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 			/* Remove before deploy! */
@@ -408,11 +410,11 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		var greenView = $("#greenView");
 
 		views = []; //If this turns out to be a problem, use views.length = 0;
-		views.push(createView(0,500,0, topView));
-		views.push(createView(0,500,-500, blueView));
-		views.push(createView(500,500,0, redView));
-		views.push(createView(0,500,500, yellowView));
-		views.push(createView(-500,500,0, greenView));
+		views.push(createView(0, baseSize, 0, topView));
+		views.push(createView(0, baseSize, -baseSize, blueView));
+		views.push(createView(baseSize, baseSize, 0, redView));
+		views.push(createView(0, baseSize, baseSize, yellowView));
+		views.push(createView(-baseSize, baseSize, 0, greenView));
 
 		views.forEach(function(element, index, array) {
 			element.init();
