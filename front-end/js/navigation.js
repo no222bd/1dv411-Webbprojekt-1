@@ -1,6 +1,15 @@
 jQuery(document).ready(function($) {
-
+	$("#what").hide();
 	var openModal = null;
+	$("#confirm").click(function(){
+		$("#what").hide();
+		cb.clearCubes();
+		closeModal();
+	});
+	$("#decline").click(function(){
+		$("#what").hide();
+		closeModal();
+	});
 
 	$(".modalOption").click(function (event) {
 		event.preventDefault();
@@ -72,8 +81,9 @@ jQuery(document).ready(function($) {
 	function baseSize() {
 		$("#reset").click(function (event) {
 			event.preventDefault();
-			cb.clearCubes();
-			closeModal();
+			$("#what").show();
+			//cb.clearCubes();
+			//closeModal();
 		});
 
 		$(".sizeControl").click(function (event) {
