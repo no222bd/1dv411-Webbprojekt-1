@@ -45,9 +45,13 @@ Class Buildning{
 		$key = 'name';
 		if($name != '') {
 			if(strlen($name) <= 10) {
-				$this->removeError($key);
-				$this->name = $name;
-				return true;
+				if($this->modelExists($name)) {
+					$this->removeError($key);
+					$this->name = $name;
+					return true;
+				}else{
+					$errors[] = 'A buildning with that name already exists';
+				}
 			}else{
 				$errors[] = 'Your name can maximum have 10 characters';
 			}
@@ -102,7 +106,7 @@ Class Buildning{
 	private function setDate($date){
 		$errors = array();
 		$key = 'date';
-		$date = DateTime::createFromFormat($this->dateFormat, $date);
+		$date = \DateTime::createFromFormat($this->dateFormat, $date);
 		if ($date) {
 			$this->removeError($key);
 			$this->date = $date;
@@ -146,17 +150,35 @@ Class Buildning{
 	/**
 	 * @return string
 	 */
-	public function getJson(){
-		return json_encode(array('name' => $this->name, 'model' => $this->model, 'date' => $this->date));
+	public function save(){
+		$array = array();
+		$array[$this->name] = array('model' => $this->model, 'date' => $this->date);
+		if(@file_put_contents('./app/db.json', json_encode($array)) !== false){
+			return true;
+		}
+		return false;
+	}
+
+	public function getAll(){
+		return json_decode(@file_get_contents('./app/db.json'),true);
+
+	}
+
+	private function modelExists($id){
+		$model = $this->getAll();
+		return array_key_exists($id, $model);
 	}
 
 	/**
 	 * @param $json
 	 */
-	public function loadJson($json){
-		$model = json_decode($json, true);
-		$this->setName($model['name']);
-		$this->setModel($model['model']);
-		$this->setDate($model['date']);
+	public function get($id){
+		$model = $this->getAll();
+		if($this->modelExists($id)) {
+			$model = $model[$id];
+			return $model;
+		}else{
+			return false;
+		}
 	}
 }

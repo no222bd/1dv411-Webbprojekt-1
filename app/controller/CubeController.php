@@ -34,7 +34,11 @@ class CubeController{
 	 * @param Application $app
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
-	public function index(Application $app){
+	public function index(Application $app) {
+		$data = $this->building->getAll();
+		if(!is_null($data)){
+			return $app->json(array('data' => $data), 200);
+		}
 		return $app->json(array('message' => ''), 200);
 	}
 
@@ -44,7 +48,11 @@ class CubeController{
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function show($id, Application $app){
-		return $app->json(array('message' => $id), 200);
+		$data = $this->building->loadJson($id);
+		if($data) {
+			return $app->json(array('data' => $data), 200);
+		}
+		return $app->json(array('message' => ''), 200);
 	}
 
 	/**
@@ -58,7 +66,11 @@ class CubeController{
 		if($this->building->haveErrors()){
 			return $app->json(array('message' => 'Your model could not be created.', 'errors' => $this->building->getErrors()), 200);
 		}
-		return $app->json(array('message' => 'Your model have been created.'), 201);
+		if($this->building->save()) {
+			return $app->json(array('message' => 'Your model have been created.'), 201);
+		}else{
+			return $app->json(array('message' => 'Your model could not be created.'), 200);
+		}
 	}
 
 }
