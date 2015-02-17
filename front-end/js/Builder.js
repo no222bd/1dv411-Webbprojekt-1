@@ -299,7 +299,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		jQueryContainer.append(renderer.domElement);
 		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
 		jQueryContainer.on( "mouseup", onDocumentMouseTouch);
-		//window.addEventListener("resize", onWindowResize);
 		document.body.appendChild( stats.domElement );
 
 		createPerspectives();
@@ -563,18 +562,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			}
 		}
 	}
-	
-	// Rerenders when size changes
-	/*function onWindowResize(event) {
-		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
-		camera.updateProjectionMatrix();
-
-		views.forEach(function(element, index, array) {
-			element.setSize();
-		});
-
-		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
-	}*/
 
 	init();
 
@@ -603,7 +590,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	// functions
 	this._init = init;
-	//this._onWindowResize = onWindowResize;
 	this._onDocumentMouseTouch = onDocumentMouseTouch;
 	this._addCube = addCube;
 	this._removeCube = removeCube;
