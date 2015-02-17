@@ -39,7 +39,7 @@ class CubeController{
 		if(!is_null($data)){
 			return $app->json(array('data' => $data), 200);
 		}
-		return $app->json(array('message' => ''), 200);
+		return $app->json(array('message' => 'There are no buildning saved for the moment.'), 200);
 	}
 
 	/**
@@ -52,7 +52,7 @@ class CubeController{
 		if($data) {
 			return $app->json(array('data' => $data), 200);
 		}
-		return $app->json(array('message' => ''), 200);
+		return $app->json(array('message' => 'We could not find that building.'), 200);
 	}
 
 	/**

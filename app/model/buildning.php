@@ -159,11 +159,18 @@ Class Buildning{
 		return false;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getAll(){
 		return json_decode(@file_get_contents('./app/db.json'),true);
 
 	}
 
+	/**
+	 * @param $id
+	 * @return bool
+	 */
 	private function modelExists($id){
 		$model = $this->getAll();
 		return array_key_exists($id, $model);
