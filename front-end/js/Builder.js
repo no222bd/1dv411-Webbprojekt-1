@@ -29,6 +29,13 @@ BUILDER.CubeBuilder = function() {
 	this.renderPerspectives = function() {
 		construction.renderPerspectives();
 	};
+	
+	/**
+	 * Calls ConstructionArea.resize() 
+	 */
+	this.resize = function() {
+		construction.resize();
+	};
 
 	//reset
 	this.reset = function() {
@@ -155,6 +162,18 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
             element.setSize();
             element.render();
         });
+	};
+	
+	/**
+	 * Updates camera and renderer settings to new element sizes.
+	 */
+	this.resize = function() {
+		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
+		camera.updateProjectionMatrix();
+		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
+		
+		// Updates perspective views
+		self.renderPerspectives();
 	};
 	
 	// Save model to JSON
@@ -603,6 +622,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._loadModel = this.loadModel;
 	this._toggleBuildMode = this.toggleBuildMode;
 	this._createPerspectives = createPerspectives;
+	this._resize = this.resize;
 
 	/* End of testing code */
 };

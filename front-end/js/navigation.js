@@ -59,12 +59,11 @@ jQuery(document).ready(function($) {
 		};
 	});
 	
+	/**
+	 * Sets a resize event handler. 
+	 */
 	$(window).resize(function(event) {
-		cb.setSize();
-		
-		if ($("#perspectiveContainer").attr("class") == "open") {
-			cb.setPerspectiveSize();
-		}
+		cb.resize();
 	});
 
 	function closeModal() {
