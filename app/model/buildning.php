@@ -62,22 +62,31 @@ Class Buildning{
 	 * @param $model
 	 * @return bool
 	 */
+	private function validateCubes($model){
+		$modelarray = json_decode($model, true);
+		$cube = new Cube($modelarray['baseSize'], $modelarray['step']);
+		for($i = 0; $i < count($modelarray['cubes']); $i++){
+			if(!$cube->set($modelarray['cubes'][$i])){
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * @param $model
+	 * @return bool
+	 */
 	public function setModel($model){
 		$errors = array();
 		$key = 'model';
 		if(strlen($model) >= 65) {
-			$modelarray = json_decode($model, true);
-			$cube = new Cube($modelarray['baseSize'], 25);
-			for($i = 0; $i < count($modelarray['cubes']); $i++){
-				if(!$cube->set($modelarray['cubes'][$i])){
-					$i = count($modelarray['cubes']);
-					$errors[] = 'All cubes are not in a correct position';
-				}
-			}
-			if(count($errors) > 0) {
+			if($this->validateCubes($model)) {
 				$this->removeError($key);
 				$this->model = $model;
 				return true;
+			}else{
+				$errors[] = 'All cubes are not in a correct position';
 			}
 		}else{
 			$errors[] = 'Your  model can minimum have 65 characters';

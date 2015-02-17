@@ -40,7 +40,7 @@ Class Cube{
 	public function __construct($base, $step){
 		$base = floor($base);
 		$step = floor($step);
-		if(is_null($base) && is_null($step)){
+		if(!is_null($base) && !is_null($step)){
 			$this->base = $base;
 			$this->step = $step;
 		}else{
@@ -59,17 +59,17 @@ Class Cube{
 		$range = range((0-($this->base - $this->step)), ($this->base - $this->step), $this->step);
 		switch($type){
 			case 'z':
-				if(in_array($position, $range) && $position > $this->step && ($position % $this->step = 0)){
+				if(in_array($position, $range) && ($position % $this->step == 0)){
 					$valid = true;
 				}
 				break;
 			case 'x':
-				if(in_array($position, $range) && $position > $this->step && ($position % $this->step = 0)){
+				if(in_array($position, $range) && ($position % $this->step == 0)){
 					$valid = true;
 				}
 				break;
 			case 'y':
-				if($position > $this->step && $position <= ($this->base -  $this->step) && ($position % $this->step = 0)){
+				if($position >= $this->step && $position <= ($this->base -  $this->step) && ($position % $this->step == 0)){
 					$valid = true;
 				}
 				break;
@@ -78,6 +78,17 @@ Class Cube{
 				break;
 		}
 		return $valid;
+	}
+
+	/**
+	 * @param $color
+	 * @return bool
+	 */
+	private function validateColor($color){
+		if(preg_match("([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})", $color)){
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -93,7 +104,7 @@ Class Cube{
 						Throw new \Exception();
 					}
 				} else {
-					if(preg_match("^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$", $value)){
+					if($this->validateColor($value)){
 						$this->$key = $value;
 					}else{
 						Throw new \Exception();
