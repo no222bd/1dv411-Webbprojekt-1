@@ -92,6 +92,13 @@ jQuery(document).ready(function($) {
 		$('#sizePreview').text(currentSize);
 		cb.setBaseSize(currentSize);
 	});
+	
+	/**
+	 * Sets a resize event handler. 
+	 */
+	$(window).resize(function(event) {
+		cb.resize();
+	});
 
 	function closeModal() {
 		$(openModal).removeClass('open');
