@@ -29,6 +29,13 @@ BUILDER.CubeBuilder = function() {
 	this.renderPerspectives = function() {
 		construction.renderPerspectives();
 	};
+	
+	/**
+	 * Calls ConstructionArea.resize() 
+	 */
+	this.resize = function() {
+		construction.resize();
+	};
 
 	//reset
 	this.reset = function() {
@@ -157,6 +164,18 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
         });
 	};
 	
+	/**
+	 * Updates camera and renderer settings to new element sizes.
+	 */
+	this.resize = function() {
+		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
+		camera.updateProjectionMatrix();
+		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
+		
+		// Updates perspective views
+		self.renderPerspectives();
+	};
+	
 	// Save model to JSON
 	this.saveModel = function() {
 		function Cube(color, x, y, z) {
@@ -280,7 +299,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		jQueryContainer.append(renderer.domElement);
 		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
 		jQueryContainer.on( "mouseup", onDocumentMouseTouch);
-		window.addEventListener("resize", onWindowResize);
 		document.body.appendChild( stats.domElement );
 
 		createPerspectives();
@@ -544,18 +562,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			}
 		}
 	}
-	
-	// Rerenders when size changes
-	function onWindowResize(event) {
-		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
-		camera.updateProjectionMatrix();
-
-		views.forEach(function(element, index, array) {
-			element.setSize();
-		});
-
-		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
-	}
 
 	init();
 
@@ -584,7 +590,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	// functions
 	this._init = init;
-	this._onWindowResize = onWindowResize;
 	this._onDocumentMouseTouch = onDocumentMouseTouch;
 	this._addCube = addCube;
 	this._removeCube = removeCube;
@@ -603,6 +608,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._loadModel = this.loadModel;
 	this._toggleBuildMode = this.toggleBuildMode;
 	this._createPerspectives = createPerspectives;
+	this._resize = this.resize;
 
 	/* End of testing code */
 };

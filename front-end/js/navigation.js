@@ -58,6 +58,13 @@ jQuery(document).ready(function($) {
 			default:
 		};
 	});
+	
+	/**
+	 * Sets a resize event handler. 
+	 */
+	$(window).resize(function(event) {
+		cb.resize();
+	});
 
 	function closeModal() {
 		$(openModal).removeClass('open');
