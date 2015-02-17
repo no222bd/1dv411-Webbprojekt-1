@@ -111,6 +111,7 @@ body{
 	top: 0;
 	bottom: 0;
 	cursor:default;
+	z-index: 100;
 }
 
 .modal > div {
