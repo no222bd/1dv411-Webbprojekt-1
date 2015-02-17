@@ -9,6 +9,7 @@ body{
 }
 
 #ThreeJScontainer {
+	position: relative;
 	width: 90%;
 	float: left;
 	height: 100%;
@@ -94,6 +95,7 @@ body{
 
 .counter p {
 	margin: 0 0 2px 2px;
+	text-align: right;
 }
 
 
