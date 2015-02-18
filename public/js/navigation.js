@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
 	var perspectives = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
-	var cb = new BUILDER.CubeBuilder($("#ThreeJScontainer"), perspectives);
+	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives);
 	var openModal = null;
 	
 	$("#confirmdeclinebuttons").hide();
@@ -145,7 +145,7 @@ jQuery(document).ready(function($) {
 		$(".color").click(function (event) {
 			event.preventDefault();
 			var colorHex = $(this).attr("href");
-			cb.setColor(colorHex);
+			cb.setCubeMaterial(colorHex);
 			closeModal();
 		});
 	}
