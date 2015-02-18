@@ -2,7 +2,8 @@ describe("Builder.CubeBuilder", function () {
 	var cubeBuilder;
 	
 	beforeEach(function () {
-		cubeBuilder = new BUILDER.CubeBuilder();
+		var arr = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
+		cubeBuilder = new BUILDER.CubeBuilder($("#ThreeJScontainer"), arr);
 	});
 
 	describe("toggleBuildMode", function () {
