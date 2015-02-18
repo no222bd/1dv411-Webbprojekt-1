@@ -1,6 +1,15 @@
 jQuery(document).ready(function($) {
-
+	$("#confirmdeclinebuttons").hide();
 	var openModal = null;
+	$("#confirm").click(function(){
+		$("#confirmdeclinebuttons").hide();
+		cb.clearCubes();
+		closeModal();
+	});
+	$("#decline").click(function(){
+		$("#confirmdeclinebuttons").hide();
+		closeModal();
+	});
 
 	$(".modalOption").click(function (event) {
 		event.preventDefault();
@@ -70,8 +79,7 @@ jQuery(document).ready(function($) {
 	function baseSize() {
 		$("#reset").click(function (event) {
 			event.preventDefault();
-			cb.clearCubes();
-			closeModal();
+			$("#confirmdeclinebuttons").show();
 		});
 	}
 	
