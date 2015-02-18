@@ -79,7 +79,7 @@ body{
 	background-size: 350%;
 }
 
-#perspective .chosen-view {
+#perspective.chosen-view {
 	background-position: inherit;
 	background-size: 100%;
 	background-repeat: no-repeat;

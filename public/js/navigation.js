@@ -26,7 +26,7 @@ jQuery(document).ready(function($) {
 		context.drawImage(image, 0, 0, 145, 145);
 		console.log($("#perspective"));
 		$("#perspective").css("background-image", "url("+resizeElement.toDataURL() + ")");	
-		$("#perspective").toggleClass("chosen-view");
+		$("#perspective").addClass("chosen-view");
 	});
 
 	$(".modalOption").click(function (event) {
