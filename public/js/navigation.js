@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
 	var perspectives = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
-	var cb = new BUILDER.CubeBuilder(perspectives);
+	var cb = new BUILDER.CubeBuilder($("#ThreeJScontainer"), perspectives);
 	var openModal = null;
 	
 	$("#confirmdeclinebuttons").hide();

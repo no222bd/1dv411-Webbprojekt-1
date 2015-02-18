@@ -6,11 +6,12 @@ var BUILDER = outerWindow.BUILDER;
 
 /**
  * Builder object used in application.
- * @constructor
+ * @param jQuery element container
+ * @param array perspectives
  */
-BUILDER.CubeBuilder = function(perspectives) {
+BUILDER.CubeBuilder = function(container, perspectives) {
 	// private members
-	var construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives);
+	var construction = new BUILDER.ConstructionArea(container, perspectives);
 
 	//public functions
 

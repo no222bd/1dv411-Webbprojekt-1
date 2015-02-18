@@ -3,7 +3,7 @@ describe("Builder.CubeBuilder", function () {
 	
 	beforeEach(function () {
 		var arr = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
-		cubeBuilder = new BUILDER.CubeBuilder(arr);
+		cubeBuilder = new BUILDER.CubeBuilder($("#ThreeJScontainer"), arr);
 	});
 
 	describe("resize", function () {
