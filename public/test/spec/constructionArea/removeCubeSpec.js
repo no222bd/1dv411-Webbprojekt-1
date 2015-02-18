@@ -15,7 +15,7 @@ describe("Builder.ConstructionArea", function () {
 			builder._objects[1] = cube;
 		});
 
-		it("should remove cube when click on cube", function () {
+		it("should remove cube from objects when click on cube", function () {
 			// arrange
 			builder._mouse = new THREE.Vector2(0, 0);
 			builder._raycaster.setFromCamera(builder._mouse, builder._camera);
@@ -27,6 +27,20 @@ describe("Builder.ConstructionArea", function () {
 			
 			// assert
 			expect(builder._objects.length).toBe(1);
+		});
+
+		it("should remove cube from scene when click on cube", function () {
+			// arrange
+			builder._mouse = new THREE.Vector2(0, 0);
+			builder._raycaster.setFromCamera(builder._mouse, builder._camera);
+			var intersects = builder._raycaster.intersectObjects(builder._objects);
+			var intersect = intersects[0];
+			
+			// act
+			builder._removeCube(intersect);
+			
+			// assert
+			expect(builder._scene.children.length).toBe(8);
 		});
 		
 	});
