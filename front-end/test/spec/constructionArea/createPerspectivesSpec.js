@@ -23,7 +23,7 @@ describe("Builder.ConstructionArea", function () {
 				expect(builder._views[0]._renderer instanceof THREE.CanvasRenderer).toBeTruthy();
 				// camera
 				expect(builder._views[0]._camera instanceof THREE.OrthographicCamera).toBeTruthy();
-				expect(builder._views[0]._camera.position).toEqual(new THREE.Vector3(0, 500, 0));
+				expect(builder._views[0]._camera.position).toEqual(new THREE.Vector3(0, 1600, 0));
 				// JQueryElement
 				// TODO: add tests för jqueryelement when dependency in builder.js is fixed
 				// scene
