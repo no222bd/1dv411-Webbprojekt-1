@@ -177,6 +177,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		renderer = createRenderer(jQueryContainer, true);
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
 		controls.noPan = true;
+		setZoom();
 
 		jQueryContainer.append(renderer.domElement);
 		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
@@ -325,7 +326,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 			baseSize = (step / 2) * size;
 			objects = [];
 			setBase();
-			
+			setZoom();
 			scene = createScene();
 			createPerspectives();
 			updateCounter();
@@ -385,6 +386,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	};
 	
 	/* Private functions */
+
+	/**
+	 * Sets zoom on control using baseSize.
+	 */
+	function setZoom() {
+		controls.maxDistance = baseSize * 6;
+		controls.minDistance = baseSize;
+	}
 
 	/**
 	 * Checks if cube can be added and adds cube
