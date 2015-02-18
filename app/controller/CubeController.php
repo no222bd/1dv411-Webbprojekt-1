@@ -24,13 +24,6 @@ class CubeController{
 	}
 
 	/**
-	 * @return Response
-	 */
-	public function frontend(){
-		return new Response(@file_get_contents('front-end/index.html'));
-	}
-
-	/**
 	 * @param Application $app
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
