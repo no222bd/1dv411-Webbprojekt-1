@@ -14,7 +14,17 @@ describe("Builder.ConstructionArea", function () {
 		it("should throw exception if argument is not JQuery element", function () {
 			// assert
 			expect(function(){
-				new BUILDER.ConstructionArea("<div></div>")
+				new BUILDER.ConstructionArea("<div></div>", [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")])
+			}).toThrowError();
+		});
+
+		it("should throw exception if perspectives-argument is not JQuery element", function () {
+			// act
+			var arr = [$("#topView"), "#blueView", $("#redView"), $("#yellowView"), $("#greenView")];
+
+			// assert
+			expect(function(){
+				new BUILDER.ConstructionArea("<div></div>", arr)
 			}).toThrowError();
 		});
 

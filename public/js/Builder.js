@@ -135,6 +135,57 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	    buildMode = true,
 		self = this;
 
+	/**
+	 * Init is a constructor for this object.
+	 */
+	function init() {// TODO - Make this public ?
+		if(!(jQueryContainer instanceof jQuery)){
+			throw new Error();
+		}
+		for(var i = 0; i < perspectivesContainer.length; i++) {
+			if(!(perspectivesContainer[i] instanceof jQuery)){
+				throw new Error();
+			}
+		}
+
+		self.setCubeMaterial('#FED06F');
+
+		stats = new Stats();
+		stats.setMode(1); // 0: fps, 1: ms
+
+		// align top-left
+		stats.domElement.style.position = 'absolute';
+		stats.domElement.style.left = '0px';
+		stats.domElement.style.top = '0px';
+
+		step = 50;
+		objects = [];
+		views = [];
+		cubeGeo = new THREE.BoxGeometry(step, step, step);
+
+		raycaster = new THREE.Raycaster();
+		mouseposition = new THREE.Vector2();
+		mouse = new THREE.Vector2();
+
+		baseSize = 500;
+		//( step/2 ) * antal block i bredd
+		setBase();
+
+		scene = createScene();
+		camera = createCamera();
+		renderer = createRenderer(jQueryContainer, true);
+		controls = new THREE.OrbitControls(camera, renderer.domElement);
+		controls.noPan = true;
+
+		jQueryContainer.append(renderer.domElement);
+		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
+		jQueryContainer.on( "mouseup", onDocumentMouseTouch);
+		document.body.appendChild( stats.domElement );
+
+		createPerspectives();
+		render();
+	}
+
 	/* Public functions */
 
 	/**
@@ -333,51 +384,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	};
 	
 	/* Private functions */
-
-	/**
-	 * Init is a constructor for this object.
-	 */
-	function init() {// TODO - Make this public ?
-		if(!(jQueryContainer instanceof jQuery)){
-			throw new Error();
-		}
-		self.setCubeMaterial('#FED06F');
-
-		stats = new Stats();
-		stats.setMode(1); // 0: fps, 1: ms
-
-		// align top-left
-		stats.domElement.style.position = 'absolute';
-		stats.domElement.style.left = '0px';
-		stats.domElement.style.top = '0px';
-
-		step = 50;
-		objects = [];
-		views = [];
-		cubeGeo = new THREE.BoxGeometry(step, step, step);
-
-		raycaster = new THREE.Raycaster();
-		mouseposition = new THREE.Vector2();
-		mouse = new THREE.Vector2();
-
-		baseSize = 500;
-		//( step/2 ) * antal block i bredd
-		setBase();
-
-		scene = createScene();
-		camera = createCamera();
-		renderer = createRenderer(jQueryContainer, true);
-		controls = new THREE.OrbitControls(camera, renderer.domElement);
-		controls.noPan = true;
-
-		jQueryContainer.append(renderer.domElement);
-		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
-		jQueryContainer.on( "mouseup", onDocumentMouseTouch);
-		document.body.appendChild( stats.domElement );
-
-		createPerspectives();
-		render();
-	}
 
 	/**
 	 * Checks if cube can be added and adds cube
