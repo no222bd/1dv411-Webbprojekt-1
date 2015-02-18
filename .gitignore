@@ -1,2 +1,6 @@
 .idea
 .project
+vendor
+composer.lock
+testfil.txt
+.env
