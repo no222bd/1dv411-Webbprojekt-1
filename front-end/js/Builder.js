@@ -37,8 +37,9 @@ BUILDER.CubeBuilder = function() {
 		construction.resize();
 	};
 
-	//reset
-	this.reset = function() {
+	//removes all cubes
+	this.clearCubes = function() {
+		construction.clearCubes();
 	};
 	
 	// Save model to JSON string
@@ -100,6 +101,15 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		self = this;
 
 	/* Public functions */
+
+	// Clears all cubes from scene and objects array to create an empty base.
+	this.clearCubes = function() {
+		for(var i = 1; i < objects.length; i++) {
+			scene.remove(objects[i]);
+		}
+		objects.splice(1, objects.length);
+		updateCounter();
+	};
 
 	// Enable or disable camera rotating and zooming
 	this.enableOrDisableOrbit = function(setting) {
@@ -610,6 +620,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._loadModel = this.loadModel;
 	this._toggleBuildMode = this.toggleBuildMode;
 	this._createPerspectives = createPerspectives;
+	this._clearCubes = this.clearCubes;
 	this._resize = this.resize;
 
 	/* End of testing code */

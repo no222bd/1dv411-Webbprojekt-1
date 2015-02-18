@@ -1,6 +1,15 @@
 jQuery(document).ready(function($) {
-
+	$("#confirmdeclinebuttons").hide();
 	var openModal = null;
+	$("#confirm").click(function(){
+		$("#confirmdeclinebuttons").hide();
+		cb.clearCubes();
+		closeModal();
+	});
+	$("#decline").click(function(){
+		$("#confirmdeclinebuttons").hide();
+		closeModal();
+	});
 
 	$(".modalOption").click(function (event) {
 		event.preventDefault();
@@ -67,12 +76,13 @@ jQuery(document).ready(function($) {
 	/**
 	 * Add click event handler for reset button (in modal #baseContainer)
 	 */
-	$("#reset").click(function (event) {
-		event.preventDefault();
-		cb.reset();
-		closeModal();
-	});
-
+	function baseSize() {
+		$("#reset").click(function (event) {
+			event.preventDefault();
+			$("#confirmdeclinebuttons").show();
+		});
+	}
+	
 	/**
 	 * Add click event handler for sizeControl buttons (in modal #baseContainer)
 	 */
