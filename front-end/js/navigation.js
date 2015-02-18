@@ -81,9 +81,7 @@ jQuery(document).ready(function($) {
 	function baseSize() {
 		$("#reset").click(function (event) {
 			event.preventDefault();
-			$("#what").show();
-			//cb.clearCubes();
-			//closeModal();
+			$("#confirmdeclinebuttons").show();
 		});
 
 		$(".sizeControl").click(function (event) {
