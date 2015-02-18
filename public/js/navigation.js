@@ -15,6 +15,20 @@ jQuery(document).ready(function($) {
 		closeModal();
 	});
 
+	$(".perspective .canvasWrapper").click(function(){
+		var image = new Image();
+		image.src = this.firstChild.toDataURL();
+		console.log(this.firstChild.toDataURL());
+		var resizeElement = document.createElement("canvas");
+		resizeElement.width = 145;
+		resizeElement.height = 145;
+		var context = resizeElement.getContext("2d");
+		context.drawImage(image, 0, 0, 145, 145);
+		console.log($("#perspective"));
+		$("#perspective").css("background-image", "url("+resizeElement.toDataURL() + ")");	
+		$("#perspective").toggleClass("chosen-view");
+	});
+
 	$(".modalOption").click(function (event) {
 		event.preventDefault();
 		var href = $(this).attr("href");
