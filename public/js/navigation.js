@@ -2,6 +2,8 @@ jQuery(document).ready(function($) {
 	var openModal = null;
 	
 	$("#resetConfirmModal").hide();
+	$("#formSaveModal").hide();
+	$("#formOpenModal").hide();
 	
 	$("#confirm").click(function(){
 		cb.clearCubes();
@@ -36,10 +38,8 @@ jQuery(document).ready(function($) {
 					perspective();
 					break;
 				case "base":
-					
 					break;
 				case "settings":
-					settings();
 					break;
 				case "colors":
 					colors();
@@ -73,6 +73,25 @@ jQuery(document).ready(function($) {
 				cb.toggleBuildMode();
 				break;
 			default:
+		};
+	});
+	
+	/**
+	 * Add click event for buttons in settings modal
+	 */
+	$("#settingsModal").click(function (event) {
+		event.preventDefault();
+		var href = $(event.target).attr("href");
+		
+		switch(href) {
+			case "#save":
+				$("#settingsModal").hide();
+				$("#formSaveModal").show();
+				break;
+			case "#import":
+				$("#settingsModal").hide();
+				$("#formImportModal").show();
+				break;
 		};
 	});
 	
@@ -124,6 +143,12 @@ jQuery(document).ready(function($) {
 		$("#resetConfirmModal").hide();
 		$("#baseModal").show();
 		
+		$("#settingsModal").show();
+		$("#formSaveModal").hide();
+		
+		$("#settingsModal").show();
+		$("#formImportModal").hide();
+		
 		openModal = null;
 		cb.enableOrDisableOrbit(true);
 	}
@@ -152,10 +177,4 @@ jQuery(document).ready(function($) {
 		});
 	}
 
-	/**
-	 * Function for handling different settings options.
-	 */
-	function settings() {
-
-	}
 });
