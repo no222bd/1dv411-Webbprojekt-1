@@ -29,9 +29,17 @@ BUILDER.CubeBuilder = function() {
 	this.renderPerspectives = function() {
 		construction.renderPerspectives();
 	};
+	
+	/**
+	 * Calls ConstructionArea.resize() 
+	 */
+	this.resize = function() {
+		construction.resize();
+	};
 
-	//reset
-	this.reset = function() {
+	//removes all cubes
+	this.clearCubes = function() {
+		construction.clearCubes();
 	};
 	
 	// Save model to JSON string
@@ -93,6 +101,15 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		self = this;
 
 	/* Public functions */
+
+	// Clears all cubes from scene and objects array to create an empty base.
+	this.clearCubes = function() {
+		for(var i = 1; i < objects.length; i++) {
+			scene.remove(objects[i]);
+		}
+		objects.splice(1, objects.length);
+		updateCounter();
+	};
 
 	// Enable or disable camera rotating and zooming
 	this.enableOrDisableOrbit = function(setting) {
@@ -157,6 +174,18 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
         });
 	};
 	
+	/**
+	 * Updates camera and renderer settings to new element sizes.
+	 */
+	this.resize = function() {
+		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
+		camera.updateProjectionMatrix();
+		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
+		
+		// Updates perspective views
+		self.renderPerspectives();
+	};
+	
 	// Save model to JSON
 	this.saveModel = function() {
 		function Cube(color, x, y, z) {
@@ -191,8 +220,10 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			baseSize = (step / 2) * size;
 			objects = [];
 			setBase();
-			updateCounter();
+			
 			scene = createScene();
+			createPerspectives();
+			updateCounter();
 
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 			/* Remove before deploy! */
@@ -280,7 +311,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		jQueryContainer.append(renderer.domElement);
 		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
 		jQueryContainer.on( "mouseup", onDocumentMouseTouch);
-		window.addEventListener("resize", onWindowResize);
 		document.body.appendChild( stats.domElement );
 
 		createPerspectives();
@@ -390,11 +420,11 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		var greenView = $("#greenView");
 
 		views = []; //If this turns out to be a problem, use views.length = 0;
-		views.push(createView(0,500,0, topView));
-		views.push(createView(0,500,-500, blueView));
-		views.push(createView(500,500,0, redView));
-		views.push(createView(0,500,500, yellowView));
-		views.push(createView(-500,500,0, greenView));
+		views.push(createView(0, 1600, 0, topView));
+		views.push(createView(0, baseSize, -baseSize, blueView));
+		views.push(createView(baseSize, baseSize, 0, redView));
+		views.push(createView(0, baseSize, baseSize, yellowView));
+		views.push(createView(-baseSize, baseSize, 0, greenView));
 
 		views.forEach(function(element, index, array) {
 			element.init();
@@ -544,18 +574,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			}
 		}
 	}
-	
-	// Rerenders when size changes
-	function onWindowResize(event) {
-		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
-		camera.updateProjectionMatrix();
-
-		views.forEach(function(element, index, array) {
-			element.setSize();
-		});
-
-		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
-	}
 
 	init();
 
@@ -584,7 +602,6 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	// functions
 	this._init = init;
-	this._onWindowResize = onWindowResize;
 	this._onDocumentMouseTouch = onDocumentMouseTouch;
 	this._addCube = addCube;
 	this._removeCube = removeCube;
@@ -603,6 +620,8 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	this._loadModel = this.loadModel;
 	this._toggleBuildMode = this.toggleBuildMode;
 	this._createPerspectives = createPerspectives;
+	this._clearCubes = this.clearCubes;
+	this._resize = this.resize;
 
 	/* End of testing code */
 };

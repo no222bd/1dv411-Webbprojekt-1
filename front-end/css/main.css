@@ -9,6 +9,7 @@ body{
 }
 
 #ThreeJScontainer {
+	position: relative;
 	width: 90%;
 	float: left;
 	height: 100%;
@@ -94,6 +95,7 @@ body{
 
 .counter p {
 	margin: 0 0 2px 2px;
+	text-align: right;
 }
 
 
@@ -109,6 +111,7 @@ body{
 	top: 0;
 	bottom: 0;
 	cursor:default;
+	z-index: 100;
 }
 
 .modal > div {
@@ -152,7 +155,10 @@ body{
 #sizePreview {
 	width: 100%;
 }
-
+#baseModal div div span {
+	color: white;
+	font-size: 3vw;
+}
 #baseModal div div a, #baseModal div div #sizePreview {
 	display: block;
 	height: 27%;
@@ -166,7 +172,7 @@ body{
 	font-size: 6vw;
 }
 
-#baseModal > div:first-child a {
+#baseModal > div:first-child > a {
 	position: absolute;
 	top: 0;
 	left: 0;
