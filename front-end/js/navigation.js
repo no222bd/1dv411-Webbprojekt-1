@@ -1,13 +1,13 @@
 jQuery(document).ready(function($) {
-	$("#what").hide();
+	$("#confirmdeclinebuttons").hide();
 	var openModal = null;
 	$("#confirm").click(function(){
-		$("#what").hide();
+		$("#confirmdeclinebuttons").hide();
 		cb.clearCubes();
 		closeModal();
 	});
 	$("#decline").click(function(){
-		$("#what").hide();
+		$("#confirmdeclinebuttons").hide();
 		closeModal();
 	});
 
