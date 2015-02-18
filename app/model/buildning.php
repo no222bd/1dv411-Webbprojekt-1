@@ -151,7 +151,10 @@ Class Buildning{
 	 * @return string
 	 */
 	public function save(){
-		$array = array();
+		$array = $this->getAll();
+		if(!is_array($array)) {
+			$array = array();
+		}
 		$array[$this->name] = array('model' => $this->model, 'date' => $this->date);
 		if(@file_put_contents('./app/db.json', json_encode($array)) !== false){
 			return true;
@@ -182,8 +185,7 @@ Class Buildning{
 	public function get($id){
 		$model = $this->getAll();
 		if($this->modelExists($id)) {
-			$model = $model[$id];
-			return $model;
+			return $model[$id];
 		}else{
 			return false;
 		}

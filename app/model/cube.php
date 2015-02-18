@@ -83,18 +83,16 @@ Class Cube{
 	public function set($cubes){
 		try {
 			foreach($cubes as $key => $value) {
+				$valid = false;
 				if($key != 'color') {
-					if($this->validatePosition($value, $key)) {
-						$this->$key = $value;
-					} else {
-						Throw new \Exception();
-					}
+					$valid = $this->validatePosition($value, $key);
 				} else {
-					if($this->validateColor($value)){
-						$this->$key = $value;
-					}else{
-						Throw new \Exception();
-					}
+					$valid = $this->validateColor($value);
+				}
+				if($valid) {
+					$this->$key = $value;
+				} else {
+					Throw new \Exception();
 				}
 			}
 			return true;
