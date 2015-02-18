@@ -1,17 +1,16 @@
 jQuery(document).ready(function($) {
 	var openModal = null;
 	
-	$("#confirmdeclinebuttons").hide();
-	
+	$("#resetConfirmModal").hide();
 	
 	$("#confirm").click(function(){
-		$("#confirmdeclinebuttons").hide();
 		cb.clearCubes();
 		closeModal();
 	});
 	
 	$("#decline").click(function(){
-		$("#confirmdeclinebuttons").hide();
+		$("#resetConfirmModal").hide();
+		$("#baseModal").show();
 		closeModal();
 	});
 
@@ -82,7 +81,8 @@ jQuery(document).ready(function($) {
 	 */
 	$("#reset").click(function (event) {
 		event.preventDefault();
-		$("#confirmdeclinebuttons").show();
+		$("#baseModal").hide();
+		$("#resetConfirmModal").show();
 	});
 	
 	/**
@@ -120,6 +120,10 @@ jQuery(document).ready(function($) {
 	function closeModal() {
 		$(openModal).removeClass('open');
 		$('#modal').removeClass('open');
+		
+		$("#resetConfirmModal").hide();
+		$("#baseModal").show();
+		
 		openModal = null;
 		cb.enableOrDisableOrbit(true);
 	}
