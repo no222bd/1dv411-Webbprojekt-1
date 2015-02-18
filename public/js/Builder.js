@@ -4,28 +4,43 @@
 outerWindow.BUILDER = outerWindow.BUILDER || {};
 var BUILDER = outerWindow.BUILDER;
 
+/**
+ * Builder object used in application.
+ * @constructor
+ */
 BUILDER.CubeBuilder = function() {
 	// private members
 	var construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"));
 
 	//public functions
 
-	// Freeze model if popup menu is open
+	/**
+	 * Freeze model if popup menu is open
+	 * @param setting
+	 */
 	this.enableOrDisableOrbit = function(setting) {
 		construction.enableOrDisableOrbit(setting);
 	};
-	
-	// Load model from JSON string
+
+	/**
+	 * Load model from JSON string
+	 * @param jsonString
+	 */
 	this.loadModel = function(jsonString) {
 		construction.loadModel(jsonString);
 	};
 
-	//perspective of view in menubar
+	/**
+	 * perspective of view in menubar
+	 * @param perspective
+	 */
 	this.perspective = function(perspective) {
 		//green, blue, top, yellow, red
 	};
-	
-	//render all perspectives in menu
+
+	/**
+	 * render all perspectives in menu
+	 */
 	this.renderPerspectives = function() {
 		construction.renderPerspectives();
 	};
@@ -37,32 +52,47 @@ BUILDER.CubeBuilder = function() {
 		construction.resize();
 	};
 
-	//removes all cubes
+	/**
+	 * removes all cubes
+	 */
 	this.clearCubes = function() {
 		construction.clearCubes();
 	};
-	
-	// Save model to JSON string
+
+	/**
+	 * Save model to JSON string
+	 */
 	this.saveModel = function() {
 		var jsonString = construction.saveModel();
 		console.log(jsonString); // Temp
 	};
 
-	//size of base plane - size: width of base
+	/**
+	 * size of base plane - size: width of base
+	 * @param size
+	 * @returns {*}
+	 */
 	this.setBaseSize = function(size) {
 		return construction.setBaseSize(size);
 	};
 
-	// set color
+	/**
+	 * set color
+	 * @param colorHex
+	 */
 	this.setColor = function(colorHex) {
 		construction.setCubeMaterial(colorHex);
 	};
 
-	// set action for mouse up
+	/**
+	 * set action for mouse up
+	 */
 	this.setMouseUpAction = function() {
 	};
-	
-	// Toggle buildMode Add/Remove
+
+	/**
+	 * Toggle buildMode Add/Remove
+	 */
 	this.toggleBuildMode = function() {
 		construction.toggleBuildMode();// = construction.buildMode === true ? false : true;
 	};
@@ -76,6 +106,11 @@ BUILDER.CubeBuilder = function() {
 	/* End of testing code */
 };
 
+/**
+ * Three.js object for application.
+ * @param jQueryContainer
+ * @constructor
+ */
 BUILDER.ConstructionArea = function(jQueryContainer) {
 	
 	/* Private members */
@@ -102,7 +137,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 	/* Public functions */
 
-	// Clears all cubes from scene and objects array to create an empty base.
+	/**
+	 * Clears all cubes from scene and objects array to create an empty base.
+	 */
 	this.clearCubes = function() {
 		for(var i = 1; i < objects.length; i++) {
 			scene.remove(objects[i]);
@@ -111,7 +148,11 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		updateCounter();
 	};
 
-	// Enable or disable camera rotating and zooming
+	/**
+	 * Enable or disable camera rotating and zooming
+	 * @param setting
+	 * @returns {boolean}
+	 */
 	this.enableOrDisableOrbit = function(setting) {
 		if(typeof setting === 'boolean'){
 			controls.enabled = setting;
@@ -119,8 +160,11 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		}
 		return false;
 	};
-	
-	// Load model from JSON
+
+	/**
+	 * Load model from JSON
+	 * @param jsonString
+	 */
 	this.loadModel = function(jsonString) {
 		var model;
 		var voxel;
@@ -165,8 +209,10 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		/* End of testing code */
 	};
-	
-	// Renders model perspectives
+
+	/**
+	 * Renders model perspectives
+	 */
 	this.renderPerspectives = function() {
 		views.forEach(function(element, index, array) {
             element.setSize();
@@ -185,8 +231,11 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		// Updates perspective views
 		self.renderPerspectives();
 	};
-	
-	// Save model to JSON
+
+	/**
+	 * Save model to JSON
+	 * @returns {*}
+	 */
 	this.saveModel = function() {
 		function Cube(color, x, y, z) {
 			this.color = color;
@@ -213,8 +262,12 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		return JSON.stringify(model);
 	};
-	
-	// Changes the size of the base and creates new scene
+
+	/**
+	 * Changes the size of the base and creates new scene
+	 * @param size
+	 * @returns {boolean}
+	 */
 	this.setBaseSize = function(size) {
 		if(!isNaN(size) && size >= 2 && size <= 20) {
 			baseSize = (step / 2) * size;
@@ -237,8 +290,12 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		return false;
 	};
-	
-	// set material for cube
+
+	/**
+	 * set material for cube
+	 * @param colorHex
+	 * @returns {boolean}
+	 */
 	this.setCubeMaterial = function(colorHex) {
 		var pattern = new RegExp("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
 		if(pattern.test(colorHex)) {
@@ -261,7 +318,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		return false;
 	};
 
-	// BuildMode Add or Remove cube
+	/**
+	 * BuildMode Add or Remove cube
+	 */
 	this.toggleBuildMode = function() {
 		buildMode = !buildMode;
 
@@ -275,6 +334,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	
 	/* Private functions */
 
+	/**
+	 * Init is a constructor for this object.
+	 */
 	function init() {// TODO - Make this public ?
 		if(!(jQueryContainer instanceof jQuery)){
 			throw new Error();
@@ -316,8 +378,11 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		createPerspectives();
 		render();
 	}
-	
-	// Checks if cube can be added and adds cube
+
+	/**
+	 * Checks if cube can be added and adds cube
+	 * @param intersect
+	 */
 	function addCube(intersect) {
 		// Checks if cubes positon will be outside of the plane or higher then allowed.
 		if (
@@ -341,6 +406,10 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		}
 	}
 
+	/**
+	 * Creating camera
+	 * @returns {THREE.PerspectiveCamera}
+	 */
 	function createCamera() {
 		var camera = new THREE.PerspectiveCamera(45, jQueryContainer.width() / jQueryContainer.height(), 1, 10000);
 		camera.position.set(500, 800, 1300);
@@ -348,7 +417,11 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		return camera;
 	};
-	
+
+	/**
+	 * Creating color lines round base.
+	 * @returns {Array}
+	 */
 	function createColorLines() {
 		var lines = [];
 		var gridOffset = 20;
@@ -391,7 +464,11 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 
 		return lines;
 	};
-	
+
+	/**
+	 * Creating lights
+	 * @returns {Array}
+	 */
 	function createLights() {
 		var lights = [];
 		lights.push(new THREE.AmbientLight(0x606060));
@@ -403,6 +480,9 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		return lights;
 	};
 
+	/**
+	 * Creating five views for model.
+	 */
 	function createPerspectives() {
 		function createView(x,y,z, view){
 			var viewSize = 1200;
@@ -430,7 +510,13 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			element.init();
 		});
 	}
-	
+
+	/**
+	 * Creating rendering for all views.
+	 * @param JQueryElement
+	 * @param checkWebGL
+	 * @returns {*}
+	 */
 	function createRenderer(JQueryElement, checkWebGL) {
 		checkWebGL = checkWebGL || false;
 		var renderer;
@@ -449,6 +535,10 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		return renderer;
 	};
 
+	/**
+	 * Creating scene for cameras and views.
+	 * @returns {THREE.Scene}
+	 */
 	function createScene() {
 		var scene = new THREE.Scene();
 
@@ -466,7 +556,10 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		return scene;
 	};
 
-	// Checks is cube can be removed and removes cube
+	/**
+	 * Checks is cube can be removed and removes cube
+	 * @param intersect
+	 */
 	function removeCube(intersect) {
 		if (intersect.object != basePlane) {
 			scene.remove(intersect.object);
@@ -478,13 +571,18 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		}
 	}
 
-	// Called to render object
+	/**
+	 * Called to render object
+	 */
 	function render() {
 		stats.update();
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 	};
-	
+
+	/**
+	 * Change base size.
+	 */
 	function setBase() {
 		// create foundation
 		//var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
@@ -521,8 +619,10 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		objects[0] = plane;
 		basePlane = plane;
 	};
-	
-	//Updates counter if there's a counter element.
+
+	/**
+	 * Updates counter if there's a counter element.
+	 */
 	function updateCounter() {
 		var count = objects.length == 1 ? "0" : objects.length - 1;
 		var counter = $("#counter");
@@ -533,10 +633,12 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	
 	/* Event handlers */
 
-	// Hanldes both mousedown and mouseup
+	/**
+	 * Handels both mousedown and mouseup
+	 * @param event
+	 */
 	function onDocumentMouseTouch(event) {
 		event.preventDefault();
-		//FUNGERAR INTE
 
 		var targetPosition = {
 			x : event.pageX - jQueryContainer.offset().left,
@@ -626,11 +728,25 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	/* End of testing code */
 };
 
+/**
+ * View object
+ * @param renderer
+ * @param camera
+ * @param JQueryElement
+ * @param scene
+ * @constructor
+ */
 BUILDER.View = function(renderer, camera, JQueryElement, scene) {
+	/**
+	 * Renders scene.
+	 */
 	this.render = function() {
 		renderer.render(scene, camera);
 	};
 
+	/**
+	 * Set size for camera.
+	 */
 	this.setSize = function() {
 		var viewSite = 1200;
 		var aspectRatio = JQueryElement.width() / JQueryElement.height();
@@ -643,6 +759,9 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 		camera.updateProjectionMatrix();
 	};
 
+	/**
+	 * Init view.
+	 */
 	this.init = function() {
 		JQueryElement.empty();
 		JQueryElement.append(renderer.domElement);
