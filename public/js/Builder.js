@@ -8,9 +8,9 @@ var BUILDER = outerWindow.BUILDER;
  * Builder object used in application.
  * @constructor
  */
-BUILDER.CubeBuilder = function() {
+BUILDER.CubeBuilder = function(perspectives) {
 	// private members
-	var construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"));
+	var construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives);
 
 	//public functions
 
@@ -111,7 +111,7 @@ BUILDER.CubeBuilder = function() {
  * @param jQueryContainer
  * @constructor
  */
-BUILDER.ConstructionArea = function(jQueryContainer) {
+BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	
 	/* Private members */
 	
@@ -493,18 +493,13 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			var ren = createRenderer(view);
 			return new BUILDER.View(ren, cam, view, scene);
 		}
-		var topView = $("#topView");
-		var blueView = $("#blueView");
-		var redView = $("#redView");
-		var yellowView = $("#yellowView");
-		var greenView = $("#greenView");
 
 		views = []; //If this turns out to be a problem, use views.length = 0;
-		views.push(createView(0, 1600, 0, topView));
-		views.push(createView(0, baseSize, -baseSize, blueView));
-		views.push(createView(baseSize, baseSize, 0, redView));
-		views.push(createView(0, baseSize, baseSize, yellowView));
-		views.push(createView(-baseSize, baseSize, 0, greenView));
+		views.push(createView(0, 1600, 0, perspectivesContainer[0]));
+		views.push(createView(0, baseSize, -baseSize, perspectivesContainer[1]));
+		views.push(createView(baseSize, baseSize, 0, perspectivesContainer[2]));
+		views.push(createView(0, baseSize, baseSize, perspectivesContainer[3]));
+		views.push(createView(-baseSize, baseSize, 0, perspectivesContainer[4]));
 
 		views.forEach(function(element, index, array) {
 			element.init();
