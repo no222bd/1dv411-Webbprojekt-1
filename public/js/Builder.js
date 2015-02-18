@@ -393,6 +393,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	function setZoom() {
 		controls.maxDistance = baseSize * 6;
 		controls.minDistance = baseSize;
+		controls.reset();
 	}
 
 	/**
