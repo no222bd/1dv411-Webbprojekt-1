@@ -1,6 +1,6 @@
 .idea
 .project
-vendor
+/vendor
 composer.lock
 testfil.txt
 .env
