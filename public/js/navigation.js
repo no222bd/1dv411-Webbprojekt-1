@@ -32,8 +32,7 @@ jQuery(document).ready(function($) {
 			url: requestUrl,
 			statusCode: {
 				200: function(result) {
-					var resObj = JSON.parse(result);
-					cb.loadModel(resObj['data']);
+					cb.loadModel(result.data);
 					closeModal();
 				},
 				400: function(result) {
