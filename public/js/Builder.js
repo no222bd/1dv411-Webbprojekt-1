@@ -316,7 +316,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		) {
 			var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
 			voxel.position.copy(intersect.point).add(intersect.face.normal);
-			voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+			// checks if basePlane have uneven number of cubes...
+			if((baseSize / (step/2)) % 2 !== 0) {
+				voxel.position.divideScalar(step).round().multiplyScalar(step);
+				voxel.position.y = Math.floor(intersect.point.y / step) * step + (step / 2);
+			} else {
+				voxel.position.divideScalar(step).floor().multiplyScalar(step).addScalar(step / 2);
+			}
+			
 			if(voxel.position.y > 0) {
 				scene.add(voxel);
 				objects.push(voxel);
@@ -511,7 +518,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		//foundation = f;
 		
 		var grid = new THREE.Geometry();
-
+		
 		for (var i = -baseSize; i <= baseSize; i += step) {
 			grid.vertices.push(new THREE.Vector3(-baseSize, 0, i));
 			grid.vertices.push(new THREE.Vector3(baseSize, 0, i));
@@ -591,7 +598,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 					var intersect = intersects[0];
 					switch(event.button) {
 					case 0:
-						console.log(buildMode);
 						// left mouse button adds cube if buildMode == true, removes if false
 						buildMode ? addCube(intersect) : removeCube(intersect);
 						break;
