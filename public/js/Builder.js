@@ -417,7 +417,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		}
 
 		views = []; //If this turns out to be a problem, use views.length = 0;
-		views.push(createView(0, 1600, 0, perspectivesContainer[0]));
+		views.push(createView(0, -1600, 0, perspectivesContainer[0]));
 		views.push(createView(0, baseSize, -baseSize, perspectivesContainer[1]));
 		views.push(createView(baseSize, baseSize, 0, perspectivesContainer[2]));
 		views.push(createView(0, baseSize, baseSize, perspectivesContainer[3]));
@@ -527,12 +527,19 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 
 		baseGrid = new THREE.Line(grid, material, THREE.LinePieces);
 
-		// create plane
+		/**
+		 * * Green foundation * * 
+		 * Does not work with canvas renderer and is therefore turned off
+		 * by being commented away. In later iterations this might get 
+		 * implemented but it needs another solution since the commented 
+		 * line only fixes the big model cube (webgl/canvas) and not the 
+		 * cube displayed in perspective views (canvas).
+		 */
 		var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
 		geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
 		var plane = new THREE.Mesh(geo);
 		if(Detector.webgl) {
-			plane.material = new THREE.MeshBasicMaterial({color: 0xa0e0b9});
+			plane.visible = false;//plane.material = new THREE.MeshBasicMaterial({color: 0xa0e0b9});
 		}else{
 			plane.visible = false;
 		}
