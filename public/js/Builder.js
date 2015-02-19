@@ -532,7 +532,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
 		var plane = new THREE.Mesh(geo);
 		if(Detector.webgl) {
-			plane.material = new THREE.MeshBasicMaterial({color: 0xa0e0b9});
+			plane.visible = false;//plane.material = new THREE.MeshBasicMaterial({color: 0xa0e0b9});
 		}else{
 			plane.visible = false;
 		}
