@@ -319,8 +319,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 			voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
 			if(voxel.position.y > 0) {
 				if((baseSize / (step/2)) % 2 !== 0){
+					voxel.position.x += step/2;
 					voxel.position.z -= step/2;
-					voxel.position.x -= step/2;
 				}
 				scene.add(voxel);
 				objects.push(voxel);
@@ -579,6 +579,10 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 				// if mouse has moved since mousedown event
 				return;
 			} else {
+				if((baseSize / (step/2)) % 2 !== 0){
+					targetPosition.x -= step/2;
+					targetPosition.y += step/2;
+				}
 				mouse.set((targetPosition.x / jQueryContainer.width() ) * 2 - 1, -(targetPosition.y / jQueryContainer.height() ) * 2 + 1);
 				raycaster.setFromCamera(mouse, camera);
 				var intersects = raycaster.intersectObjects(objects);
