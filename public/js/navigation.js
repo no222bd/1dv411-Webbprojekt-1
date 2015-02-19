@@ -18,6 +18,55 @@ jQuery(document).ready(function($) {
 		closeModal();
 	});
 
+	// skicka GET till /api/{name} där name = modellens namn
+	// vid success får en json, värdet under key "data" skall skickas till modellen
+	// anropa cb.loadModel(JSON-strängen)
+	$("#importForm").submit(function(event) {
+		event.preventDefault();
+		
+		var name = $("#importName").val();
+		var requestUrl = "/api/" + name;
+		
+		$.ajax({
+			type: "GET",
+			url: requestUrl,
+			statusCode: {
+				200: function(result) {
+					console.log(result);
+				},
+				400: function(result) {
+					console.log(result);
+				}
+			}
+		});
+	});
+	
+	// för att få ut json-strängen cb.saveModel() för att få ut en json-sträng
+	// skicka POST till /api med variblerna name="modellens namn" och model="json-strängen"
+	$("#saveForm").submit(function(event) {
+		event.preventDefault();
+		
+		var name = $("#saveName").val();
+		var requestUrl = "/api";
+		
+		$.ajax({
+			type: "POST",
+			url: requestUrl,
+			data: { id: name },
+			statusCode: {
+				201: function(result) {
+					console.log(result);
+				},
+				400: function(result) {
+					console.log(result);
+				},
+				503: function(result) {
+					console.log(result);
+				}
+			}
+		});
+	});
+
 	$(".modalOption").click(function (event) {
 		event.preventDefault();
 		var href = $(this).attr("href");
