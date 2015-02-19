@@ -318,6 +318,10 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 			voxel.position.copy(intersect.point).add(intersect.face.normal);
 			voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
 			if(voxel.position.y > 0) {
+				if((baseSize / (step/2)) % 2 !== 0){
+					voxel.position.z -= step/2;
+					voxel.position.x -= step/2;
+				}
 				scene.add(voxel);
 				objects.push(voxel);
 				updateCounter();
