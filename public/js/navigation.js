@@ -17,12 +17,17 @@ jQuery(document).ready(function($) {
 		closeModal();
 	});
 
-	$(".perspective .canvasWrapper").click(function(){
-		console.log(this);
+	$(".perspective .canvasWrapper").on("click", function(){
 		var canvas = this.firstChild;
 		var target = $("#perspective");
 		target.css("background-image", "url("+this.firstChild.toDataURL() + ")");
-		target.removeClass("top red yellow green orange").addClass("chosen-view " + $(this).parent().parent().attr("class"));
+		target.removeClass("top red yellow green blue").addClass("chosen-view " + $(this).parents("div").attr("class"));
+		$("#menu").data("target", $(this).attr("id"));
+	});
+	$("#ThreeJScontainer").on("updateView", function(){
+		var target = $("#perspective");
+		var canvas = $("#"+$("#menu").data("target")).children()[0];
+		target.css("background-image", "url("+canvas.toDataURL() + ")");
 	});
 
 	$(".modalOption").click(function (event) {
