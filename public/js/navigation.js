@@ -156,8 +156,4 @@ jQuery(document).ready(function($) {
 	function settings() {
 
 	}
-
-	$("#ThreeJScontainer").on('updateView', function () {
-
-	});
 });
