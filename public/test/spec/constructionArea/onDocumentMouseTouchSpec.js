@@ -2,7 +2,8 @@ describe("Builder.ConstructionArea", function () {
 	var builder;
 	var event;
 	beforeEach(function () {
-		builder = new BUILDER.ConstructionArea($("<div style='position:absolute; top:0; left:0;height: 1000px; width: 1000px;'></div>"));
+		var arr = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
+		builder = new BUILDER.ConstructionArea($("<div style='height: 1000px; width: 1000px;'></div>"), arr);
 		event = {
 			pageX: 500,
 			pageY: 500,

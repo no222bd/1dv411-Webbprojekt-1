@@ -2,7 +2,8 @@ describe("Builder.ConstructionArea", function () {
 	var builder;
 
 	beforeEach(function () {
-		builder = new BUILDER.ConstructionArea($("<div></div>"));
+		var arr = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
+		builder = new BUILDER.ConstructionArea($("<div style='height: 1000px; width: 1000px;'></div>"), arr);
 	});
 
 	describe("setBaseSize", function () {

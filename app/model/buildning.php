@@ -30,7 +30,7 @@ Class Buildning{
 	/**
 	 *
 	 */
-	public function __constuct(){
+	public function __construct(){
 		$this->dateFormat = 'Y-m-d';
 		$this->setDate(Date($this->dateFormat));
 		$this->errors = array();
@@ -45,7 +45,7 @@ Class Buildning{
 		$key = 'name';
 		if($name != '') {
 			if(strlen($name) <= 10) {
-				if($this->modelExists($name)) {
+				if(!$this->modelExists($name)) {
 					$this->removeError($key);
 					$this->name = $name;
 					return true;
@@ -107,7 +107,7 @@ Class Buildning{
 		$errors = array();
 		$key = 'date';
 		$date = \DateTime::createFromFormat($this->dateFormat, $date);
-		if ($date) {
+		if ($date && !is_null($date)) {
 			$this->removeError($key);
 			$this->date = $date;
 			return true;
@@ -152,12 +152,19 @@ Class Buildning{
 	 */
 	public function save(){
 		$array = $this->getAll();
-		if(!is_array($array)) {
-			$array = array();
-		}
-		$array[$this->name] = array('model' => $this->model, 'date' => $this->date);
-		if(@file_put_contents('./app/db.json', json_encode($array)) !== false){
-			return true;
+		$array[$this->name] = array('model' => $this->model, 'date' => $this->date->format($this->dateFormat));
+		return $this->checkDate($array);
+	}
+
+	/**
+	 * @param $array
+	 * @return bool
+	 */
+	private function saveToFile($array){
+		if(count($array) > 0) {
+			if(@file_put_contents('./app/db.json', json_encode($array)) !== false) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -166,8 +173,11 @@ Class Buildning{
 	 * @return mixed
 	 */
 	public function getAll(){
-		return json_decode(@file_get_contents('./app/db.json'),true);
-
+		$all = json_decode(@file_get_contents('./app/db.json'),true);
+		if(is_array($all)){
+			return $all;
+		}
+		return array();
 	}
 
 	/**
@@ -175,19 +185,38 @@ Class Buildning{
 	 * @return bool
 	 */
 	private function modelExists($id){
-		$model = $this->getAll();
-		return array_key_exists($id, $model);
+		return array_key_exists($id, $this->getAll());
 	}
 
 	/**
-	 * @param $json
+	 * @param $all
+	 * @return bool
+	 */
+	private function checkDate($all){
+		$new = array();
+		foreach($all as $key => $model){
+			$date = \DateTime::createFromFormat($this->dateFormat, $model['date']);
+			$interval = new \DateInterval('P1M');
+			$date->add($interval);
+			if($date >= new \DateTime("now")){
+				$new[$key] = $model;
+			}
+		}
+		return $this->saveToFile($new);
+	}
+
+	/**
+	 * @param $id
+	 * @return bool
 	 */
 	public function get($id){
 		$model = $this->getAll();
 		if($this->modelExists($id)) {
-			return $model[$id];
-		}else{
-			return false;
+			$model[$id]['date'] = Date($this->dateFormat);
+			if($this->saveToFile($model)) {
+				return $model[$id];
+			}
 		}
+		return false;
 	}
 }
