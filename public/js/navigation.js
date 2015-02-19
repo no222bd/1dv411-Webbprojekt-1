@@ -25,17 +25,20 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		
 		var name = $("#importName").val();
-		var requestUrl = "/api/" + name;
+		var requestUrl = "api/" + name;
 		
 		$.ajax({
 			type: "GET",
 			url: requestUrl,
 			statusCode: {
 				200: function(result) {
-					console.log(result);
+					var resObj = JSON.parse(result);
+					cb.loadModel(resObj['data']);
+					closeModal();
 				},
 				400: function(result) {
 					console.log(result);
+					closeModal();
 				}
 			}
 		});
@@ -47,12 +50,13 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		
 		var name = $("#saveName").val();
-		var requestUrl = "/api";
+		var requestUrl = "api";
+		var dataString = cb.saveModel();
 		
 		$.ajax({
 			type: "POST",
 			url: requestUrl,
-			data: { id: name },
+			data: { name: name, model: dataString },
 			statusCode: {
 				201: function(result) {
 					console.log(result);
@@ -196,9 +200,11 @@ jQuery(document).ready(function($) {
 		
 		$("#settingsModal").show();
 		$("#formSaveModal").hide();
+		$("#saveName").val("");
 		
 		$("#settingsModal").show();
 		$("#formImportModal").hide();
+		$("#importName").val("");
 		
 		openModal = null;
 		cb.enableOrDisableOrbit(true);
