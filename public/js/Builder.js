@@ -5,109 +5,6 @@ outerWindow.BUILDER = outerWindow.BUILDER || {};
 var BUILDER = outerWindow.BUILDER;
 
 /**
- * Builder object used in application.
- * @param jQuery element container
- * @param array perspectives
- */
-BUILDER.CubeBuilder = function(container, perspectives) {
-	// private members
-	var construction = new BUILDER.ConstructionArea(container, perspectives);
-
-	//public functions
-
-	/**
-	 * Freeze model if popup menu is open
-	 * @param setting
-	 */
-	this.enableOrDisableOrbit = function(setting) {
-		construction.enableOrDisableOrbit(setting);
-	};
-
-	/**
-	 * Load model from JSON string
-	 * @param jsonString
-	 */
-	this.loadModel = function(jsonString) {
-		construction.loadModel(jsonString);
-	};
-
-	/**
-	 * perspective of view in menubar
-	 * @param perspective
-	 */
-	this.perspective = function(perspective) {
-		//green, blue, top, yellow, red
-	};
-
-	/**
-	 * render all perspectives in menu
-	 */
-	this.renderPerspectives = function() {
-		construction.renderPerspectives();
-	};
-	
-	/**
-	 * Calls ConstructionArea.resize() 
-	 */
-	this.resize = function() {
-		construction.resize();
-	};
-
-	/**
-	 * removes all cubes
-	 */
-	this.clearCubes = function() {
-		construction.clearCubes();
-	};
-
-	/**
-	 * Save model to JSON string
-	 */
-	this.saveModel = function() {
-		var jsonString = construction.saveModel();
-		console.log(jsonString); // Temp
-	};
-
-	/**
-	 * size of base plane - size: width of base
-	 * @param size
-	 * @returns {*}
-	 */
-	this.setBaseSize = function(size) {
-		return construction.setBaseSize(size);
-	};
-
-	/**
-	 * set color
-	 * @param colorHex
-	 */
-	this.setColor = function(colorHex) {
-		construction.setCubeMaterial(colorHex);
-	};
-
-	/**
-	 * set action for mouse up
-	 */
-	this.setMouseUpAction = function() {
-	};
-
-	/**
-	 * Toggle buildMode Add/Remove
-	 */
-	this.toggleBuildMode = function() {
-		construction.toggleBuildMode();// = construction.buildMode === true ? false : true;
-	};
-
-	/* OBS. For testing only! Do not use in application!!! */
-	// TODO: Remove before deploying
-
-	// members
-	this._construction = construction;
-
-	/* End of testing code */
-};
-
-/**
  * Three.js object for application.
  * @param jQueryContainer
  * @constructor
@@ -189,6 +86,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	}
 
 	/* Public functions */
+
+	/**
+	 * perspective of view in menubar
+	 * @param perspective
+	 */
+	this.perspective = function(perspective) {
+		//green, blue, top, yellow, red
+	};
 
 	/**
 	 * Clears all cubes from scene and objects array to create an empty base.
