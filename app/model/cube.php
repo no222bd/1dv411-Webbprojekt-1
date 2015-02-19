@@ -78,7 +78,8 @@ Class Cube{
 	}
 
 	/**
-	 * @param $cube
+	 * @param $cubes
+	 * @return bool
 	 */
 	public function set($cubes){
 		try {

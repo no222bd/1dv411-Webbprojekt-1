@@ -5,113 +5,11 @@ outerWindow.BUILDER = outerWindow.BUILDER || {};
 var BUILDER = outerWindow.BUILDER;
 
 /**
- * Builder object used in application.
- * @constructor
- */
-BUILDER.CubeBuilder = function() {
-	// private members
-	var construction = new BUILDER.ConstructionArea($("#ThreeJScontainer"));
-
-	//public functions
-
-	/**
-	 * Freeze model if popup menu is open
-	 * @param setting
-	 */
-	this.enableOrDisableOrbit = function(setting) {
-		construction.enableOrDisableOrbit(setting);
-	};
-
-	/**
-	 * Load model from JSON string
-	 * @param jsonString
-	 */
-	this.loadModel = function(jsonString) {
-		construction.loadModel(jsonString);
-	};
-
-	/**
-	 * perspective of view in menubar
-	 * @param perspective
-	 */
-	this.perspective = function(perspective) {
-		//green, blue, top, yellow, red
-	};
-
-	/**
-	 * render all perspectives in menu
-	 */
-	this.renderPerspectives = function() {
-		construction.renderPerspectives();
-	};
-	
-	/**
-	 * Calls ConstructionArea.resize() 
-	 */
-	this.resize = function() {
-		construction.resize();
-	};
-
-	/**
-	 * removes all cubes
-	 */
-	this.clearCubes = function() {
-		construction.clearCubes();
-	};
-
-	/**
-	 * Save model to JSON string
-	 */
-	this.saveModel = function() {
-		var jsonString = construction.saveModel();
-		console.log(jsonString); // Temp
-	};
-
-	/**
-	 * size of base plane - size: width of base
-	 * @param size
-	 * @returns {*}
-	 */
-	this.setBaseSize = function(size) {
-		return construction.setBaseSize(size);
-	};
-
-	/**
-	 * set color
-	 * @param colorHex
-	 */
-	this.setColor = function(colorHex) {
-		construction.setCubeMaterial(colorHex);
-	};
-
-	/**
-	 * set action for mouse up
-	 */
-	this.setMouseUpAction = function() {
-	};
-
-	/**
-	 * Toggle buildMode Add/Remove
-	 */
-	this.toggleBuildMode = function() {
-		construction.toggleBuildMode();// = construction.buildMode === true ? false : true;
-	};
-
-	/* OBS. For testing only! Do not use in application!!! */
-	// TODO: Remove before deploying
-
-	// members
-	this._construction = construction;
-
-	/* End of testing code */
-};
-
-/**
  * Three.js object for application.
  * @param jQueryContainer
  * @constructor
  */
-BUILDER.ConstructionArea = function(jQueryContainer) {
+BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	
 	/* Private members */
 	
@@ -135,7 +33,67 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	    buildMode = true,
 		self = this;
 
+	/**
+	 * Init is a constructor for this object.
+	 */
+	function init() {// TODO - Make this public ?
+		if(!(jQueryContainer instanceof jQuery)){
+			throw new Error();
+		}
+		for(var i = 0; i < perspectivesContainer.length; i++) {
+			if(!(perspectivesContainer[i] instanceof jQuery)){
+				throw new Error();
+			}
+		}
+
+		self.setCubeMaterial('#FED06F');
+
+		stats = new Stats();
+		stats.setMode(1); // 0: fps, 1: ms
+
+		// align top-left
+		stats.domElement.style.position = 'absolute';
+		stats.domElement.style.left = '0px';
+		stats.domElement.style.top = '0px';
+
+		step = 50;
+		objects = [];
+		views = [];
+		cubeGeo = new THREE.BoxGeometry(step, step, step);
+
+		raycaster = new THREE.Raycaster();
+		mouseposition = new THREE.Vector2();
+		mouse = new THREE.Vector2();
+
+		baseSize = 500;
+		//( step/2 ) * antal block i bredd
+		setBase();
+
+		scene = createScene();
+		camera = createCamera();
+		renderer = createRenderer(jQueryContainer, true);
+		controls = new THREE.OrbitControls(camera, renderer.domElement);
+		controls.noPan = true;
+		setZoom();
+
+		jQueryContainer.append(renderer.domElement);
+		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
+		jQueryContainer.on( "mouseup", onDocumentMouseTouch);
+		document.body.appendChild( stats.domElement );
+
+		createPerspectives();
+		render();
+	}
+
 	/* Public functions */
+
+	/**
+	 * perspective of view in menubar
+	 * @param perspective
+	 */
+	this.perspective = function(perspective) {
+		//green, blue, top, yellow, red
+	};
 
 	/**
 	 * Clears all cubes from scene and objects array to create an empty base.
@@ -273,7 +231,7 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			baseSize = (step / 2) * size;
 			objects = [];
 			setBase();
-			
+			setZoom();
 			scene = createScene();
 			createPerspectives();
 			updateCounter();
@@ -335,48 +293,12 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 	/* Private functions */
 
 	/**
-	 * Init is a constructor for this object.
+	 * Sets zoom on control using baseSize.
 	 */
-	function init() {// TODO - Make this public ?
-		if(!(jQueryContainer instanceof jQuery)){
-			throw new Error();
-		}
-		self.setCubeMaterial('#FED06F');
-
-		stats = new Stats();
-		stats.setMode(1); // 0: fps, 1: ms
-
-		// align top-left
-		stats.domElement.style.position = 'absolute';
-		stats.domElement.style.left = '0px';
-		stats.domElement.style.top = '0px';
-
-		step = 50;
-		objects = [];
-		views = [];
-		cubeGeo = new THREE.BoxGeometry(step, step, step);
-
-		raycaster = new THREE.Raycaster();
-		mouseposition = new THREE.Vector2();
-		mouse = new THREE.Vector2();
-
-		baseSize = 500;
-		//( step/2 ) * antal block i bredd
-		setBase();
-
-		scene = createScene();
-		camera = createCamera();
-		renderer = createRenderer(jQueryContainer, true);
-		controls = new THREE.OrbitControls(camera, renderer.domElement);
-		controls.noPan = true;
-
-		jQueryContainer.append(renderer.domElement);
-		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
-		jQueryContainer.on( "mouseup", onDocumentMouseTouch);
-		document.body.appendChild( stats.domElement );
-
-		createPerspectives();
-		render();
+	function setZoom() {
+		controls.maxDistance = baseSize * 6;
+		controls.minDistance = baseSize;
+		controls.reset();
 	}
 
 	/**
@@ -493,18 +415,13 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 			var ren = createRenderer(view);
 			return new BUILDER.View(ren, cam, view, scene);
 		}
-		var topView = $("#topView");
-		var blueView = $("#blueView");
-		var redView = $("#redView");
-		var yellowView = $("#yellowView");
-		var greenView = $("#greenView");
 
 		views = []; //If this turns out to be a problem, use views.length = 0;
-		views.push(createView(0, 1600, 0, topView));
-		views.push(createView(0, baseSize, -baseSize, blueView));
-		views.push(createView(baseSize, baseSize, 0, redView));
-		views.push(createView(0, baseSize, baseSize, yellowView));
-		views.push(createView(-baseSize, baseSize, 0, greenView));
+		views.push(createView(0, 1600, 0, perspectivesContainer[0]));
+		views.push(createView(0, baseSize, -baseSize, perspectivesContainer[1]));
+		views.push(createView(baseSize, baseSize, 0, perspectivesContainer[2]));
+		views.push(createView(0, baseSize, baseSize, perspectivesContainer[3]));
+		views.push(createView(-baseSize, baseSize, 0, perspectivesContainer[4]));
 
 		views.forEach(function(element, index, array) {
 			element.init();
@@ -614,7 +531,11 @@ BUILDER.ConstructionArea = function(jQueryContainer) {
 		var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
 		geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
 		var plane = new THREE.Mesh(geo);
-		plane.visible = false;
+		if(Detector.webgl) {
+			plane.material = new THREE.MeshBasicMaterial({color: 0xa0e0b9});
+		}else{
+			plane.visible = false;
+		}
 
 		objects[0] = plane;
 		basePlane = plane;

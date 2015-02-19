@@ -8,7 +8,8 @@ describe("Builder.View", function () {
 		JQueryElement.height(100);
 		var viewSize = 1200;
 		var aspectRatio = JQueryElement.width() / JQueryElement.height();
-		var builder = new BUILDER.ConstructionArea($("<div></div>"));
+		var arr = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
+		var builder = new BUILDER.ConstructionArea($("<div style='height: 1000px; width: 1000px;'></div>"), arr);
 		
 		view = new BUILDER.View(
 			new THREE.CanvasRenderer(), 

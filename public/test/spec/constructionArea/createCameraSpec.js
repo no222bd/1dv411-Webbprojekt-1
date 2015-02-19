@@ -2,8 +2,8 @@ describe("Builder.ConstructionArea", function () {
 	var camera;
 	
 	beforeEach(function () {
-		builder = new BUILDER.ConstructionArea($("<div style='height: 1000px; width: 1000px;'></div>"));
-		
+		var arr = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
+		builder = new BUILDER.ConstructionArea($("<div style='height: 1000px; width: 1000px;'></div>"), arr);
 	});
 
 	describe("createCamera", function () {
