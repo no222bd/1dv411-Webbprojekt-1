@@ -323,8 +323,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 			} else {
 				voxel.position.divideScalar(step).floor().multiplyScalar(step).addScalar(step / 2);
 			}
-			
-			if(voxel.position.y > 0) {
+
+			if(voxel.position.y > 0 && !cubeExists(voxel.position)) {
 				scene.add(voxel);
 				objects.push(voxel);
 				updateCounter();
@@ -332,6 +332,24 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 					element.render();
 				});
 			}
+		}
+	}
+
+	/**
+	 * Checks if a cube already are in a position.
+	 * @param voxelPosition
+	 * @returns {boolean}
+	 */
+	function cubeExists(voxelPosition){
+		for(var i= 1; i < objects.length; i++){
+			if(
+				voxelPosition.x == objects[i].position.x &&
+				voxelPosition.z == objects[i].position.z &&
+				voxelPosition.y == objects[i].position.y
+			){
+				return true;
+			}
+			return false;
 		}
 	}
 
