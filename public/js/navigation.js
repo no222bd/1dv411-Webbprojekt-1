@@ -158,6 +158,6 @@ jQuery(document).ready(function($) {
 	}
 
 	$("#ThreeJScontainer").on('updateView', function () {
-		alert('hej');
+
 	});
 });
