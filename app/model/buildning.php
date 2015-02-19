@@ -156,6 +156,10 @@ Class Buildning{
 		return $this->checkDate($array);
 	}
 
+	/**
+	 * @param $array
+	 * @return bool
+	 */
 	private function saveToFile($array){
 		if(count($array) > 0) {
 			if(@file_put_contents('./app/db.json', json_encode($array)) !== false) {
@@ -184,6 +188,10 @@ Class Buildning{
 		return array_key_exists($id, $this->getAll());
 	}
 
+	/**
+	 * @param $all
+	 * @return bool
+	 */
 	private function checkDate($all){
 		$new = array();
 		foreach($all as $key => $model){
@@ -198,7 +206,8 @@ Class Buildning{
 	}
 
 	/**
-	 * @param $json
+	 * @param $id
+	 * @return bool
 	 */
 	public function get($id){
 		$model = $this->getAll();
