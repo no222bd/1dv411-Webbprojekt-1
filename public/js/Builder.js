@@ -527,7 +527,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 
 		baseGrid = new THREE.Line(grid, material, THREE.LinePieces);
 
-		// create plane
+		/**
+		 * * Green foundation * * 
+		 * Does not work with canvas renderer and is therefore turned off
+		 * by being commented away. In later iterations this might get 
+		 * implemented but it needs another solution since the commented 
+		 * line only fixes the big model cube (webgl/canvas) and not the 
+		 * cube displayed in perspective views (canvas).
+		 */
 		var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
 		geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
 		var plane = new THREE.Mesh(geo);
