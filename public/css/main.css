@@ -80,6 +80,9 @@ body{
 }
 
 #perspective.chosen-view {
+	width: 145px;
+	height: 145px;
+	padding-top: 0;
 	background-position: inherit;
 	background-size: 100%;
 	background-repeat: no-repeat;

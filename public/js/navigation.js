@@ -16,17 +16,11 @@ jQuery(document).ready(function($) {
 	});
 
 	$(".perspective .canvasWrapper").click(function(){
-		var image = new Image();
-		image.src = this.firstChild.toDataURL();
-		console.log(this.firstChild.toDataURL());
-		var resizeElement = document.createElement("canvas");
-		resizeElement.width = 145;
-		resizeElement.height = 145;
-		var context = resizeElement.getContext("2d");
-		context.drawImage(image, 0, 0, 145, 145);
-		console.log($("#perspective"));
-		$("#perspective").css("background-image", "url("+resizeElement.toDataURL() + ")");	
-		$("#perspective").addClass("chosen-view");
+		console.log(this);
+		var canvas = this.firstChild;
+		var target = $("#perspective");
+		target.css("background-image", "url("+this.firstChild.toDataURL() + ")");
+		target.removeClass("top red yellow green orange").addClass("chosen-view " + $(this).parent().parent().attr("class"));
 	});
 
 	$(".modalOption").click(function (event) {
