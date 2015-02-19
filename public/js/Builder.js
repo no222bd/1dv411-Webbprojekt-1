@@ -417,7 +417,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		}
 
 		views = []; //If this turns out to be a problem, use views.length = 0;
-		views.push(createView(0, 1600, 0, perspectivesContainer[0]));
+		views.push(createView(0, -1600, 0, perspectivesContainer[0]));
 		views.push(createView(0, baseSize, -baseSize, perspectivesContainer[1]));
 		views.push(createView(baseSize, baseSize, 0, perspectivesContainer[2]));
 		views.push(createView(0, baseSize, baseSize, perspectivesContainer[3]));
