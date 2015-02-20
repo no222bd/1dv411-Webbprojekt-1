@@ -18,6 +18,21 @@ jQuery(document).ready(function($) {
 		closeModal();
 	});
 
+	$(".perspective .canvasWrapper").on("click", function() {
+        var canvas = this.firstChild;
+        var target = $("#perspective");
+        target.css("background-image", "url(" + this.firstChild.toDataURL() + ")");
+        target.removeClass("top red yellow green blue").addClass("chosen-view " + $(this).parents("div").attr("class"));
+        $("#menu").data("target", $(this).attr("id"));
+    });
+    
+    $("#ThreeJScontainer").on("updateView", function() {
+        var menuTargetId = $("#menu").data("target");
+        var target = $("#perspective");
+        var canvas = $("#" + menuTargetId).children()[0];
+        target.css("background-image", "url(" + canvas.toDataURL() + ")");
+    });
+
 	// skicka GET till /api/{name} där name = modellens namn
 	// vid success får en json, värdet under key "data" skall skickas till modellen
 	// anropa cb.loadModel(JSON-strängen)
@@ -232,5 +247,4 @@ jQuery(document).ready(function($) {
 			closeModal();
 		});
 	}
-
 });

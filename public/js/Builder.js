@@ -30,6 +30,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	    controls,
 	    views,
 	    stats,
+		UIevent,
 	    buildMode = true,
 		self = this;
 
@@ -55,6 +56,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		stats.domElement.style.position = 'absolute';
 		stats.domElement.style.left = '0px';
 		stats.domElement.style.top = '0px';
+
+		UIevent = new CustomEvent("updateView");
 
 		step = 50;
 		objects = [];
@@ -318,8 +321,15 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		) {
 			var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
 			voxel.position.copy(intersect.point).add(intersect.face.normal);
-			voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
-			if(voxel.position.y > 0) {
+			// checks if basePlane have uneven number of cubes...
+			if((baseSize / (step/2)) % 2 !== 0) {
+				voxel.position.divideScalar(step).round().multiplyScalar(step);
+				voxel.position.y = Math.floor(intersect.point.y / step) * step + (step / 2);
+			} else {
+				voxel.position.divideScalar(step).floor().multiplyScalar(step).addScalar(step / 2);
+			}
+
+			if(voxel.position.y > 0 && !cubeExists(voxel.position)) {
 				scene.add(voxel);
 				objects.push(voxel);
 				updateCounter();
@@ -327,6 +337,24 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 					element.render();
 				});
 			}
+		}
+	}
+
+	/**
+	 * Checks if a cube already are in a position.
+	 * @param voxelPosition
+	 * @returns {boolean}
+	 */
+	function cubeExists(voxelPosition){
+		for(var i= 1; i < objects.length; i++){
+			if(
+				voxelPosition.x == objects[i].position.x &&
+				voxelPosition.z == objects[i].position.z &&
+				voxelPosition.y == objects[i].position.y
+			){
+				return true;
+			}
+			return false;
 		}
 	}
 
@@ -419,7 +447,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		}
 
 		views = []; //If this turns out to be a problem, use views.length = 0;
-		views.push(createView(0, 1600, 0, perspectivesContainer[0]));
+		views.push(createView(0, -1600, 0, perspectivesContainer[0]));
 		views.push(createView(0, baseSize, -baseSize, perspectivesContainer[1]));
 		views.push(createView(baseSize, baseSize, 0, perspectivesContainer[2]));
 		views.push(createView(0, baseSize, baseSize, perspectivesContainer[3]));
@@ -513,7 +541,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		//foundation = f;
 		
 		var grid = new THREE.Geometry();
-
+		
 		for (var i = -baseSize; i <= baseSize; i += step) {
 			grid.vertices.push(new THREE.Vector3(-baseSize, 0, i));
 			grid.vertices.push(new THREE.Vector3(baseSize, 0, i));
@@ -529,12 +557,19 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 
 		baseGrid = new THREE.Line(grid, material, THREE.LinePieces);
 
-		// create plane
+		/**
+		 * * Green foundation * * 
+		 * Does not work with canvas renderer and is therefore turned off
+		 * by being commented away. In later iterations this might get 
+		 * implemented but it needs another solution since the commented 
+		 * line only fixes the big model cube (webgl/canvas) and not the 
+		 * cube displayed in perspective views (canvas).
+		 */
 		var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
 		geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
 		var plane = new THREE.Mesh(geo);
 		if(Detector.webgl) {
-			plane.material = new THREE.MeshBasicMaterial({color: 0xa0e0b9});
+			plane.visible = false;//plane.material = new THREE.MeshBasicMaterial({color: 0xa0e0b9});
 		}else{
 			plane.visible = false;
 		}
@@ -586,13 +621,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 					var intersect = intersects[0];
 					switch(event.button) {
 					case 0:
-						console.log(buildMode);
 						// left mouse button adds cube if buildMode == true, removes if false
 						buildMode ? addCube(intersect) : removeCube(intersect);
+						jQueryContainer.trigger(UIevent);
 						break;
 					case 2:
 						// right mouse button removes cube
 						removeCube(intersect);
+						jQueryContainer.trigger(UIevent);
 						break;
 					}
 				}
@@ -647,6 +683,10 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	this._createPerspectives = createPerspectives;
 	this._clearCubes = this.clearCubes;
 	this._resize = this.resize;
+	this._perspective = this.perspective;
+	this._clearCubes = this.clearCubes;
+	this._setZoom = setZoom;
+	this._cubeExists = cubeExists;
 
 	/* End of testing code */
 };
