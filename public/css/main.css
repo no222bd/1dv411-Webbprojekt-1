@@ -52,9 +52,9 @@ body{
 	float: left;
 }
 
-#cube, #erase, #base, #perspective, #settings, #colors {
+#cube, #erase, #base, #settings, #colors, #perspective {
 	background-image: url('../img/Ikoner.png');
-	background-size: 250%;
+	background-size: 250%;	
 }
 
 #cube {
@@ -77,6 +77,15 @@ body{
 #colors {
 	background-position: 93% 96%;
 	background-size: 350%;
+}
+
+#perspective.chosen-view {
+	width: 145px;
+	height: 145px;
+	padding-top: 0;
+	background-position: inherit;
+	background-size: 100%;
+	background-repeat: no-repeat;
 }
 
 /** -- Counter -- **

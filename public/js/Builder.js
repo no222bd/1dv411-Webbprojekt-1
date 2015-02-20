@@ -30,6 +30,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	    controls,
 	    views,
 	    stats,
+		UIevent,
 	    buildMode = true,
 		self = this;
 
@@ -55,6 +56,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		stats.domElement.style.position = 'absolute';
 		stats.domElement.style.left = '0px';
 		stats.domElement.style.top = '0px';
+
+		UIevent = new CustomEvent("updateView");
 
 		step = 50;
 		objects = [];
@@ -618,10 +621,12 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 					case 0:
 						// left mouse button adds cube if buildMode == true, removes if false
 						buildMode ? addCube(intersect) : removeCube(intersect);
+						jQueryContainer.trigger(UIevent);
 						break;
 					case 2:
 						// right mouse button removes cube
 						removeCube(intersect);
+						jQueryContainer.trigger(UIevent);
 						break;
 					}
 				}
