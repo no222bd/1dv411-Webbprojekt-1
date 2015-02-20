@@ -80,8 +80,8 @@ body{
 }
 
 #perspective.chosen-view {
-	width: 145px;
-	height: 145px;
+	width: 120px;
+	height: 120px;
 	padding-top: 0;
 	background-position: inherit;
 	background-size: 100%;
@@ -353,7 +353,7 @@ body{
 	background-color:#E5004F;
 }
 .color.random {
-	bac kground-color:#BE0081;
+	background-color:#BE0081;
 }
 .color.turquoise {
 	background-color:#C6FFF0;
@@ -435,8 +435,7 @@ body{
   width: 12%;
   margin-top: 12%;
  }
-
- #ThreeJScontainer {
+	#ThreeJScontainer {
   width: 100%;
  }
 
