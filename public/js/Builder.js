@@ -676,6 +676,10 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	this._createPerspectives = createPerspectives;
 	this._clearCubes = this.clearCubes;
 	this._resize = this.resize;
+	this._perspective = this.perspective;
+	this._clearCubes = this.clearCubes;
+	this._setZoom = setZoom;
+	this._cubeExists = cubeExists;
 
 	/* End of testing code */
 };
