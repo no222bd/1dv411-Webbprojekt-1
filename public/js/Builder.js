@@ -206,7 +206,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		var model = {
 			baseSize: objects[0].geometry.parameters.height / step,
 			cubes: [],
-			step: step
+			step: (step/2)
 		};
 
 		for(var i = 1; i < objects.length; i++) {
