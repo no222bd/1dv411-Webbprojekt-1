@@ -136,6 +136,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		} else {
 			model = JSON.parse(jsonString);
 		}
+		model = JSON.parse(model.model);
 
 		objects = [];
 		baseSize = model.baseSize * (step / 2);
@@ -207,7 +208,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 
 		var model = {
 			baseSize: objects[0].geometry.parameters.height / step,
-			cubes: []
+			cubes: [],
+			step: (step/2)
 		};
 
 		for(var i = 1; i < objects.length; i++) {

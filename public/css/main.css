@@ -146,21 +146,46 @@ body{
 	height: 100%;
 }
 
-#baseModal {
+#baseModal,
+#resetConfirmModal {
 	display: table-cell;
 	vertical-align: middle;
 }
 
-#baseModal > div {
+#baseModal > div,
+#resetConfirmModal > div  {
 	width: 40%;
 	padding-top: 40%;
 	margin: 1%;
 	display: inline-block;
 	position: relative;
 }
+
+#confirmdeclinebuttons p {
+	color: white;
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 2vw;
+}
+
+#confirmdeclinebuttons div a {
+	display: block;
+	height: 27%;
+	margin-bottom: 2%;
+
+	background-color: #555;
+	border: 2px solid #333;
+	border-radius: 40px;
+
+	color: white;
+	font-size: 2vw;
+}
+
 .chosen {
 	display: none;
 }
+
 #sizePreview {
 	width: 100%;
 }
@@ -168,7 +193,8 @@ body{
 	color: white;
 	font-size: 3vw;
 }
-#baseModal div div a, #baseModal div div #sizePreview {
+#baseModal div div a, 
+#baseModal div div #sizePreview {
 	display: block;
 	height: 27%;
 	margin-bottom: 2%;
@@ -377,13 +403,15 @@ body{
 	height: 100%;
 }
 
-#settingsModal {
-	display:none;
+#settingsModal,
+#formSaveModal,
+#formImportModal {
+	/*display:none;*/
 	display: table-cell;
 	vertical-align: middle;
 }
 
-#settingsModal div {
+#settingsModal > div {
 	display: inline-block;
 	position: relative;
 	vertical-align: middle;
@@ -395,25 +423,58 @@ body{
 	background-color: #555;
 	border: 10px solid #333;
 	border-radius: 40px;
-
 }
 
+#formSaveModal > div,
+#formImportModal > div {
+	width: 40%;
+	padding-top: 40%;
+	margin: 1%;
+	display: inline-block;
+	position: relative;
+}
+
+#formSaveModal *,
+#formImportModal * {
+	width: 100%;
+}
+
+#formSaveModal form label,
+#formImportModal form label {
+	display: block;
+	color: white;
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 2vw;
+}
+
+#formSaveModal form input[type="text"],
+#formImportModal form input[type="text"] {
+	width: 70%;
+}
+
+#formSaveModal form input[type="submit"],
+#formImportModal form input[type="submit"] {
+	width: 20%;
+} 
+
 #settingsModal div a {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 
-		margin: auto auto;
+	margin: auto auto;
 
-		color: white;
-		font-family: Arial, "MS Trebuchet", sans-serif;
-		text-decoration: none;
-		text-transform: uppercase;
-		font-weight: bold;
-		font-size: 4vw;
-		line-height: 23vw;
+	color: white;
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 4vw;
+	line-height: 23vw;
 }
 
 /* Smaller devices orientation */

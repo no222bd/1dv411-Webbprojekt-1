@@ -41,8 +41,8 @@ Class Cube{
 		$base = floor($base);
 		$step = floor($step);
 		if(!is_null($base) && !is_null($step)){
-			$this->base = $base;
 			$this->step = $step;
+			$this->base = $base * $this->step;
 		}else{
 			Throw new \Exception();
 		}

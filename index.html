@@ -15,21 +15,29 @@
 			<!-- BASE -->
 			<div id="baseContainer">
 				<div id="baseModal">
-					<div>
+					<div class="baseModalInnerBox">
 						<a id="reset" class="innerBox" href=""></a>
-						<div id="confirmdeclinebuttons" class="innerBox">
-							<span>Remove blocks</span> <a id="confirm">Yes</a>
-							<a id="decline">No</a>
-						</div>
 					</div>
 					<div>
-						<div class="innerBox">
+						<div id="resize" class="innerBox">
 							<a class="sizeControl" href="#up">&#8679;</a>
 							<span id="sizePreview">20</span>
 							<a class="sizeControl" href="#down">&#8681;</a>
 						</div>
 					</div>
 				</div>
+				<div id="resetConfirmModal">
+					<div>
+						<div id="confirmdeclinebuttons" class="innerBox">
+							<p>Är det säkert att du vill ta bort alla blocken?</p>
+							<div>
+								<a id="confirm">Ja</a>
+								<a id="decline">Nej</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 			</div>
 			<!-- PERSPECTIVE -->
 			<div id="perspectiveContainer">
@@ -113,6 +121,28 @@
 					</div>
 					<div>
 						<a class="innerBox" href="#save">Spara</a>
+					</div>
+				</div>
+				<div id="formSaveModal">
+					<div>
+						<div id="saveModel" class="innerBox">
+							<form id="saveForm">
+								<label for="saveName">Välj byggnadens namn</label>
+								<input id="saveName" type="text"/>
+								<input id="saveSubmit" type="submit" value="Spara"/>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div id="formImportModal">
+					<div>
+						<div id="importModel" class="innerBox">
+							<form id="importForm">
+								<label for="importName">Ange byggnadens namn</label>
+								<input id="importName" type="text"/>
+								<input id="importSubmit" type="submit" value="Hämta"/>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
