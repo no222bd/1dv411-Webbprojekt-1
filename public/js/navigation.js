@@ -185,11 +185,15 @@ jQuery(document).ready(function($) {
 			case "#up":
 				if (currentSize < 20) {
 					currentSize = parseInt(currentSize) + 1;
+				} else {
+					return;
 				}
 				break;
 			case "#down":
 				if (currentSize > 2) {
 					currentSize = parseInt(currentSize) - 1;
+				} else {
+					return;
 				}
 				break;
 		};
