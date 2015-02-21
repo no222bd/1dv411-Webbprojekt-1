@@ -57,7 +57,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		stats.domElement.style.left = '0px';
 		stats.domElement.style.top = '0px';
 
-		UIevent = new CustomEvent("updateView");
+		UIevent = jQuery.Event("updateView") ;
 
 		step = 50;
 		objects = [];
