@@ -255,6 +255,15 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	};
 
 	/**
+	 * returns base size
+	 * @return {int} number of cubes on one side
+	 */
+	this.getBaseSize = function() {
+		var size = baseSize / (step/2);
+		return size;
+	};
+
+	/**
 	 * set material for cube
 	 * @param colorHex
 	 * @returns {boolean}

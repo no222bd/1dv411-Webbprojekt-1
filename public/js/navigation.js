@@ -179,7 +179,7 @@ jQuery(document).ready(function($) {
 	$(".sizeControl").click(function (event) {
 		event.preventDefault();
 		var href = $(this).attr("href");
-		var currentSize = $('#sizePreview').text();
+		var currentSize = cb.getBaseSize();
 
 		switch(href) {
 			case "#up":
