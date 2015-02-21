@@ -307,10 +307,12 @@ body{
 	height:100%;
 	width:100%;
 	position: absolute;
+	margin: 10px;
 	left:0;
 	border-radius: 5%;
 	overflow: hidden; 
 }
+
 #perspectiveModal .green {
 	display:block; margin:0 auto;
 }
@@ -480,12 +482,21 @@ body{
 /* Smaller devices orientation */
 @media (orientation: landscape) and (max-width:1200px) {
 	.red, .blue, .green , .top , .yellow {
-		border-width:5px;}
+		border-width:5px;
+	}
+
+	#colorsModal a {
+		margin: 0;
+	}
 }
 
 /* Portrait orientation */
 
 @media (orientation: portrait) {
+	#colorsModal a {
+	margin:0;
+}
+
  #menu {
   width: 100%;
   height: auto;
