@@ -28,9 +28,11 @@ jQuery(document).ready(function($) {
     
     $("#ThreeJScontainer").on("updateView", function() {
         var menuTargetId = $("#menu").data("target");
-        var target = $("#perspective");
-        var canvas = $("#" + menuTargetId).children()[0];
-        target.css("background-image", "url(" + canvas.toDataURL() + ")");
+		if(menuTargetId !== undefined) {
+			var target = $("#perspective");
+			var canvas = $("#" + menuTargetId).children()[0];
+			target.css("background-image", "url(" + canvas.toDataURL() + ")");
+		}
     });
 
 	// skicka GET till /api/{name} där name = modellens namn
