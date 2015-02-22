@@ -1,11 +1,32 @@
 html{
 	height: 100%;
 }
+
 body{
 	margin: 0;
 	height: 100%;
 	background: #E1F5FF;
-	overflow:hidden;
+	overflow: hidden;
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+	-khtml-user-select: none; /* Konqueror */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;
+}
+
+/* Use this class whenever body unselectable doesn't work */
+.unselectable {
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+	-khtml-user-select: none; /* Konqueror */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;
 }
 
 #ThreeJScontainer {
