@@ -7,7 +7,7 @@ body{
 	height: 100%;
 	background: #E1F5FF;
 	overflow: hidden;
-	-webkit-user-select: none; /* Chrome/Safari */        
+	-webkit-user-select: none; /* Chrome/Safari */
 	-moz-user-select: none; /* Firefox */
 	-ms-user-select: none; /* IE10+ */
 	-khtml-user-select: none; /* Konqueror */
@@ -19,7 +19,7 @@ body{
 
 /* Use this class whenever body unselectable doesn't work */
 .unselectable {
-	-webkit-user-select: none; /* Chrome/Safari */        
+	-webkit-user-select: none; /* Chrome/Safari */
 	-moz-user-select: none; /* Firefox */
 	-ms-user-select: none; /* IE10+ */
 	-khtml-user-select: none; /* Konqueror */
@@ -41,7 +41,7 @@ body{
  ---------------------------------------------------------------------- */
 
 .chosen {
-	border: 5px solid red;
+	opacity: 1.0 !important;
 }
 
 #menu {
@@ -71,11 +71,12 @@ body{
 	margin-top: 35%;
 	padding-top:45%;
 	float: left;
+	opacity: 0.6;
 }
 
 #cube, #erase, #base, #settings, #colors, #perspective {
 	background-image: url('../img/Ikoner.png');
-	background-size: 250%;	
+	background-size: 250%;
 }
 
 #cube {
@@ -214,7 +215,7 @@ body{
 	color: white;
 	font-size: 3vw;
 }
-#baseModal div div a, 
+#baseModal div div a,
 #baseModal div div #sizePreview {
 	display: block;
 	height: 27%;
@@ -330,12 +331,12 @@ body{
 	position: absolute;
 	left:0;
 	border-radius: 5%;
-	overflow: hidden; 
+	overflow: hidden;
 }
 #perspectiveModal .green {
 	display:block; margin:0 auto;
 }
-/* colors for the view-frames*/ 
+/* colors for the view-frames*/
 .red {
 	border:10px solid #E60012;
 }
@@ -362,7 +363,7 @@ body{
 .color.yellow {
 	background-color:#FFF100;
 }
-.color.lgreen 
+.color.lgreen
 {
 	background-color:#8FC31F;
 }
@@ -478,7 +479,7 @@ body{
 #formSaveModal form input[type="submit"],
 #formImportModal form input[type="submit"] {
 	width: 20%;
-} 
+}
 
 #settingsModal div a {
 	position: absolute;
@@ -536,7 +537,7 @@ body{
  #settingsModal div a {
   line-height: 38vw;
  }
- 
+
  /* perspectives */
  .red, .blue, .green , .top , .yellow {
   border-width:5px;
