@@ -183,14 +183,14 @@ jQuery(document).ready(function($) {
 
 		switch(href) {
 			case "#up":
-				if (currentSize < 20) {
+				if (currentSize < 10) {
 					currentSize = parseInt(currentSize) + 1;
 				} else {
 					return;
 				}
 				break;
 			case "#down":
-				if (currentSize > 2) {
+				if (currentSize > 1) {
 					currentSize = parseInt(currentSize) - 1;
 				} else {
 					return;

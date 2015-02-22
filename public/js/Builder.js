@@ -68,7 +68,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		mouseposition = new THREE.Vector2();
 		mouse = new THREE.Vector2();
 
-		baseSize = 500;
+		baseSize = 250;
 		//( step/2 ) * antal block i bredd
 		setBase();
 
@@ -232,7 +232,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	 * @returns {boolean}
 	 */
 	this.setBaseSize = function(size) {
-		if(!isNaN(size) && size >= 2 && size <= 20) {
+		if(!isNaN(size) && size >= 1 && size <= 10) {
 			baseSize = (step / 2) * size;
 			objects = [];
 			setBase();
@@ -720,7 +720,7 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 	 * Set size for camera.
 	 */
 	this.setSize = function() {
-		var viewSite = 1200;
+		var viewSite = 600;
 		var aspectRatio = JQueryElement.width() / JQueryElement.height();
 		renderer.setSize(JQueryElement.width(), JQueryElement.height());
 
