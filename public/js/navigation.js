@@ -103,6 +103,8 @@ jQuery(document).ready(function($) {
 
 			$('#modal').toggleClass('open');
 			$(href).toggleClass('open');
+			$(".modalOption").toggleClass('faded');
+			$(this).removeClass('faded');
 			openModal = href;
 
 			//Switches function to call depending on the id of the chosen menu link.
@@ -217,6 +219,7 @@ jQuery(document).ready(function($) {
 	function closeModal() {
 		$(openModal).removeClass('open');
 		$('#modal').removeClass('open');
+		$('.modalOption').removeClass('faded');
 
 		$("#resetConfirmModal").hide();
 		$("#baseModal").show();
