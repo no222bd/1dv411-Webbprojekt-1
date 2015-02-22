@@ -1,17 +1,18 @@
 jQuery(document).ready(function($) {
 	var perspectives = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
 	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives);
+	cb.renderPerspectives();
 	var openModal = null;
-	
+
 	$("#resetConfirmModal").hide();
 	$("#formSaveModal").hide();
 	$("#formOpenModal").hide();
-	
+
 	$("#confirm").click(function(){
 		cb.clearCubes();
 		closeModal();
 	});
-	
+
 	$("#decline").click(function(){
 		$("#resetConfirmModal").hide();
 		$("#baseModal").show();
@@ -19,31 +20,33 @@ jQuery(document).ready(function($) {
 	});
 
 	$(".perspective .canvasWrapper").on("click", function() {
-        var canvas = this.firstChild;
-        var target = $("#perspective");
-        target.css("background-image", "url(" + this.firstChild.toDataURL() + ")");
-        target.removeClass("top red yellow green blue").addClass("chosen-view " + $(this).parents("div").attr("class"));
-        $("#menu").data("target", $(this).attr("id"));
-    });
-    
-    $("#ThreeJScontainer").on("updateView", function() {
-        var menuTargetId = $("#menu").data("target");
+		var canvas = this.firstChild;
+		var target = $("#perspective");
+		target.css("background-image", "url(" + this.firstChild.toDataURL() + ")");
+		target.removeClass("top red yellow green blue").addClass("chosen-view " + $(this).parents("div").attr("class"));
+		$("#menu").data("target", $(this).attr("id"));
+	});
+
+	$('#topView').trigger('click');
+
+	$("#ThreeJScontainer").on("updateView", function() {
+		var menuTargetId = $("#menu").data("target");
 		if(menuTargetId !== undefined) {
 			var target = $("#perspective");
 			var canvas = $("#" + menuTargetId).children()[0];
 			target.css("background-image", "url(" + canvas.toDataURL() + ")");
 		}
-    });
+	});
 
 	// skicka GET till /api/{name} där name = modellens namn
 	// vid success får en json, värdet under key "data" skall skickas till modellen
 	// anropa cb.loadModel(JSON-strängen)
 	$("#importForm").submit(function(event) {
 		event.preventDefault();
-		
+
 		var name = $("#importName").val();
 		var requestUrl = "api/" + name;
-		
+
 		$.ajax({
 			type: "GET",
 			url: requestUrl,
@@ -59,16 +62,16 @@ jQuery(document).ready(function($) {
 			}
 		});
 	});
-	
+
 	// för att få ut json-strängen cb.saveModel() för att få ut en json-sträng
 	// skicka POST till /api med variblerna name="modellens namn" och model="json-strängen"
 	$("#saveForm").submit(function(event) {
 		event.preventDefault();
-		
+
 		var name = $("#saveName").val();
 		var requestUrl = "api";
 		var dataString = cb.saveModel();
-		
+
 		$.ajax({
 			type: "POST",
 			url: requestUrl,
@@ -97,7 +100,7 @@ jQuery(document).ready(function($) {
 			closeModal();
 
 			var id = $(this).attr("id");
-		
+
 			$('#modal').toggleClass('open');
 			$(href).toggleClass('open');
 			openModal = href;
@@ -123,11 +126,11 @@ jQuery(document).ready(function($) {
 
 	$(".buildOption").click(function (event) {
 		event.preventDefault();
-		
+
 		if ($(this).hasClass('chosen')) {
 			return;
 		}
-		
+
 		var href = $(this).attr("href");
 		var id = $(this).attr("id");
 
@@ -146,14 +149,14 @@ jQuery(document).ready(function($) {
 			default:
 		};
 	});
-	
+
 	/**
 	 * Add click event for buttons in settings modal
 	 */
 	$("#settingsModal").click(function (event) {
 		event.preventDefault();
 		var href = $(event.target).attr("href");
-		
+
 		switch(href) {
 			case "#save":
 				$("#settingsModal").hide();
@@ -165,7 +168,7 @@ jQuery(document).ready(function($) {
 				break;
 		};
 	});
-	
+
 	/**
 	 * Add click event handler for reset button (in modal #baseContainer)
 	 */
@@ -174,7 +177,7 @@ jQuery(document).ready(function($) {
 		$("#baseModal").hide();
 		$("#resetConfirmModal").show();
 	});
-	
+
 	/**
 	 * Add click event handler for sizeControl buttons (in modal #baseContainer)
 	 */
@@ -203,9 +206,9 @@ jQuery(document).ready(function($) {
 		$('#sizePreview').text(currentSize);
 		cb.setBaseSize(currentSize);
 	});
-	
+
 	/**
-	 * Sets a resize event handler. 
+	 * Sets a resize event handler.
 	 */
 	$(window).resize(function(event) {
 		cb.resize();
@@ -214,18 +217,18 @@ jQuery(document).ready(function($) {
 	function closeModal() {
 		$(openModal).removeClass('open');
 		$('#modal').removeClass('open');
-		
+
 		$("#resetConfirmModal").hide();
 		$("#baseModal").show();
-		
+
 		$("#settingsModal").show();
 		$("#formSaveModal").hide();
 		$("#saveName").val("");
-		
+
 		$("#settingsModal").show();
 		$("#formImportModal").hide();
 		$("#importName").val("");
-		
+
 		openModal = null;
 		cb.enableOrDisableOrbit(true);
 	}
