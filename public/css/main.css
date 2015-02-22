@@ -508,42 +508,42 @@ body{
 /* Portrait orientation */
 
 @media (orientation: portrait) {
-	#menu {
-		width: 100%;
-		height: auto;
-	}
+ #menu {
+  width: 100%;
+  height: auto;
+ }
 
-	#menu li {
-		float: left;
-		width: 12%;
-		margin-top: 12%;
-	}
+ #menu li {
+  float: left;
+  width: 12%;
+  margin-top: 12%;
+ }
 	#ThreeJScontainer {
-		width: 100%;
-	}
+  width: 100%;
+ }
 
-	/* Modals */
-	.modal {
-		border-left: none;
-		border-top: 2px solid rgba(0,0,0,0.75);
-		left: 0;
-		margin-top: 24%;
-	}
+ /* Modals */
+ .modal {
+  border-left: none;
+  border-top: 2px solid rgba(0,0,0,0.75);
+  left: 0;
+  margin-top: 24%;
+ }
 
-	#settingsContainer, #perspectiveContainer, #colorsContainer {
-		width: 100%;
-	}
+ #settingsContainer, #perspectiveContainer, #colorsContainer {
+  width: 100%;
+ }
 
-	#settingsModal div a {
-		line-height: 38vw;
-	}
+ #settingsModal div a {
+  line-height: 38vw;
+ }
 
-	/* perspectives */
-	.red, .blue, .green , .top , .yellow {
-		border-width:5px;
-	}
+ /* perspectives */
+ .red, .blue, .green , .top , .yellow {
+  border-width:5px;
+ }
 
-	#colors {
-		top: 50%;
-	}
+ #colors {
+  top: 50%;
+ }
 }
