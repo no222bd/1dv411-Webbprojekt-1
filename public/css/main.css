@@ -75,11 +75,11 @@ body{
 }
 
 #cube {
-	background-position: 93.75% 99.59%;
+	background-position: 95.221% 100%;
 	background-size: 200%;
 }
 #erase {
-	background-position: 95.221% 1.377%;
+	background-position: 95.221% 0%;
 	background-size: 200%;
 }
 #base {
@@ -96,7 +96,7 @@ body{
 }
 
 #cube.chosen {
-	background-position: 4.815% 79.917%;
+	background-position: 0 79.917%;
 	background-size: 200%;
 }
 #erase.chosen  {
