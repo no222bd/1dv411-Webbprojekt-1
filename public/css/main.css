@@ -234,7 +234,6 @@ body{
 	vertical-align: middle;
 	width: 25%;
 	padding-bottom:25%;
-	height: 0;
 	margin: 1%;
 	background-color: #555;
 	border-radius: 5%;
@@ -377,14 +376,7 @@ body{
 	width: 20%;
 }
 #settingsModal div a {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	margin: auto auto;
 	color: white;
-	font-family: Arial, "MS Trebuchet", sans-serif;
 	text-decoration: none;
 	text-transform: uppercase;
 	font-weight: bold;
