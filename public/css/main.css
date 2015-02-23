@@ -391,13 +391,15 @@ body{
 	}
 	#colorsModal a {
 		margin: 0;
+		border-width:5px;
 	}
 }
 
 /* Portrait orientation */
 @media (orientation: portrait) {
 	#colorsModal a {
-		margin:0;
+		margin: 0;
+		border-width: 5px;
 	}
 	#menu {
 		width: 100%;
