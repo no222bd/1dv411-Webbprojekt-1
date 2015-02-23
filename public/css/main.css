@@ -1,34 +1,17 @@
 html{
 	height: 100%;
 }
-
 body{
-	margin: 0;
 	height: 100%;
 	background: #E1F5FF;
 	overflow: hidden;
-	-webkit-user-select: none; /* Chrome/Safari */
-	-moz-user-select: none; /* Firefox */
-	-ms-user-select: none; /* IE10+ */
-	-khtml-user-select: none; /* Konqueror */
-
-	/* Rules below not implemented in browsers yet */
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
 	-o-user-select: none;
 	user-select: none;
 }
-
-/* Use this class whenever body unselectable doesn't work */
-.unselectable {
-	-webkit-user-select: none; /* Chrome/Safari */
-	-moz-user-select: none; /* Firefox */
-	-ms-user-select: none; /* IE10+ */
-	-khtml-user-select: none; /* Konqueror */
-
-	/* Rules below not implemented in browsers yet */
-	-o-user-select: none;
-	user-select: none;
-}
-
 #ThreeJScontainer {
 	position: relative;
 	width: 90%;
@@ -36,10 +19,22 @@ body{
 	height: 100%;
 }
 
+/* -- Helpers -- */
 
-/** -- Menu -- **
- ---------------------------------------------------------------------- */
+/* Use this class whenever body unselectable doesn't work */
+.unselectable {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+.clear {
+	clear: both;
+}
 
+/* -- Menu --  */
 #menu {
 	list-style-type: none;
 	margin: 0;
@@ -49,18 +44,12 @@ body{
 	height: 100%;
 	background: #C2E9F9;
 }
-
 #menu a {
 	display: block;
 	width: 100%;
 	padding-top: 100%;
 	position: relative;
 }
-
-.clear {
-	clear: both;
-}
-
 #menu .buildOption {
 	width: 45%;
 	height: 45%;
@@ -71,84 +60,64 @@ body{
 
 #cube, #erase, #base, #settings, #colors {
 	background-image: url('../img/Ikoner_nya.png');
-	background-size: 250%;
+	background-size: 200%;
 }
-
 #cube {
 	background-position: 95.221% 100%;
-	background-size: 200%;
 }
 #erase {
-	background-position: 95.221% 0%;
-	background-size: 200%;
+	background-position: 95.221% 0;
 }
 #base {
 	background-position: 0 20.346%;
-	background-size: 200%;
 }
 #settings {
 	background-position: 0 60.594%;
-	background-size: 200%;
 }
 #colors {
 	background-position: 0 39.734%;
-	background-size: 200%;
 }
-
 #cube.chosen {
 	background-position: 0 79.917%;
-	background-size: 200%;
 }
 #erase.chosen  {
 	background-position: 95.221% 79.041%;
-	background-size: 200%;
 }
-
 #base.faded  {
 	background-position: 101.3% 20.346%;
-	background-size: 200%;
 }
 #settings.faded  {
 	background-position: 100% 60.594%;
-	background-size: 200%;
 }
 #colors.faded  {
 	background-position: 100% 39.734%;
-	background-size: 200%;
 }
 
 #perspective.chosen-view {
 	width: 120px;
 	height: 120px;
 	padding-top: 0;
-	background-position: inherit;
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
 
-/** -- Counter -- **
- ---------------------------------------------------------------------- */
-
+/* -- Counter -- */
 .counter {
 	width: 150px;
 	height: 40px;
 	position: absolute;
-	z-index: 5;
 	top: 1em;
 	right: 1em;
 	font-weight: 900;
 	font-size: 1em;
-}
-
-.counter p {
-	margin: 0 0 2px 2px;
 	text-align: right;
 }
+.counter p {
+	margin: 0 0 2px 2px;
+}
 
-
-/** -- Modal -- **
- ---------------------------------------------------------------------- */
-.modal{
+/* -- Modal -- */
+.modal {
 	display: none;
 	position: absolute;
 	background: rgba(0,0,0,0.5);
@@ -157,110 +126,73 @@ body{
 	right: 0;
 	top: 0;
 	bottom: 0;
-	cursor:default;
 	z-index: 100;
 }
-
 .modal > div {
 	display: none;
 }
-
 .open {
 	display: block;
 }
-
 .modal .open{
 	display: table;
 }
-
-.hidden {
-	visibility: hidden;
-}
-
 #baseContainer {
 	text-align: center;
 	width: 90%;
 	margin: auto auto;
 	height: 100%;
 }
-
-#baseModal,
-#resetConfirmModal {
+#baseModal, #resetConfirmModal {
+	color: white;
+	font-family: Arial, "MS Trebuchet", sans-serif;
 	display: table-cell;
 	vertical-align: middle;
 }
-
-#baseModal > div,
-#resetConfirmModal > div  {
+#baseModal > div, #resetConfirmModal > div  {
 	width: 40%;
 	padding-top: 40%;
 	margin: 1%;
 	display: inline-block;
 	position: relative;
 }
-
 #confirmdeclinebuttons p {
-	color: white;
-	font-family: Arial, "MS Trebuchet", sans-serif;
-	text-decoration: none;
 	font-weight: bold;
 	font-size: 2vw;
 }
-
 #confirmdeclinebuttons div a {
 	display: block;
 	height: 27%;
 	margin-bottom: 2%;
-
 	background-color: #555;
 	border: 2px solid #333;
 	border-radius: 40px;
-
-	color: white;
 	font-size: 2vw;
 }
-
-.chosen {
-	display: none;
-}
-
-#sizePreview {
-	width: 100%;
-}
-#baseModal div div span {
-	color: white;
-	font-size: 3vw;
-}
-#baseModal div div a,
-#baseModal div div #sizePreview {
+#baseModal div div a, #baseModal div div #sizePreview {
 	display: block;
 	height: 27%;
+	width: 100%;
 	margin-bottom: 2%;
-
 	background-color: #555;
 	border: 2px solid #333;
 	border-radius: 40px;
-
-	color: white;
 	font-size: 6vw;
+	color: white;
 }
-
-#baseModal > div:first-child > a {
+#reset {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-
 	background-image: url('../img/Ikoner.png');
 	background-position: 0% 198%;
 	background-size: 220%;
-
 	background-color: #555;
 	border: 10px solid #333;
 	border-radius: 40px;
 }
-
 .innerBox {
 	position: absolute;
 	top: 0;
@@ -268,45 +200,16 @@ body{
 	right: 0;
 	bottom: 0;
 }
-
-#sizeWrapper {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-}
-
-#sizeWrapper a, #sizeWrapper #sizePreview {
-	display: block;
-
-	height: 27%;
-
-	background-color: #555;
-	border: 2px solid #333;
-	border-radius: 40px;
-
-	margin-bottom: 2%;
-
-	color: white;
-	font-family: Arial, "MS Trebuchet", sans-serif;
-	font-weight: bold;
-	text-decoration: none;
-	font-size: 6vw;
-}
-
 #colorsContainer {
 	text-align: center;
 	width: 65%;
 	margin: auto auto;
 	height: 100%;
 }
-
 #colorsModal {
 	display: table-cell;
 	vertical-align: middle;
 }
-
 #colorsModal a {
 	display:inline-block;
 	border: 10px solid #333;
@@ -315,19 +218,16 @@ body{
 	width: 14%;
 	padding-top: 14%;
 }
-
 #perspectiveContainer {
 	text-align: center;
 	width: 65%;
 	margin: auto auto;
 	height: 100%;
 }
-
 #perspectiveModal {
 	display: table-cell;
 	vertical-align: middle;
 }
-
 #perspectiveModal > div {
 	display: inline-block;
 	position: relative;
@@ -340,17 +240,14 @@ body{
 	border-radius: 5%;
 	background:#C2E9F9;
 }
-
 .canvasWrapper {
 	height:100%;
 	width:100%;
 	position: absolute;
-	margin: 10px;
 	left:0;
 	border-radius: 5%;
 	overflow: hidden;
 }
-
 #perspectiveModal .green {
 	display:block; margin:0 auto;
 }
@@ -434,53 +331,38 @@ body{
 	background-color:#FFF;
 }
 
-
 #settingsContainer {
 	width: 65%;
 	text-align: center;
-
 	margin: auto auto;
 	height: 100%;
 }
-
-#settingsModal,
-#formSaveModal,
-#formImportModal {
-	/*display:none;*/
+#settingsModal, #formSaveModal, #formImportModal {
 	display: table-cell;
 	vertical-align: middle;
 }
-
 #settingsModal > div {
 	display: inline-block;
 	position: relative;
 	vertical-align: middle;
-
 	width: 40%;
 	padding-top: 40%;
 	margin: 2%;
-
 	background-color: #555;
 	border: 10px solid #333;
 	border-radius: 40px;
 }
-
-#formSaveModal > div,
-#formImportModal > div {
+#formSaveModal > div, #formImportModal > div {
 	width: 40%;
 	padding-top: 40%;
 	margin: 1%;
 	display: inline-block;
 	position: relative;
 }
-
-#formSaveModal *,
-#formImportModal * {
+#formSaveModal *, #formImportModal * {
 	width: 100%;
 }
-
-#formSaveModal form label,
-#formImportModal form label {
+#formSaveModal form label, #formImportModal form label {
 	display: block;
 	color: white;
 	font-family: Arial, "MS Trebuchet", sans-serif;
@@ -488,26 +370,19 @@ body{
 	font-weight: bold;
 	font-size: 2vw;
 }
-
-#formSaveModal form input[type="text"],
-#formImportModal form input[type="text"] {
+#formSaveModal form input[type="text"], #formImportModal form input[type="text"] {
 	width: 70%;
 }
-
-#formSaveModal form input[type="submit"],
-#formImportModal form input[type="submit"] {
+#formSaveModal form input[type="submit"], #formImportModal form input[type="submit"] {
 	width: 20%;
 }
-
 #settingsModal div a {
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-
 	margin: auto auto;
-
 	color: white;
 	font-family: Arial, "MS Trebuchet", sans-serif;
 	text-decoration: none;
@@ -522,62 +397,51 @@ body{
 	.red, .blue, .green , .top , .yellow {
 		border-width:5px;
 	}
-
 	#colorsModal a {
 		margin: 0;
 	}
 }
 
 /* Portrait orientation */
-
 @media (orientation: portrait) {
 	#colorsModal a {
-	margin:0;
-}
-
- #menu {
-  width: 100%;
-  height: auto;
- }
-
-#menu .buildOption {
-	width: 100%;
-	height: 100%;
-	margin-top: 0;
-	padding-top:100%;
-}
-
- #menu li {
-  float: left;
-  width: 12%;
-  margin-top: 12%;
- }
+		margin:0;
+	}
+	#menu {
+		width: 100%;
+		height: auto;
+	}
+	#menu .buildOption {
+		width: 100%;
+		height: 100%;
+		margin-top: 0;
+		padding-top:100%;
+	}
+	#menu li {
+		float: left;
+		width: 12%;
+		margin-top: 12%;
+	}
 	#ThreeJScontainer {
-  width: 100%;
- }
-
- /* Modals */
- .modal {
-  border-left: none;
-  border-top: 2px solid rgba(0,0,0,0.75);
-  left: 0;
-  margin-top: 24%;
- }
-
- #settingsContainer, #perspectiveContainer, #colorsContainer {
-  width: 100%;
- }
-
- #settingsModal div a {
-  line-height: 38vw;
- }
-
- /* perspectives */
- .red, .blue, .green , .top , .yellow {
-  border-width:5px;
- }
-
- #colors {
-  top: 50%;
- }
+		width: 100%;
+	}
+	/* Modals */
+	.modal {
+		border-left: none;
+		border-top: 2px solid rgba(0,0,0,0.75);
+		left: 0;
+		margin-top: 24%;
+	}
+	#settingsContainer, #perspectiveContainer, #colorsContainer {
+		width: 100%;
+	}
+	#settingsModal div a {
+		line-height: 38vw;
+	}
+	.red, .blue, .green , .top , .yellow {
+		border-width:5px;
+	}
+	#colors {
+		top: 50%;
+	}
 }
