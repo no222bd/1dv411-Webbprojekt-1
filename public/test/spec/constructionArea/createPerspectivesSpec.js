@@ -36,7 +36,7 @@ describe("Builder.ConstructionArea", function () {
 				expect(builder._views[1]._renderer instanceof THREE.CanvasRenderer).toBeTruthy();
 				// camera
 				expect(builder._views[1]._camera instanceof THREE.OrthographicCamera).toBeTruthy();
-				expect(builder._views[1]._camera.position).toEqual(new THREE.Vector3(0, 500, -500));
+				expect(builder._views[1]._camera.position).toEqual(new THREE.Vector3(0, 250, -250));
 				// JQueryElement
 				// TODO: add tests för jqueryelement when dependency in builder.js is fixed
 				// scene
@@ -48,7 +48,7 @@ describe("Builder.ConstructionArea", function () {
 				expect(builder._views[2]._renderer instanceof THREE.CanvasRenderer).toBeTruthy();
 				// camera
 				expect(builder._views[2]._camera instanceof THREE.OrthographicCamera).toBeTruthy();
-				expect(builder._views[2]._camera.position).toEqual(new THREE.Vector3(500, 500, 0));
+				expect(builder._views[2]._camera.position).toEqual(new THREE.Vector3(250, 250, 0));
 				// JQueryElement
 				// TODO: add tests för jqueryelement when dependency in builder.js is fixed
 				// scene
@@ -60,7 +60,7 @@ describe("Builder.ConstructionArea", function () {
 				expect(builder._views[3]._renderer instanceof THREE.CanvasRenderer).toBeTruthy();
 				// camera
 				expect(builder._views[3]._camera instanceof THREE.OrthographicCamera).toBeTruthy();
-				expect(builder._views[3]._camera.position).toEqual(new THREE.Vector3(0, 500, 500));
+				expect(builder._views[3]._camera.position).toEqual(new THREE.Vector3(0, 250, 250));
 				// JQueryElement
 				// TODO: add tests för jqueryelement when dependency in builder.js is fixed
 				// scene
@@ -72,7 +72,7 @@ describe("Builder.ConstructionArea", function () {
 				expect(builder._views[4]._renderer instanceof THREE.CanvasRenderer).toBeTruthy();
 				// camera
 				expect(builder._views[4]._camera instanceof THREE.OrthographicCamera).toBeTruthy();
-				expect(builder._views[4]._camera.position).toEqual(new THREE.Vector3(-500, 500, 0));
+				expect(builder._views[4]._camera.position).toEqual(new THREE.Vector3(-250, 250, 0));
 				// JQueryElement
 				// scene
 				expect(builder._views[4]._scene).toEqual(builder._scene);

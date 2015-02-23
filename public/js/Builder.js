@@ -135,8 +135,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 			model = jsonString;
 		} else {
 			model = JSON.parse(jsonString);
-		}
-		model = JSON.parse(model.model);
+		}		
 
 		objects = [];
 		baseSize = model.baseSize * (step / 2);

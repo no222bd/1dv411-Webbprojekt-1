@@ -25,7 +25,7 @@ describe("Builder.ConstructionArea", function () {
 			builder._loadModel(json);
 			
 			// assert
-			expect(builder._baseSize).toBe(500);
+			expect(builder._baseSize).toBe(250);
 			
 			expect(builder._objects.length).toBe(2);
 			expect(builder._objects[0].geometry.parameters.width).toBe(builder._baseSize * 2);

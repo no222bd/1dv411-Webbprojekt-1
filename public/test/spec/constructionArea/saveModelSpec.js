@@ -21,7 +21,7 @@ describe("Builder.ConstructionArea", function () {
 			var parsedJSON = JSON.parse(json);
 			
 			// assert
-			expect(parsedJSON['baseSize']).toBe(20);
+			expect(parsedJSON['baseSize']).toBe(10);
 			expect(parsedJSON['cubes'][0].color).toBe("fed06f");
 			expect(parsedJSON['cubes'][0].x).toBe(-25);
 			expect(parsedJSON['cubes'][0].y).toBe(25);
