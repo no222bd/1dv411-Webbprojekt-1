@@ -84,13 +84,8 @@ Class Buildning{
 	public function setModel($model){
 		$errors = array();
 		$key = 'model';
-		/*
-		if(is_null(json_decode($model))) {
-			$model = \LZString::decompressFromBase64($model);
-		}
-		*/
 		if(strlen($model) >= 65) {
-			if($this->validateCubes($model) || true) {
+			if($this->validateCubes($model)) {
 				$this->removeError($key);
 				$this->model = \LZString::compressToBase64($model);
 				return true;

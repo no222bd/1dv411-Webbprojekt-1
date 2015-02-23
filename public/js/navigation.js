@@ -71,7 +71,7 @@ jQuery(document).ready(function($) {
 
 		var name = $("#saveName").val();
 		var requestUrl = "api";
-		var dataString = cb.saveModel();
+		var dataString = LZString.decompressFromBase64(cb.saveModel());
 
 		$.ajax({
 			type: "POST",
