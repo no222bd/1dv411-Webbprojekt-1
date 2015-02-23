@@ -40,10 +40,6 @@ body{
 /** -- Menu -- **
  ---------------------------------------------------------------------- */
 
-.chosen {
-	opacity: 1.0 !important;
-}
-
 #menu {
 	list-style-type: none;
 	margin: 0;
@@ -71,34 +67,54 @@ body{
 	margin-top: 35%;
 	padding-top:45%;
 	float: left;
-	opacity: 0.6;
 }
 
-#cube, #erase, #base, #settings, #colors, #perspective {
-	background-image: url('../img/Ikoner.png');
+#cube, #erase, #base, #settings, #colors {
+	background-image: url('../img/Ikoner_nya.png');
 	background-size: 250%;
 }
 
 #cube {
-	background-position: 4% 0;
+	background-position: 95.221% 100%;
+	background-size: 200%;
 }
 #erase {
-	background-position: 102% 0;
+	background-position: 95.221% 0%;
+	background-size: 200%;
 }
 #base {
-	background-position: 0% 198%;
-	background-size: 220%;
-}
-#perspective {
-	background-position: 3% 241%;
+	background-position: 0 20.346%;
+	background-size: 200%;
 }
 #settings {
-	background-position: 93% 50%;
-	background-size: 350%;
+	background-position: 0 60.594%;
+	background-size: 200%;
 }
 #colors {
-	background-position: 93% 96%;
-	background-size: 350%;
+	background-position: 0 39.734%;
+	background-size: 200%;
+}
+
+#cube.chosen {
+	background-position: 0 79.917%;
+	background-size: 200%;
+}
+#erase.chosen  {
+	background-position: 95.221% 79.041%;
+	background-size: 200%;
+}
+
+#base.faded  {
+	background-position: 101.3% 20.346%;
+	background-size: 200%;
+}
+#settings.faded  {
+	background-position: 100% 60.594%;
+	background-size: 200%;
+}
+#colors.faded  {
+	background-position: 100% 39.734%;
+	background-size: 200%;
 }
 
 #perspective.chosen-view {
