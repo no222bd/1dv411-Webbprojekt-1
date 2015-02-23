@@ -87,7 +87,7 @@ Class Buildning{
 		if(strlen($model) >= 65) {
 			if($this->validateCubes($model)) {
 				$this->removeError($key);
-				$this->model = $model;
+				$this->model = \LZString::compressToBase64($model);
 				return true;
 			}else{
 				$errors[] = 'All cubes are not in a correct position';

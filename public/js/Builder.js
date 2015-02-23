@@ -137,6 +137,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 			model = JSON.parse(jsonString);
 		}		
 
+		model = JSON.parse(LZString.decompressFromBase64(model.model));
+
 		objects = [];
 		baseSize = model.baseSize * (step / 2);
 
@@ -222,7 +224,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 			);
 		}
 
-		return JSON.stringify(model);
+		return LZString.compressToBase64(JSON.stringify(model));
 	};
 
 	/**
