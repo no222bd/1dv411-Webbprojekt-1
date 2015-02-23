@@ -19,7 +19,8 @@ jQuery(document).ready(function($) {
 		closeModal();
 	});
 
-	$(".perspective .canvasWrapper").on("click", function() {
+	$(".perspective .canvasWrapper").on("click", function(event) {
+		event.preventDefault();
 		var canvas = this.firstChild;
 		var target = $("#perspective");
 		target.css("background-image", "url(" + this.firstChild.toDataURL() + ")");
