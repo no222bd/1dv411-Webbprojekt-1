@@ -4,6 +4,8 @@ html{
 body{
 	height: 100%;
 	background: #E1F5FF;
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	color: white;
 	overflow: hidden;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -11,6 +13,10 @@ body{
 	-khtml-user-select: none;
 	-o-user-select: none;
 	user-select: none;
+}
+body a {
+	color: white;
+	text-decoration: none;
 }
 #ThreeJScontainer {
 	position: relative;
@@ -114,6 +120,7 @@ body{
 }
 .counter p {
 	margin: 0 0 2px 2px;
+	color:black;
 }
 
 /* -- Modal -- */
@@ -137,24 +144,50 @@ body{
 .modal .open{
 	display: table;
 }
-#baseContainer {
+.container {
 	text-align: center;
-	width: 90%;
+	width: 65%;
 	margin: auto auto;
 	height: 100%;
 }
-#baseModal, #resetConfirmModal {
-	color: white;
-	font-family: Arial, "MS Trebuchet", sans-serif;
+#baseModal, 
+#resetConfirmModal, 
+#colorsModal, 
+#settingsModal, 
+#formSaveModal, 
+#formImportModal,
+#perspectiveModal {
 	display: table-cell;
 	vertical-align: middle;
 }
-#baseModal > div, #resetConfirmModal > div  {
-	width: 40%;
-	padding-top: 40%;
-	margin: 1%;
+#baseModal > div, 
+#resetConfirmModal > div, 
+#colorsModal > div, 
+#settingsModal > div, 
+#formSaveModal > div, 
+#formImportModal > div,
+#perspectiveModal > div {
 	display: inline-block;
 	position: relative;
+	margin: 1%;
+	width: 40%;
+	padding-top: 40%;
+	vertical-align: middle;
+}
+#settingsModal > div {
+	vertical-align: none;
+	background-color: #555;
+	border: 10px solid #333;
+	border-radius: 40px;
+}
+#perspectiveModal > div {
+	padding-top: 0;
+	width: 25%;
+	padding-bottom:25%;
+	background-color: #555; 
+	border-radius: 5%; 
+	background:#C2E9F9; 
+
 }
 #confirmdeclinebuttons p {
 	font-weight: bold;
@@ -177,15 +210,12 @@ body{
 	background-color: #555;
 	border: 2px solid #333;
 	border-radius: 40px;
-	font-size: 6vw;
+	font-size: 4vw;
 	color: white;
+	vertical-align: middle;
 }
 #reset {
 	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
 	background-image: url('../img/Ikoner.png');
 	background-position: 0% 198%;
 	background-size: 220%;
@@ -200,16 +230,6 @@ body{
 	right: 0;
 	bottom: 0;
 }
-#colorsContainer {
-	text-align: center;
-	width: 65%;
-	margin: auto auto;
-	height: 100%;
-}
-#colorsModal {
-	display: table-cell;
-	vertical-align: middle;
-}
 #colorsModal a {
 	display:inline-block;
 	border: 10px solid #333;
@@ -217,27 +237,6 @@ body{
 	margin: 10px;
 	width: 14%;
 	padding-top: 14%;
-}
-#perspectiveContainer {
-	text-align: center;
-	width: 65%;
-	margin: auto auto;
-	height: 100%;
-}
-#perspectiveModal {
-	display: table-cell;
-	vertical-align: middle;
-}
-#perspectiveModal > div {
-	display: inline-block;
-	position: relative;
-	vertical-align: middle;
-	width: 25%;
-	padding-bottom:25%;
-	margin: 1%;
-	background-color: #555;
-	border-radius: 5%;
-	background:#C2E9F9;
 }
 .canvasWrapper {
 	height:100%;
@@ -248,7 +247,8 @@ body{
 	overflow: hidden;
 }
 #perspectiveModal .green {
-	display:block; margin:0 auto;
+	display:block; 
+	margin:0 auto;
 }
 /* colors for the view-frames*/
 .red {
@@ -265,6 +265,26 @@ body{
 }
 .top {
 	border:10px solid #000;
+}
+#formSaveModal *, #formImportModal * {
+	width: 100%;
+}
+#formSaveModal form label, #formImportModal form label {
+	display: block;
+	font-weight: bold;
+	font-size: 2vw;
+}
+#formSaveModal form input[type="text"], #formImportModal form input[type="text"] {
+	width: 70%;
+}
+#formSaveModal form input[type="submit"], #formImportModal form input[type="submit"] {
+	width: 20%;
+}
+#settingsModal div a {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 4vw;
+	line-height: 23vw;
 }
 
 /* Colors for colormodal options */
@@ -330,60 +350,6 @@ body{
 	background-color:#FFF;
 }
 
-#settingsContainer {
-	width: 65%;
-	text-align: center;
-	margin: auto auto;
-	height: 100%;
-}
-#settingsModal, #formSaveModal, #formImportModal {
-	display: table-cell;
-	vertical-align: middle;
-}
-#settingsModal > div {
-	display: inline-block;
-	position: relative;
-	vertical-align: middle;
-	width: 40%;
-	padding-top: 40%;
-	margin: 2%;
-	background-color: #555;
-	border: 10px solid #333;
-	border-radius: 40px;
-}
-#formSaveModal > div, #formImportModal > div {
-	width: 40%;
-	padding-top: 40%;
-	margin: 1%;
-	display: inline-block;
-	position: relative;
-}
-#formSaveModal *, #formImportModal * {
-	width: 100%;
-}
-#formSaveModal form label, #formImportModal form label {
-	display: block;
-	color: white;
-	font-family: Arial, "MS Trebuchet", sans-serif;
-	text-decoration: none;
-	font-weight: bold;
-	font-size: 2vw;
-}
-#formSaveModal form input[type="text"], #formImportModal form input[type="text"] {
-	width: 70%;
-}
-#formSaveModal form input[type="submit"], #formImportModal form input[type="submit"] {
-	width: 20%;
-}
-#settingsModal div a {
-	color: white;
-	text-decoration: none;
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 4vw;
-	line-height: 23vw;
-}
-
 /* Smaller devices orientation */
 @media (orientation: landscape) and (max-width:1200px) {
 	.red, .blue, .green , .top , .yellow {
@@ -426,7 +392,7 @@ body{
 		left: 0;
 		margin-top: 24%;
 	}
-	#settingsContainer, #perspectiveContainer, #colorsContainer {
+	.container {
 		width: 100%;
 	}
 	#settingsModal div a {
