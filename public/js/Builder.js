@@ -271,13 +271,10 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	this.setCubeMaterial = function(colorHex) {
 		var pattern = new RegExp("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
 		if(pattern.test(colorHex)) {
-			cubeMaterial = new THREE.MeshLambertMaterial({
+			cubeMaterial = new THREE.MeshBasicMaterial({
 				color: colorHex,
-				specular: 0x009900,
-				shininess: 30,
-				shading: THREE.FlatShading
+				ambient: colorHex
 			});
-			cubeMaterial.ambient = cubeMaterial.color;
 
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 			// TODO: Remove before deploying
@@ -427,21 +424,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	};
 
 	/**
-	 * Creating lights
-	 * @returns {Array}
-	 */
-	function createLights() {
-		var lights = [];
-		lights.push(new THREE.AmbientLight(0x606060));
-
-		var directionalLight = new THREE.DirectionalLight(0xffffff);
-		directionalLight.position.set(1, 0.75, 0.5).normalize();
-
-		lights.push(directionalLight);
-		return lights;
-	};
-
-	/**
 	 * Creating five views for model.
 	 */
 	function createPerspectives() {
@@ -502,10 +484,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		scene.add(basePlane);
 
 		createColorLines().forEach(function(element, index, array) {
-			scene.add(element);
-		});
-
-		createLights().forEach(function(element, index, array) {
 			scene.add(element);
 		});
 
@@ -681,7 +659,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	this._createCamera = createCamera;
 	this._setBase = setBase;
 	this._createColorLines = createColorLines;
-	this._createLights = createLights;
 	this._updateCounter = updateCounter;
 	this._render = render;
 	this._renderPerspectives = this.renderPerspectives;
