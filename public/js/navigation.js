@@ -116,14 +116,12 @@ jQuery(document).ready(function($) {
 			switch(id) {
 				case "perspective":
 					cb.renderPerspectives();
-					perspective();
 					break;
 				case "base":
 					break;
 				case "settings":
 					break;
 				case "colors":
-					colors();
 					break;
 				default:
 			};
@@ -244,24 +242,20 @@ jQuery(document).ready(function($) {
 	/**
 	 * Function for handling users choice of perspective.
 	 */
-	function perspective() {
-		$(".perspective").click(function (event) {
+	$(".perspective").click(function (event) {
 			event.preventDefault();
 			var perspective = $(this).attr("href");
 			cb.perspective(perspective);
 			closeModal();
 		});
-	}
 
 	/**
 	 * Function for handling users choice of color.
 	 */
-	function colors() {
-		$(".color").click(function (event) {
+	$(".color").click(function (event) {
 			event.preventDefault();
 			var colorHex = $(this).attr("href");
 			cb.setCubeMaterial(colorHex);
 			closeModal();
 		});
-	}
 });
