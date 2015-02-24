@@ -8,38 +8,38 @@ describe("Builder.ConstructionArea", function () {
 
 	describe("setBaseSize", function () {
 
-		it("should be 500 after init", function () {
+		it("should be 250 after init", function () {
 			// assert
-			expect(builder._baseSize).toBe(500);
+			expect(builder._baseSize).toBe(250);
 		});
 
-		it("should be 250", function () {
+		it("should be 200", function () {
 			// act
-			builder.setBaseSize(10);
+			builder.setBaseSize(8);
+			
+			// assert
+			expect(builder._baseSize).toBe(200);
+		});
+		
+		it("should still be 250 when trying to set 21", function () {
+			// act
+			builder.setBaseSize(11);
 			
 			// assert
 			expect(builder._baseSize).toBe(250);
 		});
 		
-		it("should still be 500 when trying to set 21", function () {
-			// act
-			builder.setBaseSize(21);
-			
-			// assert
-			expect(builder._baseSize).toBe(500);
-		});
-		
-		it("should still be 500 when trying to set NaN", function () {
+		it("should still be 250 when trying to set NaN", function () {
 			// act
 			var ret = builder.setBaseSize("Donald Duck");
 			
 			// assert
-			expect(builder._baseSize).toBe(500);
+			expect(builder._baseSize).toBe(250);
 		});
 		
 		it("should return true/false", function () {
 			// act
-			var ret1 = builder.setBaseSize("20");
+			var ret1 = builder.setBaseSize(8);
 			var ret2 = builder.setBaseSize("Donald Duck");
 			
 			// assert

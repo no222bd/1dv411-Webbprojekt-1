@@ -13,8 +13,8 @@ describe("Builder.View", function () {
 		view = new BUILDER.View(
 			new THREE.CanvasRenderer(), 
 			new THREE.OrthographicCamera(
-				aspectRatio * 1200 / 2, -aspectRatio * 1200 / 2, 
-				1200 / 2, -1200 / 2
+				aspectRatio * 600 / 2, -aspectRatio * 600 / 2, 
+				600 / 2, -600 / 2
 			),
 			JQueryElement,
 			builder._createScene()
@@ -36,10 +36,10 @@ describe("Builder.View", function () {
 			// assert
 			expect(view._renderer.setSize).toHaveBeenCalled();
 			
-			expect(view._camera.left).toBe(aspectRatio * 1200 / 2);
-			expect(view._camera.right).toBe(-aspectRatio * 1200 / 2);
-			expect(view._camera.top).toBe(1200 / 2);
-			expect(view._camera.bottom).toBe(-1200 / 2);
+			expect(view._camera.left).toBe(aspectRatio * 600 / 2);
+			expect(view._camera.right).toBe(-aspectRatio * 600 / 2);
+			expect(view._camera.top).toBe(600 / 2);
+			expect(view._camera.bottom).toBe(-600 / 2);
 		});
 
 	});

@@ -18,10 +18,9 @@ describe("Builder.ConstructionArea", function () {
 			
 			// act
 			var json = builder._saveModel();
-			var parsedJSON = JSON.parse(json);
-			
+			var parsedJSON = JSON.parse(LZString.decompressFromBase64(json));
 			// assert
-			expect(parsedJSON['baseSize']).toBe(20);
+			expect(parsedJSON['baseSize']).toBe(10);
 			expect(parsedJSON['cubes'][0].color).toBe("fed06f");
 			expect(parsedJSON['cubes'][0].x).toBe(-25);
 			expect(parsedJSON['cubes'][0].y).toBe(25);

@@ -4,6 +4,7 @@ describe("Builder.ConstructionArea", function () {
 	beforeEach(function () {
 		var arr = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
 		builder = new BUILDER.ConstructionArea($("<div style='height: 1000px; width: 1000px;'></div>"), arr);
+	});
 
 	describe("createRenderer", function () {
 
@@ -35,6 +36,5 @@ describe("Builder.ConstructionArea", function () {
 			// assert
 			expect(renderer instanceof THREE.CanvasRenderer).toBeTruthy();
 		});
-		
 	});
 });
