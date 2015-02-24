@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
 	//colorsArray holds all the colors that are awailable in the UI color selector
 	var colorsArray = [];
     $('#colorsModal a').each(function( index, link ) {
-    	if($(link).attr('href') != 'random'){
+    	if($(link).attr('href') != '#random'){
     		colorsArray.push($(link).attr('href'));	
     	}
     });
@@ -256,7 +256,7 @@ jQuery(document).ready(function($) {
 			var colorHex = $(this).attr("href");
 
 			//The hex will be "random" if the user selected the random color option
-			if(colorHex == "random"){
+			if(colorHex == "#random"){
 				colorHex = chooseRandomColorFromColors();
 			}
 
