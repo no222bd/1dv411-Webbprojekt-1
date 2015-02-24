@@ -22,7 +22,7 @@ describe("Builder.ConstructionArea", function () {
 			});
 			
 			// act
-			builder._loadModel(json);
+			builder._loadModel({model: json});
 			
 			// assert
 			expect(builder._baseSize).toBe(250);

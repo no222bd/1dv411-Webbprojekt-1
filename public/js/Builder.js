@@ -134,8 +134,9 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		if(typeof jsonString === "object"){
 			model = jsonString;
 		} else {
-			model = JSON.parse(LZString.decompressFromBase64(jsonString));
+			model = JSON.parse(jsonString);
 		}
+		model = JSON.parse(LZString.decompressFromBase64(model.model));
 
 		objects = [];
 		baseSize = model.baseSize * (step / 2);
