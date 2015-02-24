@@ -479,7 +479,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 
 		if (checkWebGL) {
 			renderer = Detector.webgl ? new THREE.WebGLRenderer({
-				antialias : true
+				antialias : true,
+				preserveDrawingBuffer: true
 			}) : new THREE.CanvasRenderer();
 		} else {
 			renderer = new THREE.CanvasRenderer();
