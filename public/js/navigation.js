@@ -253,7 +253,6 @@ jQuery(document).ready(function($) {
 	 * Function for handling users choice of color.
 	 */
 	$(".color").click(function (event) {
-			console.log(event);
 			event.preventDefault();
 			var colorHex = $(this).attr("href");
 			cb.setCubeMaterial(colorHex);
