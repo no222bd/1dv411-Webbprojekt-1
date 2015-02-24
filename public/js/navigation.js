@@ -239,7 +239,6 @@ jQuery(document).ready(function($) {
 		cb.enableOrDisableOrbit(true);
 	}
 	$(".counter").click(function(){
-		console.log(this);
 		$(this).toggleClass("hide");
 	});
 	/**
