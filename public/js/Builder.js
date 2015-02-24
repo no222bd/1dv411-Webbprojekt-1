@@ -273,7 +273,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		if(pattern.test(colorHex)) {
 			cubeMaterial = new THREE.MeshBasicMaterial({
 				color: colorHex,
-				ambient: colorHex
+				map: THREE.ImageUtils.loadTexture('public/img/textures/'+colorHex.toUpperCase().substring(1)+'.png')
 			});
 
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
