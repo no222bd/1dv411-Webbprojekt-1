@@ -7,7 +7,9 @@ jQuery(document).ready(function($) {
 	//colorsArray holds all the colors that are awailable in the UI color selector
 	var colorsArray = [];
     $('#colorsModal a').each(function( index, link ) {
-        colorsArray.push($(link).attr('href'));
+    	if($(link).attr('href') != 'random'){
+    		colorsArray.push($(link).attr('href'));	
+    	}
     });
 
 	$("#modal").click(function(event){
