@@ -72,6 +72,19 @@ class BuildingTest extends \App_TestCase {
 		$this->assertTrue(count($errors) == 1);
 	}
 
+	public function testErros(){
+		$value =  'test error';
+		$key = 'test';
+		$this->assertFalse($this->building->haveErrors());
+		$addErrors = $this->getPrivateMethod('\app\model\Building', 'addError');
+		$addErrors->invoke($this->building, $key, $value);
+		$errors = $this->building->getErrors();
+		$this->assertEquals($value, $errors[$key]);
+		$this->assertTrue($this->building->haveErrors());
 
+		$removeError = $this->getPrivateMethod('\app\model\Building', 'removeError');
+		$removeError->invoke($this->building, $key);
+		$this->assertFalse($this->building->haveErrors());
+	}
 
 }
