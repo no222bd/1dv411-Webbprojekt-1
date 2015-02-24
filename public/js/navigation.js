@@ -3,7 +3,11 @@ jQuery(document).ready(function($) {
 	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives);
 	cb.renderPerspectives();
 	var openModal = null;
-
+	$("#modal").click(function(event){
+		if(event.target.tagName == "DIV"){
+			closeModal();	
+		}
+	});
 	$("#resetConfirmModal").hide();
 	$("#formSaveModal").hide();
 	$("#formOpenModal").hide();
