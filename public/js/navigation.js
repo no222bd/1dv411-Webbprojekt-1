@@ -111,20 +111,7 @@ jQuery(document).ready(function($) {
 			$(".modalOption").toggleClass('faded');
 			$(this).removeClass('faded');
 			openModal = href;
-
-			//Switches function to call depending on the id of the chosen menu link.
-			switch(id) {
-				case "perspective":
-					cb.renderPerspectives();
-					break;
-				case "base":
-					break;
-				case "settings":
-					break;
-				case "colors":
-					break;
-				default:
-			};
+			
 			cb.enableOrDisableOrbit(false);
 		}
 	});
@@ -247,6 +234,7 @@ jQuery(document).ready(function($) {
 	$(".perspective").click(function (event) {
 			event.preventDefault();
 			var perspective = $(this).attr("href");
+			cb.renderPerspectives();
 			cb.perspective(perspective);
 			closeModal();
 		});
