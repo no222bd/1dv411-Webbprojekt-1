@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 class CubeController {
 
 	/**
-	 * @var model\Buildning
+	 * @var model\Building
 	 */
 	private $building;
 
@@ -20,7 +20,7 @@ class CubeController {
 	 *
 	 */
 	public function __construct() {
-		$this->building = new \app\model\Buildning();
+		$this->building = new \app\model\Building();
 	}
 
 	/**
