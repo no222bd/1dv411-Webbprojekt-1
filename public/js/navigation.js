@@ -3,6 +3,13 @@ jQuery(document).ready(function($) {
 	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives);
 	cb.renderPerspectives();
 	var openModal = null;
+	//colorsArray holds all the colors that are awailable in the UI color selector
+	var colorsArray = [];
+    $('#colorsModal a').each(function( index, link ) {
+    	if($(link).attr('href') != '#random'){
+    		colorsArray.push($(link).attr('href'));	
+    	}
+    });
 	$("#modal").click(function(event){
 		if(event.target.tagName == "DIV"){
 			closeModal();	
@@ -255,7 +262,19 @@ jQuery(document).ready(function($) {
 	$(".color").click(function (event) {
 			event.preventDefault();
 			var colorHex = $(this).attr("href");
+			//The hex will be "random" if the user selected the random color option
+			if(colorHex == "#random"){
+				colorHex = chooseRandomColorFromColors();
+			}
 			cb.setCubeMaterial(colorHex);
 			closeModal();
 		});
+	//Fantastic name, isn't it?
+	/*
+	*	Chooses a color from the colorsArray that holds all available colors
+	*/
+	function chooseRandomColorFromColors(){
+	    return colorsArray[Math.floor((Math.random() * (colorsArray.length-1)))];
+ 	}		 	
+}
 });
