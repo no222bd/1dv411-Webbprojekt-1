@@ -29,7 +29,7 @@ class CubeController {
 	 */
 	public function index(Application $app) {
 		$data = $this->building->getAll();
-		if(!is_null($data)) {
+		if(!empty($data)) {
 			return $app->json(array('data' => $data), 200);
 		}
 		return $app->json(array('message' => 'There are no buildning saved for the moment.'), 204);
