@@ -31,13 +31,15 @@ describe("Builder.ConstructionArea", function () {
 			return count;
 		}
 
-		it("should have an Ambient Light", function () {
+		// Remove if Jorryt liked the changed lights.
+		
+		/*it("should have an Ambient Light", function () {
 			expect(typeExists(children, 'AmbientLight')).toBeTruthy();
-		});
+		});*/
 
-		it("should have an Directional Light", function () {
+		/*it("should have an Directional Light", function () {
 			expect(typeExists(children, 'DirectionalLight')).toBeTruthy();
-		});
+		});*/
 
 		it("should have lines", function () {
 			expect(numOfType(children, 'Line')).toEqual(5);
