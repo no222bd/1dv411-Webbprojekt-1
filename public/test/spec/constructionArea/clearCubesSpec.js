@@ -35,7 +35,7 @@ describe("Builder.ConstructionArea", function () {
 			builder._clearCubes();
 
 			// assert
-			expect(builder._scene.children.length).toBe(8);
+			expect(builder._scene.children.length).toBe(6);
 		});
 		
 	});
