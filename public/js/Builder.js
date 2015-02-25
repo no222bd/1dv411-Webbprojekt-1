@@ -272,7 +272,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		var pattern = new RegExp("^#([A-Fa-f0-9]{6})$");
 		if(pattern.test(colorHex)) {
 			cubeMaterial = new THREE.MeshBasicMaterial({
-				color: colorHex,
 				map: THREE.ImageUtils.loadTexture('public/img/textures/'+colorHex.toUpperCase().substring(1)+'.png')
 			});
 
