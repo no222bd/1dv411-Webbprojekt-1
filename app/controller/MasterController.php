@@ -21,7 +21,7 @@ class MasterController{
 		\Dotenv::load('./');
 		$this->route();
 		$this->config();
-		$this->createFilters();
+		//$this->createFilters();
 		if(!isset($this->app['session.test'])) {
 			$this->app->run();
 		}
