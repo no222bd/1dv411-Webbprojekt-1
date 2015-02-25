@@ -16,4 +16,14 @@
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./app/model/</directory>
+            <directory suffix=".php">./app/controller/</directory>
+            <exclude>
+                <file>./app/model/LZString.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>

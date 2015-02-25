@@ -74,11 +74,18 @@ class BuildingTest extends \App_TestCase {
 		$errors = $this->building->getErrors();
 		$this->assertTrue(count($errors) == 1);
 
-		$this->building->setName($name+$name+$name);
+		$this->building->setName($name.$name.$name);
 
 		$NameBuilding = $this->getPrivateProperty('\app\model\Building', 'name');
 		$NameBuilding = $NameBuilding->getValue($this->building);
 		$this->assertEquals($name, $NameBuilding);
+
+		$errors = $this->building->getErrors();
+		$this->assertTrue(count($errors) == 1);
+
+		$this->testSaveToFile();
+
+		$this->building->setName($name);
 
 		$errors = $this->building->getErrors();
 		$this->assertTrue(count($errors) == 1);
