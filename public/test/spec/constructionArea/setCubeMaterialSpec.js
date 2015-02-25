@@ -9,13 +9,12 @@ describe("Builder.ConstructionArea", function () {
 	describe("setCubeMaterial", function () {
 
 		it("should have color of FED06F after init", function () {
-			expect(builder._cubeMaterial.ambient.getHexString()).toBe('fed06f');
+			expect(builder._cubeMaterial.map.sourceFile.match(/FED06F/g).length > 0).toBeTruthy();
 		});
 
 		it("should have new color of E60012", function () {
 			builder._setCubeMaterial('#E60012');
-			expect(builder._cubeMaterial.color.getHexString()).toBe('e60012');
-			expect(builder._cubeMaterial.ambient.getHexString()).toBe('e60012');
+			expect(builder._cubeMaterial.map.sourceFile.match(/E60012/g).length > 0).toBeTruthy();
 		});
 
 		it("should only accept hex value with an #", function(){
