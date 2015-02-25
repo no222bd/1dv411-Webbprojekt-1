@@ -262,6 +262,5 @@ jQuery(document).ready(function($) {
 	*/
 	function chooseRandomColorFromColors(){
 	    return colorsArray[Math.floor((Math.random() * (colorsArray.length-1)))];
- 	}		 	
-}
+ 	}	
 });
