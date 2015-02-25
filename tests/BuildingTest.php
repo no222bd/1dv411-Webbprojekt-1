@@ -73,7 +73,7 @@ class BuildingTest extends \App_TestCase {
 		$this->building->setName('');
 		$errors = $this->building->getErrors();
 		$this->assertTrue(count($errors) == 1);
-
+		
 		$this->building->setName($name.$name.$name);
 
 		$NameBuilding = $this->getPrivateProperty('\app\model\Building', 'name');
