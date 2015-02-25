@@ -158,8 +158,11 @@ Class Building{
 	 */
 	public function save(){
 		$array = $this->getAll();
-		$array[$this->name] = array('model' => $this->model, 'date' => $this->date->format($this->dateFormat));
-		return $this->checkDate($array);
+		if($this->setModel($this->model) && $this->setName($this->name)) {
+			$array[$this->name] = array('model' => $this->model, 'date' => $this->date->format($this->dateFormat));
+			return $this->checkDate($array);
+		}
+		return false;
 	}
 
 	/**
