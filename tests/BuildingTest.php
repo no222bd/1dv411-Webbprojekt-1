@@ -4,17 +4,29 @@ use \app\model;
 class BuildingTest extends \App_TestCase {
 
 	protected $building;
+	protected $jsonBuilding;
+	protected $storage;
 
 	protected function setUp(){
 		$this->building = New model\Building();
+		$this->storage = './tests/db.json';
 		$storage = $this->getPrivateProperty('\app\model\Building', 'storage');
-		$storage->setValue($this->building, './tests/db.json');
+		$storage->setValue($this->building, $this->storage);
+		$this->jsonBuilding = array(
+			'step' => 25,
+			'baseSize' => 20,
+			'cubes' => array(
+				array('color' => 'e60012', 'x' => -325, 'y' => 25, 'z' => -275)
+			)
+		);
 	}
 
 	protected function tearDown(){
 		$storage = $this->getPrivateProperty('\app\model\Building', 'storage');
 		$storage = $storage->getValue($this->building);
-		unset($storage);
+		if(file_exists($storage)) {
+			unlink($storage);
+		}
 	}
 
 	public function testConstruct(){
@@ -85,6 +97,76 @@ class BuildingTest extends \App_TestCase {
 		$removeError = $this->getPrivateMethod('\app\model\Building', 'removeError');
 		$removeError->invoke($this->building, $key);
 		$this->assertFalse($this->building->haveErrors());
+	}
+
+	public function testSetModel(){
+		$jsonBuilding = $this->jsonBuilding;
+		$this->assertTrue($this->building->setModel(json_encode($this->jsonBuilding)));
+
+		$modelBuilding = $this->getPrivateProperty('\app\model\Building', 'model');
+		$modelBuilding = $modelBuilding->getValue($this->building);
+		$this->assertNull(json_decode($modelBuilding));
+
+		$jsonBuilding['baseSize'] = 1;
+		$this->assertFalse($this->building->setModel(json_encode($jsonBuilding)));
+		$matchError = preg_match('/position/', $this->building->getErrors()['model'][0]);
+		$this->assertTrue($matchError > 0);
+
+		$this->assertFalse($this->building->setModel(json_encode('')));
+		$matchError = preg_match('/characters/', $this->building->getErrors()['model'][0]);
+		$this->assertTrue($matchError > 0);
+	}
+
+	public function testSaveToFile(){
+		$dateFormat = $this->getPrivateProperty('\app\model\Building', 'dateFormat');
+		$dateFormat = $dateFormat->getValue($this->building);
+
+		$saveToFile = $this->getPrivateMethod('\app\model\Building', 'saveToFile');
+		$this->assertFalse($saveToFile->invoke($this->building, array()));
+
+		$building = array('test' => array('model' => $this->jsonBuilding, 'date' => Date($dateFormat)));
+		$this->assertTrue($saveToFile->invoke($this->building, $building));
+
+		$storage = json_decode(@file_get_contents($this->storage), true);
+		$this->assertEquals($building, $storage);
+	}
+
+	public function testGetAll(){
+		$this->assertTrue(is_array($this->building->getAll()));
+		$this->testSaveToFile();
+		$this->assertTrue(count($this->building->getAll()) > 0);
+	}
+
+	public function testGet(){
+		$this->assertFalse($this->building->get(''));
+		$this->testSaveToFile();
+		$this->assertTrue(is_array($this->building->get('test')));
+	}
+
+	public function testModelExists(){
+		$modelExists = $this->getPrivateMethod('\app\model\Building', 'modelExists');
+		$this->assertFalse($modelExists->invoke($this->building, ''));
+		$this->testSaveToFile();
+		$this->assertTrue($modelExists->invoke($this->building, 'test'));
+	}
+
+	public function testSave(){
+		$this->assertFalse($this->building->save());
+		$this->building->setModel(json_encode($this->jsonBuilding));
+		$this->building->setName('test');
+		$this->assertTrue($this->building->save());
+	}
+
+	public function testCheckDate(){
+		$this->building->setModel(json_encode($this->jsonBuilding));
+		$this->building->setName('test');
+		$this->building->save();
+
+		$checkDate = $this->getPrivateMethod('\app\model\Building', 'checkDate');
+		$this->assertTrue($checkDate->invoke($this->building, $this->building->getAll()));
+
+		$building = array('test' => array('model' => $this->jsonBuilding, 'date' => '2015-01-24'));
+		$this->assertFalse($checkDate->invoke($this->building, $building));
 	}
 
 }
