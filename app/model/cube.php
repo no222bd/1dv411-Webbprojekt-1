@@ -69,7 +69,9 @@ Class Cube{
 	 * @return bool
 	 */
 	private function validateColor($color){
-		if(preg_match("([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})", $color)){
+		$matches = array();
+		preg_match("([A-Fa-f0-9]{6})", $color, $matches);
+		if(count($matches) > 0){
 			return true;
 		}
 		return false;
