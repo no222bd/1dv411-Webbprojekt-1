@@ -1,0 +1,12 @@
+# Adding content type for .manifest
+AddType text/cache-manifest .manifest
+
+<IfModule mod_expires.c>
+  ExpiresActive on
+ 
+  # Default cache time is 10 years
+  ExpiresDefault                          "access plus 10 years"
+ 
+  # .manifest should not be cached
+  ExpiresByType text/cache-manifest       "access plus 0 seconds"  
+</IfModule>
