@@ -5,4 +5,4 @@ function dd($dumpValue){
 }
 
 require 'vendor/autoload.php';
-new \app\controller\MasterController();
+new \app\controller\MasterController(new \Silex\Application());

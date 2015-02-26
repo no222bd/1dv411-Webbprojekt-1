@@ -38,11 +38,9 @@ Class Cube{
 	 * @throws \Exception
 	 */
 	public function __construct($base, $step){
-		$base = floor($base);
-		$step = floor($step);
 		if(!is_null($base) && !is_null($step)){
-			$this->step = $step;
-			$this->base = $base * $this->step;
+			$this->step = floor($step);
+			$this->base = floor($base) * $this->step;
 		}else{
 			Throw new \Exception();
 		}
@@ -71,7 +69,9 @@ Class Cube{
 	 * @return bool
 	 */
 	private function validateColor($color){
-		if(preg_match("([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})", $color)){
+		$matches = array();
+		preg_match("([A-Fa-f0-9]{6})", $color, $matches);
+		if(count($matches) > 0){
 			return true;
 		}
 		return false;
