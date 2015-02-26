@@ -158,9 +158,9 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		scene = createScene();
 
 		for(var i = 0, cubes = model.cubes.length; i < cubes; i++) {
-			material = new THREE.MeshBasicMaterial({specular: 0x009900, shininess: 30, shading: THREE.FlatShading});	//Dependency
-			material.color.setHex('0x' + model.cubes[i].color);
-			material.ambient = material.color;
+			material = new THREE.MeshBasicMaterial({
+				map: THREE.ImageUtils.loadTexture('public/img/textures/'+model.cubes[i].color.toUpperCase()+'.png')
+			});
 
 			voxel = new THREE.Mesh(cubeGeo, material);
 			voxel.position.x = model.cubes[i].x;

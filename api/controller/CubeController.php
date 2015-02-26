@@ -1,7 +1,7 @@
 <?php
-namespace app\controller;
+namespace api\controller;
 
-use app\model;
+use api\model;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 class CubeController {
 
 	/**
-	 * @var model\Buildning
+	 * @var model\Building
 	 */
 	private $building;
 
@@ -20,7 +20,7 @@ class CubeController {
 	 *
 	 */
 	public function __construct() {
-		$this->building = new \app\model\Buildning();
+		$this->building = new \api\model\Building();
 	}
 
 	/**
@@ -29,7 +29,7 @@ class CubeController {
 	 */
 	public function index(Application $app) {
 		$data = $this->building->getAll();
-		if(!is_null($data)) {
+		if(!empty($data)) {
 			return $app->json(array('data' => $data), 200);
 		}
 		return $app->json(array('message' => 'There are no buildning saved for the moment.'), 204);

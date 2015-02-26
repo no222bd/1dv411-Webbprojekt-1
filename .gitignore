@@ -3,4 +3,5 @@
 /vendor
 composer.lock
 testfil.txt
-.env
+/tests/coverage
+/api/.htaccess
