@@ -18,7 +18,7 @@ class ControllerTest extends WebTestCase {
 		copy("./api/test_ db.json", "./api/db.json");
 		$app = new Application();
 		$app['session.test'] = true;
-		new \app\controller\MasterController($app);
+		new \api\controller\MasterController($app);
 		$this->subfolder = 'webbprojekt1';
 		return $this->app = $app;
 	}
@@ -62,6 +62,6 @@ class ControllerTest extends WebTestCase {
 	}
 
 	public function testMasterControllerConstruct(){
-		$this->assertTrue(count(new \app\controller\MasterController(new Application())) > 0);
+		$this->assertTrue(count(new \api\controller\MasterController(new Application())) > 0);
 	}
 }

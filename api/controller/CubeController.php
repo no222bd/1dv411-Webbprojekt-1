@@ -1,7 +1,7 @@
 <?php
-namespace app\controller;
+namespace api\controller;
 
-use app\model;
+use api\model;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -20,7 +20,7 @@ class CubeController {
 	 *
 	 */
 	public function __construct() {
-		$this->building = new \app\model\Building();
+		$this->building = new \api\model\Building();
 	}
 
 	/**
