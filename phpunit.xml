@@ -9,11 +9,21 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="index.php"
+         bootstrap="tests/bootstrap.php"
         >
     <testsuites>
         <testsuite name="App Suite">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./app/model/</directory>
+            <directory suffix=".php">./app/controller/</directory>
+            <exclude>
+                <file>./app/model/LZString.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>

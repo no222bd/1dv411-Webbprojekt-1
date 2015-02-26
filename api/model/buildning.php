@@ -5,7 +5,7 @@ namespace app\model;
  * Class Buildning
  * @package app\model
  */
-Class Buildning{
+Class Building{
 	/**
 	 * @var
 	 */
@@ -28,12 +28,18 @@ Class Buildning{
 	private $dateFormat;
 
 	/**
+	 * @var string
+	 */
+	private $storage;
+
+	/**
 	 *
 	 */
 	public function __construct(){
 		$this->dateFormat = 'Y-m-d';
 		$this->setDate(Date($this->dateFormat));
 		$this->errors = array();
+		$this->storage = './db.json';
 	}
 
 	/**
@@ -152,8 +158,11 @@ Class Buildning{
 	 */
 	public function save(){
 		$array = $this->getAll();
-		$array[$this->name] = array('model' => $this->model, 'date' => $this->date->format($this->dateFormat));
-		return $this->checkDate($array);
+		if(!is_null($this->model) && !is_null($this->name)) {
+			$array[$this->name] = array('model' => $this->model, 'date' => $this->date->format($this->dateFormat));
+			return $this->checkDate($array);
+		}
+		return false;
 	}
 
 	/**
@@ -162,7 +171,7 @@ Class Buildning{
 	 */
 	private function saveToFile($array){
 		if(count($array) > 0) {
-			if(@file_put_contents('./db.json', json_encode($array)) !== false) {
+			if(@file_put_contents($this->storage, json_encode($array)) !== false) {
 				return true;
 			}
 		}
@@ -173,7 +182,7 @@ Class Buildning{
 	 * @return mixed
 	 */
 	public function getAll(){
-		$all = json_decode(@file_get_contents('./db.json'),true);
+		$all = json_decode(@file_get_contents($this->storage),true);
 		if(is_array($all)){
 			return $all;
 		}
