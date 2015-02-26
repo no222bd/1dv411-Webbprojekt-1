@@ -158,7 +158,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 		scene = createScene();
 
 		for(var i = 0, cubes = model.cubes.length; i < cubes; i++) {
-			material = new THREE.MeshLambertMaterial({specular: 0x009900, shininess: 30, shading: THREE.FlatShading});	//Dependency
+			material = new THREE.MeshBasicMaterial({specular: 0x009900, shininess: 30, shading: THREE.FlatShading});	//Dependency
 			material.color.setHex('0x' + model.cubes[i].color);
 			material.ambient = material.color;
 
@@ -282,14 +282,15 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	 * @returns {boolean}
 	 */
 	this.setCubeMaterial = function(colorHex) {
+		console.log(colorHex);
 		var pattern = new RegExp("^#([A-Fa-f0-9]{6})$");
 		if(pattern.test(colorHex)) {
-			cubeMaterial = new THREE.MeshLambertMaterial({
+			cubeMaterial = new THREE.MeshBasicMaterial({
 				//Either take it from the hash, but we can't know if it's there yet
 				//Or just load the texture right here, if it's missing
 				map: textures[colorHex.toUpperCase().substring(1)] || THREE.ImageUtils.loadTexture('public/img/textures/'+colorHex.toUpperCase().substring(1)+'.png')
 			});
-
+			console.log(cubeMaterial);
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 			// TODO: Remove before deploying
 
