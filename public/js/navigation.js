@@ -1,16 +1,17 @@
 jQuery(document).ready(function($) {
 	var perspectives = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
-	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives);
-	cb.renderPerspectives();
-	var openModal = null;
-	var chosenColor;
-	//colorsArray holds all the colors that are awailable in the UI color selector
 	var colorsArray = [];
     $('#colorsModal a').each(function( index, link ) {
     	if($(link).attr('href') != '#random'){
     		colorsArray.push($(link).attr('href'));	
     	}
     });
+	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives, colorsArray);
+	cb.renderPerspectives();
+	var openModal = null;
+	var chosenColor;
+	//colorsArray holds all the colors that are awailable in the UI color selector
+	
     $("#ThreeJScontainer").on("mousedown", function(){
     	if(chosenColor == "#random"){
     		cb.setCubeMaterial(chooseRandomColorFromColors());	
