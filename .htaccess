@@ -1,4 +1,0 @@
-DirectoryIndex index.html index.php
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^api index.php [QSA,L]

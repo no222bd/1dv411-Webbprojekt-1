@@ -17,7 +17,6 @@ class MasterController{
 	 *
 	 */
 	public function __construct(){
-		\Dotenv::load('./');
 		$this->app = new Application();
 		$this->route();
 		$this->config();
@@ -26,10 +25,9 @@ class MasterController{
 	}
 
 	private function route(){
-		$subfolderOnLocalhost = $_ENV['BASE_DIR'];
-		$this->app->get($subfolderOnLocalhost.'/api', '\app\controller\CubeController::index');
-		$this->app->get($subfolderOnLocalhost.'/api/{id}', '\app\controller\CubeController::show');
-		$this->app->post($subfolderOnLocalhost.'/api', '\app\controller\CubeController::create');
+		$this->app->get('/', '\app\controller\CubeController::index');
+		$this->app->get('/{id}', '\app\controller\CubeController::show');
+		$this->app->post('/create', '\app\controller\CubeController::create');
 	}
 
 	/**

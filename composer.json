@@ -1,12 +1,11 @@
 {
   "require": {
-    "silex/silex": "~1.2",
-    "vlucas/phpdotenv": "1.*"
+    "silex/silex": "~1.2"
   },
   "autoload": {
     "classmap": [
-      "app/controller",
-      "app/model"
+      "api/controller",
+      "api/model"
     ]
   }
 }

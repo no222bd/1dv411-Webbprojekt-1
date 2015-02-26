@@ -162,7 +162,7 @@ Class Buildning{
 	 */
 	private function saveToFile($array){
 		if(count($array) > 0) {
-			if(@file_put_contents('./app/db.json', json_encode($array)) !== false) {
+			if(@file_put_contents('./db.json', json_encode($array)) !== false) {
 				return true;
 			}
 		}
@@ -173,7 +173,7 @@ Class Buildning{
 	 * @return mixed
 	 */
 	public function getAll(){
-		$all = json_decode(@file_get_contents('./app/db.json'),true);
+		$all = json_decode(@file_get_contents('./db.json'),true);
 		if(is_array($all)){
 			return $all;
 		}
