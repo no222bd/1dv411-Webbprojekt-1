@@ -284,7 +284,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	this.setCubeMaterial = function(colorHex) {
 		var pattern = new RegExp("^#([A-Fa-f0-9]{6})$");
 		if(pattern.test(colorHex)) {
-			cubeMaterial = new THREE.MeshBasicMaterial({
+			cubeMaterial = new THREE.MeshLambertMaterial({
 				//Either take it from the hash, but we can't know if it's there yet
 				//Or just load the texture right here, if it's missing
 				map: textures[colorHex.toUpperCase().substring(1)] || THREE.ImageUtils.loadTexture('public/img/textures/'+colorHex.toUpperCase().substring(1)+'.png')
