@@ -33,7 +33,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		UIevent,
 	    buildMode = true,
 		self = this,
-		colors = colorChoices,
+		colors = colorChoices || [],
 		textures = {};
 
 
