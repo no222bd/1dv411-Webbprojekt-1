@@ -32,7 +32,16 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	    stats,
 		UIevent,
 	    buildMode = true,
-		self = this;
+		self = this,
+		colors = ["000000", "0068B7", "009944", 
+					"009E96", "00A0E9", "601986", 
+					"7F3E09", "8FC31F", "BE0081", 
+					"C6FFF0", "E27BFE", "E5004F", 
+					"E60012", "F39800", "F7C6EB", 
+					"FBE430", "FDE3C5", "FED06F", 
+					"FFFFFF"],
+		textures = {};
+
 
 	/**
 	 * Init is a constructor for this object.
@@ -46,7 +55,11 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 				throw new Error();
 			}
 		}
-
+		colors.forEach(function(colorValue){
+			THREE.ImageUtils.loadTexture('public/img/textures/'+colorValue+'.png', undefined, function(texture){
+				textures[colorValue] = texture;
+			});
+		});
 		self.setCubeMaterial('#FED06F');
 
 		stats = new Stats();
@@ -269,12 +282,15 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer) {
 	 * @returns {boolean}
 	 */
 	this.setCubeMaterial = function(colorHex) {
+		console.log(colorHex);
 		var pattern = new RegExp("^#([A-Fa-f0-9]{6})$");
 		if(pattern.test(colorHex)) {
 			cubeMaterial = new THREE.MeshBasicMaterial({
-				map: THREE.ImageUtils.loadTexture('public/img/textures/'+colorHex.toUpperCase().substring(1)+'.png')
+				//Either take it from the hash, but we can't know if it's there yet
+				//Or just load the texture right here, if it's missing
+				map: textures[colorHex.toUpperCase().substring(1)] || THREE.ImageUtils.loadTexture('public/img/textures/'+colorHex.toUpperCase().substring(1)+'.png')
 			});
-
+			console.log(cubeMaterial);
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 			// TODO: Remove before deploying
 

@@ -3,11 +3,17 @@ jQuery(document).ready(function($) {
 	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives);
 	cb.renderPerspectives();
 	var openModal = null;
+	var chosenColor;
 	//colorsArray holds all the colors that are awailable in the UI color selector
 	var colorsArray = [];
     $('#colorsModal a').each(function( index, link ) {
     	if($(link).attr('href') != '#random'){
     		colorsArray.push($(link).attr('href'));	
+    	}
+    });
+    $("#ThreeJScontainer").on("mousedown", function(){
+    	if(chosenColor == "#random"){
+    		cb.setCubeMaterial(chooseRandomColorFromColors());	
     	}
     });
 	$("#modal").click(function(event){
@@ -249,6 +255,7 @@ jQuery(document).ready(function($) {
 	$(".color").click(function (event) {
 			event.preventDefault();
 			var colorHex = $(this).attr("href");
+			chosenColor = colorHex;
 			//The hex will be "random" if the user selected the random color option
 			if(colorHex == "#random"){
 				colorHex = chooseRandomColorFromColors();
