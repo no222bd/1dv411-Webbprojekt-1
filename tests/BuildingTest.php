@@ -176,4 +176,16 @@ class BuildingTest extends \App_TestCase {
 		$this->assertFalse($checkDate->invoke($this->building, $building));
 	}
 
+	public function testGetCurretBuilding(){
+		$dateFormat = $this->getPrivateProperty('\api\model\Building', 'dateFormat');
+		$dateFormat = $dateFormat->getValue($this->building);
+
+		$name = 'test';
+		$this->building->setModel(json_encode($this->jsonBuilding));
+		$this->building->setName($name);
+		$this->building->save();
+		$building = \LZString::compressToBase64(json_encode($this->jsonBuilding));
+		$this->assertEquals(json_encode(array($name => array('model' => $building, 'date' => Date($dateFormat)))),$this->building->getCurretBuilding());
+	}
+
 }

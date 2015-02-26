@@ -60,7 +60,7 @@ class CubeController {
 			return $app->json(array('message' => 'Your model could not be created.', 'errors' => $this->building->getErrors()), 400);
 		}
 		if($this->building->save()) {
-			return $app->json(array('message' => 'Your model have been created.'), 201);
+			return $app->json(array('message' => 'Your model have been created.', 'data' => $this->building->getCurretBuilding()), 201);
 		} else {
 			return $app->json(array('message' => 'Your model could not be created.'), 503);
 		}

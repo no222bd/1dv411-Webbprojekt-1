@@ -228,4 +228,8 @@ Class Building{
 		}
 		return false;
 	}
+
+	public function getCurretBuilding(){
+		return json_encode(array( $this->name => array('model' => $this->model, 'date' => $this->date->format($this->dateFormat))));
+	}
 }
