@@ -19,10 +19,10 @@
 
     <filter>
         <whitelist>
-            <directory suffix=".php">./app/model/</directory>
-            <directory suffix=".php">./app/controller/</directory>
+            <directory suffix=".php">./api/model/</directory>
+            <directory suffix=".php">./api/controller/</directory>
             <exclude>
-                <file>./app/model/LZString.php</file>
+                <file>./api/model/LZString.php</file>
             </exclude>
         </whitelist>
     </filter>
