@@ -1,5 +1,5 @@
 <?php
-namespace app\controller;
+namespace api\controller;
 use \Silex\Application;
 
 /**

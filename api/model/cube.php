@@ -1,5 +1,5 @@
 <?php
-namespace app\model;
+namespace api\model;
 
 /**
  * Class Cube

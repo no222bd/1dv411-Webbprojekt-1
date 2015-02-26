@@ -1,5 +1,5 @@
 <?php
-use \app\model;
+use \api\model;
 
 class CubeTest extends \App_TestCase {
 
@@ -18,7 +18,7 @@ class CubeTest extends \App_TestCase {
 	public function testValidatePosition(){
 		$cube = New model\Cube(10, 25);
 		try {
-			$validatePosition = $this->getPrivateMethod('\app\model\Cube', 'validatePosition');
+			$validatePosition = $this->getPrivateMethod('\api\model\Cube', 'validatePosition');
 			$validatePosition->invoke($cube, 0, 'h');
 		} catch(\Exception $e){
 			return;
@@ -29,7 +29,7 @@ class CubeTest extends \App_TestCase {
 
 	public function testValidateColor(){
 		$cube = New model\Cube(10, 25);
-		$validatePosition = $this->getPrivateMethod('\app\model\Cube', 'validateColor');
+		$validatePosition = $this->getPrivateMethod('\api\model\Cube', 'validateColor');
 		$this->assertFalse($validatePosition->invoke($cube, '1234'));
 	}
 

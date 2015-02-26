@@ -1,5 +1,5 @@
 <?php
-use \app\model;
+use \api\model;
 
 class BuildingTest extends \App_TestCase {
 
@@ -10,7 +10,7 @@ class BuildingTest extends \App_TestCase {
 	protected function setUp(){
 		$this->building = New model\Building();
 		$this->storage = './tests/db.json';
-		$storage = $this->getPrivateProperty('\app\model\Building', 'storage');
+		$storage = $this->getPrivateProperty('\api\model\Building', 'storage');
 		$storage->setValue($this->building, $this->storage);
 		$this->jsonBuilding = array(
 			'step' => 25,
@@ -22,7 +22,7 @@ class BuildingTest extends \App_TestCase {
 	}
 
 	protected function tearDown(){
-		$storage = $this->getPrivateProperty('\app\model\Building', 'storage');
+		$storage = $this->getPrivateProperty('\api\model\Building', 'storage');
 		$storage = $storage->getValue($this->building);
 		if(file_exists($storage)) {
 			unlink($storage);
@@ -32,14 +32,14 @@ class BuildingTest extends \App_TestCase {
 	public function testConstruct(){
 		$building = New model\Building();
 
-		$errors = $this->getPrivateProperty('\app\model\Building', 'errors');
+		$errors = $this->getPrivateProperty('\api\model\Building', 'errors');
 		$this->assertTrue(is_array($errors->getValue($building)));
 
-		$storage = $this->getPrivateProperty('\app\model\Building', 'storage');
+		$storage = $this->getPrivateProperty('\api\model\Building', 'storage');
 		$this->assertFalse(is_null($storage->getValue($building)));
 
-		$dateFormat = $this->getPrivateProperty('\app\model\Building', 'dateFormat');
-		$dateBuilding = $this->getPrivateProperty('\app\model\Building', 'date');
+		$dateFormat = $this->getPrivateProperty('\api\model\Building', 'dateFormat');
+		$dateBuilding = $this->getPrivateProperty('\api\model\Building', 'date');
 
 		$dateFormat = $dateFormat->getValue($building);
 		$this->assertEquals('Y-m-d',$dateFormat);
@@ -52,10 +52,10 @@ class BuildingTest extends \App_TestCase {
 	}
 
 	public function testDate(){
-		$dateFormat = $this->getPrivateProperty('\app\model\Building', 'dateFormat');
+		$dateFormat = $this->getPrivateProperty('\api\model\Building', 'dateFormat');
 		$dateFormat = $dateFormat->getValue($this->building);
 
-		$setDate = $this->getPrivateMethod('\app\model\Building', 'setDate');
+		$setDate = $this->getPrivateMethod('\api\model\Building', 'setDate');
 		$this->assertTrue($setDate->invoke($this->building, Date($dateFormat)));
 		$this->assertFalse($setDate->invoke($this->building, 'hej'));
 		$this->assertTrue(count($this->building->getErrors()) === 1);
@@ -65,7 +65,7 @@ class BuildingTest extends \App_TestCase {
 		$name = 'test';
 
 		$this->building->setName($name);
-		$NameBuilding = $this->getPrivateProperty('\app\model\Building', 'name');
+		$NameBuilding = $this->getPrivateProperty('\api\model\Building', 'name');
 		$NameBuilding = $NameBuilding->getValue($this->building);
 
 		$this->assertEquals($name, $NameBuilding);
@@ -76,7 +76,7 @@ class BuildingTest extends \App_TestCase {
 		
 		$this->building->setName($name.$name.$name);
 
-		$NameBuilding = $this->getPrivateProperty('\app\model\Building', 'name');
+		$NameBuilding = $this->getPrivateProperty('\api\model\Building', 'name');
 		$NameBuilding = $NameBuilding->getValue($this->building);
 		$this->assertEquals($name, $NameBuilding);
 
@@ -95,13 +95,13 @@ class BuildingTest extends \App_TestCase {
 		$value =  'test error';
 		$key = 'test';
 		$this->assertFalse($this->building->haveErrors());
-		$addErrors = $this->getPrivateMethod('\app\model\Building', 'addError');
+		$addErrors = $this->getPrivateMethod('\api\model\Building', 'addError');
 		$addErrors->invoke($this->building, $key, $value);
 		$errors = $this->building->getErrors();
 		$this->assertEquals($value, $errors[$key]);
 		$this->assertTrue($this->building->haveErrors());
 
-		$removeError = $this->getPrivateMethod('\app\model\Building', 'removeError');
+		$removeError = $this->getPrivateMethod('\api\model\Building', 'removeError');
 		$removeError->invoke($this->building, $key);
 		$this->assertFalse($this->building->haveErrors());
 	}
@@ -110,7 +110,7 @@ class BuildingTest extends \App_TestCase {
 		$jsonBuilding = $this->jsonBuilding;
 		$this->assertTrue($this->building->setModel(json_encode($this->jsonBuilding)));
 
-		$modelBuilding = $this->getPrivateProperty('\app\model\Building', 'model');
+		$modelBuilding = $this->getPrivateProperty('\api\model\Building', 'model');
 		$modelBuilding = $modelBuilding->getValue($this->building);
 		$this->assertNull(json_decode($modelBuilding));
 
@@ -125,10 +125,10 @@ class BuildingTest extends \App_TestCase {
 	}
 
 	public function testSaveToFile(){
-		$dateFormat = $this->getPrivateProperty('\app\model\Building', 'dateFormat');
+		$dateFormat = $this->getPrivateProperty('\api\model\Building', 'dateFormat');
 		$dateFormat = $dateFormat->getValue($this->building);
 
-		$saveToFile = $this->getPrivateMethod('\app\model\Building', 'saveToFile');
+		$saveToFile = $this->getPrivateMethod('\api\model\Building', 'saveToFile');
 		$this->assertFalse($saveToFile->invoke($this->building, array()));
 
 		$building = array('test' => array('model' => $this->jsonBuilding, 'date' => Date($dateFormat)));
@@ -151,7 +151,7 @@ class BuildingTest extends \App_TestCase {
 	}
 
 	public function testModelExists(){
-		$modelExists = $this->getPrivateMethod('\app\model\Building', 'modelExists');
+		$modelExists = $this->getPrivateMethod('\api\model\Building', 'modelExists');
 		$this->assertFalse($modelExists->invoke($this->building, ''));
 		$this->testSaveToFile();
 		$this->assertTrue($modelExists->invoke($this->building, 'test'));
@@ -169,7 +169,7 @@ class BuildingTest extends \App_TestCase {
 		$this->building->setName('test');
 		$this->building->save();
 
-		$checkDate = $this->getPrivateMethod('\app\model\Building', 'checkDate');
+		$checkDate = $this->getPrivateMethod('\api\model\Building', 'checkDate');
 		$this->assertTrue($checkDate->invoke($this->building, $this->building->getAll()));
 
 		$building = array('test' => array('model' => $this->jsonBuilding, 'date' => '2015-01-24'));
