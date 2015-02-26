@@ -27,9 +27,9 @@ class MasterController{
 	}
 
 	private function route(){
-		$this->app->get('/', '\app\controller\CubeController::index');
-		$this->app->get('/{id}', '\app\controller\CubeController::show');
-		$this->app->post('/create', '\app\controller\CubeController::create');
+		$this->app->get('/', '\api\controller\CubeController::index');
+		$this->app->get('/{id}', '\api\controller\CubeController::show');
+		$this->app->post('/create', '\api\controller\CubeController::create');
 	}
 
 	/**
