@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
 	var perspectives = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
-	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives);
+	window.cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives);
 	cb.renderPerspectives();
 	var openModal = null;
 	var chosenColor;
