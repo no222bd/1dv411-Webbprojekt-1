@@ -117,10 +117,10 @@ body a {
 	font-weight: 900;
 	font-size: 1em;
 	text-align: right;
+	color:black;
 }
 .counter p {
 	margin: 0 0 2px 2px;
-	color:black;
 }
 
 /* -- Modal -- */
@@ -348,6 +348,13 @@ body a {
 }
 .color.white {
 	background-color:#FFF;
+}
+.counter.hide{
+	color: transparent;
+}
+.counter.hide p {
+	border-radius: 4px;
+	border: 1px solid #cdcdcd;
 }
 
 /* Smaller devices orientation */

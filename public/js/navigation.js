@@ -238,7 +238,9 @@ jQuery(document).ready(function($) {
 		openModal = null;
 		cb.enableOrDisableOrbit(true);
 	}
-
+	$(".counter").click(function(){
+		$(this).toggleClass("hide");
+	});
 	/**
 	 * Function for handling users choice of perspective.
 	 */
