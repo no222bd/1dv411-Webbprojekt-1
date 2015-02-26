@@ -1,7 +1,6 @@
 {
   "require": {
-    "silex/silex": "~1.2",
-    "vlucas/phpdotenv": "1.*"
+    "silex/silex": "~1.2"
   },
   "require-dev": {
     "symfony/browser-kit"   : "~2.3",
@@ -10,8 +9,8 @@
   },
   "autoload": {
     "classmap": [
-      "app/controller",
-      "app/model"
+      "api/controller",
+      "api/model"
     ]
   }
 }

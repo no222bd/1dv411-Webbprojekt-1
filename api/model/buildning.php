@@ -39,7 +39,7 @@ Class Building{
 		$this->dateFormat = 'Y-m-d';
 		$this->setDate(Date($this->dateFormat));
 		$this->errors = array();
-		$this->storage = './app/db.json';
+		$this->storage = './db.json';
 	}
 
 	/**
