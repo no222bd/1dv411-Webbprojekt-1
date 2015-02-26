@@ -34,7 +34,11 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	    buildMode = true,
 		self = this,
 		colors = colorChoices || [],
-		textures = {};
+		textures = {},
+		texturePath = {
+			extention: '.png',
+			path: 'public/img/textures/'
+		};
 
 
 	/**
@@ -50,7 +54,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			}
 		}
 		colors.forEach(function(colorValue){
-			THREE.ImageUtils.loadTexture('public/img/textures/'+colorValue.toUpperCase().substring(1)+'.png', undefined, function(texture){
+			THREE.ImageUtils.loadTexture(texturePath.path+colorValue.toUpperCase().substring(1)+texturePath.extention, undefined, function(texture){
 				textures[colorValue] = texture;
 			});
 		});
@@ -150,10 +154,9 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 		setBase();
 		scene = createScene();
-
 		for(var i = 0, cubes = model.cubes.length; i < cubes; i++) {
 			material = new THREE.MeshBasicMaterial({
-				map: THREE.ImageUtils.loadTexture('public/img/textures/'+model.cubes[i].color.toUpperCase()+'.png')
+				map:textures[model.cubes[i].color.toUpperCase()] || THREE.ImageUtils.loadTexture(texturePath.path+model.cubes[i].color.toUpperCase()+texturePath.extention)
 			});
 
 			voxel = new THREE.Mesh(cubeGeo, material);
@@ -219,10 +222,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			step: (step/2)
 		};
 
+
 		for(var i = 1; i < objects.length; i++) {
+			var color = objects[i].material.map.sourceFile
+			color = color.replace("public/img/textures/", "");
+			color = color.replace(".png", "");
 			model.cubes.push(
 				new Cube(
-					objects[i].material.color.getHexString(),
+					color,
 					objects[i].position.x,
 					objects[i].position.y,
 					objects[i].position.z
@@ -276,13 +283,12 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 * @returns {boolean}
 	 */
 	this.setCubeMaterial = function(colorHex) {
-		console.log(colorHex);
 		var pattern = new RegExp("^#([A-Fa-f0-9]{6})$");
 		if(pattern.test(colorHex)) {
 			cubeMaterial = new THREE.MeshBasicMaterial({
 				//Either take it from the hash, but we can't know if it's there yet
 				//Or just load the texture right here, if it's missing
-				map: textures[colorHex.toUpperCase().substring(1)] || THREE.ImageUtils.loadTexture('public/img/textures/'+colorHex.toUpperCase().substring(1)+'.png')
+				map: textures[colorHex.toUpperCase().substring(1)] || THREE.ImageUtils.loadTexture(texturePath.path+colorHex.toUpperCase().substring(1)+texturePath.extention)
 			});
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 			// TODO: Remove before deploying
@@ -656,6 +662,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	this._views = views;
 	this._self = self;
 	this._buildMode = buildMode;
+	this._texturePath = texturePath;
 
 	// functions
 	this._init = init;
