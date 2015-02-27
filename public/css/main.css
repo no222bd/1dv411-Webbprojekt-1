@@ -176,6 +176,8 @@ body a {
 	background-color: #555;
 	border: 10px solid #333;
 	border-radius: 40px;
+	width: 36%;
+	padding-top: 36%;
 }
 #perspectiveModal > div {
 	padding-top: 0;
