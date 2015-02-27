@@ -153,9 +153,7 @@ body a {
 #baseModal, 
 #resetConfirmModal, 
 #colorsModal, 
-#settingsModal, 
-#formSaveModal, 
-#formImportModal,
+#settingsModal,
 #perspectiveModal {
 	display: table-cell;
 	vertical-align: middle;
@@ -163,9 +161,8 @@ body a {
 #baseModal > div, 
 #resetConfirmModal > div, 
 #colorsModal > div, 
-#settingsModal > div, 
-#formSaveModal > div, 
-#formImportModal > div,
+#settingsModal > div,
+#FormModal > form,
 #perspectiveModal > div {
 	display: inline-block;
 	position: relative;
@@ -266,18 +263,10 @@ body a {
 .top {
 	border:10px solid #000;
 }
-#formSaveModal *, #formImportModal * {
-	width: 100%;
-}
-#formSaveModal form label, #formImportModal form label {
-	display: block;
-	font-weight: bold;
-	font-size: 2vw;
-}
-#formSaveModal form input[type="text"], #formImportModal form input[type="text"] {
+#FormModal form input[type="text"]{
 	width: 70%;
 }
-#formSaveModal form input[type="submit"], #formImportModal form input[type="submit"] {
+#FormModal form input[type="submit"]{
 	width: 20%;
 }
 #settingsModal div a {
