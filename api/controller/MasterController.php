@@ -20,7 +20,6 @@ class MasterController{
 		$this->app = $app;
 		$this->route();
 		$this->config();
-		//$this->createFilters();
 		if(!isset($this->app['session.test'])) {
 			$this->app->run();
 		}
@@ -37,17 +36,5 @@ class MasterController{
 	 */
 	private function config(){
 		$this->app['debug'] = true;
-	}
-
-	/**
-	 *
-	 */
-	private function createFilters(){
-		$this->app->before(function() {
-			// Source: http://davidwalsh.name/detect-ajax
-			if(!(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') && !isset($this->app['session.test'])) {
-				return $this->app->json(array('message' => 'Please send a ajax request to fetch content'), 401);
-			}
-		});
 	}
 }

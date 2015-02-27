@@ -201,9 +201,9 @@ body a {
 }
 #baseModal div div a, #baseModal div div #sizePreview, #preview {
 	display: block;
-	height: 27%;
+	height: 25%;
 	width: 100%;
-	margin-bottom: 2%;
+	margin-bottom: 8%;
 	background-color: #555;
 	border: 2px solid #333;
 	border-radius: 40px;
