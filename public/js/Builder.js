@@ -29,7 +29,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	    basePlane,
 	    controls,
 	    views,
-	    stats,
 		UIevent,
 	    buildMode = true,
 		self = this,
@@ -60,14 +59,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		});
 		self.setCubeMaterial('#FED06F');
 
-		stats = new Stats();
-		stats.setMode(1); // 0: fps, 1: ms
-
-		// align top-left
-		stats.domElement.style.position = 'absolute';
-		stats.domElement.style.left = '0px';
-		stats.domElement.style.top = '0px';
-
 		UIevent = jQuery.Event("updateView") ;
 
 		step = 50;
@@ -93,7 +84,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		jQueryContainer.append(renderer.domElement);
 		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
 		jQueryContainer.on( "mouseup", onDocumentMouseTouch);
-		document.body.appendChild( stats.domElement );
 
 		createPerspectives();
 		render();
@@ -524,8 +514,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	/**
 	 * Called to render object
 	 */
-	function render() {
-		stats.update();
+	function render() {;
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 	};
