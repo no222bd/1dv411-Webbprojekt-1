@@ -404,4 +404,7 @@ body a {
 	#colors {
 		top: 50%;
 	}
+	#baseModal div div a, #baseModal div div #sizePreview, #preview {
+		font-size: 8vw;
+	}
 }
