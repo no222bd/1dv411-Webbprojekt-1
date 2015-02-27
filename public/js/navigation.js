@@ -1,16 +1,8 @@
 jQuery(document).ready(function($) {
 	var perspectives = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView"), $("#preview")];
-	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives);
-	cb.renderPerspectives();
-
-	//Represents the current open modal.
-	var openModal = null;
 
 	//colorsArray holds all the colors that are awailable in the UI color selector
 	var colorsArray = [];
-
-	var chosenColor;
-
 	/**
 	 * Populates colorsArray with colors from colorsModal.
 	 */
@@ -19,6 +11,17 @@ jQuery(document).ready(function($) {
 			colorsArray.push($(link).attr('href'));
 		}
 	});
+
+	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives, colorsArray);
+	cb.renderPerspectives();
+
+	//Represents the current open modal.
+	var openModal = null;
+
+	
+
+	var chosenColor;
+
 
 	/**	
 	 * Generates random cube colors per cube placed.
