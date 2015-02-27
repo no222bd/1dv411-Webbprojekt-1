@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-	var perspectives = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
+	var perspectives = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView"), $("#preview")];
 	var colorsArray = [];
     $('#colorsModal a').each(function( index, link ) {
     	if($(link).attr('href') != '#random'){
@@ -126,6 +126,7 @@ jQuery(document).ready(function($) {
 			$(this).removeClass('faded');
 			openModal = href;
 			cb.enableOrDisableOrbit(false);
+			cb.renderPerspectives();
 		}
 	});
 
@@ -210,6 +211,7 @@ jQuery(document).ready(function($) {
 
 		$('#sizePreview').text(currentSize);
 		cb.setBaseSize(currentSize);
+		cb.renderPerspectives();
 	});
 
 	/**

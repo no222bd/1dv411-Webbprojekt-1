@@ -202,26 +202,26 @@ body a {
 	border-radius: 40px;
 	font-size: 2vw;
 }
-#baseModal div div a, #baseModal div div #sizePreview {
+#baseModal div div a, #baseModal div div #sizePreview, #preview {
 	display: block;
-	height: 27%;
+	height: 25%;
 	width: 100%;
-	margin-bottom: 2%;
+	margin-bottom: 8%;
 	background-color: #555;
 	border: 2px solid #333;
 	border-radius: 40px;
 	font-size: 4vw;
 	color: white;
 	vertical-align: middle;
+	padding-top: 2%;
 }
-#reset {
-	position: absolute;
-	background-image: url('../img/Ikoner.png');
-	background-position: 0% 198%;
-	background-size: 220%;
-	background-color: #555;
-	border: 10px solid #333;
+#preview {
+	height: 100%;
+	width: 100%;
+	position: relative;
 	border-radius: 40px;
+	overflow: hidden;
+	padding-top: 0;
 }
 .innerBox {
 	position: absolute;
@@ -403,5 +403,8 @@ body a {
 	}
 	#colors {
 		top: 50%;
+	}
+	#baseModal div div a, #baseModal div div #sizePreview, #preview {
+		font-size: 8vw;
 	}
 }
