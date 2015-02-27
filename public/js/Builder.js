@@ -384,7 +384,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 */
 	function createCamera() {
 		var camera = new THREE.PerspectiveCamera(45, jQueryContainer.width() / jQueryContainer.height(), 1, 10000);
-		camera.position.set(500, 800, 1300);
+		camera.position.set(0, 800, 500);
 		camera.lookAt(new THREE.Vector3());
 
 		return camera;
@@ -444,18 +444,21 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		function createView(x,y,z, view){
 			var viewSize = 1200;
 			var aspectRatio = view.width() / view.height();
-			var cam = new THREE.OrthographicCamera(view.width() / -2, view.width() / 2, view.height() / 2, view.height() / -2, 1, 1700);
+			var cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, aspectRatio * viewSize / 2, viewSize / 2, viewSize / 2);
 			cam.position.set(x,y,z);
-			cam.lookAt(new THREE.Vector3(0, 0, 0));
+			cam.lookAt(new THREE.Vector3(0, baseSize, 0));
+			cam.up.set(0, 0, 1);
+			cam.updateProjectionMatrix();
+			scene.add(cam);
 			var ren = createRenderer(view);
 			return new BUILDER.View(ren, cam, view, scene);
 		}
 
 		views = []; //If this turns out to be a problem, use views.length = 0;
-		views.push(createView(1, 1600, 1, perspectivesContainer[0]));
-		views.push(createView(0, baseSize, -baseSize, perspectivesContainer[1]));
+		views.push(createView(0, 1600, 0, perspectivesContainer[0]));
+		views.push(createView(0, baseSize, baseSize, perspectivesContainer[1]));
 		views.push(createView(-baseSize, baseSize, 0, perspectivesContainer[2]));
-		views.push(createView(0, baseSize, baseSize, perspectivesContainer[3]));
+		views.push(createView(0, baseSize, -baseSize, perspectivesContainer[3]));
 		views.push(createView(baseSize, baseSize, 0, perspectivesContainer[4]));
 		views.push(createView(0, 1600, 0, perspectivesContainer[5]));
 
