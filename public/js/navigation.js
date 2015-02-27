@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-	var perspectives = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView")];
+	var perspectives = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView"), $("#preview")];
 	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives);
 	cb.renderPerspectives();
 
@@ -170,6 +170,7 @@ jQuery(document).ready(function($) {
 
 		$('#sizePreview').text(currentSize);
 		cb.setBaseSize(currentSize);
+		cb.renderPerspectives();
 	}
 
 	/**

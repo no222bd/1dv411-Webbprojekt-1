@@ -457,6 +457,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		views.push(createView(baseSize, baseSize, 0, perspectivesContainer[2]));
 		views.push(createView(0, baseSize, baseSize, perspectivesContainer[3]));
 		views.push(createView(-baseSize, baseSize, 0, perspectivesContainer[4]));
+		views.push(createView(0, -1600, 0, perspectivesContainer[5]));
 
 		views.forEach(function(element, index, array) {
 			element.init();
