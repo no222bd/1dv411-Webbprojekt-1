@@ -9,6 +9,8 @@ jQuery(document).ready(function($) {
 	//colorsArray holds all the colors that are awailable in the UI color selector
 	var colorsArray = [];
 
+	var chosenColor;
+
 	/**
 	 * Populates colorsArray with colors from colorsModal.
 	 */
@@ -17,6 +19,15 @@ jQuery(document).ready(function($) {
 			colorsArray.push($(link).attr('href'));
 		}
 	});
+
+	/**	
+	 * Generates random cube colors per cube placed.
+	 */
+	$("#ThreeJScontainer").on("mousedown", function(){
+		if(chosenColor == "#random"){
+			cb.setCubeMaterial(chooseRandomColorFromColors()); 
+		}
+    });
 
 	/**
 	 * Menu click eventhandler.
@@ -184,6 +195,7 @@ jQuery(document).ready(function($) {
 	 */
 	function setColor(element) {
 		var colorHex = element.attr("href");
+		chosenColor = colorHex;
 		//The hex will be "random" if the user selected the random color option
 		if (colorHex == "#random") {
 			colorHex = chooseRandomColorFromColors();
