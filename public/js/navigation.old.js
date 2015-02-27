@@ -213,11 +213,10 @@ jQuery(document).ready(function($) {
 	 */
 	function handleModalWindow(element) {
 		var href = element.attr('href');
+		var areOpen = href !== openModal;
 
-		if (href === openModal) {
-			closeModal();
-		} else {
-			closeModal();
+		closeModal();
+		if (areOpen) {
 			if(href == '#save' || href == '#import'){
 				if(href == '#save'){
 					$("#Submit").val('Spara');
