@@ -59,18 +59,8 @@ jQuery(document).ready(function($) {
 		} else if ($(this).hasClass('perspective')) {
 			setPerspective($(this));
 		} else {
-			switch($(this).attr('href')) {
-				//Settings modal
-				case '#import':
-					handleModalWindow($(this));
-					$("#Submit").val('Hämta');
-					break;
-				case '#save':
-					handleModalWindow($(this));
-					$("#Submit").val('Spara');
-					break;
-				case '#help':
-					break;
+			if($(this).attr('href') == '#import' || $(this).attr('href') == '#save'){
+				handleModalWindow($(this));
 			}
 		}
 	});
@@ -80,10 +70,10 @@ jQuery(document).ready(function($) {
 	 * When successful, gets JSON, value with key "data" should be sent to
 	 * the model through cb.loadModel();
 	 */
-	$("#Submit").submit(function(event) {
+	$("#Submit").on('click',function(event) {
 		event.preventDefault();
 		var name = $("#Name").val();
-		if($(this.val() == 'Hämta')) {
+		if($(this).val() == 'Hämta') {
 			var requestUrl = "api/" + name;
 
 			$.ajax({
@@ -121,6 +111,7 @@ jQuery(document).ready(function($) {
 				}
 			});
 		}
+		return false;
 	});
 
 	/**
@@ -210,18 +201,9 @@ jQuery(document).ready(function($) {
 		if (element.hasClass('chosen')) {
 			return;
 		} else {
-			switch(element.attr('id')) {
-				case "cube":
-					element.toggleClass('chosen');
-					$('#erase').removeClass('chosen');
-					cb.toggleBuildMode();
-					break;
-				case "erase":
-					element.toggleClass('chosen');
-					$('#cube').removeClass('chosen');
-					cb.toggleBuildMode();
-					break;
-			};
+			element.toggleClass('chosen');
+			$(element.attr('id')).removeClass('chosen');
+			cb.toggleBuildMode();
 		}
 	}
 
@@ -237,6 +219,11 @@ jQuery(document).ready(function($) {
 		} else {
 			closeModal();
 			if(href == '#save' || href == '#import'){
+				if(href == '#save'){
+					$("#Submit").val('Spara');
+				}else{
+					$("#Submit").val('Hämta');
+				}
 				href = '#FormModal';
 			}
 
