@@ -431,7 +431,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 * Creating five views for model.
 	 */
 	function createPerspectives() {
-		console.log(perspectivesContainer);
 		function createView(x,y,z, view){
 			var viewSize = 1200;
 			var aspectRatio = view.width() / view.height();
