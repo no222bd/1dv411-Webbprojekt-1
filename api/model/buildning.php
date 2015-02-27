@@ -205,7 +205,7 @@ Class Building{
 		$new = array();
 		foreach($all as $key => $model){
 			$date = \DateTime::createFromFormat($this->dateFormat, $model['date']);
-			$interval = new \DateInterval('P1M');
+			$interval = new \DateInterval('P30D');
 			$date->add($interval);
 			if($date >= new \DateTime("now")){
 				$new[$key] = $model;
