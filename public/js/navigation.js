@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
 	/**
 	 * Menu click eventhandler.
 	 */
-	$('#menu').on('click', 'a', function() {
+	$('#menu').on('click', 'a', function(event) {
 		event.preventDefault();
 
 		/**
@@ -60,7 +60,7 @@ jQuery(document).ready(function($) {
 	/**
 	 * Modal click eventhandler. Controls which function to use.
 	 */
-	$('#modal').on('click', 'a', function() {
+	$('#modal').on('click', 'a', function(event) {
 		event.preventDefault();
 
 		if ($(this).hasClass('color')) {
