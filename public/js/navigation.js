@@ -38,7 +38,7 @@ jQuery(document).ready(function($) {
 		/**
 		 * If buildOption class do handleBuildOption, else do handleModalWindow.
 		 */
-		if ($(this).attr('class') === "buildOption") {
+		if ($(this).hasClass("buildOption")) {
 			handleBuildOption($(this));
 		} else {
 			handleModalWindow($(this));
@@ -219,8 +219,8 @@ jQuery(document).ready(function($) {
 		if (element.hasClass('chosen')) {
 			return;
 		} else {
+			$('.buildOption').removeClass('chosen');
 			element.toggleClass('chosen');
-			$(element.attr('id')).removeClass('chosen');
 			cb.toggleBuildMode();
 		}
 	}
