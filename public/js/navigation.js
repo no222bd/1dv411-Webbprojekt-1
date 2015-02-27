@@ -18,8 +18,7 @@ jQuery(document).ready(function($) {
 	//Represents the current open modal.
 	var openModal = null;
 
-	
-
+	//Represents the chosen color.
 	var chosenColor;
 
 
@@ -190,6 +189,7 @@ jQuery(document).ready(function($) {
 		$('#sizePreview').text(currentSize);
 		cb.setBaseSize(currentSize);
 		cb.renderPerspectives();
+		$('#ThreeJScontainer').trigger('updateView');
 	}
 
 	/**
