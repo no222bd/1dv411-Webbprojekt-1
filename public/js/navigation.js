@@ -78,6 +78,7 @@ jQuery(document).ready(function($) {
 			if($(this).attr('href') == '#reset') {
 				cb.clearCubes();
 				cb.renderPerspectives();
+				$('#ThreeJScontainer').trigger('updateView');
 				//closeModal();
 			}
 		}
