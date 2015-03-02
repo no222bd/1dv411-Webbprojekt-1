@@ -29,7 +29,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	    basePlane,
 	    controls,
 	    views,
-	    stats,
 		UIevent,
 	    buildMode = true,
 		self = this,
@@ -60,14 +59,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		});
 		self.setCubeMaterial('#FED06F');
 
-		stats = new Stats();
-		stats.setMode(1); // 0: fps, 1: ms
-
-		// align top-left
-		stats.domElement.style.position = 'absolute';
-		stats.domElement.style.left = '0px';
-		stats.domElement.style.top = '0px';
-
 		UIevent = jQuery.Event("updateView") ;
 
 		step = 50;
@@ -93,7 +84,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		jQueryContainer.append(renderer.domElement);
 		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
 		jQueryContainer.on( "mouseup", onDocumentMouseTouch);
-		document.body.appendChild( stats.domElement );
 
 		createPerspectives();
 		render();
@@ -321,7 +311,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 * Sets zoom on control using baseSize.
 	 */
 	function setZoom() {
-		controls.maxDistance = baseSize * 6;
+		controls.maxDistance = (baseSize/2) * 20;
 		controls.minDistance = baseSize;
 		controls.reset();
 	}
@@ -457,6 +447,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		views.push(createView(baseSize, baseSize, 0, perspectivesContainer[2]));
 		views.push(createView(0, baseSize, baseSize, perspectivesContainer[3]));
 		views.push(createView(-baseSize, baseSize, 0, perspectivesContainer[4]));
+		if(perspectivesContainer[5]) views.push(createView(0, -1600, 0, perspectivesContainer[5]));
 
 		views.forEach(function(element, index, array) {
 			element.init();
@@ -523,8 +514,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	/**
 	 * Called to render object
 	 */
-	function render() {
-		stats.update();
+	function render() {;
 		requestAnimationFrame(render);
 		renderer.render(scene, camera);
 	};

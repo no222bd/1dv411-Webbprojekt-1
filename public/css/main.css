@@ -59,7 +59,7 @@ body a {
 #menu .buildOption {
 	width: 45%;
 	height: 45%;
-	margin-top: 35%;
+	margin-top: 15%;
 	padding-top:45%;
 	float: left;
 }
@@ -153,9 +153,7 @@ body a {
 #baseModal, 
 #resetConfirmModal, 
 #colorsModal, 
-#settingsModal, 
-#formSaveModal, 
-#formImportModal,
+#settingsModal,
 #perspectiveModal {
 	display: table-cell;
 	vertical-align: middle;
@@ -163,9 +161,8 @@ body a {
 #baseModal > div, 
 #resetConfirmModal > div, 
 #colorsModal > div, 
-#settingsModal > div, 
-#formSaveModal > div, 
-#formImportModal > div,
+#settingsModal > div,
+#FormModal > form,
 #perspectiveModal > div {
 	display: inline-block;
 	position: relative;
@@ -179,6 +176,8 @@ body a {
 	background-color: #555;
 	border: 10px solid #333;
 	border-radius: 40px;
+	width: 36%;
+	padding-top: 36%;
 }
 #perspectiveModal > div {
 	padding-top: 0;
@@ -202,26 +201,26 @@ body a {
 	border-radius: 40px;
 	font-size: 2vw;
 }
-#baseModal div div a, #baseModal div div #sizePreview {
+#baseModal div div a, #baseModal div div #sizePreview, #preview {
 	display: block;
-	height: 27%;
+	height: 25%;
 	width: 100%;
-	margin-bottom: 2%;
+	margin-bottom: 8%;
 	background-color: #555;
 	border: 2px solid #333;
 	border-radius: 40px;
 	font-size: 4vw;
 	color: white;
 	vertical-align: middle;
+	padding-top: 2%;
 }
-#reset {
-	position: absolute;
-	background-image: url('../img/Ikoner.png');
-	background-position: 0% 198%;
-	background-size: 220%;
-	background-color: #555;
-	border: 10px solid #333;
+#preview {
+	height: 100%;
+	width: 100%;
+	position: relative;
 	border-radius: 40px;
+	overflow: hidden;
+	padding-top: 0;
 }
 .innerBox {
 	position: absolute;
@@ -266,18 +265,10 @@ body a {
 .top {
 	border:10px solid #000;
 }
-#formSaveModal *, #formImportModal * {
-	width: 100%;
-}
-#formSaveModal form label, #formImportModal form label {
-	display: block;
-	font-weight: bold;
-	font-size: 2vw;
-}
-#formSaveModal form input[type="text"], #formImportModal form input[type="text"] {
+#FormModal form input[type="text"]{
 	width: 70%;
 }
-#formSaveModal form input[type="submit"], #formImportModal form input[type="submit"] {
+#FormModal form input[type="submit"]{
 	width: 20%;
 }
 #settingsModal div a {
@@ -403,5 +394,8 @@ body a {
 	}
 	#colors {
 		top: 50%;
+	}
+	#baseModal div div a, #baseModal div div #sizePreview, #preview {
+		font-size: 8vw;
 	}
 }
