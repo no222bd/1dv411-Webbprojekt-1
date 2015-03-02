@@ -7,9 +7,8 @@
 	/**
 	 * Handles saving and loading buildings to localStorage. 
 	 */
-	BULDER.BuildingSaver = function() {
+	BUILDER.BuildingSaver = function() {
 		
-		var self = this;
 		var keyLocalStorage = "buildings";
 		
 		/**
@@ -19,15 +18,18 @@
  		 * @return Object An object with all the valid buildings
 		 */
 		function checkDate(all) {
-			var ret = []; 
-			for (id in all) {
+			var ret = {};
+			var counter = 0;
+			
+			for (var id in all) {
 				var created = new Date(all[id].date);
 				// 30 days in milliseconds = 60 * 60 * 24 * 30 * 1000
 				var validUntil = new Date(created.getTime() + 2592000000);
-				var counter = 0;
-
-				if (validUntil >= Date.now()) {
-					if (counter >= 250) { break; } // size limit in localStorage
+				var now = new Date();
+				now.setHours(0, 0, 0, 0);
+				
+				if (validUntil >= now.getTime()) {
+					if (counter >= 250) { break; } // size limit for localStorage
 					ret[id] = all[id];
 					counter += 1;
 				}
@@ -38,10 +40,14 @@
 		/**
 		 * Returns an object with all buildings in localStorage.
 		 * 
-		 * @return Object An object with all buildings in localStorage
+		 * @return Object {"building":{"model":"qwerty","date":"1999-12-31"}} or FALSE
 		 */
 		function getAllBuildings() {
-			return JSON.parse(localStorage[keyLocalStorage]);
+			if (localStorage.getItem(keyLocalStorage)) {
+				return JSON.parse(localStorage.getItem(keyLocalStorage));
+			} else {
+				false;
+			}
 		};
 		
 		/**
@@ -51,7 +57,7 @@
 		 * @return Void
 		 */
 		function saveAllBuildings(all) {
-			localStorage[keyLocalStorage] = JSON.stringify(all);
+			localStorage.setItem(keyLocalStorage, JSON.stringify(all));
 		}
 		
 		/**
@@ -60,9 +66,8 @@
 		 * @param String name 
 		 * @return Boolean TRUE if building already exists
 		 */
-		function checkIfBuildingExists(name) {
-			var all = self.getAllBuildings();
-			for (id in all) {
+		function checkIfBuildingExists(name, all) {
+			for (var id in all) {
 				if (id == name) { return true; }
 			};
 			return false;
@@ -71,32 +76,38 @@
 		/**
 		 * Adds one building in localStorage
 		 *
-		 * @param Object building An object with properties "model" and "date", property name is the name of the building
+		 * @param Object building {"building":{"model":"qwerty","date":"1999-12-31"}}
 		 * @return Void 
 		 */
-		this.saveBuilding = function(building) {
-			var all = self.getAllBuildings();
+		this.saveBuildings = function(buildings) {
+			var all = getAllBuildings();
+			if (typeof all != "object") {
+				all = {};
+			}
 			
-			for (id in building) {
-				if (!self.checkIfBuildingExists(id)) {
-					all[id] = building[id];
+			for (var id in buildings) {
+				if (!checkIfBuildingExists(id, all)) {
+					all[id] = buildings[id];
 				}
 			};
 			
 			// checks dates before saving
-			self.saveAllBuildings(self.checkDate(all));
+			saveAllBuildings(checkDate(all));
 		};
 		
 		/**
 		 * Fetches a building from localStorage.
 		 *
 		 * @param String id Name of the building to fetch
-		 * @return Object Return the building as an object or undefined 
+		 * @return Object {"building":{"model":"qwerty","date":"1999-12-31"}} or false
 		 */
 		this.getBuilding = function(id) {
-			var building;
-			var all = self.getAllBuildings();
-			return all[id];
+			var building, all;
+			if (all = getAllBuildings()) {
+				return all[id];
+			} else {
+				return false;
+			}
 		};
 	};
 

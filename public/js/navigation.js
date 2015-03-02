@@ -21,7 +21,6 @@ jQuery(document).ready(function($) {
 	//Represents the chosen color.
 	var chosenColor;
 
-
 	/**	
 	 * Generates random cube colors per cube placed.
 	 */
@@ -92,24 +91,40 @@ jQuery(document).ready(function($) {
 	$("#Submit").on('click',function(event) {
 		event.preventDefault();
 		var name = $("#Name").val();
+		var buildingSaver = new BUILDER.BuildingSaver();
+		
 		if($(this).val() == 'Hämta') {
-			var requestUrl = "api/" + name;
-
-			$.ajax({
-				type: "GET",
-				url: requestUrl,
-				statusCode: {
-					200: function (result) {
-						cb.loadModel(result.data);
-						closeModal();
-					},
-					400: function (result) {
-						console.log(result);
-						closeModal();
+			// check in localStorage
+			result = buildingSaver.getBuilding(name);
+			if (result) {
+				cb.loadModel(result.model);
+				closeModal();
+			// if online also check api
+			} else if (navigator.onLine) {
+				var requestUrl = "api/" + name;
+				$.ajax({
+					type: "GET",
+					url: requestUrl,
+					statusCode: {
+						200: function (result) {
+							cb.loadModel(result.data);
+							// save building in localStorage
+							var building = {};
+							building[name] = result.data;
+							buildingSaver.saveBuildings(building);
+							closeModal();
+						},
+						400: function (result) {
+							console.log(result);
+							closeModal();
+						}
 					}
-				}
-			});
-		}else{
+				});
+			} else {
+				console.log("Can't open building. Correct name?");
+				closeModal();
+			}
+		} else {
 			var requestUrl = "api/create";
 			var dataString = LZString.decompressFromBase64(cb.saveModel());
 
@@ -119,6 +134,8 @@ jQuery(document).ready(function($) {
 				data: { name: name, model: dataString },
 				statusCode: {
 					201: function(result) {
+						// save in localStorage also
+						buildingSaver.saveBuildings(JSON.parse(result.data));
 						console.log(result);
 					},
 					400: function(result) {
