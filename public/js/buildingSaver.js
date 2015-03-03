@@ -80,8 +80,8 @@
 		 * @return Object {"building":{"model":"qwerty","date":"1999-12-31"}} or false
 		 */
 		this.getBuilding = function(id) {
-			var building, all;
-			if (all = getAllBuildings()) {
+			var building, all = getAllBuildings();
+			if (all) {
 				return all[id];
 			} else {
 				return false;
