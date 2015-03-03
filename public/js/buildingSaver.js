@@ -38,6 +38,19 @@
 		};
 		
 		/**
+		 * Check if name alrady exists in localStorage.
+		 *
+		 * @param String name 
+		 * @return Boolean TRUE if building already exists
+		 */
+		function checkIfBuildingExists(name, all) {
+			for (var id in all) {
+				if (id == name) { return true; }
+			};
+			return false;
+		};
+		
+		/**
 		 * Returns an object with all buildings in localStorage.
 		 * 
 		 * @return Object {"building":{"model":"qwerty","date":"1999-12-31"}} or FALSE
@@ -58,20 +71,22 @@
 		 */
 		function saveAllBuildings(all) {
 			localStorage.setItem(keyLocalStorage, JSON.stringify(all));
-		}
+		};
 		
 		/**
-		 * Check if name alrady exists in localStorage.
+		 * Fetches a building from localStorage.
 		 *
-		 * @param String name 
-		 * @return Boolean TRUE if building already exists
+		 * @param String id Name of the building to fetch
+		 * @return Object {"building":{"model":"qwerty","date":"1999-12-31"}} or false
 		 */
-		function checkIfBuildingExists(name, all) {
-			for (var id in all) {
-				if (id == name) { return true; }
-			};
-			return false;
-		}
+		this.getBuilding = function(id) {
+			var building, all;
+			if (all = getAllBuildings()) {
+				return all[id];
+			} else {
+				return false;
+			}
+		};
 		
 		/**
 		 * Adds one building in localStorage
@@ -95,20 +110,13 @@
 			saveAllBuildings(checkDate(all));
 		};
 		
-		/**
-		 * Fetches a building from localStorage.
-		 *
-		 * @param String id Name of the building to fetch
-		 * @return Object {"building":{"model":"qwerty","date":"1999-12-31"}} or false
-		 */
-		this.getBuilding = function(id) {
-			var building, all;
-			if (all = getAllBuildings()) {
-				return all[id];
-			} else {
-				return false;
-			}
-		};
+		// OBS!!! For testing purpose only!!! Do not use in application!!!
+		// TODO: Remove before deploy!
+		this._checkDate = checkDate;
+		this._checkIfBuildingExists = checkIfBuildingExists;
+		this._getAllBuildings = getAllBuildings;
+		this._saveAllBuildings = saveAllBuildings;
+		// End
 	};
 
 }(window));
