@@ -214,7 +214,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 
 		for(var i = 1; i < objects.length; i++) {
-			var color = objects[i].material.map.sourceFile
+			var color = objects[i].material.map.sourceFile;
 			color = color.replace("public/img/textures/", "");
 			color = color.replace(".png", "");
 			model.cubes.push(

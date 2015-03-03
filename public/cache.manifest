@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 9
+# 16
 
 CACHE:
 #css
@@ -38,6 +38,7 @@ img/textures/FFFFFF.png
 
 #js
 js/Builder.js
+js/buildingSaver.js
 js/navigation.js
 #js/vendor
 js/vendor/jquery-1.11.2.min.js

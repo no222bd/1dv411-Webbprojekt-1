@@ -21,7 +21,6 @@ jQuery(document).ready(function($) {
 	//Represents the chosen color.
 	var chosenColor;
 
-
 	/**	
 	 * Generates random cube colors per cube placed.
 	 */
@@ -92,43 +91,64 @@ jQuery(document).ready(function($) {
 	$("#Submit").on('click',function(event) {
 		event.preventDefault();
 		var name = $("#Name").val();
+		var buildingSaver = new BUILDER.BuildingSaver();
+		
 		if($(this).val() == 'Hämta') {
-			var requestUrl = "api/" + name;
-
-			$.ajax({
-				type: "GET",
-				url: requestUrl,
-				statusCode: {
-					200: function (result) {
-						cb.loadModel(result.data);
-						closeModal();
-					},
-					400: function (result) {
-						console.log(result);
-						closeModal();
+			// check in localStorage
+			var result = buildingSaver.getBuilding(name);
+			if (result) {
+				cb.loadModel(result);
+				closeModal();
+			// if online also check api
+			} else if (navigator.onLine) {
+				var requestUrl = "api/" + name;
+				$.ajax({
+					type: "GET",
+					url: requestUrl,
+					statusCode: {
+						200: function (result) {
+							cb.loadModel(result.data);
+							// save building in localStorage
+							var building = {};
+							building[name] = result.data;
+							buildingSaver.saveBuildings(building);
+							closeModal();
+						},
+						400: function (result) {
+							console.log(result);
+						}
 					}
-				}
-			});
-		}else{
+				});
+			} else {
+				console.log("Can't open building. Correct name?");
+			}
+		} else {
 			var requestUrl = "api/create";
 			var dataString = LZString.decompressFromBase64(cb.saveModel());
 
-			$.ajax({
-				type: "POST",
-				url: requestUrl,
-				data: { name: name, model: dataString },
-				statusCode: {
-					201: function(result) {
-						console.log(result);
-					},
-					400: function(result) {
-						console.log(result);
-					},
-					503: function(result) {
-						console.log(result);
+			if (navigator.onLine) {	
+				$.ajax({
+					type: "POST",
+					url: requestUrl,
+					data: { name: name, model: dataString },
+					statusCode: {
+						201: function(result) {
+							// save in localStorage also
+							buildingSaver.saveBuildings(JSON.parse(result.data));
+							console.log(result);
+							closeModal();
+						},
+						400: function(result) {
+							console.log(result);
+						},
+						503: function(result) {
+							console.log(result);
+						}
 					}
-				}
-			});
+				});
+			} else {
+				console.log("Must be online to save buildings.");
+			}
 		}
 		return false;
 	});
