@@ -95,9 +95,9 @@ jQuery(document).ready(function($) {
 		
 		if($(this).val() == 'Hämta') {
 			// check in localStorage
-			result = buildingSaver.getBuilding(name);
+			var result = buildingSaver.getBuilding(name);
 			if (result) {
-				cb.loadModel(result.model);
+				cb.loadModel(result);
 				closeModal();
 			// if online also check api
 			} else if (navigator.onLine) {
@@ -116,36 +116,39 @@ jQuery(document).ready(function($) {
 						},
 						400: function (result) {
 							console.log(result);
-							closeModal();
 						}
 					}
 				});
 			} else {
 				console.log("Can't open building. Correct name?");
-				closeModal();
 			}
 		} else {
 			var requestUrl = "api/create";
 			var dataString = LZString.decompressFromBase64(cb.saveModel());
 
-			$.ajax({
-				type: "POST",
-				url: requestUrl,
-				data: { name: name, model: dataString },
-				statusCode: {
-					201: function(result) {
-						// save in localStorage also
-						buildingSaver.saveBuildings(JSON.parse(result.data));
-						console.log(result);
-					},
-					400: function(result) {
-						console.log(result);
-					},
-					503: function(result) {
-						console.log(result);
+			if (navigator.onLine) {	
+				$.ajax({
+					type: "POST",
+					url: requestUrl,
+					data: { name: name, model: dataString },
+					statusCode: {
+						201: function(result) {
+							// save in localStorage also
+							buildingSaver.saveBuildings(JSON.parse(result.data));
+							console.log(result);
+							closeModal();
+						},
+						400: function(result) {
+							console.log(result);
+						},
+						503: function(result) {
+							console.log(result);
+						}
 					}
-				}
-			});
+				});
+			} else {
+				console.log("Must be online to save buildings.");
+			}
 		}
 		return false;
 	});
