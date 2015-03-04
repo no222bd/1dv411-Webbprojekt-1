@@ -94,13 +94,8 @@ jQuery(document).ready(function($) {
 		var buildingSaver = new BUILDER.BuildingSaver();
 		
 		if($(this).val() == 'Hämta') {
-			// check in localStorage
-			var result = buildingSaver.getBuilding(name);
-			if (result) {
-				cb.loadModel(result);
-				closeModal();
-			// if online also check api
-			} else if (navigator.onLine) {
+			if (navigator.onLine) {
+				// check api first
 				var requestUrl = "api/" + name;
 				$.ajax({
 					type: "GET",
@@ -108,32 +103,43 @@ jQuery(document).ready(function($) {
 					statusCode: {
 						200: function (result) {
 							cb.loadModel(result.data);
-							// save building in localStorage
-							var building = {};
-							building[name] = result.data;
-							buildingSaver.saveBuildings(building);
 							closeModal();
 						},
 						400: function (result) {
-							console.log(result);
+							// check in localStorage
+							var result = buildingSaver.getBuilding(name);
+							if (result) {
+								//console.log(result);
+								cb.loadModel(result);
+								closeModal();
+							} else {
+								console.log("Could not find that building.");
+							}
 						}
 					}
 				});
+			// if offline
 			} else {
-				console.log("Can't open building. Correct name?");
+				var result = buildingSaver.getBuilding(name);
+				if (result) {
+					cb.loadModel(result);
+					closeModal();
+				} else {
+					console.log("Could not find that building.");
+				}
 			}
 		} else {
 			var requestUrl = "api/create";
 			var dataString = LZString.decompressFromBase64(cb.saveModel());
 
-			if (navigator.onLine) {	
+			if (navigator.onLine) {
 				$.ajax({
 					type: "POST",
 					url: requestUrl,
 					data: { name: name, model: dataString },
 					statusCode: {
 						201: function(result) {
-							// save in localStorage also
+							// save in localStorage
 							buildingSaver.saveBuildings(JSON.parse(result.data));
 							console.log(result);
 							closeModal();
@@ -146,8 +152,14 @@ jQuery(document).ready(function($) {
 						}
 					}
 				});
+			// if offline
 			} else {
-				console.log("Must be online to save buildings.");
+				// save building in localStorage
+				if (buildingSaver.saveNewBuilding(name, dataString)) {
+					closeModal();
+				} else {
+					console.log("Name already exists.");
+				}
 			}
 		}
 		return false;

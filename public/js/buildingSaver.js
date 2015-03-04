@@ -10,6 +10,7 @@
 	BUILDER.BuildingSaver = function() {
 		
 		var keyLocalStorage = "buildings";
+		var self = this;
 		
 		/**
 		 * Checks that all stored building have valid dates.
@@ -48,6 +49,24 @@
 				if (id == name) { return true; }
 			};
 			return false;
+		};
+		
+		/**
+		 * Creates a date (now) in format YYYY-MM-DD
+		 * @return String Ex: 1999-12-31
+		 */
+		function createDateString(date) {
+			var dd = date.getDate();
+			if ( dd < 10 ) { 
+				dd = '0' + dd;
+			}
+			var mm = date.getMonth() + 1;
+			if ( mm < 10 ) { 
+				mm = '0' + mm;
+			}
+			var yyyy = date.getFullYear();
+			
+			return yyyy + "-" + mm + "-" + dd;
 		};
 		
 		/**
@@ -95,11 +114,7 @@
 		 * @return Void 
 		 */
 		this.saveBuildings = function(buildings) {
-			var all = getAllBuildings();
-			if (typeof all != "object") {
-				all = {};
-			}
-			
+			var all = getAllBuildings() || {};
 			for (var id in buildings) {
 				if (!checkIfBuildingExists(id, all)) {
 					all[id] = buildings[id];
@@ -110,10 +125,24 @@
 			saveAllBuildings(checkDate(all));
 		};
 		
+		this.saveNewBuilding = function(name, model) {
+			if (checkIfBuildingExists(name, getAllBuildings())) {
+				return false;
+			}
+			
+			var building = {};
+			var model = LZString.compressToBase64(model);
+			var now = createDateString(new Date());
+			building[name] = { model: model, date: now };
+			self.saveBuildings(building);
+			return true;
+		};
+		
 		// OBS!!! For testing purpose only!!! Do not use in application!!!
 		// TODO: Remove before deploy!
 		this._checkDate = checkDate;
 		this._checkIfBuildingExists = checkIfBuildingExists;
+		this._createDateString = createDateString;
 		this._getAllBuildings = getAllBuildings;
 		this._saveAllBuildings = saveAllBuildings;
 		// End
