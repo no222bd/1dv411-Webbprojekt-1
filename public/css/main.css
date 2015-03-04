@@ -25,6 +25,7 @@ body a {
 	text-decoration: none;
 }
 #ThreeJScontainer {
+	position: relative;
 	width: 80%;
 	float: left;
 	height: 100%;
@@ -109,7 +110,25 @@ body a {
 	background-repeat: no-repeat;
 	margin-bottom:5px;
 }
-
+#perspectiveModal > div {
+	display: inline-block;
+	position: relative;
+	margin: 1%;
+	padding-top: 0;
+	width: 25%;
+	padding-bottom: 25%;
+	background-color: #555;
+	border-radius: 5%;
+	background: #C2E9F9;
+}
+.canvasWrapper {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	border-radius: 5%;
+	overflow: hidden;
+}
 /* -- Counter -- */
 .counter {
 	width: 150px;
@@ -153,7 +172,7 @@ body a {
 	margin: auto auto;
 	height: 100%;
 }
-#perspectiveContainer {
+#perspectiveContainer2 {
 	background-color: #C2E9F9;
 	height: 100%;
 	width: 10%;
@@ -162,7 +181,8 @@ body a {
 #baseModal, 
 #resetConfirmModal, 
 #colorsModal, 
-#settingsModal {
+#settingsModal,
+#perspectiveModal {
 	display: table-cell;
 	vertical-align: middle;
 }
@@ -170,8 +190,8 @@ body a {
 #resetConfirmModal > div, 
 #colorsModal > div, 
 #settingsModal > div,
-#FormModal > form/*,
-#perspectiveModal > div*/ {
+#FormModal > form,
+#perspectiveModal > div {
 	display: inline-block;
 	position: relative;
 	margin: 1%;
@@ -188,18 +208,15 @@ body a {
 	padding-top: 36%;
 }
 #perspectiveModal > div {
-	display: block;
-	width: 100%;
-	margin-top: 5%;
-	/*padding-top: 0;*/
-	/*width: 25%;*/
-	/*padding-bottom:25%;*/
+	padding-top: 0;
+	width: 25%;
+	padding-bottom:25%;
 	background-color: #555; 
 	border-radius: 5%; 
 	background:#C2E9F9; 
 
 }
-#perspectiveModal {
+#perspectiveModal2 {
 	padding-top: 50%;
 }
 #confirmdeclinebuttons p {
@@ -251,7 +268,7 @@ body a {
 	width: 14%;
 	padding-top: 14%;
 }
-.canvasWrapper {
+.canvasWrapper2 {
 	width:100%;
 	height:100px;
 	/*position: absolute;
