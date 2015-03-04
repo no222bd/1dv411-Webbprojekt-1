@@ -22,12 +22,12 @@ jQuery(document).ready(function($) {
 	var chosenColor;
 
 
-	/**	
+	/**
 	 * Generates random cube colors per cube placed.
 	 */
 	$("#ThreeJScontainer").on("mousedown", function(){
 		if(chosenColor == "#random"){
-			cb.setCubeMaterial(chooseRandomColorFromColors()); 
+			cb.setCubeMaterial(chooseRandomColorFromColors());
 		}
     });
 
@@ -205,6 +205,7 @@ jQuery(document).ready(function($) {
 			colorHex = chooseRandomColorFromColors();
 		}
 		cb.setCubeMaterial(colorHex);
+		handleBuildOption($('#cube'));
 		closeModal();
 	}
 

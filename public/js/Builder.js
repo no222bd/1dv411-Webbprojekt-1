@@ -10,9 +10,9 @@ var BUILDER = outerWindow.BUILDER;
  * @constructor
  */
 BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colorChoices) {
-	
+
 	/* Private members */
-	
+
 	var step,
 	    baseSize,
 	    objects,
@@ -163,7 +163,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		views.forEach(function(element, index, array) {
 			element.render();
 		});
-		
+
 		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 		// TODO: Remove before deploying
 
@@ -181,7 +181,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
             element.render();
         });
 	};
-	
+
 	/**
 	 * Updates camera and renderer settings to new element sizes.
 	 */
@@ -189,7 +189,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
 		camera.updateProjectionMatrix();
 		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
-		
+
 		// Updates perspective views
 		self.renderPerspectives();
 	};
@@ -304,7 +304,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 		/* End of testing code */
 	};
-	
+
 	/* Private functions */
 
 	/**
@@ -531,9 +531,9 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		//});
 		//var f = new THREE.Mesh(geo, m);
 		//foundation = f;
-		
+
 		var grid = new THREE.Geometry();
-		
+
 		for (var i = -baseSize; i <= baseSize; i += step) {
 			grid.vertices.push(new THREE.Vector3(-baseSize, 0, i));
 			grid.vertices.push(new THREE.Vector3(baseSize, 0, i));
@@ -550,11 +550,11 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		baseGrid = new THREE.Line(grid, material, THREE.LinePieces);
 
 		/**
-		 * * Green foundation * * 
+		 * * Green foundation * *
 		 * Does not work with canvas renderer and is therefore turned off
-		 * by being commented away. In later iterations this might get 
-		 * implemented but it needs another solution since the commented 
-		 * line only fixes the big model cube (webgl/canvas) and not the 
+		 * by being commented away. In later iterations this might get
+		 * implemented but it needs another solution since the commented
+		 * line only fixes the big model cube (webgl/canvas) and not the
 		 * cube displayed in perspective views (canvas).
 		 */
 		var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
@@ -580,7 +580,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			counter.text(count);
 		}
 	}
-	
+
 	/* Event handlers */
 
 	/**
@@ -721,7 +721,7 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 		JQueryElement.empty();
 		JQueryElement.append(renderer.domElement);
 	};
-	
+
 	/* OBS. For testing only! Do not use in application!!! */
 	// TODO: Remove before deploying
 
