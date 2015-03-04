@@ -386,7 +386,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 */
 	function createColorLines() {
 		var lines = [];
-		var gridOffset = 20;
+		var gridOffset = baseSize/7;
 
 		// green line
 		var line = new THREE.Geometry();
