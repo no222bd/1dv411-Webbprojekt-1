@@ -20,7 +20,7 @@ jQuery(document).ready(function($) {
 
 	//Represents the chosen color.
 	var chosenColor;
-
+	
 	/**	
 	 * Generates random cube colors per cube placed.
 	 */
@@ -92,7 +92,7 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		var name = $("#Name").val();
 		var buildingSaver = new BUILDER.BuildingSaver();
-		
+
 		if($(this).val() == 'Hämta') {
 			if (navigator.onLine) {
 				// check api first
@@ -118,7 +118,7 @@ jQuery(document).ready(function($) {
 						}
 					}
 				});
-			// if offline
+				// if offline
 			} else {
 				var result = buildingSaver.getBuilding(name);
 				if (result) {
@@ -152,7 +152,7 @@ jQuery(document).ready(function($) {
 						}
 					}
 				});
-			// if offline
+				// if offline
 			} else {
 				// save building in localStorage
 				if (buildingSaver.saveNewBuilding(name, dataString)) {
@@ -237,6 +237,7 @@ jQuery(document).ready(function($) {
 			colorHex = chooseRandomColorFromColors();
 		}
 		cb.setCubeMaterial(colorHex);
+		handleBuildOption($('#cube'));
 		closeModal();
 	}
 
