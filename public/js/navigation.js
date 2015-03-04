@@ -20,14 +20,13 @@ jQuery(document).ready(function($) {
 
 	//Represents the chosen color.
 	var chosenColor;
-
-
-	/**
+	
+	/**	
 	 * Generates random cube colors per cube placed.
 	 */
 	$("#ThreeJScontainer").on("mousedown", function(){
 		if(chosenColor == "#random"){
-			cb.setCubeMaterial(chooseRandomColorFromColors());
+			cb.setCubeMaterial(chooseRandomColorFromColors()); 
 		}
     });
 
@@ -92,43 +91,76 @@ jQuery(document).ready(function($) {
 	$("#Submit").on('click',function(event) {
 		event.preventDefault();
 		var name = $("#Name").val();
-		if($(this).val() == 'Hämta') {
-			var requestUrl = "api/" + name;
+		var buildingSaver = new BUILDER.BuildingSaver();
 
-			$.ajax({
-				type: "GET",
-				url: requestUrl,
-				statusCode: {
-					200: function (result) {
-						cb.loadModel(result.data);
-						closeModal();
-					},
-					400: function (result) {
-						console.log(result);
-						closeModal();
+		if($(this).val() == 'Hämta') {
+			if (navigator.onLine) {
+				// check api first
+				var requestUrl = "api/" + name;
+				$.ajax({
+					type: "GET",
+					url: requestUrl,
+					statusCode: {
+						200: function (result) {
+							cb.loadModel(result.data);
+							closeModal();
+						},
+						400: function (result) {
+							// check in localStorage
+							var result = buildingSaver.getBuilding(name);
+							if (result) {
+								//console.log(result);
+								cb.loadModel(result);
+								closeModal();
+							} else {
+								console.log("Could not find that building.");
+							}
+						}
 					}
+				});
+				// if offline
+			} else {
+				var result = buildingSaver.getBuilding(name);
+				if (result) {
+					cb.loadModel(result);
+					closeModal();
+				} else {
+					console.log("Could not find that building.");
 				}
-			});
-		}else{
+			}
+		} else {
 			var requestUrl = "api/create";
 			var dataString = LZString.decompressFromBase64(cb.saveModel());
 
-			$.ajax({
-				type: "POST",
-				url: requestUrl,
-				data: { name: name, model: dataString },
-				statusCode: {
-					201: function(result) {
-						console.log(result);
-					},
-					400: function(result) {
-						console.log(result);
-					},
-					503: function(result) {
-						console.log(result);
+			if (navigator.onLine) {
+				$.ajax({
+					type: "POST",
+					url: requestUrl,
+					data: { name: name, model: dataString },
+					statusCode: {
+						201: function(result) {
+							// save in localStorage
+							buildingSaver.saveBuildings(JSON.parse(result.data));
+							console.log(result);
+							closeModal();
+						},
+						400: function(result) {
+							console.log(result);
+						},
+						503: function(result) {
+							console.log(result);
+						}
 					}
+				});
+				// if offline
+			} else {
+				// save building in localStorage
+				if (buildingSaver.saveNewBuilding(name, dataString)) {
+					closeModal();
+				} else {
+					console.log("Name already exists.");
 				}
-			});
+			}
 		}
 		return false;
 	});
