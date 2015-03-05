@@ -24,7 +24,9 @@ body a {
 	float: left;
 	height: 100%;
 }
-
+.perspective canvas, #perspective {
+	transform: scaleX(-1);
+}
 /* -- Helpers -- */
 
 /* Use this class whenever body unselectable doesn't work */
