@@ -54,59 +54,57 @@ body a {
 }
 #menu a {
 	display: block;
-	width: 100%;
-	padding-top: 100%;
-	position: relative;
-}
-#menu .buildOption {
-	width: 45%;
-	height: 45%;
-	margin-top: 35%;
-	padding-top:45%;
-	float: left;
+	width: 80%;
+	padding-top: 77%;
+	position: relative; 
+	margin:0 10%;
+	margin-bottom:5px;
 }
 
 #cube, #erase, #base, #settings, #colors {
-	background-image: url('../img/Ikoner_nya.png');
+	background-image: url('../img/Ikoner.png');
 	background-size: 200%;
 }
+#cube.chosen {
+	background-position: 0 0;
+}
 #cube {
-	background-position: 95.221% 100%;
+	background-position: 100% 0;
+}
+
+#erase.chosen  {
+	background-position: 0 16.286%
 }
 #erase {
-	background-position: 95.221% 0;
+	background-position: 100% 16.286%;
 }
 #base {
-	background-position: 0 20.346%;
-}
-#settings {
-	background-position: 0 60.594%;
-}
-#colors {
-	background-position: 0 39.734%;
-}
-#cube.chosen {
-	background-position: 0 79.917%;
-}
-#erase.chosen  {
-	background-position: 95.221% 79.041%;
+	background-position: 0 33.715%;
 }
 #base.faded  {
-	background-position: 101.3% 20.346%;
+	background-position: 100% 33.715%;
+}
+#settings {
+	background-position: 0 67.144%;
 }
 #settings.faded  {
-	background-position: 100% 60.594%;
+	background-position: 100% 67.144%;
+}
+#colors {  
+	background-position: 0 49.857%;
 }
 #colors.faded  {
-	background-position: 100% 39.734%;
+	background-position: 100%  49.857%;
 }
 
 #perspective.chosen-view {
-	width: 120px;
-	height: 120px;
+	width: 138px;
+	height: 138px;
 	padding-top: 0;
+	margin-left:10%;
 	background-size: 100%;
 	background-repeat: no-repeat;
+	margin-bottom:5px;
 }
 
 /* -- Counter -- */
@@ -155,9 +153,7 @@ body a {
 #baseModal, 
 #resetConfirmModal, 
 #colorsModal, 
-#settingsModal, 
-#formSaveModal, 
-#formImportModal,
+#settingsModal,
 #perspectiveModal {
 	display: table-cell;
 	vertical-align: middle;
@@ -165,9 +161,8 @@ body a {
 #baseModal > div, 
 #resetConfirmModal > div, 
 #colorsModal > div, 
-#settingsModal > div, 
-#formSaveModal > div, 
-#formImportModal > div,
+#settingsModal > div,
+#FormModal > form,
 #perspectiveModal > div {
 	display: inline-block;
 	position: relative;
@@ -181,6 +176,8 @@ body a {
 	background-color: #555;
 	border: 10px solid #333;
 	border-radius: 40px;
+	width: 36%;
+	padding-top: 36%;
 }
 #perspectiveModal > div {
 	padding-top: 0;
@@ -266,20 +263,12 @@ body a {
 	border:10px solid #009944;
 }
 .top {
-	border:10px solid #000;
+	border:none;
 }
-#formSaveModal *, #formImportModal * {
-	width: 100%;
-}
-#formSaveModal form label, #formImportModal form label {
-	display: block;
-	font-weight: bold;
-	font-size: 2vw;
-}
-#formSaveModal form input[type="text"], #formImportModal form input[type="text"] {
+#FormModal form input[type="text"]{
 	width: 70%;
 }
-#formSaveModal form input[type="submit"], #formImportModal form input[type="submit"] {
+#FormModal form input[type="submit"]{
 	width: 20%;
 }
 #settingsModal div a {
@@ -373,7 +362,7 @@ body a {
 		width: 100%;
 		height: auto;
 	}
-	#menu .buildOption {
+	#menu a {
 		width: 100%;
 		height: 100%;
 		margin-top: 0;
@@ -382,7 +371,7 @@ body a {
 	#menu li {
 		float: left;
 		width: 12%;
-		margin-top: 12%;
+		margin-top:5%;
 	}
 	#ThreeJScontainer {
 		width: 100%;
@@ -408,5 +397,16 @@ body a {
 	}
 	#baseModal div div a, #baseModal div div #sizePreview, #preview {
 		font-size: 8vw;
+	}
+}
+@media print {
+	#menu, .counter{
+		display: none;
+	}
+	html, body{
+		height: auto;
+	}
+	#ThreeJScontainer{
+		width: auto;
 	}
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="sv" manifest="./public/cache.manifest">
+<!--<html lang="sv" manifest="./public/cache.manifest">-->
+<html>
 	<head>
 		<meta charset="utf-8">
 		<title>CubeBuilder</title>
@@ -31,18 +32,6 @@
 						</div>
 					</div>
 				</div>
-				<div id="resetConfirmModal">
-					<div>
-						<div id="confirmdeclinebuttons" class="innerBox">
-							<p>Är det säkert att du vill ta bort alla blocken?</p>
-							<div>
-								<a id="confirm">Ja</a>
-								<a id="decline">Nej</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				
 			</div>
 			<!-- PERSPECTIVE -->
 			<div id="perspectiveContainer" class="container">
@@ -128,28 +117,13 @@
 						<a class="innerBox" href="#save">Spara</a>
 					</div>
 				</div>
-				<div id="formSaveModal">
-					<div>
-						<div id="saveModel" class="innerBox">
-							<form id="saveForm">
-								<label for="saveName">Välj byggnadens namn</label>
-								<input id="saveName" type="text"/>
-								<input id="saveSubmit" type="submit" value="Spara"/>
-							</form>
-						</div>
-					</div>
-				</div>
-				<div id="formImportModal">
-					<div>
-						<div id="importModel" class="innerBox">
-							<form id="importForm">
-								<label for="importName">Ange byggnadens namn</label>
-								<input id="importName" type="text"/>
-								<input id="importSubmit" type="submit" value="Hämta"/>
-							</form>
-						</div>
-					</div>
-				</div>
+			</div>
+
+			<div id="FormModal" class="container">
+				<form>
+					<input id="Name" type="text" placeholder="Namn"/>
+					<input id="Submit" type="submit" value="Hämta"/>
+				</form>
 			</div>
 		</div>
 		
@@ -194,6 +168,7 @@
 		<script src="./public/js/vendor/stats.min.js"></script>
 		<script src="./public/js/vendor/lz-string.min.js"></script>
 		<script src="./public/js/Builder.js"></script>
+		<script src="./public/js/buildingSaver.js"></script>
 		<script src="./public/js/navigation.js"></script>
 		<script src="./public/js/appcache.js"></script>
 	</body>

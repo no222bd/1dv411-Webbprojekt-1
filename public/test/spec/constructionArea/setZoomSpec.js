@@ -15,7 +15,7 @@ describe("Builder.ConstructionArea", function () {
 			builder._setZoom();
 
 			// assert
-			expect(builder._controls.maxDistance).toBe(builder._controls.minDistance * 6);
+			expect(builder._controls.maxDistance).toBe(builder._baseSize * 10);
 			expect(builder._controls.minDistance).toBe(builder._baseSize);
 		});
 
