@@ -29,7 +29,9 @@ body a {
 	width: 80%;
 	height: 100%;
 }
-
+#perspective.modalOption.chosen-view{
+	display: none;
+}
 /* -- Helpers -- */
 
 /* Use this class whenever body unselectable doesn't work */
@@ -388,8 +390,15 @@ body a {
 		margin: 0;
 		border-width:5px;
 	}
+	#perspective {
+		display: inherit;
+	}
 }
-
+@media (max-width: 920px){
+	#perspective.modalOption.chosen-view {
+		display: inherit;
+	}
+}
 /* Portrait orientation */
 @media (orientation: portrait) {
 	#colorsModal a {
