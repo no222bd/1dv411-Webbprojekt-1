@@ -447,9 +447,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			var cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
 			cam.position.set(x,y,z);
 			cam.lookAt(new THREE.Vector3(0, baseSize, 0));
-			cam.up.set(0, 0, 1);
-			cam.updateProjectionMatrix();
-			scene.add(cam);
 			var ren = createRenderer(view);
 			return new BUILDER.View(ren, cam, view, scene);
 		}
