@@ -116,6 +116,9 @@ body a {
 	font-size: 1em;
 	text-align: right;
 }
+.counter p, #sizePreview {
+	cursor: default;
+}
 .counter p, .counterWrapper a {
 	margin: 0 0 2px 2px;
 	color:black;
