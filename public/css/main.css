@@ -276,11 +276,13 @@ body a {
 	text-align: center;
 	vertical-align: middle;
 	padding-top: 2%;
+	position: relative;
 }
 
 #alert{
-	font-size: 2vw;
-	padding: 2%;
+	font-size: 1.5vw;
+	cursor: default;
+	padding-bottom: 2%
 }
 #alert:empty{
 	display: none;
