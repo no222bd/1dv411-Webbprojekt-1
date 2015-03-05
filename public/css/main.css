@@ -25,9 +25,8 @@ body a {
 	text-decoration: none;
 }
 #ThreeJScontainer {
-	position: relative;
-	width: 80%;
 	float: left;
+	width: 80%;
 	height: 100%;
 }
 
@@ -102,7 +101,7 @@ body a {
 }
 
 #perspective.chosen-view {
-	width: 138px;
+	width: 100%;
 	height: 138px;
 	padding-top: 0;
 	margin-left:10%;
@@ -128,6 +127,18 @@ body a {
 	left: 0;
 	border-radius: 5%;
 	overflow: hidden;
+}
+.perspective {
+/* display: block; */
+width: 80%;
+padding-top: 100%;
+position: relative;
+margin: 0;
+/* margin-bottom: 5px; */
+display: block;
+width: 100%;
+background-size: contain;
+background-repeat: no-repeat;
 }
 /* -- Counter -- */
 .counter {
@@ -166,6 +177,9 @@ body a {
 .modal .open{
 	display: table;
 }
+.size-auto{
+	width: 80%;
+}
 .container {
 	text-align: center;
 	width: 65%;
@@ -176,7 +190,7 @@ body a {
 	background-color: #C2E9F9;
 	height: 100%;
 	width: 10%;
-	float:left;
+	float:right;
 }
 #baseModal, 
 #resetConfirmModal, 
@@ -217,7 +231,7 @@ body a {
 
 }
 #perspectiveModal2 {
-	padding-top: 50%;
+	padding-top: 30%;
 }
 #confirmdeclinebuttons p {
 	font-weight: bold;
@@ -269,12 +283,6 @@ body a {
 	padding-top: 14%;
 }
 .canvasWrapper2 {
-	width:100%;
-	height:100px;
-	/*position: absolute;
-	left:0;*/
-	border-radius: 5%;
-	overflow: hidden;
 }
 #perspectiveModal .green {
 	display:block; 
