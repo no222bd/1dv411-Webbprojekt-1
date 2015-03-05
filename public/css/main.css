@@ -397,3 +397,14 @@ body a {
 		font-size: 8vw;
 	}
 }
+@media print {
+	#menu, .counter{
+		display: none;
+	}
+	html, body{
+		height: auto;
+	}
+	#ThreeJScontainer{
+		width: auto;
+	}
+}
