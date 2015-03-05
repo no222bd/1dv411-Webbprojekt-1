@@ -184,7 +184,12 @@ jQuery(document).ready(function($) {
 	});
 
 	$('#topView').trigger('click');
-
+	var canvasSelector = ".perspective canvas";
+	$(canvasSelector).each(function(){
+		var dataURL = this.toDataURL();
+		var targetElement = $("." + $(this).parent().attr("id"));
+		targetElement.parent().css("background-image", "url(" + dataURL + ")");
+	});
 	$("#ThreeJScontainer").on("updateView", function() {
 		var menuTargetId = $("#menu").data("target");
 		if(menuTargetId !== undefined) {
@@ -192,6 +197,12 @@ jQuery(document).ready(function($) {
 			var canvas = $("#" + menuTargetId).children()[0];
 			target.css("background-image", "url(" + canvas.toDataURL() + ")");
 		}
+		var canvasSelector = ".perspective canvas";
+	$(canvasSelector).each(function(){
+		var dataURL = this.toDataURL();
+		var targetElement = $("." + $(this).parent().attr("id"));
+		targetElement.parent().css("background-image", "url(" + dataURL + ")");
+	});
 	});
 
 	/**
