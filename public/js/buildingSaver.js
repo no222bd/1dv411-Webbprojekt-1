@@ -115,6 +115,7 @@
 		 */
 		this.saveBuildings = function(buildings) {
 			var all = getAllBuildings() || {};
+			
 			for (var id in buildings) {
 				if (!checkIfBuildingExists(id, all)) {
 					all[id] = buildings[id];
