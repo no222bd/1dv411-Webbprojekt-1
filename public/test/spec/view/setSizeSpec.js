@@ -30,7 +30,10 @@ describe("Builder.View", function () {
 			spyOn(view._renderer, 'setSize');
 			JQueryElement.width(80);
 			var aspectRatio = JQueryElement.width() / JQueryElement.height();
-			var viewSite = (view._baseSize / 2) * 5;
+			var viewSite = view._baseSize * 2;
+			if (view._JQueryElement.attr("id") == "topView") {
+				viewSite = view._baseSize * 2 + view._baseSize / 10;
+			}
 
 			// act
 			view.setSize();

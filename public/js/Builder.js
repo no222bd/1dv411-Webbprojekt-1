@@ -390,8 +390,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 		// green line
 		var line = new THREE.Geometry();
-		line.vertices.push(new THREE.Vector3(baseSize + gridOffset, -gridOffset / 2, baseSize));
-		line.vertices.push(new THREE.Vector3(baseSize + gridOffset, -gridOffset / 2, -baseSize));
+		line.vertices.push(new THREE.Vector3(baseSize + gridOffset, 0 / 2, baseSize));
+		line.vertices.push(new THREE.Vector3(baseSize + gridOffset, 0 / 2, -baseSize));
 		var material = new THREE.LineBasicMaterial({
 			color : 0x009944, linewidth: 2
 		});
@@ -399,8 +399,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 		// red line
 		var line = new THREE.Geometry();
-		line.vertices.push(new THREE.Vector3(-(baseSize + gridOffset), -gridOffset / 2, baseSize));
-		line.vertices.push(new THREE.Vector3(-(baseSize + gridOffset), -gridOffset / 2, -baseSize));
+		line.vertices.push(new THREE.Vector3(-(baseSize + gridOffset), 0, baseSize));
+		line.vertices.push(new THREE.Vector3(-(baseSize + gridOffset), 0, -baseSize));
 		material = new THREE.LineBasicMaterial({
 			color : 0xE60012, linewidth: 2
 		});
@@ -408,8 +408,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 		// blue line
 		line = new THREE.Geometry();
-		line.vertices.push(new THREE.Vector3(baseSize, -gridOffset / 2, baseSize + gridOffset));
-		line.vertices.push(new THREE.Vector3(-baseSize, -gridOffset / 2, baseSize + gridOffset));
+		line.vertices.push(new THREE.Vector3(baseSize, 0, baseSize + gridOffset));
+		line.vertices.push(new THREE.Vector3(-baseSize, 0, baseSize + gridOffset));
 		material = new THREE.LineBasicMaterial({
 			color : 0x0068B7, linewidth: 2
 		});
@@ -417,8 +417,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 		// yellow line
 		line = new THREE.Geometry();
-		line.vertices.push(new THREE.Vector3(baseSize, -gridOffset / 2, -(baseSize + gridOffset)));
-		line.vertices.push(new THREE.Vector3(-baseSize, -gridOffset / 2, -(baseSize + gridOffset)));
+		line.vertices.push(new THREE.Vector3(baseSize, 0, -(baseSize + gridOffset)));
+		line.vertices.push(new THREE.Vector3(-baseSize, 0, -(baseSize + gridOffset)));
 		material = new THREE.LineBasicMaterial({
 			color : 0xF39800, linewidth: 2
 		});
@@ -703,7 +703,10 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	 * Set size for camera.
 	 */
 	this.setSize = function() {
-		var viewSite = (baseSize / 2) * 5;
+		var viewSite = baseSize * 2;
+		if (JQueryElement.attr("id") == "topView") {
+			viewSite = baseSize * 2 + baseSize / 10;
+		}
 		var aspectRatio = JQueryElement.width() / JQueryElement.height();
 		renderer.setSize(JQueryElement.width(), JQueryElement.height());
 
