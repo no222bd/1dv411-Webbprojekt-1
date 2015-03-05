@@ -384,7 +384,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 */
 	function createCamera() {
 		var camera = new THREE.PerspectiveCamera(45, jQueryContainer.width() / jQueryContainer.height(), 1, 10000);
-		camera.position.set(0, 800, 500);
+		camera.position.set(500, 800, 1300);
 		camera.lookAt(new THREE.Vector3());
 
 		return camera;
@@ -444,7 +444,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		function createView(x,y,z, view){
 			var viewSize = 1200;
 			var aspectRatio = view.width() / view.height();
-			var cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, aspectRatio * viewSize / 2, viewSize / 2, viewSize / 2);
+			var cam = new THREE.OrthographicCamera(aspectRatio * viewSize / 2, -aspectRatio * viewSize / 2, viewSize / 2, -viewSize / 2);
 			cam.position.set(x,y,z);
 			cam.lookAt(new THREE.Vector3(0, baseSize, 0));
 			cam.up.set(0, 0, 1);

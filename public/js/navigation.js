@@ -6,7 +6,7 @@ jQuery(document).ready(function($) {
     		colorsArray.push($(link).attr('href'));	
     	}
     });
-	window.cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives, colorsArray);
+	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives, colorsArray);
 	cb.renderPerspectives();
 	var openModal = null;
 	var chosenColor;
