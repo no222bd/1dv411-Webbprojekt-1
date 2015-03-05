@@ -92,6 +92,7 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		var name = $("#Name").val();
 		var buildingSaver = new BUILDER.BuildingSaver();
+		var alert = $('#alert');
 
 		if($(this).val() == 'Hämta') {
 			if (navigator.onLine) {
@@ -114,6 +115,7 @@ jQuery(document).ready(function($) {
 								closeModal();
 							} else {
 								console.log("Could not find that building.");
+								alert.text('Byggnaden hittades inte :(');
 							}
 						}
 					}
@@ -125,7 +127,7 @@ jQuery(document).ready(function($) {
 					cb.loadModel(result);
 					closeModal();
 				} else {
-					console.log("Could not find that building.");
+					alert.text('Byggnaden hittades inte :(');
 				}
 			}
 		} else {
@@ -141,14 +143,14 @@ jQuery(document).ready(function($) {
 						201: function(result) {
 							// save in localStorage
 							buildingSaver.saveBuildings(JSON.parse(result.data));
-							console.log(result);
+							alert.text('Byggnaden sparades :)');
 							closeModal();
 						},
 						400: function(result) {
-							console.log(result);
+							alert.text('Försök med ett annat namn :(');
 						},
 						503: function(result) {
-							console.log(result);
+							alert.text('Försök spara igen :(');
 						}
 					}
 				});
@@ -158,7 +160,7 @@ jQuery(document).ready(function($) {
 				if (buildingSaver.saveNewBuilding(name, dataString)) {
 					closeModal();
 				} else {
-					console.log("Name already exists.");
+					alert.text('Försök med ett annat namn :(');
 				}
 			}
 		}
@@ -283,6 +285,7 @@ jQuery(document).ready(function($) {
 
 			$('#modal').toggleClass('open');
 			$(href).toggleClass('open');
+			$('#alert').text('');
 			$(".modalOption").toggleClass('faded');
 			element.removeClass('faded');
 			openModal = href;

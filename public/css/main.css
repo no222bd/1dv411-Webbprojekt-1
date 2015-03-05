@@ -263,12 +263,30 @@ body a {
 .top {
 	border:none;
 }
-#FormModal form input[type="text"]{
-	width: 70%;
+#FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
+	display: block;
+	height: 25%;
+	width: 100%;
+	margin-bottom: 8%;
+	background-color: #555;
+	border: 2px solid #333;
+	border-radius: 40px;
+	font-size: 4vw;
+	color: white !important;
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 2%;
 }
-#FormModal form input[type="submit"]{
-	width: 20%;
+
+#alert{
+	font-size: 2vw;
+	padding: 2%;
 }
+#alert:empty{
+	display: none;
+}
+
+
 #settingsModal div a {
 	text-transform: uppercase;
 	font-weight: bold;
