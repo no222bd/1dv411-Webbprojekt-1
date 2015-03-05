@@ -386,7 +386,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 */
 	function createColorLines() {
 		var lines = [];
-		var gridOffset = 20;
+		var gridOffset = baseSize/7;
 
 		// green line
 		var line = new THREE.Geometry();
@@ -438,7 +438,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			cam.position.set(x,y,z);
 			cam.lookAt(new THREE.Vector3(0, baseSize, 0));
 			var ren = createRenderer(view);
-			return new BUILDER.View(ren, cam, view, scene);
+			return new BUILDER.View(ren, cam, view, scene, baseSize);
 		}
 
 		views = []; //If this turns out to be a problem, use views.length = 0;
@@ -691,7 +691,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
  * @param scene
  * @constructor
  */
-BUILDER.View = function(renderer, camera, JQueryElement, scene) {
+BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	/**
 	 * Renders scene.
 	 */
@@ -703,7 +703,7 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 	 * Set size for camera.
 	 */
 	this.setSize = function() {
-		var viewSite = 600;
+		var viewSite = (baseSize/2)*5;
 		var aspectRatio = JQueryElement.width() / JQueryElement.height();
 		renderer.setSize(JQueryElement.width(), JQueryElement.height());
 
