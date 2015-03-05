@@ -106,19 +106,21 @@ body a {
 }
 
 /* -- Counter -- */
-.counter {
+.counterWrapper {
 	width: 150px;
 	height: 40px;
-	position: absolute;
 	top: 1em;
+	position: absolute;
 	right: 1em;
 	font-weight: 900;
 	font-size: 1em;
 	text-align: right;
 }
-.counter p {
+.counter p, .counterWrapper a {
 	margin: 0 0 2px 2px;
 	color:black;
+	display: inline;
+	position: relative;
 }
 
 /* -- Modal -- */

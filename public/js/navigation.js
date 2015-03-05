@@ -31,6 +31,20 @@ jQuery(document).ready(function($) {
     });
 
 	/**
+	 * Toggles counter to hide/show it.
+	 */
+    $('.counterWrapper').on('click', 'a', function(event){
+    	event.preventDefault();
+    	if ($('#toggleCounter').text() === "<") {
+			$('#toggleCounter').text(">");
+			$('.counter').show();
+    	} else if ($('#toggleCounter').text() === ">") {
+			$('#toggleCounter').text("<");
+			$('.counter').hide();
+    	}
+    });
+
+	/**
 	 * Menu click eventhandler.
 	 */
 	$('#menu').on('click', 'a', function(event) {
