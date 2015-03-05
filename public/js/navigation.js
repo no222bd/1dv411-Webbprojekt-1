@@ -35,11 +35,11 @@ jQuery(document).ready(function($) {
 	 */
     $('.counterWrapper').on('click', 'a', function(event){
     	event.preventDefault();
-    	if ($('#toggleCounter').text() === "<") {
-			$('#toggleCounter').text(">");
+    	if ($('#toggleArrow').text() === "<") {
+			$('#toggleArrow').text(">");
 			$('.counter').show();
-    	} else if ($('#toggleCounter').text() === ">") {
-			$('#toggleCounter').text("<");
+    	} else if ($('#toggleArrow').text() === ">") {
+			$('#toggleArrow').text("<");
 			$('.counter').hide();
     	}
     });
