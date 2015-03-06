@@ -365,7 +365,8 @@ body a {
 	background-color:#E5004F;
 }
 .color.random {
-	background-color:#BE0081;
+	background-image: url('../img/random-color.png');
+	background-size:contain;
 }
 .color.turquoise {
 	background-color:#C6FFF0;
