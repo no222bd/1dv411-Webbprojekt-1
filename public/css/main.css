@@ -219,6 +219,12 @@ body a {
 	border-radius: 40px;
 	overflow: hidden;
 	padding-top: 0;
+	border-left: none;
+	border-top: none;
+}
+#preview canvas{
+	border-radius: 40px !important;
+	border: 2px solid #333;
 }
 .innerBox {
 	position: absolute;
