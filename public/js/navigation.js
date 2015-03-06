@@ -74,6 +74,10 @@ jQuery(document).ready(function($) {
 			if($(this).attr('href') == '#import' || $(this).attr('href') == '#save'){
 				handleModalWindow($(this));
 			}
+			if($(this).attr('href') == '#print'){
+				closeModal();
+				window.print();
+			}
 			if($(this).attr('href') == '#reset') {
 				cb.clearCubes();
 				cb.renderPerspectives();
