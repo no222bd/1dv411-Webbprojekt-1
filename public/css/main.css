@@ -29,9 +29,6 @@ body a {
 	width: 80%;
 	height: 100%;
 }
-#perspective.modalOption.chosen-view{
-	display: none;
-}
 /* -- Helpers -- */
 
 /* Use this class whenever body unselectable doesn't work */
@@ -111,31 +108,22 @@ body a {
 	margin-bottom:5px;
 }
 #perspectiveModal > div {
-	display: inline-block;
-	position: relative;
 	margin: 1%;
 	padding-top: 0;
-	width: 25%;
-	padding-bottom: 25%;
 	background-color: #555;
 	border-radius: 5%;
 	background: #C2E9F9;
 }
 .canvasWrapper {
-	height: 100%;
-	width: 100%;
-	position: absolute;
-	left: 0;
 	border-radius: 5%;
 	overflow: hidden;
 }
-#perspectiveModal2 .perspective {
-/* display: block; */
-	width: 80%;
-	padding-top: 100%;
-	position: relative;
+.perspective canvas {
+	width: 100% !important;
+	height: 100px !important;
+}
+.perspective {
 	margin: 0;
-	/* margin-bottom: 5px; */
 	display: block;
 	width: 100%;
 	background-size: contain;
@@ -187,7 +175,7 @@ body a {
 	margin: auto auto;
 	height: 100%;
 }
-#perspectiveContainer2 {
+#perspectiveContainer {
 	background-color: #C2E9F9;
 	height: 100%;
 	width: 10%;
@@ -196,8 +184,7 @@ body a {
 #baseModal, 
 #resetConfirmModal, 
 #colorsModal, 
-#settingsModal,
-#perspectiveModal {
+#settingsModal {
 	display: table-cell;
 	vertical-align: middle;
 }
@@ -205,8 +192,7 @@ body a {
 #resetConfirmModal > div, 
 #colorsModal > div, 
 #settingsModal > div,
-#FormModal > form,
-#perspectiveModal > div {
+#FormModal > form {
 	display: inline-block;
 	position: relative;
 	margin: 1%;
@@ -222,16 +208,7 @@ body a {
 	width: 36%;
 	padding-top: 36%;
 }
-#perspectiveModal > div {
-	padding-top: 0;
-	width: 25%;
-	padding-bottom:25%;
-	background-color: #555; 
-	border-radius: 5%; 
-	background:#C2E9F9; 
-
-}
-#perspectiveModal2 {
+#perspectiveModal {
 	padding-top: 30%;
 }
 #confirmdeclinebuttons p {
@@ -282,12 +259,6 @@ body a {
 	margin: 10px;
 	width: 14%;
 	padding-top: 14%;
-}
-.canvasWrapper2 {
-}
-#perspectiveModal .green {
-	display:block; 
-	margin:0 auto;
 }
 /* colors for the view-frames*/
 .red {
@@ -390,14 +361,6 @@ body a {
 		margin: 0;
 		border-width:5px;
 	}
-	#perspective {
-		display: inherit;
-	}
-}
-@media (max-width: 920px){
-	#perspective.modalOption.chosen-view {
-		display: inherit;
-	}
 }
 /* Portrait orientation */
 @media (orientation: portrait) {
@@ -407,7 +370,7 @@ body a {
 	}
 	#menu {
 		width: 100%;
-		height: auto;
+		height: 12%;
 	}
 	#menu a {
 		width: 100%;
@@ -418,10 +381,25 @@ body a {
 	#menu li {
 		float: left;
 		width: 12%;
-		margin-top:5%;
 	}
 	#ThreeJScontainer {
 		width: 100%;
+		height: 75%;
+	}
+	#perspectiveContainer {
+		height: 15%;
+		width: 100%;
+	}
+	#perspectiveModal {
+		padding-top: 0;
+	}
+	#perspectiveModal > div {
+		width: 20%;
+		float: left;
+		margin: 0;
+	}
+	.perspective {
+		height: 100%;
 	}
 	/* Modals */
 	.modal {
