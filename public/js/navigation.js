@@ -134,46 +134,6 @@ jQuery(document).ready(function($) {
 	});
 
 	/**
-	 * Sets perspective.
-	 * @param {jQuery element} element
-	 */
-	function setPerspective(element) {
-		var perspective = element.attr("href");
-		cb.perspective(perspective);
-		closeModal();
-	}
-
-	$(".perspective .canvasWrapper").on("click", function(event) {
-		event.preventDefault();
-		var target = $("#perspective");
-		target.css("background-image", "url(" + this.firstChild.toDataURL() + ")");
-		target.removeClass("top red yellow green blue").addClass("chosen-view " + $(this).parents("div").attr("class"));
-		$("#menu").data("target", $(this).attr("id"));
-	});
-
-	$('#topView').trigger('click');
-	var canvasSelector = ".perspective canvas";
-	$(canvasSelector).each(function(){
-		var dataURL = this.toDataURL();
-		var targetElement = $("." + $(this).parent().attr("id"));
-		targetElement.parent().css("background-image", "url(" + dataURL + ")");
-	});
-	$("#ThreeJScontainer").on("updateView", function() {
-		var menuTargetId = $("#menu").data("target");
-		if(menuTargetId !== undefined) {
-			var target = $("#perspective");
-			var canvas = $("#" + menuTargetId).children()[0];
-			target.css("background-image", "url(" + canvas.toDataURL() + ")");
-		}
-		var canvasSelector = ".perspective canvas";
-	$(canvasSelector).each(function(){
-		var dataURL = this.toDataURL();
-		var targetElement = $("." + $(this).parent().attr("id"));
-		targetElement.parent().css("background-image", "url(" + dataURL + ")");
-	});
-	});
-
-	/**
 	 * Sets base size.
 	 * @param {jQuery element} element
 	 */
@@ -203,7 +163,7 @@ jQuery(document).ready(function($) {
 		cb.renderPerspectives();
 		$('#ThreeJScontainer').trigger('updateView');
 	}
-
+	
 	/**
 	 * Sets color of cube.
 	 * @param  {jQuery element} element
