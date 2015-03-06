@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+jQuery(document).ready(function ($) {
 	var perspectives = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView"), $("#preview")];
 
 	//colorsArray holds all the colors that are awailable in the UI color selector
@@ -6,8 +6,8 @@ jQuery(document).ready(function($) {
 	/**
 	 * Populates colorsArray with colors from colorsModal.
 	 */
-	$('#colorsModal a').each(function( index, link ) {
-		if($(link).attr('href') != '#random'){
+	$('#colorsModal a').each(function (index, link) {
+		if ($(link).attr('href') != '#random') {
 			colorsArray.push($(link).attr('href'));
 		}
 	});
@@ -20,15 +20,15 @@ jQuery(document).ready(function($) {
 
 	//Represents the chosen color.
 	var chosenColor;
-	
-	/**	
+
+	/**
 	 * Generates random cube colors per cube placed.
 	 */
-	$("#ThreeJScontainer").on("mousedown", function(){
-		if(chosenColor == "#random"){
-			cb.setCubeMaterial(chooseRandomColorFromColors()); 
+	$("#ThreeJScontainer").on("mousedown", function () {
+		if (chosenColor == "#random") {
+			cb.setCubeMaterial(chooseRandomColorFromColors());
 		}
-    });
+	});
 
 	/**
 	 * Toggles counter to hide/show it.
@@ -47,7 +47,7 @@ jQuery(document).ready(function($) {
 	/**
 	 * Menu click eventhandler.
 	 */
-	$('#menu').on('click', 'a', function(event) {
+	$('#menu').on('click', 'a', function (event) {
 		event.preventDefault();
 
 		/**
@@ -66,8 +66,8 @@ jQuery(document).ready(function($) {
 	 * Provides a more intuitive closing of modals.
 	 * @param event
 	 */
-	$("#modal").click(function(event){
-		if(event.target.tagName == "DIV"){
+	$("#modal").click(function (event) {
+		if (event.target.tagName == "DIV") {
 			closeModal();
 		}
 	});
@@ -75,7 +75,7 @@ jQuery(document).ready(function($) {
 	/**
 	 * Modal click eventhandler. Controls which function to use.
 	 */
-	$('#modal').on('click', 'a', function(event) {
+	$('#modal').on('click', 'a', function (event) {
 		event.preventDefault();
 
 		if ($(this).hasClass('color')) {
@@ -85,10 +85,10 @@ jQuery(document).ready(function($) {
 		} else if ($(this).hasClass('perspective')) {
 			setPerspective($(this));
 		} else {
-			if($(this).attr('href') == '#import' || $(this).attr('href') == '#save'){
+			if ($(this).attr('href') == '#import' || $(this).attr('href') == '#save') {
 				handleModalWindow($(this));
 			}
-			if($(this).attr('href') == '#reset') {
+			if ($(this).attr('href') == '#reset') {
 				cb.clearCubes();
 				cb.renderPerspectives();
 				$('#ThreeJScontainer').trigger('updateView');
@@ -102,77 +102,82 @@ jQuery(document).ready(function($) {
 	 * When successful, gets JSON, value with key "data" should be sent to
 	 * the model through cb.loadModel();
 	 */
-	$("#Submit").on('click',function(event) {
+	$("#Submit").on('click', function (event) {
 		event.preventDefault();
-		var name = $("#Name").val();
+		var name = $.trim($("#Name").val());
 		var buildingSaver = new BUILDER.BuildingSaver();
-
-		if($(this).val() == 'Hämta') {
-			if (navigator.onLine) {
-				// check api first
-				var requestUrl = "api/" + name;
-				$.ajax({
-					type: "GET",
-					url: requestUrl,
-					statusCode: {
-						200: function (result) {
-							cb.loadModel(result.data);
-							closeModal();
-						},
-						400: function (result) {
-							// check in localStorage
-							var result = buildingSaver.getBuilding(name);
-							if (result) {
-								//console.log(result);
-								cb.loadModel(result);
+		var alert = $('#alert');
+		if (name == '' || name == null || name == undefined) {
+			alert.text('Försök med ett annat namn :(');
+		} else {
+			if ($(this).val() == 'Hämta') {
+				if (navigator.onLine) {
+					// check api first
+					var requestUrl = "api/" + name;
+					$.ajax({
+						type: "GET",
+						url: requestUrl,
+						statusCode: {
+							200: function (result) {
+								cb.loadModel(result.data);
 								closeModal();
-							} else {
-								console.log("Could not find that building.");
+							},
+							400: function (result) {
+								// check in localStorage
+								var result = buildingSaver.getBuilding(name);
+								if (result) {
+									//console.log(result);
+									cb.loadModel(result);
+									closeModal();
+								} else {
+									console.log("Could not find that building.");
+									alert.text('Byggnaden hittades inte :(');
+								}
 							}
 						}
-					}
-				});
-				// if offline
-			} else {
-				var result = buildingSaver.getBuilding(name);
-				if (result) {
-					cb.loadModel(result);
-					closeModal();
+					});
+					// if offline
 				} else {
-					console.log("Could not find that building.");
+					var result = buildingSaver.getBuilding(name);
+					if (result) {
+						cb.loadModel(result);
+						closeModal();
+					} else {
+						alert.text('Byggnaden hittades inte :(');
+					}
 				}
-			}
-		} else {
-			var requestUrl = "api/create";
-			var dataString = LZString.decompressFromBase64(cb.saveModel());
-
-			if (navigator.onLine) {
-				$.ajax({
-					type: "POST",
-					url: requestUrl,
-					data: { name: name, model: dataString },
-					statusCode: {
-						201: function(result) {
-							// save in localStorage
-							buildingSaver.saveBuildings(JSON.parse(result.data));
-							console.log(result);
-							closeModal();
-						},
-						400: function(result) {
-							console.log(result);
-						},
-						503: function(result) {
-							console.log(result);
-						}
-					}
-				});
-				// if offline
 			} else {
-				// save building in localStorage
-				if (buildingSaver.saveNewBuilding(name, dataString)) {
-					closeModal();
+				var requestUrl = "api/create";
+				var dataString = LZString.decompressFromBase64(cb.saveModel());
+
+				if (navigator.onLine) {
+					$.ajax({
+						type: "POST",
+						url: requestUrl,
+						data: {name: name, model: dataString},
+						statusCode: {
+							201: function (result) {
+								// save in localStorage
+								buildingSaver.saveBuildings(JSON.parse(result.data));
+								alert.text('Byggnaden sparades :)');
+								closeModal();
+							},
+							400: function (result) {
+								alert.text('Försök med ett annat namn :(');
+							},
+							503: function (result) {
+								alert.text('Försök spara igen :(');
+							}
+						}
+					});
+					// if offline
 				} else {
-					console.log("Name already exists.");
+					// save building in localStorage
+					if (buildingSaver.saveNewBuilding(name, dataString)) {
+						closeModal();
+					} else {
+						alert.text('Försök med ett annat namn :(');
+					}
 				}
 			}
 		}
@@ -189,7 +194,7 @@ jQuery(document).ready(function($) {
 		closeModal();
 	}
 
-	$(".perspective .canvasWrapper").on("click", function(event) {
+	$(".perspective .canvasWrapper").on("click", function (event) {
 		event.preventDefault();
 		var target = $("#perspective");
 		target.css("background-image", "url(" + this.firstChild.toDataURL() + ")");
@@ -199,9 +204,9 @@ jQuery(document).ready(function($) {
 
 	$('#topView').trigger('click');
 
-	$("#ThreeJScontainer").on("updateView", function() {
+	$("#ThreeJScontainer").on("updateView", function () {
 		var menuTargetId = $("#menu").data("target");
-		if(menuTargetId !== undefined) {
+		if (menuTargetId !== undefined) {
 			var target = $("#perspective");
 			var canvas = $("#" + menuTargetId).children()[0];
 			target.css("background-image", "url(" + canvas.toDataURL() + ")");
@@ -216,7 +221,7 @@ jQuery(document).ready(function($) {
 		var href = element.attr("href");
 		var currentSize = cb.getBaseSize();
 
-		switch(href) {
+		switch (href) {
 			case "#up":
 				if (currentSize < 10) {
 					currentSize = parseInt(currentSize) + 1;
@@ -231,7 +236,8 @@ jQuery(document).ready(function($) {
 					return;
 				}
 				break;
-		};
+		}
+		;
 
 		$('#sizePreview').text(currentSize);
 		cb.setBaseSize(currentSize);
@@ -258,7 +264,7 @@ jQuery(document).ready(function($) {
 	/**
 	 * Sets a resize event handler.
 	 */
-	$(window).resize(function(event) {
+	$(window).resize(function (event) {
 		cb.resize();
 	});
 
@@ -286,10 +292,10 @@ jQuery(document).ready(function($) {
 
 		closeModal();
 		if (areOpen) {
-			if(href == '#save' || href == '#import'){
-				if(href == '#save'){
+			if (href == '#save' || href == '#import') {
+				if (href == '#save') {
 					$("#Submit").val('Spara');
-				}else{
+				} else {
 					$("#Submit").val('Hämta');
 				}
 				href = '#FormModal';
@@ -297,6 +303,7 @@ jQuery(document).ready(function($) {
 
 			$('#modal').toggleClass('open');
 			$(href).toggleClass('open');
+			$('#alert').text('');
 			$(".modalOption").toggleClass('faded');
 			element.removeClass('faded');
 			openModal = href;
@@ -321,7 +328,7 @@ jQuery(document).ready(function($) {
 	/*
 	 * Chooses a color from the colorsArray that holds all available colors.
 	 */
-	function chooseRandomColorFromColors(){
-		return colorsArray[Math.floor((Math.random() * (colorsArray.length-1)))];
+	function chooseRandomColorFromColors() {
+		return colorsArray[Math.floor((Math.random() * (colorsArray.length - 1)))];
 	}
 });

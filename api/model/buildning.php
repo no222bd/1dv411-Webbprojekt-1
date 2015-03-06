@@ -50,7 +50,7 @@ Class Building{
 		$errors = array();
 		$key = 'name';
 		if($name != '') {
-			if(strlen($name) <= 10) {
+			if(strlen($name) <= 50) {
 				if(!$this->modelExists($name)) {
 					$this->removeError($key);
 					$this->name = $name;
