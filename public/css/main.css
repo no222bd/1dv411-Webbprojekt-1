@@ -24,7 +24,9 @@ body a {
 	float: left;
 	height: 100%;
 }
-
+.perspective canvas, #perspective {
+	transform: scaleX(-1);
+}
 /* -- Helpers -- */
 
 /* Use this class whenever body unselectable doesn't work */
@@ -106,19 +108,24 @@ body a {
 }
 
 /* -- Counter -- */
-.counter {
+.counterWrapper {
 	width: 150px;
 	height: 40px;
-	position: absolute;
 	top: 1em;
+	position: absolute;
 	right: 1em;
 	font-weight: 900;
 	font-size: 1em;
 	text-align: right;
 }
-.counter p {
+#sizePreview {
+	cursor: default;
+}
+.counter p, .counterWrapper a {
 	margin: 0 0 2px 2px;
 	color:black;
+	display: inline;
+	position: relative;
 }
 
 /* -- Modal -- */
@@ -249,25 +256,33 @@ body a {
 	border-radius: 5%;
 	overflow: hidden;
 }
+
 #perspectiveModal .green {
 	display:block; 
 	margin:0 auto;
 }
+
 /* colors for the view-frames*/
+
 .red {
-	border:10px solid #E60012;
+	border: 10px solid #C2E9F9;
+	border-bottom:10px solid #E60012;
 }
+
 .blue {
-	border:10px solid #0068B7;
+	border: 10px solid #C2E9F9;
+	border-bottom:10px solid #0068B7;
 }
 .yellow {
-	border:10px solid #F39800;
+	border: 10px solid #C2E9F9;
+	border-bottom:10px solid #F39800;
 }
 .green {
-	border:10px solid #009944;
+	border: 10px solid #C2E9F9;
+	border-bottom:10px solid #009944;
 }
 .top {
-	border:none;
+	border: 10px solid #C2E9F9;
 }
 #FormModal form input[type="text"]{
 	width: 70%;
@@ -353,6 +368,13 @@ body a {
 	#colorsModal a {
 		margin: 0;
 		border-width:5px;
+	}
+}
+
+/* Smaller devices border-radius */
+@media (max-width:960px) {
+	#settingsModal > div, #baseModal div div a, #baseModal div div #sizePreview, #preview {
+		border-radius: 20px;
 	}
 }
 

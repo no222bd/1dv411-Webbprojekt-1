@@ -42,7 +42,7 @@ describe("Builder.BuildingSaver", function () {
 			buildingSaver.saveNewBuilding("name4", "qwerty");
 			
 			// assert
-			expect(Object.keys(buildingSaver._getAllBuildings()).length >= 4).toBeTruthy();
+			expect(Object.keys(buildingSaver._getAllBuildings().length == temp.length + 1)).toBeTruthy();
 		});
 		
 		it("should not save with already existing name", function () {
@@ -56,7 +56,7 @@ describe("Builder.BuildingSaver", function () {
 			buildingSaver.saveNewBuilding("name2", "qwerty");
 			
 			// assert
-			expect(Object.keys(buildingSaver._getAllBuildings()).length >= 4).toBeFalsy();
+			expect(Object.keys(buildingSaver._getAllBuildings().length == temp.length)).toBeTruthy();
 		});
 	});
 });

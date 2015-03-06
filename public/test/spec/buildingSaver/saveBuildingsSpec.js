@@ -46,7 +46,7 @@ describe("Builder.BuildingSaver", function () {
 			buildingSaver.saveBuildings(oneMoreBuilding);
 			
 			// assert
-			expect(Object.keys(buildingSaver._getAllBuildings()).length >= 4).toBeTruthy();
+			expect(Object.keys(buildingSaver._getAllBuildings().length == temp.length + 1)).toBeTruthy();
 		});
 		
 		it("should not save already existing building", function () {
@@ -60,7 +60,7 @@ describe("Builder.BuildingSaver", function () {
 			buildingSaver.saveBuildings({name2: { model: "qwerty", date: "2015-03-03" }});
 			
 			// assert
-			expect(Object.keys(buildingSaver._getAllBuildings()).length >= 4).toBeFalsy();
+			expect(Object.keys(buildingSaver._getAllBuildings().length == temp.length)).toBeTruthy();
 		});
 	});
 });
