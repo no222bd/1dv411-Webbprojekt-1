@@ -705,7 +705,9 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	this.setSize = function() {
 		var viewSite = baseSize * 2;
 		if (JQueryElement.attr("id") == "topView") {
-			viewSite = baseSize * 2 + baseSize / 10;
+			viewSite = baseSize * 2 + baseSize / 20;
+		} else if (JQueryElement.attr("id") == "preview") {
+			viewSite = baseSize * 2 + baseSize / 2;
 		}
 		var aspectRatio = JQueryElement.width() / JQueryElement.height();
 		renderer.setSize(JQueryElement.width(), JQueryElement.height());

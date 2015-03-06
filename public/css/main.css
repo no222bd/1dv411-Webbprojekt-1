@@ -226,6 +226,12 @@ body a {
 	border-radius: 40px;
 	overflow: hidden;
 	padding-top: 0;
+	border-left: none;
+	border-top: none;
+}
+#preview canvas{
+	border-radius: 40px !important;
+	border: 2px solid #333;
 }
 .innerBox {
 	position: absolute;
@@ -276,7 +282,7 @@ body a {
 	border-bottom:10px solid #009944;
 }
 .top {
-	border: 10px solid #C2E9F9;
+	border: 10px solid #C2E9F9;*/
 }
 #FormModal form input[type="text"]{
 	width: 70%;
@@ -369,6 +375,9 @@ body a {
 @media (max-width:960px) {
 	#settingsModal > div, #baseModal div div a, #baseModal div div #sizePreview, #preview {
 		border-radius: 20px;
+	}
+	#preview canvas{
+		border-radius: 20px !important;
 	}
 }
 
