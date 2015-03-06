@@ -23,7 +23,7 @@ describe("Builder.ConstructionArea", function () {
 				var line = lines[0];
 				var gridOffset = builder._baseSize / 7;
 
-				var Vector3 = new THREE.Vector3((builder._baseSize + gridOffset), -gridOffset / 2, builder._baseSize);
+				var Vector3 = new THREE.Vector3((builder._baseSize + gridOffset), 0, builder._baseSize);
 				expect(line.geometry.vertices[0]).toEqual(Vector3);
 				Vector3.z = -Vector3.z;
 				expect(line.geometry.vertices[1]).toEqual(Vector3);
@@ -33,7 +33,7 @@ describe("Builder.ConstructionArea", function () {
 				var line = lines[1];
 				var gridOffset = builder._baseSize / 7;
 
-				var Vector3 = new THREE.Vector3(-(builder._baseSize + gridOffset), -gridOffset / 2, builder._baseSize);
+				var Vector3 = new THREE.Vector3(-(builder._baseSize + gridOffset), 0, builder._baseSize);
 				expect(line.geometry.vertices[0]).toEqual(Vector3);
 				Vector3.z = -Vector3.z;
 				expect(line.geometry.vertices[1]).toEqual(Vector3);
@@ -43,7 +43,7 @@ describe("Builder.ConstructionArea", function () {
 				var line = lines[2];
 				var gridOffset = builder._baseSize / 7;
 
-				var Vector3 = new THREE.Vector3(builder._baseSize, -gridOffset / 2, (builder._baseSize + gridOffset));
+				var Vector3 = new THREE.Vector3(builder._baseSize, 0, (builder._baseSize + gridOffset));
 				expect(line.geometry.vertices[0]).toEqual(Vector3);
 				Vector3.x = -Vector3.x;
 				expect(line.geometry.vertices[1]).toEqual(Vector3);
@@ -53,7 +53,7 @@ describe("Builder.ConstructionArea", function () {
 				var line = lines[3];
 				var gridOffset = builder._baseSize / 7;
 
-				var Vector3 = new THREE.Vector3(builder._baseSize, -gridOffset / 2, -(builder._baseSize + gridOffset));
+				var Vector3 = new THREE.Vector3(builder._baseSize, 0, -(builder._baseSize + gridOffset));
 				expect(line.geometry.vertices[0]).toEqual(Vector3);
 				Vector3.x = -Vector3.x;
 				expect(line.geometry.vertices[1]).toEqual(Vector3);

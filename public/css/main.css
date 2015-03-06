@@ -250,25 +250,33 @@ body a {
 	border-radius: 5%;
 	overflow: hidden;
 }
+
 #perspectiveModal .green {
 	display:block; 
 	margin:0 auto;
 }
+
 /* colors for the view-frames*/
+
 .red {
-	border:10px solid #E60012;
+	border: 10px solid #C2E9F9;
+	border-bottom:10px solid #E60012;
 }
+
 .blue {
-	border:10px solid #0068B7;
+	border: 10px solid #C2E9F9;
+	border-bottom:10px solid #0068B7;
 }
 .yellow {
-	border:10px solid #F39800;
+	border: 10px solid #C2E9F9;
+	border-bottom:10px solid #F39800;
 }
 .green {
-	border:10px solid #009944;
+	border: 10px solid #C2E9F9;
+	border-bottom:10px solid #009944;
 }
 .top {
-	border:none;
+	border: 10px solid #C2E9F9;
 }
 #FormModal form input[type="text"]{
 	width: 70%;
