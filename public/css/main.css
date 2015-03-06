@@ -357,6 +357,13 @@ body a {
 	}
 }
 
+/* Smaller devices border-radius */
+@media (max-width:960px) {
+	#settingsModal > div, #baseModal div div a, #baseModal div div #sizePreview, #preview {
+		border-radius: 20px;
+	}
+}
+
 /* Portrait orientation */
 @media (orientation: portrait) {
 	#colorsModal a {
