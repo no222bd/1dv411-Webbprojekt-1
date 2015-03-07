@@ -176,14 +176,44 @@ body a {
 	padding-top: 40%;
 	vertical-align: middle;
 }
-#settingsModal > div {
+/* -- Settings modal icons/divs -- */
+#settingsModal > div  {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
 	vertical-align: none;
-	background-color: #555;
-	border: 10px solid #333;
+	border: 2px solid #333;
 	border-radius: 40px;
 	width: 36%;
 	padding-top: 36%;
 }
+#settingsModal div a {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 4vw;
+	line-height: 23vw;
+}
+
+#settingsModal div a span{
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 2.5vw;
+	line-height: 8vw; 
+	vertical-align:bottom;
+}
+
+#settingsModal .get {
+	background-position:0 0 ;
+}
+#settingsModal .save {
+	background-position:100% 0;
+}
+#settingsModal .print {
+	background-position:0 100%;
+}
+#settingsModal .help {
+	background-position:100% 100%;
+}
+
 #perspectiveModal > div {
 	padding-top: 0;
 	width: 25%;
@@ -215,9 +245,11 @@ body a {
 	border: 2px solid #333;
 	border-radius: 40px;
 	font-size: 4vw;
+	line-height:5.5vw;
 	color: white;
 	vertical-align: middle;
 	padding-top: 2%;
+	font-weight: bold;
 }
 #preview {
 	height: 100%;
@@ -307,14 +339,6 @@ body a {
 }
 #alert:empty{
 	display: none;
-}
-
-
-#settingsModal div a {
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 4vw;
-	line-height: 23vw;
 }
 
 /* Colors for colormodal options */
@@ -437,8 +461,13 @@ body a {
 		width: 100%;
 	}
 	#settingsModal div a {
-		line-height: 38vw;
+		line-height: 37vw;
 	}
+	#settingsModal div a span {
+		font-size: 4vw;
+		line-height: 9vw; 
+	}
+
 	.red, .blue, .green , .top , .yellow {
 		border-width:5px;
 	}
@@ -446,7 +475,8 @@ body a {
 		top: 50%;
 	}
 	#baseModal div div a, #baseModal div div #sizePreview, #preview {
-		font-size: 8vw;
+		font-size:7vw;
+		line-height:10vw;
 	}
 }
 @media print {
