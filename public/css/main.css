@@ -176,14 +176,47 @@ body a {
 	padding-top: 40%;
 	vertical-align: middle;
 }
-#settingsModal > div {
+/* -- Settings modal icons/divs -- */
+#settingsModal > div  {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
 	vertical-align: none;
-	background-color: #555;
-	border: 10px solid #333;
+	border: 2px solid #333;
 	border-radius: 40px;
 	width: 36%;
 	padding-top: 36%;
 }
+#settingsModal div a {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 4vw;
+	line-height: 23vw;
+}
+
+#settingsModal div a span{
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 2.5vw;
+	line-height: 15.2vw;
+}
+#settingsModal div a span {
+	line-height: 8vw; 
+	vertical-align:bottom;
+}
+
+#settingsModal .get {
+	background-position:0 0 ;
+}
+#settingsModal .save {
+	background-position:100% 0;
+}
+#settingsModal .print {
+	background-position:0 100%;
+}
+#settingsModal .help {
+	background-position:100% 100%;
+}
+
 #perspectiveModal > div {
 	padding-top: 0;
 	width: 25%;
@@ -310,12 +343,7 @@ body a {
 }
 
 
-#settingsModal div a {
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 4vw;
-	line-height: 23vw;
-}
+
 
 /* Colors for colormodal options */
 .color.red {

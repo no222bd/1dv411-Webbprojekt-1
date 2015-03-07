@@ -397,12 +397,12 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		});
 		lines.push(new THREE.Line(line, material, THREE.LinePieces));
 
-		// red line
+		// pink line
 		var line = new THREE.Geometry();
 		line.vertices.push(new THREE.Vector3(-(baseSize + gridOffset), 0, baseSize));
 		line.vertices.push(new THREE.Vector3(-(baseSize + gridOffset), 0, -baseSize));
 		material = new THREE.LineBasicMaterial({
-			color : 0xE60012, linewidth: 2
+			color : 0xE27BFE, linewidth: 2
 		});
 		lines.push(new THREE.Line(line, material, THREE.LinePieces));
 
@@ -473,7 +473,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			renderer = new THREE.CanvasRenderer();
 		}
 
-		renderer.setClearColor(0xE1F5FF);
+		renderer.setClearColor(0xE9F9FF);
 		renderer.setPixelRatio(window.devicePixelRatio || 1);
 		renderer.setSize(JQueryElement.width(), JQueryElement.height());
 		return renderer;
