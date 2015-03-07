@@ -24,7 +24,9 @@ body a {
 	float: left;
 	height: 100%;
 }
-
+.perspective canvas, #perspective {
+	transform: scaleX(-1);
+}
 /* -- Helpers -- */
 
 /* Use this class whenever body unselectable doesn't work */
@@ -106,19 +108,24 @@ body a {
 }
 
 /* -- Counter -- */
-.counter {
+.counterWrapper {
 	width: 150px;
 	height: 40px;
-	position: absolute;
 	top: 1em;
+	position: absolute;
 	right: 1em;
 	font-weight: 900;
 	font-size: 1em;
 	text-align: right;
 }
-.counter p {
+#sizePreview {
+	cursor: default;
+}
+.counter p, .counterWrapper a {
 	margin: 0 0 2px 2px;
 	color:black;
+	display: inline;
+	position: relative;
 }
 
 /* -- Modal -- */
@@ -169,14 +176,44 @@ body a {
 	padding-top: 40%;
 	vertical-align: middle;
 }
-#settingsModal > div {
+/* -- Settings modal icons/divs -- */
+#settingsModal > div  {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
 	vertical-align: none;
-	background-color: #555;
-	border: 10px solid #333;
+	border: 2px solid #333;
 	border-radius: 40px;
 	width: 36%;
 	padding-top: 36%;
 }
+#settingsModal div a {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 4vw;
+	line-height: 23vw;
+}
+
+#settingsModal div a span{
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 2.5vw;
+	line-height: 8vw; 
+	vertical-align:bottom;
+}
+
+#settingsModal .get {
+	background-position:0 0 ;
+}
+#settingsModal .save {
+	background-position:100% 0;
+}
+#settingsModal .print {
+	background-position:0 100%;
+}
+#settingsModal .help {
+	background-position:100% 100%;
+}
+
 #perspectiveModal > div {
 	padding-top: 0;
 	width: 25%;
@@ -208,9 +245,11 @@ body a {
 	border: 2px solid #333;
 	border-radius: 40px;
 	font-size: 4vw;
+	line-height:5.5vw;
 	color: white;
 	vertical-align: middle;
 	padding-top: 2%;
+	font-weight: bold;
 }
 #preview {
 	height: 100%;
@@ -219,6 +258,12 @@ body a {
 	border-radius: 40px;
 	overflow: hidden;
 	padding-top: 0;
+	border-left: none;
+	border-top: none;
+}
+#preview canvas{
+	border-radius: 40px !important;
+	border: 2px solid #333;
 }
 .innerBox {
 	position: absolute;
@@ -243,37 +288,57 @@ body a {
 	border-radius: 5%;
 	overflow: hidden;
 }
+
 #perspectiveModal .green {
 	display:block; 
 	margin:0 auto;
 }
+
 /* colors for the view-frames*/
+
 .red {
-	border:10px solid #E60012;
+	border: 10px solid #C2E9F9;
+	border-bottom:10px solid #E60012;
 }
+
 .blue {
-	border:10px solid #0068B7;
+	border: 10px solid #C2E9F9;
+	border-bottom:10px solid #0068B7;
 }
 .yellow {
-	border:10px solid #F39800;
+	border: 10px solid #C2E9F9;
+	border-bottom:10px solid #F39800;
 }
 .green {
-	border:10px solid #009944;
+	border: 10px solid #C2E9F9;
+	border-bottom:10px solid #009944;
 }
 .top {
-	border:none;
+	border: 10px solid #C2E9F9;*/
 }
-#FormModal form input[type="text"]{
-	width: 70%;
+#FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
+	display: block;
+	height: 25%;
+	width: 100%;
+	margin-bottom: 8%;
+	background-color: #555;
+	border: 2px solid #333;
+	border-radius: 40px;
+	font-size: 2vw;
+	color: white !important;
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 2%;
+	position: relative;
 }
-#FormModal form input[type="submit"]{
-	width: 20%;
+
+#alert{
+	font-size: 1.5vw;
+	cursor: default;
+	padding-bottom: 2%
 }
-#settingsModal div a {
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 4vw;
-	line-height: 23vw;
+#alert:empty{
+	display: none;
 }
 
 /* Colors for colormodal options */
@@ -324,7 +389,8 @@ body a {
 	background-color:#E5004F;
 }
 .color.random {
-	background-color:#BE0081;
+	background-image: url('../img/random-color.png');
+	background-size:contain;
 }
 .color.turquoise {
 	background-color:#C6FFF0;
@@ -347,6 +413,16 @@ body a {
 	#colorsModal a {
 		margin: 0;
 		border-width:5px;
+	}
+}
+
+/* Smaller devices border-radius */
+@media (max-width:960px) {
+	#settingsModal > div, #baseModal div div a, #baseModal div div #sizePreview, #preview {
+		border-radius: 20px;
+	}
+	#preview canvas{
+		border-radius: 20px !important;
 	}
 }
 
@@ -385,8 +461,13 @@ body a {
 		width: 100%;
 	}
 	#settingsModal div a {
-		line-height: 38vw;
+		line-height: 37vw;
 	}
+	#settingsModal div a span {
+		font-size: 4vw;
+		line-height: 9vw; 
+	}
+
 	.red, .blue, .green , .top , .yellow {
 		border-width:5px;
 	}
@@ -394,7 +475,8 @@ body a {
 		top: 50%;
 	}
 	#baseModal div div a, #baseModal div div #sizePreview, #preview {
-		font-size: 8vw;
+		font-size:7vw;
+		line-height:10vw;
 	}
 }
 @media print {

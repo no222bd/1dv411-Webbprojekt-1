@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
 	 * Populates colorsArray with colors from colorsModal.
 	 */
 	$('#colorsModal a').each(function( index, link ) {
-		if($(link).attr('href') != '#random'){
+		if($(link).attr('href') != '#random') {
 			colorsArray.push($(link).attr('href'));
 		}
 	});
@@ -287,6 +287,7 @@ jQuery(document).ready(function($) {
 
 			$('#modal').toggleClass('open');
 			$(href).toggleClass('open');
+			$('#alert').text('');
 			$(".modalOption").toggleClass('faded');
 			element.removeClass('faded');
 			openModal = href;
