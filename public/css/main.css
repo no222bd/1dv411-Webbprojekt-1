@@ -197,9 +197,6 @@ body a {
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 2.5vw;
-	line-height: 15.2vw;
-}
-#settingsModal div a span {
 	line-height: 8vw; 
 	vertical-align:bottom;
 }
@@ -248,9 +245,11 @@ body a {
 	border: 2px solid #333;
 	border-radius: 40px;
 	font-size: 4vw;
+	line-height:5.5vw;
 	color: white;
 	vertical-align: middle;
 	padding-top: 2%;
+	font-weight: bold;
 }
 #preview {
 	height: 100%;
@@ -341,9 +340,6 @@ body a {
 #alert:empty{
 	display: none;
 }
-
-
-
 
 /* Colors for colormodal options */
 .color.red {
@@ -465,8 +461,13 @@ body a {
 		width: 100%;
 	}
 	#settingsModal div a {
-		line-height: 38vw;
+		line-height: 37vw;
 	}
+	#settingsModal div a span {
+		font-size: 4vw;
+		line-height: 9vw; 
+	}
+
 	.red, .blue, .green , .top , .yellow {
 		border-width:5px;
 	}
@@ -474,7 +475,8 @@ body a {
 		top: 50%;
 	}
 	#baseModal div div a, #baseModal div div #sizePreview, #preview {
-		font-size: 8vw;
+		font-size:7vw;
+		line-height:10vw;
 	}
 }
 @media print {
