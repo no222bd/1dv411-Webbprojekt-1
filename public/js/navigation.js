@@ -33,16 +33,16 @@ jQuery(document).ready(function ($) {
 	/**
 	 * Toggles counter to hide/show it.
 	 */
-    $('.counterWrapper').on('click', 'a', function(event){
-    	event.preventDefault();
-    	if ($('#toggleArrow').text() === "<") {
+	$('.counterWrapper').on('click', 'a', function(event){
+		event.preventDefault();
+		if ($('#toggleArrow').text() === "<") {
 			$('#toggleArrow').text(">");
 			$('.counter').show();
-    	} else if ($('#toggleArrow').text() === ">") {
+		} else if ($('#toggleArrow').text() === ">") {
 			$('#toggleArrow').text("<");
 			$('.counter').hide();
-    	}
-    });
+		}
+	});
 
 	/**
 	 * Menu click eventhandler.
@@ -87,6 +87,10 @@ jQuery(document).ready(function ($) {
 		} else {
 			if ($(this).attr('href') == '#import' || $(this).attr('href') == '#save') {
 				handleModalWindow($(this));
+			}
+			if($(this).attr('href') == '#print'){
+				closeModal();
+				window.print();
 			}
 			if ($(this).attr('href') == '#reset') {
 				cb.clearCubes();
