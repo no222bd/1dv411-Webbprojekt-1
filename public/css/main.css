@@ -485,6 +485,7 @@ body a {
 	}
 	html, body{
 		height: auto;
+		background: #ffffff;
 	}
 	#ThreeJScontainer{
 		width: auto;

@@ -467,13 +467,15 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		if (checkWebGL) {
 			renderer = Detector.webgl ? new THREE.WebGLRenderer({
 				antialias : true,
+				alpha: true,
 				preserveDrawingBuffer: true
-			}) : new THREE.CanvasRenderer();
+			}) : new THREE.CanvasRenderer({alpha: true});
 		} else {
-			renderer = new THREE.CanvasRenderer();
+			renderer = new THREE.CanvasRenderer({alpha: true});
 		}
 
-		renderer.setClearColor(0xE9F9FF);
+		// E9F9FF
+		renderer.setClearColor( 0x000000, 0 );
 		renderer.setPixelRatio(window.devicePixelRatio || 1);
 		renderer.setSize(JQueryElement.width(), JQueryElement.height());
 		return renderer;
