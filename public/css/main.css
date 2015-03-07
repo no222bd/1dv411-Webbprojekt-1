@@ -98,8 +98,9 @@ body a {
 }
 
 #perspective.chosen-view {
-	width: 138px;
-	height: 138px;
+	width: 100px;
+	height: 100px;
+	background: #E1F5FF;
 	padding-top: 0;
 	margin-left:10%;
 	background-size: 100%;
@@ -292,6 +293,9 @@ body a {
 #perspectiveModal .green {
 	display:block; 
 	margin:0 auto;
+}
+#perspectiveModal canvas, #preview canvas{
+	background: #E1F5FF;
 }
 
 /* colors for the view-frames*/
