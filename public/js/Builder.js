@@ -64,7 +64,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		step = 50;
 		objects = [];
 		views = [];
-		cubeGeo = new THREE.BoxGeometry(step, step, step);
+		cubeGeo = new THREE.BoxGeometry(step, step, step, 4, 4, 4);
 
 		raycaster = new THREE.Raycaster();
 		mouseposition = new THREE.Vector2();
