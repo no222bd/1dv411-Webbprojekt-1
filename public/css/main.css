@@ -57,8 +57,7 @@ body a {
 	width: 80%;
 	padding-top: 77%;
 	position: relative; 
-	margin:0 10%;
-	margin-bottom:5px;
+	margin:0 10% 5px 10%;
 }
 
 #cube, #erase, #base, #settings, #colors {
@@ -72,8 +71,87 @@ body a {
 	background-position: 100% 0;
 }
 
+.color-E60012, .color-F39800, .color-8FC31F, .color-009944, .color-009E96,
+.color-00A0E9, .color-0068B7, .color-601986, .color-7F3E09, .color-F7C6EB,
+.color-BE0081, .color-FDE3C5, .color-E27BFE, .color-E5004F, .color-C6FFF0,
+.color-FED06F, .color-000000, .color-FFFFFF, .color-random{
+	background-image: url('../img/cube_colors.png') !important;
+}
+/* orange */
+.color-F39800{
+	background-position-y: 5.55% !important;
+}
+/* bright green */
+.color-8FC31F{
+	background-position-y: 11.1% !important;
+}
+/* green */
+.color-009944{
+	background-position-y: 16.65% !important;
+}
+/* green blue */
+.color-009E96{
+	background-position-y: 22.2% !important;
+}
+/* blue */
+.color-00A0E9{
+	background-position-y: 27.75% !important;
+}
+/* dark blue */
+.color-0068B7{
+	background-position-y: 33.3% !important;
+}
+/* purple */
+.color-601986{
+	background-position-y: 38.85% !important;
+}
+/* brown */
+.color-7F3E09{
+	 background-position-y: 44.4% !important;
+}
+/* bright pink */
+.color-F7C6EB{
+	background-position-y: 49.9% !important;
+}
+/* bright purple */
+.color-BE0081{
+	background-position-y: 55.45% !important;
+}
+/* off white */
+.color-FDE3C5{
+	background-position-y: 61% !important;
+}
+/* light purple */
+.color-E27BFE{
+	background-position-y: 66.55% !important;
+}
+/* vine red */
+.color-E5004F{
+	background-position-y: 72.05% !important;
+}
+/* blue white */
+.color-C6FFF0{
+	background-position-y: 77.6% !important;
+}
+/* beige */
+.color-FED06F{
+	background-position-y: 83.15% !important;
+}
+/* black */
+.color-000000{
+	background-position-y: 88.7% !important;
+}
+/* white */
+.color-FFFFFF{
+	background-position-y: 94.25% !important;
+}
+/* random */
+.color-random{
+	background-position-y: 99.8% !important;
+}
+
 #erase.chosen  {
-	background-position: 0 16.286%
+	background-position: 0 16.286%;
 }
 #erase {
 	background-position: 100% 16.286%;
@@ -100,11 +178,10 @@ body a {
 #perspective.chosen-view {
 	width: 100px;
 	height: 100px;
-	background: #E1F5FF;
+	background: #E1F5FF no-repeat;
 	padding-top: 0;
 	margin-left:10%;
 	background-size: 100%;
-	background-repeat: no-repeat;
 	margin-bottom:5px;
 }
 
@@ -181,7 +258,6 @@ body a {
 #settingsModal > div  {
 	background-image: url('../img/settings-icons.png');
 	background-size: 200%;
-	vertical-align: none;
 	border: 2px solid #333;
 	border-radius: 40px;
 	width: 36%;
@@ -219,7 +295,6 @@ body a {
 	padding-top: 0;
 	width: 25%;
 	padding-bottom:25%;
-	background-color: #555; 
 	border-radius: 5%; 
 	background:#C2E9F9; 
 
@@ -300,26 +375,24 @@ body a {
 
 /* colors for the view-frames*/
 
-.red {
+.top, .red, .blue, .yellow, .green {
 	border: 10px solid #C2E9F9;
-	border-bottom:10px solid #E60012;
+}
+
+.red {
+	border-bottom-color: #E60012;
 }
 
 .blue {
-	border: 10px solid #C2E9F9;
-	border-bottom:10px solid #0068B7;
+	border-bottom-color: #0068B7;
 }
 .yellow {
-	border: 10px solid #C2E9F9;
-	border-bottom:10px solid #F39800;
+	border-bottom-color: #F39800;
 }
 .green {
-	border: 10px solid #C2E9F9;
-	border-bottom:10px solid #009944;
+	border-bottom-color: #009944;
 }
-.top {
-	border: 10px solid #C2E9F9;
-}
+
 #FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
 	display: block;
 	height: 25%;
