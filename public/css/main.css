@@ -429,6 +429,12 @@ body a {
 	#preview canvas{
 		border-radius: 20px !important;
 	}
+	#FormModal > form{
+		width: 90%;
+	}
+	#FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
+		font-size: 16px !important;
+	}
 }
 
 /* Portrait orientation */
