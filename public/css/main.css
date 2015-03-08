@@ -204,6 +204,7 @@ body a {
 	color:black;
 	display: inline;
 	position: relative;
+	font-size: 2vw;
 }
 
 /* -- Modal -- */
@@ -565,6 +566,9 @@ body a {
 	#baseModal div div a, #baseModal div div #sizePreview, #preview {
 		font-size:7vw;
 		line-height:10vw;
+	}
+	.counter p, .counterWrapper a {
+		font-size: 5vw;
 	}
 }
 @media print {
