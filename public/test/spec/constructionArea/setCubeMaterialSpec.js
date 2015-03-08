@@ -8,8 +8,8 @@ describe("Builder.ConstructionArea", function () {
 
 	describe("setCubeMaterial", function () {
 
-		it("should have color of FED06F after init", function () {
-			expect(builder._cubeMaterial.map.sourceFile.match(/FED06F/g).length > 0).toBeTruthy();
+		it("should have color of FBE430 after init", function () {
+			expect(builder._cubeMaterial.map.sourceFile.match(/FBE430/g).length > 0).toBeTruthy();
 		});
 
 		it("should have new color of E60012", function () {
