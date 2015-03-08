@@ -280,6 +280,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				//Or just load the texture right here, if it's missing
 				map: textures[colorHex.toUpperCase().substring(1)] || THREE.ImageUtils.loadTexture(texturePath.path+colorHex.toUpperCase().substring(1)+texturePath.extention)
 			});
+			cubeMaterial.side = THREE.DoubleSide;
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 			// TODO: Remove before deploying
 
