@@ -72,8 +72,157 @@ body a {
 	background-position: 100% 0;
 }
 
+/* red */
+.color-E60012{
+	background-image: url('../img/cube_colors.png') !important;
+}
+/* orange */
+.color-F39800{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 5.5% !important;
+}
+.color-F39800.chosen{
+	background-position: 0 5.5% !important;
+}
+/* bright green */
+.color-8FC31F{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 11.25% !important;
+}
+.color-8FC31F.chosen{
+	background-position: 0 11.25% !important;
+}
+/* green */
+.color-009944{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 16.75% !important;
+}
+.color-009944.chosen{
+	background-position: 0 16.75% !important;
+}
+/* green blue */
+.color-009E96{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 22.25% !important;
+}
+.color-009E96.chosen{
+	background-position: 0 22.25% !important;
+}
+/* blue */
+.color-00A0E9{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 27.75% !important;
+}
+.color-00A0E9.chosen{
+	background-position: 0 27.75% !important;
+}
+/* dark blue */
+.color-0068B7{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 33.25% !important;
+}
+.color-0068B7.chosen{
+	background-position: 0 33.25% !important;
+}
+/* purple */
+.color-601986{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 38.75% !important;
+}
+.color-601986.chosen{
+	background-position: 0 38.75% !important;
+}
+/* brown */
+.color-7F3E09{
+	 background-image: url('../img/cube_colors.png') !important;
+	 background-position: 100% 44.25% !important;
+}
+.color-7F3E09.chosen{
+	background-position: 0 44.25% !important;
+}
+/* bright pink */
+.color-F7C6EB{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 50% !important;
+}
+.color-F7C6EB.chosen{
+	background-position: 0 50% !important;
+}
+/* bright purple */
+.color-BE0081{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 55.5% !important;
+}
+.color-BE0081.chosen{
+	background-position: 0 55.5% !important;
+}
+/* off white */
+.color-FDE3C5{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 61% !important;
+}
+.color-FDE3C5.chosen{
+	background-position: 0 61% !important;
+}
+/* light purple */
+.color-E27BFE{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 66.5% !important;
+}
+.color-E27BFE.chosen{
+	background-position: 0 66.5% !important;
+}
+/* vine red */
+.color-E5004F{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 72% !important;
+}
+.color-E5004F.chosen{
+	background-position: 0 72% !important;
+}
+/* blue white */
+.color-C6FFF0{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 77.5% !important;
+}
+.color-C6FFF0.chosen{
+	background-position: 0 77.5% !important;
+}
+/* beige */
+.color-FED06F{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 83.25% !important;
+}
+.color-FED06F.chosen{
+	background-position: 0 83.25% !important;
+}
+/* black */
+.color-000000{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 88.75% !important;
+}
+.color-000000.chosen{
+	background-position: 0 88.75% !important;
+}
+/* white */
+.color-FFFFFF{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 94.25% !important;
+}
+.color-FFFFFF.chosen{
+	background-position: 0 94.25% !important;
+}
+/* random */
+.color-random{
+	background-image: url('../img/cube_colors.png') !important;
+	background-position: 100% 99.75% !important;
+}
+.color-random.chosen{
+	background-position: 0 99.75% !important;
+}
+
 #erase.chosen  {
-	background-position: 0 16.286%
+	background-position: 0 16.286%;
 }
 #erase {
 	background-position: 100% 16.286%;

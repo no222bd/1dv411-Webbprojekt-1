@@ -57,7 +57,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				textures[colorValue] = texture;
 			});
 		});
-		self.setCubeMaterial('#FED06F');
+		self.setCubeMaterial('#FBE430');
 
 		UIevent = jQuery.Event("updateView") ;
 

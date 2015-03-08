@@ -255,7 +255,11 @@ jQuery(document).ready(function ($) {
 	 */
 	function setColor(element) {
 		var colorHex = element.attr("href");
+		if(chosenColor != undefined){
+			$('#cube').removeClass('color-'+chosenColor.substring(1));
+		}
 		chosenColor = colorHex;
+		$('#cube').addClass('color-'+chosenColor.substring(1));
 		//The hex will be "random" if the user selected the random color option
 		if (colorHex == "#random") {
 			colorHex = chooseRandomColorFromColors();
