@@ -318,7 +318,7 @@ body a {
 	border-bottom:10px solid #009944;
 }
 .top {
-	border: 10px solid #C2E9F9;*/
+	border: 10px solid #C2E9F9;
 }
 #FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
 	display: block;
@@ -335,14 +335,19 @@ body a {
 	padding-top: 2%;
 	position: relative;
 }
+#FormModal form input[type="text"]{
+	background: #ffffff;
+	color: #555 !important;
+}
 
 #alert{
 	font-size: 1.5vw;
+	height: 1.5vw;
 	cursor: default;
-	padding-bottom: 2%
+	padding-bottom: 2%;
 }
 #alert:empty{
-	display: none;
+	visibility: hidden;
 }
 
 /* Colors for colormodal options */
@@ -427,6 +432,12 @@ body a {
 	}
 	#preview canvas{
 		border-radius: 20px !important;
+	}
+	#FormModal > form{
+		width: 90%;
+	}
+	#FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
+		font-size: 16px !important;
 	}
 }
 
