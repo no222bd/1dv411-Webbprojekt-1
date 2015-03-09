@@ -67,7 +67,7 @@ body a {
 	top: 0;
 	width: 80%;
 	height: 80%;
-	margin: 0 10% 5px;
+	margin: 15px 10% 5px;
 }
 
 #cube, #erase, #base, #settings, #colors {
@@ -367,11 +367,31 @@ body a {
 	top: 0;
 	width: 80%;
 	height: 80%;
-	margin: 0 10% 5px;
+	margin: 15px 10% 5px;
 }
 .canvasWrapper {
 	width:100%;
 	height:100%;
+}
+#perspectiveContainer li a canvas, #preview canvas{
+	background: #E1F5FF;
+}
+.top, .pink, .blue, .yellow, .green {
+	width: 100%
+	height: auto;
+	border-bottom: 4px solid #C2E9F9;
+}
+.pink {
+	border-bottom-color: #E27BFE;
+}
+.blue {
+	border-bottom-color: #0068B7;
+}
+.yellow {
+	border-bottom-color: #F39800;
+}
+.green {
+	border-bottom-color: #009944;
 }
 
 /*#perspectiveModal > div {
@@ -442,26 +462,7 @@ body a {
 	display:block; 
 	margin:0 auto;
 }
-#perspectiveModal canvas, #preview canvas{
-	background: #E1F5FF;
-}
-.top, .red, .blue, .yellow, .green {
-	width: 100%
-	height: auto;
-	border: 10px solid #C2E9F9;
-}
-.red {
-	border-bottom-color: #E60012;
-}
-.blue {
-	border-bottom-color: #0068B7;
-}
-.yellow {
-	border-bottom-color: #F39800;
-}
-.green {
-	border-bottom-color: #009944;
-}
+
 */
 
 #confirmdeclinebuttons p {
@@ -518,8 +519,8 @@ body a {
 	border: 10px solid #333;
 	border-radius: 15px;
 	margin: 10px;
-	width: 14%;
-	padding-top: 14%;
+	width: 13.5%;
+	padding-top: 11%;
 }
 
 #topView {
@@ -626,7 +627,7 @@ body a {
 
 /* Smaller devices orientation */
 @media (orientation: landscape) and (max-width:1200px) {
-	.red, .blue, .green , .top , .yellow {
+	.pink, .blue, .green , .top , .yellow {
 		border-width:5px;
 	}
 	#colorsModal a {
@@ -659,29 +660,60 @@ body a {
 	}
 	#menu {
 		width: 100%;
-		height: 12%;
-	}
-	#menu a {
-		width: 100%;
-		height: 100%;
-		margin-top: 0;
-		padding-top:100%;
+		height: 20%;
+		background: transparent;
 	}
 	#menu li {
 		float: left;
-		width: 12%;
+		width: 20%;
+		padding-top: 20%;
+		background: #C2E9F9;
+	}
+	#menu a {
+		width: 80%;
+		height: 80%;
+		margin-top: 10%;
 	}
 	#ThreeJScontainer {
 		width: 100%;
-		height: 74%;
+		height: 60%;
 	}
 	
 /* Perspective container and modal */
 	#perspectiveContainer {
-		height: 16%;
 		width: 100%;
+		height: 20%;
+		position: relative;
+		bottom: 0;
+		left: 0;
+		background: transparent;
 	}
-	#perspectiveModal {
+	#perspectiveContainer li {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 20%;
+		padding-top: 20%;
+		background: #C2E9F9;
+	}
+	#perspectiveContainer li:nth-of-type(2) {
+		left: 20%;
+	}
+	#perspectiveContainer li:nth-of-type(3) {
+		left: 40%;
+	}
+	#perspectiveContainer li:nth-of-type(4) {
+		left: 60%;
+	}
+	#perspectiveContainer li:nth-of-type(5) {
+		left: 80%;
+	}
+	#perspectiveContainer a {
+		width: 80%;
+		height: 80%;
+		margin-bottom: 15%;
+	}
+	/*#perspectiveModal {
 		height: 100%;
 		padding-top: 0;
 	}
@@ -696,7 +728,7 @@ body a {
 	}
 	.perspective {
 		height: 100%;
-	}
+	}*/
 	
 /* Modals */
 	.modal {
@@ -716,7 +748,7 @@ body a {
 		line-height: 9vw; 
 	}
 
-	.red, .blue, .green , .top , .yellow {
+	.pink, .blue, .green , .top , .yellow {
 		border-width:5px;
 	}
 	#colors {
