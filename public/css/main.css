@@ -26,7 +26,7 @@ body a {
 }
 #ThreeJScontainer {
 	float: left;
-	width: 80%;
+	width: 84%;
 	height: 100%;
 	position: relative;
 }
@@ -51,17 +51,23 @@ body a {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	width: 10%;
+	width: 8%;
 	float: left;
 	height: 100%;
 	background: #C2E9F9;
 }
+#menu > li {
+	width: 100%;
+	padding-top: 100%;
+	position: relative;
+}
 #menu a {
 	display: block;
+	position: absolute;
+	top: 0;
 	width: 80%;
-	padding-top: 77%;
-	position: relative; 
-	margin:0 10% 5px 10%;
+	height: 80%;
+	margin: 0 10% 5px;
 }
 
 #cube, #erase, #base, #settings, #colors {
@@ -345,19 +351,22 @@ body a {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	width: 10%;
+	width: 8%;
 	height: 100%;
 	float: right;
 	background: #C2E9F9;
 }
 #perspectiveContainer > li {
 	width: 100%;
-	height: 97px;
+	padding-top: 100%;
+	position: relative;
 }
 .perspective {
 	display: block;
-	position: relative;
+	position: absolute;
+	top: 0;
 	width: 80%;
+	height: 80%;
 	margin: 0 10% 5px;
 }
 .canvasWrapper {
