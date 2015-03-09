@@ -275,11 +275,17 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	this.setCubeMaterial = function(colorHex) {
 		var pattern = new RegExp("^#([A-Fa-f0-9]{6})$");
 		if(pattern.test(colorHex)) {
-			cubeMaterial = new THREE.MeshBasicMaterial({
-				//Either take it from the hash, but we can't know if it's there yet
-				//Or just load the texture right here, if it's missing
-				map: textures[colorHex.toUpperCase().substring(1)] || THREE.ImageUtils.loadTexture(texturePath.path+colorHex.toUpperCase().substring(1)+texturePath.extention)
-			});
+			if(Detector.webgl) {
+				cubeMaterial = new THREE.MeshBasicMaterial({
+					//Either take it from the hash, but we can't know if it's there yet
+					//Or just load the texture right here, if it's missing
+					map: textures[colorHex.toUpperCase().substring(1)] || THREE.ImageUtils.loadTexture(texturePath.path + colorHex.toUpperCase().substring(1) + texturePath.extention)
+				});
+			}else{
+				cubeMaterial = new THREE.MeshBasicMaterial({
+					color: colorHex
+				});
+			}
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 			// TODO: Remove before deploying
 
