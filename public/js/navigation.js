@@ -96,7 +96,7 @@ jQuery(document).ready(function ($) {
 				cb.clearCubes();
 				cb.renderPerspectives();
 				$('#ThreeJScontainer').trigger('updateView');
-				//closeModal();
+				closeModal();
 			}
 		}
 	});
