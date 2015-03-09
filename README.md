@@ -24,3 +24,16 @@ http://matematikdidaktik.davidsouthmountain.se/
 
 ## Backend uppdatering
 Om klassers namn eller sökväg ändras så behöver man köra ```php composer.phar dump-autoload```.
+
+##Checklista före pull request
+1. Går koden genom enhetstesterna?
+2. Går koden genom manuella funktionstester? Testa sådant som kan tänkas ha påverkats av det som har ändrats.
+
+##Checklista före merge
+1. Går koden genom enhetstesterna?
+2. Går koden genom manuella funktionstester? Testa sådant som kan tänkas ha påverkats av det som har ändrats.
+
+Om koden ej går igenom testerna, ta då kontakt med skaparen av pull requesten och be denne att åtgärda felen.
+
+##Checklista vid konflikt
+Gå till din skapade branch (git checkout your-branch). Kör kommandot: git merge master. Lös konflikterna. Därefter återupprepa checklista-före pull-request.

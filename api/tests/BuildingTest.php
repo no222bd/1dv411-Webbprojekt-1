@@ -9,7 +9,7 @@ class BuildingTest extends \App_TestCase {
 
 	protected function setUp(){
 		$this->building = New model\Building();
-		$this->storage = './tests/db.json';
+		$this->storage = './api/tests/db.json';
 		$storage = $this->getPrivateProperty('\api\model\Building', 'storage');
 		$storage->setValue($this->building, $this->storage);
 		$this->jsonBuilding = array(
@@ -25,7 +25,7 @@ class BuildingTest extends \App_TestCase {
 		$storage = $this->getPrivateProperty('\api\model\Building', 'storage');
 		$storage = $storage->getValue($this->building);
 		if(file_exists($storage)) {
-			unlink($storage);
+			file_put_contents($storage, '');
 		}
 	}
 
@@ -74,7 +74,7 @@ class BuildingTest extends \App_TestCase {
 		$errors = $this->building->getErrors();
 		$this->assertTrue(count($errors) == 1);
 		
-		$this->building->setName($name.$name.$name);
+		$this->building->setName($name.$name.$name.$name.$name.$name.$name.$name.$name.$name.$name.$name.$name);
 
 		$NameBuilding = $this->getPrivateProperty('\api\model\Building', 'name');
 		$NameBuilding = $NameBuilding->getValue($this->building);

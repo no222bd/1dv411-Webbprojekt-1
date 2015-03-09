@@ -28,7 +28,9 @@ body a {
 	float: left;
 	width: 80%;
 	height: 100%;
+	position: relative;
 }
+
 /* -- Helpers -- */
 
 /* Use this class whenever body unselectable doesn't work */
@@ -59,8 +61,7 @@ body a {
 	width: 80%;
 	padding-top: 77%;
 	position: relative; 
-	margin:0 10%;
-	margin-bottom:5px;
+	margin:0 10% 5px 10%;
 }
 
 #cube, #erase, #base, #settings, #colors {
@@ -74,8 +75,138 @@ body a {
 	background-position: 100% 0;
 }
 
+.color-E60012, .color-F39800, .color-8FC31F, .color-009944, .color-009E96,
+.color-00A0E9, .color-0068B7, .color-601986, .color-7F3E09, .color-F7C6EB,
+.color-BE0081, .color-FDE3C5, .color-E27BFE, .color-E5004F, .color-C6FFF0,
+.color-FED06F, .color-000000, .color-FFFFFF, .color-random{
+	background-image: url('../img/cube_colors.png') !important;
+}
+/* orange */
+.color-F39800{
+	background-position: 100% 5.55% !important;
+}
+.color-F39800.chosen{
+	background-position: 0% 5.55% !important;
+}
+/* bright green */
+.color-8FC31F{
+	background-position: 100% 11.1% !important;
+}
+.color-8FC31F.chosen{
+	background-position: 0% 11.1% !important;
+}
+/* green */
+.color-009944{
+	background-position: 100% 16.65% !important;
+}
+.color-009944.chosen{
+	background-position: 0% 16.65% !important;
+}
+/* green blue */
+.color-009E96{
+	background-position: 100% 22.2% !important;
+}
+.color-009E96.chosen{
+	background-position: 0% 22.2% !important;
+}
+/* blue */
+.color-00A0E9{
+	background-position: 100% 27.75% !important;
+}
+.color-00A0E9.chosen{
+	background-position: 0% 27.75% !important;
+}
+/* dark blue */
+.color-0068B7{
+	background-position: 100% 33.3% !important;
+}
+.color-0068B7.chosen{
+	background-position: 0% 33.3% !important;
+}
+/* purple */
+.color-601986{
+	background-position: 100% 38.85% !important;
+}
+.color-601986.chosen{
+	background-position: 0% 38.85% !important;
+}
+/* brown */
+.color-7F3E09{
+	 background-position: 100% 44.4% !important;
+}
+.color-7F3E09.chosen{
+	 background-position:00% 44.4% !important;
+}
+/* bright pink */
+.color-F7C6EB{
+	background-position: 100% 49.9% !important;
+}
+.color-F7C6EB.chosen{
+	background-position: 0% 49.9% !important;
+}
+/* bright purple */
+.color-BE0081{
+	background-position: 100% 55.45% !important;
+}
+.color-BE0081.chosen{
+	background-position: 0% 55.45% !important;
+}
+/* off white */
+.color-FDE3C5{
+	background-position: 100% 61% !important;
+}
+.color-FDE3C5.chosen{
+	background-position: 0% 61% !important;
+}
+/* light purple */
+.color-E27BFE{
+	background-position-y: 66.55% !important;
+}
+/* vine red */
+.color-E5004F{
+	background-position: 100% 72.05% !important;
+}
+.color-E5004F.chosen{
+	background-position: 0% 72.05% !important;
+}
+/* blue white */
+.color-C6FFF0{
+	background-position: 100% 77.6% !important;
+}
+.color-C6FFF0.chosen{
+	background-position: 0% 77.6% !important;
+}
+/* beige */
+.color-FED06F{
+	background-position: 100% 83.15% !important;
+}
+.color-FED06F.chosen{
+	background-position: 0% 83.15% !important;
+}
+/* black */
+.color-000000{
+	background-position: 100% 88.7% !important;
+}
+.color-000000.chosen{
+	background-position: 0% 88.7% !important;
+}
+/* white */
+.color-FFFFFF{
+	background-position: 100% 94.25% !important;
+}
+.color-FFFFFF.chosen{
+	background-position: 0% 94.25% !important;
+}
+/* random */
+.color-random{
+	background-position: 100% 99.8% !important;
+}
+.color-random.chosen{
+	background-position: 0% 99.8% !important;
+}
+
 #erase.chosen  {
-	background-position: 0 16.286%
+	background-position: 0 16.286%;
 }
 #erase {
 	background-position: 100% 16.286%;
@@ -98,48 +229,27 @@ body a {
 #colors.faded  {
 	background-position: 100%  49.857%;
 }
-#perspectiveModal > div {
-	height: 12%;
-	margin: 1%;
-	padding-top: 0;
-	background-color: #555;
-	border-radius: 5%;
-	background: #C2E9F9;
-}
-.canvasWrapper {
-	border-radius: 5%;
-	overflow: hidden;
-}
-.perspective canvas {
-	width: 100% !important;
-	height: 100% !important;
-	max-height: 100px;
-}
-.perspective div {
-	height: 100%;
-}
-.perspective {
-	height: 100%;
-	margin: 0;
-	display: block;
-	width: 100%;
-	background-size: contain;
-	background-repeat: no-repeat;
-}
+
 /* -- Counter -- */
-.counter {
+.counterWrapper {
 	width: 150px;
 	height: 40px;
-	position: absolute;
 	top: 1em;
+	position: absolute;
 	right: 1em;
 	font-weight: 900;
 	font-size: 1em;
 	text-align: right;
 }
-.counter p {
+#sizePreview {
+	cursor: default;
+}
+.counter p, .counterWrapper a {
 	margin: 0 0 2px 2px;
 	color:black;
+	display: inline;
+	position: relative;
+	font-size: 2vw;
 }
 
 /* -- Modal -- */
@@ -172,12 +282,6 @@ body a {
 	margin: auto auto;
 	height: 100%;
 }
-#perspectiveContainer {
-	background-color: #C2E9F9;
-	height: 100%;
-	width: 10%;
-	float:right;
-}
 #baseModal, 
 #resetConfirmModal, 
 #colorsModal, 
@@ -197,18 +301,160 @@ body a {
 	padding-top: 40%;
 	vertical-align: middle;
 }
-#settingsModal > div {
-	vertical-align: none;
-	background-color: #555;
-	border: 10px solid #333;
+/* -- Settings modal icons/divs -- */
+
+#settingsModal > div  {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
+	border: 2px solid #333;
 	border-radius: 40px;
 	width: 36%;
 	padding-top: 36%;
+}
+#settingsModal div a {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 4vw;
+	line-height: 23vw;
+}
+#settingsModal div a span{
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 2.5vw;
+	line-height: 8vw; 
+	vertical-align:bottom;
+}
+#settingsModal .get {
+	background-position:0 0 ;
+}
+#settingsModal .save {
+	background-position:100% 0;
+}
+#settingsModal .print {
+	background-position:0 100%;
+}
+#settingsModal .help {
+	background-position:100% 100%;
+}
+
+/* Perspecive container and modal */
+.perspective canvas, #perspective {
+	transform: scaleX(-1);
+}
+#perspectiveContainer {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 10%;
+	height: 100%;
+	float: right;
+	background: #C2E9F9;
+}
+#perspectiveContainer > li {
+	width: 100%;
+	height: 97px;
+}
+.perspective {
+	display: block;
+	position: relative;
+	width: 80%;
+	margin: 0 10% 5px;
+}
+.canvasWrapper {
+	width:100%;
+	height:100%;
+}
+
+/*#perspectiveModal > div {
+	height: 12%;
+	margin: 1%;
+	padding-top: 0;
+	background-color: #555;
+	border-radius: 5%;
+	background: #C2E9F9;
+}
+.canvasWrapper {
+	height:100%;
+	width:100%;
+	position: absolute;
+	left:0;
+	border-radius: 5%;
+	overflow: hidden;
+	
+	/*border-radius: 5%;
+	overflow: hidden; */
+/*}
+.perspective canvas {
+	width: 100% !important;
+	height: 100% !important;
+	max-height: 100px;
+}
+.perspective div {
+	height: 100%;
+}
+.perspective {
+	height: 100%;
+	margin: 0;
+	display: block;
+	width: 100%;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#perspective.chosen-view {
+	width: 100px;
+	height: 100px;
+	background: #E1F5FF no-repeat;
+	padding-top: 0;
+	margin-left:10%;
+	background-size: 100%;
+	margin-bottom:5px;
 }
 #perspectiveModal {
 	height: 100%;
 	padding-top: 30%;
 }
+#perspectiveContainer {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 10%;
+	height: 100%;
+	float: right;
+	background: #C2E9F9;
+}
+#perspectiveModal > div {
+	padding-top: 0;
+	width: 25%;
+	padding-bottom:25%;
+	border-radius: 5%; 
+	background:#C2E9F9; 
+}
+#perspectiveModal .green {
+	display:block; 
+	margin:0 auto;
+}
+#perspectiveModal canvas, #preview canvas{
+	background: #E1F5FF;
+}
+.top, .red, .blue, .yellow, .green {
+	width: 100%
+	height: auto;
+	border: 10px solid #C2E9F9;
+}
+.red {
+	border-bottom-color: #E60012;
+}
+.blue {
+	border-bottom-color: #0068B7;
+}
+.yellow {
+	border-bottom-color: #F39800;
+}
+.green {
+	border-bottom-color: #009944;
+}
+*/
+
 #confirmdeclinebuttons p {
 	font-weight: bold;
 	font-size: 2vw;
@@ -231,9 +477,11 @@ body a {
 	border: 2px solid #333;
 	border-radius: 40px;
 	font-size: 4vw;
+	line-height:5.5vw;
 	color: white;
 	vertical-align: middle;
 	padding-top: 2%;
+	font-weight: bold;
 }
 #preview {
 	height: 100%;
@@ -242,6 +490,12 @@ body a {
 	border-radius: 40px;
 	overflow: hidden;
 	padding-top: 0;
+	border-left: none;
+	border-top: none;
+}
+#preview canvas{
+	border-radius: 40px !important;
+	border: 2px solid #333;
 }
 .innerBox {
 	position: absolute;
@@ -258,36 +512,43 @@ body a {
 	width: 14%;
 	padding-top: 14%;
 }
+
 #topView {
 	margin-left: 1px;
 }
-/* colors for the view-frames*/
-.red {
-	border:10px solid #E60012;
-}
-.blue {
-	border:10px solid #0068B7;
-}
-.yellow {
-	border:10px solid #F39800;
-}
-.green {
-	border:10px solid #009944;
-}
-.top {
-	border:none;
+/*
+
+*/
+
+
+#FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
+	display: block;
+	height: 25%;
+	width: 100%;
+	margin-bottom: 8%;
+	background-color: #555;
+	border: 2px solid #333;
+	border-radius: 40px;
+	font-size: 2vw;
+	color: white !important;
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 2%;
+	position: relative;
 }
 #FormModal form input[type="text"]{
-	width: 70%;
+	background: #ffffff;
+	color: #555 !important;
 }
-#FormModal form input[type="submit"]{
-	width: 20%;
+
+#alert{
+	font-size: 1.5vw;
+	height: 1.5vw;
+	cursor: default;
+	padding-bottom: 2%;
 }
-#settingsModal div a {
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 4vw;
-	line-height: 23vw;
+#alert:empty{
+	visibility: hidden;
 }
 
 /* Colors for colormodal options */
@@ -338,7 +599,8 @@ body a {
 	background-color:#E5004F;
 }
 .color.random {
-	background-color:#BE0081;
+	background-image: url('../img/random-color.png');
+	background-size:contain;
 }
 .color.turquoise {
 	background-color:#C6FFF0;
@@ -363,6 +625,23 @@ body a {
 		border-width:5px;
 	}
 }
+
+/* Smaller devices border-radius */
+@media (max-width:960px) {
+	#settingsModal > div, #baseModal div div a, #baseModal div div #sizePreview, #preview {
+		border-radius: 20px;
+	}
+	#preview canvas{
+		border-radius: 20px !important;
+	}
+	#FormModal > form{
+		width: 90%;
+	}
+	#FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
+		font-size: 16px !important;
+	}
+}
+
 /* Portrait orientation */
 @media (orientation: portrait) {
 	#colorsModal a {
@@ -387,6 +666,8 @@ body a {
 		width: 100%;
 		height: 74%;
 	}
+	
+/* Perspective container and modal */
 	#perspectiveContainer {
 		height: 16%;
 		width: 100%;
@@ -407,7 +688,8 @@ body a {
 	.perspective {
 		height: 100%;
 	}
-	/* Modals */
+	
+/* Modals */
 	.modal {
 		border-left: none;
 		border-top: 2px solid rgba(0,0,0,0.75);
@@ -418,8 +700,13 @@ body a {
 		width: 100%;
 	}
 	#settingsModal div a {
-		line-height: 38vw;
+		line-height: 37vw;
 	}
+	#settingsModal div a span {
+		font-size: 4vw;
+		line-height: 9vw; 
+	}
+
 	.red, .blue, .green , .top , .yellow {
 		border-width:5px;
 	}
@@ -427,6 +714,22 @@ body a {
 		top: 50%;
 	}
 	#baseModal div div a, #baseModal div div #sizePreview, #preview {
-		font-size: 8vw;
+		font-size:7vw;
+		line-height:10vw;
+	}
+	.counter p, .counterWrapper a {
+		font-size: 5vw;
+	}
+}
+@media print {
+	#menu, .counter{
+		display: none;
+	}
+	html, body{
+		height: auto;
+		background: #ffffff;
+	}
+	#ThreeJScontainer{
+		width: auto;
 	}
 }

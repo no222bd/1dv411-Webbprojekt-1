@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 17
+# 35
 
 CACHE:
 #css
@@ -14,7 +14,7 @@ font/fontello.ttf
 font/fontello.woff
 
 #img
-img/Ikoner_nya.png
+img/Ikoner.png
 #img/textures
 img/textures/000000.png
 img/textures/0068B7.png
@@ -37,7 +37,9 @@ img/textures/FED06F.png
 img/textures/FFFFFF.png
 
 #js
+js/appcache.js
 js/Builder.js
+js/buildingSaver.js
 js/navigation.js
 #js/vendor
 js/vendor/jquery-1.11.2.min.js
@@ -48,7 +50,6 @@ js/vendor/Projector.js
 js/vendor/Detector.js
 js/vendor/CanvasRenderer.js
 js/vendor/OrbitControls.js
-js/vendor/stats.min.js
 js/vendor/lz-string.min.js
 
 NETWORK:

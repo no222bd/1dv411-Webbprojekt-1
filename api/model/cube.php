@@ -40,7 +40,7 @@ Class Cube{
 	public function __construct($base, $step){
 		if(!is_null($base) && !is_null($step)){
 			$this->step = floor($step);
-			$this->base = floor($base) * $this->step;
+			$this->base = floor($base) * ($this->step*2);
 		}else{
 			Throw new \Exception();
 		}

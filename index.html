@@ -21,7 +21,7 @@
 							<span id="preview">
 								
 							</span>
-							<a id="reset" href="#reset">Rensa</a>
+							<a id="reset" href="#reset">RENSA</a>
 						</div>
 					</div>
 					<div>
@@ -64,25 +64,26 @@
 			<!-- SETTINGS -->
 			<div id="settingsContainer" class="container">
 				<div id="settingsModal">
-					<div>
-						<a class="innerBox" href=""></a>
+					<div class="get">
+						<a class="innerBox get" href="#import"><span id="smaller">Hämta</span></a>
 					</div>
-					<div>
-						<a class="innerBox" href="#import">Hämta</a>
+					<div class="save">
+						<a class="innerBox save" href="#save"><span>Spara</span></a>
 					</div>
-					<div>
-						<a class="innerBox" href="#help">Hjälp</a>
+					<div class="print">
+						<a class="innerBox" href="#print"><span>Skriv ut</span></a>
 					</div>
-					<div>
-						<a class="innerBox" href="#save">Spara</a>
+					<div class="help">
+						<a class="innerBox" href="#help"><span>Hjälp</span></a>
 					</div>
 				</div>
 			</div>
 
 			<div id="FormModal" class="container">
 				<form>
+					<div id="alert"></div>
 					<input id="Name" type="text" placeholder="Namn"/>
-					<input id="Submit" type="submit" value="Hämta"/>
+					<input id="Submit" maxlength="50" type="submit" value="Hämta"/>
 				</form>
 			</div>
 		</div>
@@ -107,51 +108,52 @@
 		</ul>
 		<!-- PERSPECTIVE -->
 		<div id="ThreeJScontainer" onclick="void(0)">
-			<div class="counter">
-				<p>
-					Antal block: <span id="counter">0</span>
-				</p>
+			<div class="counterWrapper">
+				<a href="#toggleCounter">
+					<span id='toggleArrow'>></span>
+					<span class="counter">
+						<p><span id="counter">0</span></p>
+					</span>
+				</a>
 			</div>
 		</div>
-		<div id="perspectiveContainer" class="container">
-				<div id="perspectiveModal">
-					<div class="green">
-						<a class="perspective" href="#green">
-							<div id="greenView"  class="canvasWrapper">
-								<!--canvas></canvas-->
-							</div>
-						</a>
+		<ul id="perspectiveContainer" class="container">
+			<li>
+				<a class="green perspective" href="#green">
+					<div id="greenView"  class="canvasWrapper">
+						<!--canvas></canvas-->
 					</div>
-					<div class="yellow">
-						<a class="perspective" href="#yellow">
-							<div id="yellowView" class="canvasWrapper">
-								<!--canvas></canvas-->
-							</div>
-						</a>
-					</div>	
-					<div class="top">
-						<a class="perspective" href="#top">
-							<div id="topView" class="canvasWrapper">
-								<!--canvas></canvas-->
-							</div>
-						</a>
-					</div>		
-					<div class="blue">
-						<a class="perspective" href="#blue">
-							<div id="blueView" class="canvasWrapper">
-								<!--canvas></canvas-->
-							</div>
-						</a>
+				</a>
+			</li>
+			<li>
+				<a class="yellow perspective" href="#yellow">
+					<div id="yellowView" class="canvasWrapper">
+						<!--canvas></canvas-->
 					</div>
-					<div class="red">
-						<a class="perspective" href="#red">
-							<div id="redView" class="canvasWrapper">
-								<!--canvas></canvas-->
-							</div>
-						</a>
+				</a>
+			</li>
+			<li>
+				<a class="top perspective" href="#top">
+					<div id="topView" class="canvasWrapper">
+						<!--canvas></canvas-->
 					</div>
-				</div>
-			</div>
+				</a>
+			</li>
+			<li>
+				<a class="blue perspective" href="#blue">
+					<div id="blueView" class="canvasWrapper">
+						<!--canvas></canvas-->
+					</div>
+				</a>
+			</li>
+			<li>
+				<a class="red perspective" href="#red">
+					<div id="redView" class="canvasWrapper">
+						<!--canvas></canvas-->
+					</div>
+				</a>
+			</li>
+		</ul>
 		<script src="./public/js/vendor/jquery-1.11.2.min.js"></script>
 		<script src="./public/js/vendor/typedarrays.js"></script>
 		<script src="./public/js/vendor/requestAnimationFramePolyfill.js"></script>
@@ -163,6 +165,7 @@
 		<script src="./public/js/vendor/stats.min.js"></script>
 		<script src="./public/js/vendor/lz-string.min.js"></script>
 		<script src="./public/js/Builder.js"></script>
+		<script src="./public/js/buildingSaver.js"></script>
 		<script src="./public/js/navigation.js"></script>
 		<script src="./public/js/appcache.js"></script>
 	</body>

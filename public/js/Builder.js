@@ -10,9 +10,9 @@ var BUILDER = outerWindow.BUILDER;
  * @constructor
  */
 BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colorChoices) {
-	
+
 	/* Private members */
-	
+
 	var step,
 	    baseSize,
 	    objects,
@@ -57,7 +57,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				textures[colorValue] = texture;
 			});
 		});
-		self.setCubeMaterial('#FED06F');
+		self.setCubeMaterial('#FBE430');
 
 		UIevent = jQuery.Event("updateView") ;
 
@@ -138,7 +138,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			model = JSON.parse(jsonString);
 		}
 		model = JSON.parse(LZString.decompressFromBase64(model.model));
-
+		
 		objects = [];
 		baseSize = model.baseSize * (step / 2);
 
@@ -163,7 +163,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		views.forEach(function(element, index, array) {
 			element.render();
 		});
-		
+
 		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 		// TODO: Remove before deploying
 
@@ -181,7 +181,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
             element.render();
         });
 	};
-	
+
 	/**
 	 * Updates camera and renderer settings to new element sizes.
 	 */
@@ -189,7 +189,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
 		camera.updateProjectionMatrix();
 		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
-		
+
 		// Updates perspective views
 		self.renderPerspectives();
 	};
@@ -214,7 +214,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 
 		for(var i = 1; i < objects.length; i++) {
-			var color = objects[i].material.map.sourceFile
+			var color = objects[i].material.map.sourceFile;
 			color = color.replace("public/img/textures/", "");
 			color = color.replace(".png", "");
 			model.cubes.push(
@@ -304,7 +304,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 		/* End of testing code */
 	};
-	
+
 	/* Private functions */
 
 	/**
@@ -386,23 +386,23 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 */
 	function createColorLines() {
 		var lines = [];
-		var gridOffset = 20;
+		var gridOffset = baseSize / 7;
 
 		// green line
 		var line = new THREE.Geometry();
-		line.vertices.push(new THREE.Vector3(baseSize + gridOffset, 0, baseSize));
-		line.vertices.push(new THREE.Vector3(baseSize + gridOffset, 0, -baseSize));
+		line.vertices.push(new THREE.Vector3(baseSize + gridOffset, 0 / 2, baseSize));
+		line.vertices.push(new THREE.Vector3(baseSize + gridOffset, 0 / 2, -baseSize));
 		var material = new THREE.LineBasicMaterial({
-			color : 0x009944
+			color : 0x009944, linewidth: 2
 		});
 		lines.push(new THREE.Line(line, material, THREE.LinePieces));
 
-		// red line
-		line = new THREE.Geometry();
+		// pink line
+		var line = new THREE.Geometry();
 		line.vertices.push(new THREE.Vector3(-(baseSize + gridOffset), 0, baseSize));
 		line.vertices.push(new THREE.Vector3(-(baseSize + gridOffset), 0, -baseSize));
 		material = new THREE.LineBasicMaterial({
-			color : 0xE60012
+			color : 0xE27BFE, linewidth: 2
 		});
 		lines.push(new THREE.Line(line, material, THREE.LinePieces));
 
@@ -411,7 +411,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		line.vertices.push(new THREE.Vector3(baseSize, 0, baseSize + gridOffset));
 		line.vertices.push(new THREE.Vector3(-baseSize, 0, baseSize + gridOffset));
 		material = new THREE.LineBasicMaterial({
-			color : 0x0068B7
+			color : 0x0068B7, linewidth: 2
 		});
 		lines.push(new THREE.Line(line, material, THREE.LinePieces));
 
@@ -420,7 +420,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		line.vertices.push(new THREE.Vector3(baseSize, 0, -(baseSize + gridOffset)));
 		line.vertices.push(new THREE.Vector3(-baseSize, 0, -(baseSize + gridOffset)));
 		material = new THREE.LineBasicMaterial({
-			color : 0xF39800
+			color : 0xF39800, linewidth: 2
 		});
 		lines.push(new THREE.Line(line, material, THREE.LinePieces));
 
@@ -438,16 +438,16 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			cam.position.set(x,y,z);
 			cam.lookAt(new THREE.Vector3(0, baseSize, 0));
 			var ren = createRenderer(view);
-			return new BUILDER.View(ren, cam, view, scene);
+			return new BUILDER.View(ren, cam, view, scene, baseSize);
 		}
 
 		views = []; //If this turns out to be a problem, use views.length = 0;
-		views.push(createView(0, -1600, 0, perspectivesContainer[0]));
-		views.push(createView(0, baseSize, -baseSize, perspectivesContainer[1]));
-		views.push(createView(baseSize, baseSize, 0, perspectivesContainer[2]));
-		views.push(createView(0, baseSize, baseSize, perspectivesContainer[3]));
-		views.push(createView(-baseSize, baseSize, 0, perspectivesContainer[4]));
-		if(perspectivesContainer[5]) views.push(createView(0, -1600, 0, perspectivesContainer[5]));
+		views.push(createView(0, 1600, 0, perspectivesContainer[0]));
+		views.push(createView(0, baseSize, baseSize, perspectivesContainer[1]));
+		views.push(createView(-baseSize, baseSize, 0, perspectivesContainer[2]));
+		views.push(createView(0, baseSize, -baseSize, perspectivesContainer[3]));
+		views.push(createView(baseSize, baseSize, 0, perspectivesContainer[4]));
+		if(perspectivesContainer[5]) views.push(createView(0, 1600, 0, perspectivesContainer[5]));
 
 		views.forEach(function(element, index, array) {
 			element.init();
@@ -467,13 +467,15 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		if (checkWebGL) {
 			renderer = Detector.webgl ? new THREE.WebGLRenderer({
 				antialias : true,
+				alpha: true,
 				preserveDrawingBuffer: true
-			}) : new THREE.CanvasRenderer();
+			}) : new THREE.CanvasRenderer({alpha: true});
 		} else {
-			renderer = new THREE.CanvasRenderer();
+			renderer = new THREE.CanvasRenderer({alpha: true});
 		}
 
-		renderer.setClearColor(0xE1F5FF);
+		// E9F9FF
+		renderer.setClearColor( 0x000000, 0 );
 		renderer.setPixelRatio(window.devicePixelRatio || 1);
 		renderer.setSize(JQueryElement.width(), JQueryElement.height());
 		return renderer;
@@ -531,9 +533,9 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		//});
 		//var f = new THREE.Mesh(geo, m);
 		//foundation = f;
-		
+
 		var grid = new THREE.Geometry();
-		
+
 		for (var i = -baseSize; i <= baseSize; i += step) {
 			grid.vertices.push(new THREE.Vector3(-baseSize, 0, i));
 			grid.vertices.push(new THREE.Vector3(baseSize, 0, i));
@@ -550,11 +552,11 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		baseGrid = new THREE.Line(grid, material, THREE.LinePieces);
 
 		/**
-		 * * Green foundation * * 
+		 * * Green foundation * *
 		 * Does not work with canvas renderer and is therefore turned off
-		 * by being commented away. In later iterations this might get 
-		 * implemented but it needs another solution since the commented 
-		 * line only fixes the big model cube (webgl/canvas) and not the 
+		 * by being commented away. In later iterations this might get
+		 * implemented but it needs another solution since the commented
+		 * line only fixes the big model cube (webgl/canvas) and not the
 		 * cube displayed in perspective views (canvas).
 		 */
 		var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
@@ -580,7 +582,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			counter.text(count);
 		}
 	}
-	
+
 	/* Event handlers */
 
 	/**
@@ -691,7 +693,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
  * @param scene
  * @constructor
  */
-BUILDER.View = function(renderer, camera, JQueryElement, scene) {
+BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	/**
 	 * Renders scene.
 	 */
@@ -703,7 +705,12 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 	 * Set size for camera.
 	 */
 	this.setSize = function() {
-		var viewSite = 600;
+		var viewSite = baseSize * 2;
+		if (JQueryElement.attr("id") == "topView") {
+			viewSite = baseSize * 2 + baseSize / 20;
+		} else if (JQueryElement.attr("id") == "preview") {
+			viewSite = baseSize * 2 + baseSize / 2;
+		}
 		var aspectRatio = JQueryElement.width() / JQueryElement.height();
 		renderer.setSize(JQueryElement.width(), JQueryElement.height());
 
@@ -721,7 +728,7 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 		JQueryElement.empty();
 		JQueryElement.append(renderer.domElement);
 	};
-	
+
 	/* OBS. For testing only! Do not use in application!!! */
 	// TODO: Remove before deploying
 
@@ -730,7 +737,7 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene) {
 	this._camera = camera;
 	this._JQueryElement = JQueryElement;
 	this._scene = scene;
-
+	this._baseSize = baseSize;
 	/* End of testing code */
 };
 

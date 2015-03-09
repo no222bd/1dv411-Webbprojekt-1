@@ -17,7 +17,8 @@ describe("Builder.View", function () {
 				600 / 2, -600 / 2
 			),
 			JQueryElement,
-			builder._createScene()
+			builder._createScene(),
+			builder._baseSize
 		);
 			
 	});
@@ -29,6 +30,10 @@ describe("Builder.View", function () {
 			spyOn(view._renderer, 'setSize');
 			JQueryElement.width(80);
 			var aspectRatio = JQueryElement.width() / JQueryElement.height();
+			var viewSite = view._baseSize * 2;
+			if (view._JQueryElement.attr("id") == "topView") {
+				viewSite = view._baseSize * 2 + view._baseSize / 10;
+			}
 
 			// act
 			view.setSize();
@@ -36,10 +41,10 @@ describe("Builder.View", function () {
 			// assert
 			expect(view._renderer.setSize).toHaveBeenCalled();
 			
-			expect(view._camera.left).toBe(aspectRatio * 600 / 2);
-			expect(view._camera.right).toBe(-aspectRatio * 600 / 2);
-			expect(view._camera.top).toBe(600 / 2);
-			expect(view._camera.bottom).toBe(-600 / 2);
+			expect(view._camera.left).toBe(aspectRatio * viewSite / 2);
+			expect(view._camera.right).toBe(-aspectRatio * viewSite / 2);
+			expect(view._camera.top).toBe(viewSite / 2);
+			expect(view._camera.bottom).toBe(-viewSite / 2);
 		});
 
 	});
