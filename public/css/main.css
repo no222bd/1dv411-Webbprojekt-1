@@ -24,6 +24,7 @@ body a {
 	height: 90%;
 	margin:0;
 	padding: 0;
+	-webkit-tap-highlight-color:transparent;
 }
 .perspective canvas, #perspective {
 	transform: scaleX(-1);
@@ -57,7 +58,7 @@ body a {
 	display: block;
 	width: 80%;
 	padding-top: 77%;
-	position: relative; 
+	position: relative;
 	margin:0 10% 5px 10%;
 }
 
@@ -220,7 +221,7 @@ body a {
 #settings.faded  {
 	background-position: 100% 67.144%;
 }
-#colors {  
+#colors {
 	background-position: 0 49.857%;
 }
 #colors.faded  {
@@ -286,17 +287,17 @@ body a {
 	margin: auto auto;
 	height: 100%;
 }
-#baseModal, 
-#resetConfirmModal, 
-#colorsModal, 
+#baseModal,
+#resetConfirmModal,
+#colorsModal,
 #settingsModal,
 #perspectiveModal {
 	display: table-cell;
 	vertical-align: middle;
 }
-#baseModal > div, 
-#resetConfirmModal > div, 
-#colorsModal > div, 
+#baseModal > div,
+#resetConfirmModal > div,
+#colorsModal > div,
 #settingsModal > div,
 #FormModal > form,
 #perspectiveModal > div {
@@ -327,7 +328,7 @@ body a {
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 2.5vw;
-	line-height: 8vw; 
+	line-height: 8vw;
 	vertical-align:bottom;
 }
 
@@ -348,8 +349,8 @@ body a {
 	padding-top: 0;
 	width: 25%;
 	padding-bottom:25%;
-	border-radius: 5%; 
-	background:#C2E9F9; 
+	border-radius: 5%;
+	background:#C2E9F9;
 
 }
 #confirmdeclinebuttons p {
@@ -419,7 +420,7 @@ body a {
 }
 
 #perspectiveModal .green {
-	display:block; 
+	display:block;
 	margin:0 auto;
 }
 #perspectiveModal canvas, #preview canvas{
@@ -607,7 +608,7 @@ body a {
 	}
 	#settingsModal div a span {
 		font-size: 4vw;
-		line-height: 9vw; 
+		line-height: 9vw;
 	}
 
 	.red, .blue, .green , .top , .yellow {
