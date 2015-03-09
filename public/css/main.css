@@ -6,7 +6,6 @@ body{
 	background: #E1F5FF;
 	font-family: Arial, "MS Trebuchet", sans-serif;
 	color: white;
-	overflow: hidden;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -22,7 +21,9 @@ body a {
 	position: relative;
 	width: 90%;
 	float: left;
-	height: 100%;
+	height: 90%;
+	margin:0;
+	padding: 0;
 }
 .perspective canvas, #perspective {
 	transform: scaleX(-1);
@@ -264,6 +265,7 @@ body a {
 	position: absolute;
 	background: rgba(0,0,0,0.5);
 	border-left: 2px solid rgba(0,0,0,0.75);
+	border-bottom: 2px solid rgba(0,0,0,0.75);
 	left: 10%;
 	right: 0;
 	top: 0;
