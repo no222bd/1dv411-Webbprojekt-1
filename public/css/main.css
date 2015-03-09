@@ -79,47 +79,80 @@ body a {
 }
 /* orange */
 .color-F39800{
-	background-position-y: 5.55% !important;
+	background-position: 100% 5.55% !important;
+}
+.color-F39800.chosen{
+	background-position: 0% 5.55% !important;
 }
 /* bright green */
 .color-8FC31F{
-	background-position-y: 11.1% !important;
+	background-position: 100% 11.1% !important;
+}
+.color-8FC31F.chosen{
+	background-position: 0% 11.1% !important;
 }
 /* green */
 .color-009944{
-	background-position-y: 16.65% !important;
+	background-position: 100% 16.65% !important;
+}
+.color-009944.chosen{
+	background-position: 0% 16.65% !important;
 }
 /* green blue */
 .color-009E96{
-	background-position-y: 22.2% !important;
+	background-position: 100% 22.2% !important;
+}
+.color-009E96.chosen{
+	background-position: 0% 22.2% !important;
 }
 /* blue */
 .color-00A0E9{
-	background-position-y: 27.75% !important;
+	background-position: 100% 27.75% !important;
+}
+.color-00A0E9.chosen{
+	background-position: 0% 27.75% !important;
 }
 /* dark blue */
 .color-0068B7{
-	background-position-y: 33.3% !important;
+	background-position: 100% 33.3% !important;
+}
+.color-0068B7.chosen{
+	background-position: 0% 33.3% !important;
 }
 /* purple */
 .color-601986{
-	background-position-y: 38.85% !important;
+	background-position: 100% 38.85% !important;
+}
+.color-601986.chosen{
+	background-position: 0% 38.85% !important;
 }
 /* brown */
 .color-7F3E09{
-	 background-position-y: 44.4% !important;
+	 background-position: 100% 44.4% !important;
+}
+.color-7F3E09.chosen{
+	 background-position:00% 44.4% !important;
 }
 /* bright pink */
 .color-F7C6EB{
-	background-position-y: 49.9% !important;
+	background-position: 100% 49.9% !important;
+}
+.color-F7C6EB.chosen{
+	background-position: 0% 49.9% !important;
 }
 /* bright purple */
 .color-BE0081{
-	background-position-y: 55.45% !important;
+	background-position: 100% 55.45% !important;
+}
+.color-BE0081.chosen{
+	background-position: 0% 55.45% !important;
 }
 /* off white */
 .color-FDE3C5{
-	background-position-y: 61% !important;
+	background-position: 100% 61% !important;
+}
+.color-FDE3C5.chosen{
+	background-position: 0% 61% !important;
 }
 /* light purple */
 .color-E27BFE{
@@ -127,27 +160,45 @@ body a {
 }
 /* vine red */
 .color-E5004F{
-	background-position-y: 72.05% !important;
+	background-position: 100% 72.05% !important;
+}
+.color-E5004F.chosen{
+	background-position: 0% 72.05% !important;
 }
 /* blue white */
 .color-C6FFF0{
-	background-position-y: 77.6% !important;
+	background-position: 100% 77.6% !important;
+}
+.color-C6FFF0.chosen{
+	background-position: 0% 77.6% !important;
 }
 /* beige */
 .color-FED06F{
-	background-position-y: 83.15% !important;
+	background-position: 100% 83.15% !important;
+}
+.color-FED06F.chosen{
+	background-position: 0% 83.15% !important;
 }
 /* black */
 .color-000000{
-	background-position-y: 88.7% !important;
+	background-position: 100% 88.7% !important;
+}
+.color-000000.chosen{
+	background-position: 0% 88.7% !important;
 }
 /* white */
 .color-FFFFFF{
-	background-position-y: 94.25% !important;
+	background-position: 100% 94.25% !important;
+}
+.color-FFFFFF.chosen{
+	background-position: 0% 94.25% !important;
 }
 /* random */
 .color-random{
-	background-position-y: 99.8% !important;
+	background-position: 100% 99.8% !important;
+}
+.color-random.chosen{
+	background-position: 0% 99.8% !important;
 }
 
 #erase.chosen  {
