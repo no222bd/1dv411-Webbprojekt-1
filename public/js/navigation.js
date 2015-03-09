@@ -112,7 +112,7 @@ jQuery(document).ready(function ($) {
 		var buildingSaver = new BUILDER.BuildingSaver();
 		var alert = $('#alert');
 		if (name == '' || name == null || name == undefined) {
-			alert.text('Försök med ett annat namn :(');
+			alert.text('Namnet är för kort :(');
 		} else {
 			if (name.length <= 50) {
 				if ($(this).val() == 'Hämta') {
@@ -164,14 +164,13 @@ jQuery(document).ready(function ($) {
 								201: function (result) {
 									// save in localStorage
 									buildingSaver.saveBuildings(JSON.parse(result.data));
-									alert.text('Byggnaden sparades :)');
 									closeModal();
 								},
 								400: function (result) {
-									alert.text('Försök med ett annat namn :(');
+									alert.text('Namnet finns redan :(');
 								},
 								503: function (result) {
-									alert.text('Försök spara igen :(');
+									alert.text('Ett fel inträffade, försök igen :(');
 								}
 							}
 						});
@@ -181,7 +180,7 @@ jQuery(document).ready(function ($) {
 						if (buildingSaver.saveNewBuilding(name, dataString)) {
 							closeModal();
 						} else {
-							alert.text('Försök med ett annat namn :(');
+							alert.text('Namnet finns redan :(');
 						}
 					}
 				}
