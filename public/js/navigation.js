@@ -114,75 +114,79 @@ jQuery(document).ready(function ($) {
 		if (name == '' || name == null || name == undefined) {
 			alert.text('Försök med ett annat namn :(');
 		} else {
-			if ($(this).val() == 'Hämta') {
-				if (navigator.onLine) {
-					// check api first
-					var requestUrl = "api/" + name;
-					$.ajax({
-						type: "GET",
-						url: requestUrl,
-						statusCode: {
-							200: function (result) {
-								cb.loadModel(result.data);
-								closeModal();
-							},
-							400: function (result) {
-								// check in localStorage
-								var result = buildingSaver.getBuilding(name);
-								if (result) {
-									//console.log(result);
-									cb.loadModel(result);
+			if (name.length <= 50) {
+				if ($(this).val() == 'Hämta') {
+					if (navigator.onLine) {
+						// check api first
+						var requestUrl = "api/" + name;
+						$.ajax({
+							type: "GET",
+							url: requestUrl,
+							statusCode: {
+								200: function (result) {
+									cb.loadModel(result.data);
 									closeModal();
-								} else {
-									console.log("Could not find that building.");
-									alert.text('Byggnaden hittades inte :(');
+								},
+								400: function (result) {
+									// check in localStorage
+									var result = buildingSaver.getBuilding(name);
+									if (result) {
+										//console.log(result);
+										cb.loadModel(result);
+										closeModal();
+									} else {
+										console.log("Could not find that building.");
+										alert.text('Byggnaden hittades inte :(');
+									}
 								}
 							}
-						}
-					});
-					// if offline
-				} else {
-					var result = buildingSaver.getBuilding(name);
-					if (result) {
-						cb.loadModel(result);
-						closeModal();
+						});
+						// if offline
 					} else {
-						alert.text('Byggnaden hittades inte :(');
+						var result = buildingSaver.getBuilding(name);
+						if (result) {
+							cb.loadModel(result);
+							closeModal();
+						} else {
+							alert.text('Byggnaden hittades inte :(');
+						}
 					}
-				}
-			} else {
-				var requestUrl = "api/create";
-				var dataString = LZString.decompressFromBase64(cb.saveModel());
+				} else {
+					var requestUrl = "api/create";
+					var dataString = LZString.decompressFromBase64(cb.saveModel());
 
-				if (navigator.onLine) {
-					$.ajax({
-						type: "POST",
-						url: requestUrl,
-						data: {name: name, model: dataString},
-						statusCode: {
-							201: function (result) {
-								// save in localStorage
-								buildingSaver.saveBuildings(JSON.parse(result.data));
-								alert.text('Byggnaden sparades :)');
-								closeModal();
-							},
-							400: function (result) {
-								alert.text('Försök med ett annat namn :(');
-							},
-							503: function (result) {
-								alert.text('Försök spara igen :(');
+					if (navigator.onLine) {
+						$.ajax({
+							type: "POST",
+							url: requestUrl,
+							data: {name: name, model: dataString},
+							statusCode: {
+								201: function (result) {
+									// save in localStorage
+									buildingSaver.saveBuildings(JSON.parse(result.data));
+									alert.text('Byggnaden sparades :)');
+									closeModal();
+								},
+								400: function (result) {
+									alert.text('Försök med ett annat namn :(');
+								},
+								503: function (result) {
+									alert.text('Försök spara igen :(');
+								}
 							}
-						}
-					});
-					// if offline
-				} else {
-					// save building in localStorage
-					if (buildingSaver.saveNewBuilding(name, dataString)) {
-						closeModal();
+						});
+						// if offline
 					} else {
-						alert.text('Försök med ett annat namn :(');
+						// save building in localStorage
+						if (buildingSaver.saveNewBuilding(name, dataString)) {
+							closeModal();
+						} else {
+							alert.text('Försök med ett annat namn :(');
+						}
 					}
 				}
+			}else{
+				alert.text('Namnet är för långt :(');
 			}
 		}
 		return false;
