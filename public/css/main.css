@@ -262,10 +262,9 @@ body a {
 /* -- Modal -- */
 .modal {
 	display: none;
-	position: absolute;
+	position: fixed;
 	background: rgba(0,0,0,0.5);
 	border-left: 2px solid rgba(0,0,0,0.75);
-	border-bottom: 2px solid rgba(0,0,0,0.75);
 	left: 10%;
 	right: 0;
 	top: 0;
@@ -591,6 +590,7 @@ body a {
 	}
 	#ThreeJScontainer {
 		width: 100%;
+		height: 80%;
 	}
 	/* Modals */
 	.modal {
