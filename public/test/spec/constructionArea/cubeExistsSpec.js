@@ -8,7 +8,7 @@ describe("Builder.ConstructionArea", function () {
 
 	describe("cubeExists", function () {
 
-		it("should return false if a cube positions exists", function () {
+		it("should return true if a cube positions exists", function () {
 			// arrange
 			builder._mouse = new THREE.Vector2(0, 0);
 			builder._raycaster.setFromCamera(builder._mouse, builder._camera);
@@ -22,7 +22,7 @@ describe("Builder.ConstructionArea", function () {
 			expect(builder._cubeExists(builder._objects[1].position)).toBeTruthy();
 		});
 
-		it("should return true if a cube positions exists", function () {
+		it("should return false if a cube position doesn't exist", function () {
 			// arrange
 			builder._mouse = new THREE.Vector2(0, 0);
 			builder._raycaster.setFromCamera(builder._mouse, builder._camera);
