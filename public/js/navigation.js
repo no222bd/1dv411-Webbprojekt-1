@@ -61,6 +61,32 @@ jQuery(document).ready(function ($) {
 			cb.renderPerspectives();
 		}
 	});
+	
+	/**
+	 * Prevent link tags in perspectivs container from working
+	 */
+	$('#perspectives').on('click', 'a', function(event) {
+		event.preventDefault();
+	});
+	
+	/**
+	 * Creates functionality for hiding perspectives 
+	 */
+	$('#togglePerspective').on('click', function(event) {
+		event.preventDefault();
+		var toggleElement = $('#togglePerspective');
+		var perspectivesContainer = $('#perspectives');
+		
+		if(toggleElement.hasClass('open')) {
+			perspectivesContainer.hide();
+			toggleElement.attr('class', 'close');
+			toggleElement.text("<");
+		} else {
+			perspectivesContainer.show();
+			toggleElement.attr('class', 'open');
+			toggleElement.text(">");
+		}
+	});
 
 	/**
 	 * Provides a more intuitive closing of modals.

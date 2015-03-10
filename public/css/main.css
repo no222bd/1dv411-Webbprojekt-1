@@ -26,7 +26,7 @@ body a {
 }
 #ThreeJScontainer {
 	float: left;
-	width: 84%;
+	width: 82%;
 	height: 100%;
 	position: relative;
 }
@@ -51,7 +51,7 @@ body a {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	width: 8%;
+	width: 9%;
 	float: left;
 	height: 100%;
 	background: #C2E9F9;
@@ -65,9 +65,9 @@ body a {
 	display: block;
 	position: absolute;
 	top: 0;
-	width: 80%;
-	height: 80%;
-	margin: 15px 10% 5px;
+	width: 90%;
+	height: 90%;
+	margin: 5%;
 }
 
 #cube, #erase, #base, #settings, #colors {
@@ -236,23 +236,11 @@ body a {
 	background-position: 100%  49.857%;
 }
 
-/* -- Counter -- */
-/*#toggleCounter {
-	/*width: 150px;
-	height: 40px;*/
-	/*top: 1em;
-	position: absolute;
-	left: 2%;
-	font-weight: 900;
-	font-size: 1em;
-	text-align: left;
-}*/
 #sizePreview {
 	cursor: default;
 }
 
 #toggleCounter {
-	/*margin: 0 0 2px 2px;*/
 	top: 1em;
 	position: absolute;
 	left: 2%;
@@ -275,7 +263,7 @@ body a {
 	right: 0;
 	top: 0;
 	bottom: 0;
-	z-index: 100;
+	z-index: 1000;
 }
 .modal > div {
 	display: none;
@@ -354,14 +342,6 @@ body a {
 .perspective canvas, #perspective {
 	transform: scaleX(-1);
 }
-#perspectiveContainer {
-	margin: 0;
-	padding: 0;
-	width: 8%;
-	height: 100%;
-	float: right;
-	position: relative;
-}
 #togglePerspective {
 	font-weight: 900;
 	font-size: 2vw;
@@ -371,15 +351,17 @@ body a {
 	left: auto;
 	top: 1em;
 	right: 10%;
+	z-index: 250;
 }
 #togglePerspective.close {
 	right: 2%;
 }
 #perspectives {
 	list-style-type: none;
+	float: left;
 	margin: 0;
 	padding: 0;
-	width: 100%;
+	width: 9%;
 	height: 100%;
 	background: #C2E9F9;
 	position: relative;
@@ -393,54 +375,38 @@ body a {
 	display: block;
 	position: absolute;
 	top: 0;
-	width: 80%;
-	height: 80%;
-	margin: 15px 10% 5px;
+	width: 90%;
+	height: 90%;
+	margin: 5%;
 }
 .canvasWrapper {
 	width:100%;
 	height:100%;
+	border-bottom: 4px solid #C2E9F9;
 }
 #perspectives li a canvas, #preview canvas{
 	background: #E1F5FF;
 }
-.top, .pink, .blue, .yellow, .green {
+.perspective {
 	width: 100%
 	height: auto;
-	border-bottom: 4px solid #C2E9F9;
 }
-.pink {
-	border-bottom-color: #E27BFE;
+#greenView {
+	border-bottom-color: #009944;
 }
-.blue {
-	border-bottom-color: #0068B7;
-}
-.yellow {
+#yellowView {
 	border-bottom-color: #F39800;
 }
-.green {
-	border-bottom-color: #009944;
+#blueView {
+	border-bottom-color: #0068B7;
+}
+#redView {
+	border-bottom-color: #E27BFE;
 }
 .canvasWrapper canvas {
 	background: transparent !important;
 }
-#togglePerspective {
-	
-}
 
-#confirmdeclinebuttons p {
-	font-weight: bold;
-	font-size: 2vw;
-}
-#confirmdeclinebuttons div a {
-	display: block;
-	height: 27%;
-	margin-bottom: 2%;
-	background-color: #555;
-	border: 2px solid #333;
-	border-radius: 40px;
-	font-size: 2vw;
-}
 #baseModal div div a, #baseModal div div #sizePreview, #preview {
 	display: block;
 	height: 25%;
@@ -505,7 +471,6 @@ body a {
 	background: #ffffff;
 	color: #555 !important;
 }
-
 #alert{
 	font-size: 1.5vw;
 	height: 1.5vw;
@@ -526,8 +491,7 @@ body a {
 .color.yellow {
 	background-color:#FFF100;
 }
-.color.lgreen
-{
+.color.lgreen {
 	background-color:#8FC31F;
 }
 .color.green {
@@ -582,9 +546,6 @@ body a {
 
 /* Smaller devices orientation */
 @media (orientation: landscape) and (max-width:1200px) {
-	.pink, .blue, .green , .top , .yellow {
-		border-width:5px;
-	}
 	#colorsModal a {
 		margin: 0;
 		border-width:5px;
@@ -592,7 +553,6 @@ body a {
 }
 
 /* Smaller devices border-radius */
-
 @media (max-width:960px) {
 	#settingsModal > div, #baseModal div div a, #baseModal div div #sizePreview, #preview {
 		border-radius: 20px;
@@ -608,6 +568,8 @@ body a {
 	}
 }
 
+
+
 /* Portrait orientation */
 @media (orientation: portrait) {
 	#colorsModal a {
@@ -615,41 +577,35 @@ body a {
 		border-width: 5px;
 	}
 	#menu {
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 20%;
-		/*padding-top: 5%;*/
-		/*background: transparent;*/
+		background: transparent;
 	}
 	#menu li {
+		z-index: 150;
 		float: left;
 		width: 20%;
-		padding-top: 20%;
+		padding-top: 19%;
 		background: #C2E9F9;
 	}
 	#menu a {
-		width: 80%;
-		height: 80%;
-		margin-top: 10%;
+		width: 90%;
+		height: 90%;
+		margin-top: 5%;
 	}
 	#ThreeJScontainer {
 		width: 100%;
-		height: 60%;
+		height: 100%;
 	}
 	
 /* Perspective container and modal */
-	#perspectiveContainer {
-		width: 100%;
-		height: 20%;
-		position: relative;
-		/*padding-bottom: 5%;*/
-		bottom: 0;
-		left: 0;
-	}
 	#togglePerspective {
 		font-size: 5vw;
 		top: auto;
 		right: auto;
-		bottom: 22%;
 		left: 1em;
 	}
 	#togglePerspective.close {
@@ -657,16 +613,16 @@ body a {
 	}
 	#perspectives {
 		width: 100%;
-		height: 100%;
-		position: relative;
-		padding-bottom: 5%;
+		height: 20%;
+		position: absolute;
 		bottom: 0;
 		left: 0;
-		/*background: transparent;*/
+		background: transparent;
 	}
 	#perspectives li {
+		z-index: 150;
 		position: absolute;
-		bottom: 5px;
+		bottom: 0;
 		left: 0;
 		width: 20%;
 		padding-top: 20%;
@@ -685,33 +641,21 @@ body a {
 		left: 80%;
 	}
 	.perspective {
-		width: 80%;
-		height: 80%;
-	}
-	
-	/*#perspectiveModal {
+		width: 100%;
 		height: 100%;
-		padding-top: 0;
-	}
-	#perspectiveModal > div {
-		height: 100%;
-		width: 20%;
-		float: left;
+		padding: 0%;
 		margin: 0;
 	}
-	#topView {
-		margin-top: 1px;
+	.canvasWrapper {
+		width: 90%;
+		height: 90%;
+		margin: 5%;
 	}
-	.perspective {
-		height: 100%;
-	}*/
 	
 /* Modals */
 	.modal {
 		border-left: none;
-		/*border-top: 2px solid rgba(0,0,0,0.75);*/
 		left: 0;
-		/*margin-top: 24%;*/
 	}
 	.container {
 		width: 100%;
@@ -724,9 +668,6 @@ body a {
 		line-height: 9vw; 
 	}
 
-	.pink, .blue, .green , .top , .yellow {
-		border-width:5px;
-	}
 	#colors {
 		top: 50%;
 	}
@@ -740,15 +681,90 @@ body a {
 		font-size: 5vw;
 	}
 }
+
+/* Placing of toggles in portrait must be hard coded */
+@media (orientation: portrait) and (max-width:700px) {
+	#toggleCounter {
+		top: 140px;
+	}
+	#togglePerspective {
+		bottom: 140px;
+	}
+}
+@media (orientation: portrait) and (max-width:650px) {
+	#toggleCounter {
+		top: 130px;
+	}
+	#togglePerspective {
+		bottom: 130px;
+	}
+}
+@media (orientation: portrait) and (max-width:600px) {
+	#toggleCounter {
+		top: 120px;
+	}
+	#togglePerspective {
+		bottom: 120px;
+	}
+}
+@media (orientation: portrait) and (max-width:550px) {
+	#toggleCounter {
+		top: 110px;
+	}
+	#togglePerspective {
+		bottom: 110px;
+	}
+}
+@media (orientation: portrait) and (max-width:500px) {
+	#toggleCounter {
+		top: 100px;
+	}
+	#togglePerspective {
+		bottom: 100px;
+	}
+}
+@media (orientation: portrait) and (max-width:450px) {
+	#toggleCounter {
+		top: 90px;
+	}
+	#togglePerspective {
+		bottom: 90px;
+	}
+}
+@media (orientation: portrait) and (max-width:400px) {
+	#toggleCounter {
+		top: 80px;
+	}
+	#togglePerspective {
+		bottom: 80px;
+	}
+}
+@media (orientation: portrait) and (max-width:350px) {
+	#toggleCounter {
+		top: 70px;
+	}
+	#togglePerspective {
+		bottom: 70px;
+	}
+}
+@media (orientation: portrait) and (max-width:300px) {
+	#toggleCounter {
+		top: 60px;
+	}
+	#togglePerspective {
+		bottom: 60px;
+	}
+}
+
 @media print {
-	#menu, .counter{
+	#menu, #toggleCounter, #togglePerspective {
 		display: none;
 	}
-	html, body{
+	html, body {
 		height: auto;
 		background: #ffffff;
 	}
-	#ThreeJScontainer{
+	#ThreeJScontainer {
 		width: auto;
 	}
 }

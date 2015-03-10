@@ -705,7 +705,7 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	 * Set size for camera.
 	 */
 	this.setSize = function() {
-		var viewSite = baseSize * 2;
+		var viewSite = baseSize * 2 - 10;
 		if (JQueryElement.attr("id") == "topView") {
 			viewSite = baseSize * 2 + baseSize / 20;
 		} else if (JQueryElement.attr("id") == "preview") {
