@@ -26,7 +26,7 @@ body a {
 }
 #ThreeJScontainer {
 	float: left;
-	width: 82%;
+	width: 84%;
 	height: 100%;
 	position: relative;
 }
@@ -51,7 +51,7 @@ body a {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	width: 9%;
+	width: 8%;
 	float: left;
 	height: 100%;
 	background: #C2E9F9;
@@ -237,25 +237,32 @@ body a {
 }
 
 /* -- Counter -- */
-.counterWrapper {
-	width: 150px;
-	height: 40px;
-	top: 1em;
+/*#toggleCounter {
+	/*width: 150px;
+	height: 40px;*/
+	/*top: 1em;
 	position: absolute;
-	right: 1em;
+	left: 2%;
 	font-weight: 900;
 	font-size: 1em;
-	text-align: right;
-}
+	text-align: left;
+}*/
 #sizePreview {
 	cursor: default;
 }
-.counter p, .counterWrapper a {
-	margin: 0 0 2px 2px;
+
+#toggleCounter {
+	/*margin: 0 0 2px 2px;*/
+	top: 1em;
+	position: absolute;
+	left: 2%;
+	font-weight: 900;
+	text-align: left;
 	color:black;
-	display: inline;
-	position: relative;
 	font-size: 2vw;
+}
+#toggleCounter p {
+	display: inline;
 }
 
 /* -- Modal -- */
@@ -348,15 +355,36 @@ body a {
 	transform: scaleX(-1);
 }
 #perspectiveContainer {
+	margin: 0;
+	padding: 0;
+	width: 8%;
+	height: 100%;
+	float: right;
+	position: relative;
+}
+#togglePerspective {
+	font-weight: 900;
+	font-size: 2vw;
+	color: black;
+	position: absolute;
+	bottom: auto;
+	left: auto;
+	top: 1em;
+	right: 10%;
+}
+#togglePerspective.close {
+	right: 2%;
+}
+#perspectives {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	width: 9%;
+	width: 100%;
 	height: 100%;
-	float: right;
 	background: #C2E9F9;
+	position: relative;
 }
-#perspectiveContainer > li {
+#perspectives > li {
 	width: 100%;
 	padding-top: 100%;
 	position: relative;
@@ -373,7 +401,7 @@ body a {
 	width:100%;
 	height:100%;
 }
-#perspectiveContainer li a canvas, #preview canvas{
+#perspectives li a canvas, #preview canvas{
 	background: #E1F5FF;
 }
 .top, .pink, .blue, .yellow, .green {
@@ -392,6 +420,12 @@ body a {
 }
 .green {
 	border-bottom-color: #009944;
+}
+.canvasWrapper canvas {
+	background: transparent !important;
+}
+#togglePerspective {
+	
 }
 
 #confirmdeclinebuttons p {
@@ -451,14 +485,6 @@ body a {
 	width: 13.5%;
 	padding-top: 11%;
 }
-
-#topView {
-	margin-left: 1px;
-}
-/*
-
-*/
-
 
 #FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
 	display: block;
@@ -591,6 +617,7 @@ body a {
 	#menu {
 		width: 100%;
 		height: 20%;
+		/*padding-top: 5%;*/
 		/*background: transparent;*/
 	}
 	#menu li {
@@ -614,12 +641,30 @@ body a {
 		width: 100%;
 		height: 20%;
 		position: relative;
+		/*padding-bottom: 5%;*/
+		bottom: 0;
+		left: 0;
+	}
+	#togglePerspective {
+		font-size: 5vw;
+		top: auto;
+		right: auto;
+		bottom: 22%;
+		left: 1em;
+	}
+	#togglePerspective.close {
+		bottom: 2%;
+	}
+	#perspectives {
+		width: 100%;
+		height: 100%;
+		position: relative;
 		padding-bottom: 5%;
 		bottom: 0;
 		left: 0;
 		/*background: transparent;*/
 	}
-	#perspectiveContainer li {
+	#perspectives li {
 		position: absolute;
 		bottom: 5px;
 		left: 0;
@@ -627,23 +672,23 @@ body a {
 		padding-top: 20%;
 		background: #C2E9F9;
 	}
-	#perspectiveContainer li:nth-of-type(2) {
+	#perspectives li:nth-of-type(2) {
 		left: 20%;
 	}
-	#perspectiveContainer li:nth-of-type(3) {
+	#perspectives li:nth-of-type(3) {
 		left: 40%;
 	}
-	#perspectiveContainer li:nth-of-type(4) {
+	#perspectives li:nth-of-type(4) {
 		left: 60%;
 	}
-	#perspectiveContainer li:nth-of-type(5) {
+	#perspectives li:nth-of-type(5) {
 		left: 80%;
 	}
 	.perspective {
 		width: 80%;
 		height: 80%;
-		/*padding-bottom: 20%;*/
 	}
+	
 	/*#perspectiveModal {
 		height: 100%;
 		padding-top: 0;
@@ -689,7 +734,9 @@ body a {
 		font-size:7vw;
 		line-height:10vw;
 	}
-	.counter p, .counterWrapper a {
+	#toggleCounter {
+		left: 1em;
+		top: 4%;
 		font-size: 5vw;
 	}
 }

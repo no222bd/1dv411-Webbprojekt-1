@@ -106,54 +106,61 @@
 				<a id="settings" class="modalOption" href="#settingsContainer"></a>
 			</li>
 		</ul>
-		<!-- PERSPECTIVE -->
+		
+		<!-- Construction Area -->
 		<div id="ThreeJScontainer" onclick="void(0)">
-			<div class="counterWrapper">
-				<a href="#toggleCounter">
-					<span id='toggleArrow'>></span>
-					<span class="counter">
-						<p><span id="counter">0</span></p>
-					</span>
-				</a>
-			</div>
+			<a id="toggleCounter" href="#toggleCounter">
+				<span class="counter">
+					<p><span id="counter">0</span></p>
+				</span>
+				<span id='toggleArrow'>&lt;</span>
+			</a>
 		</div>
-		<ul id="perspectiveContainer" class="container">
-			<li>
-				<a class="green perspective" href="#green">
-					<div id="greenView"  class="canvasWrapper">
-						<!--canvas></canvas-->
-					</div>
-				</a>
-			</li>
-			<li>
-				<a class="yellow perspective" href="#yellow">
-					<div id="yellowView" class="canvasWrapper">
-						<!--canvas></canvas-->
-					</div>
-				</a>
-			</li>
-			<li>
-				<a class="top perspective" href="#top">
-					<div id="topView" class="canvasWrapper">
-						<!--canvas></canvas-->
-					</div>
-				</a>
-			</li>
-			<li>
-				<a class="blue perspective" href="#blue">
-					<div id="blueView" class="canvasWrapper">
-						<!--canvas></canvas-->
-					</div>
-				</a>
-			</li>
-			<li>
-				<a class="pink perspective" href="#red">
-					<div id="redView" class="canvasWrapper">
-						<!--canvas></canvas-->
-					</div>
-				</a>
-			</li>
-		</ul>
+		
+		<!-- Perspective -->
+		<a id="togglePerspective" class="open" href="#togglePerspective">
+			<span class='togglePerspectiveArrow'>&lt;</span>
+		</a>
+		<div id="perspectiveContainer">
+			<ul id="perspectives" class="container">
+				<li>
+					<a class="green perspective" href="#green">
+						<div id="greenView"  class="canvasWrapper">
+							<!--canvas></canvas-->
+						</div>
+					</a>
+				</li>
+				<li>
+					<a class="yellow perspective" href="#yellow">
+						<div id="yellowView" class="canvasWrapper">
+							<!--canvas></canvas-->
+						</div>
+					</a>
+				</li>
+				<li>
+					<a class="top perspective" href="#top">
+						<div id="topView" class="canvasWrapper">
+							<!--canvas></canvas-->
+						</div>
+					</a>
+				</li>
+				<li>
+					<a class="blue perspective" href="#blue">
+						<div id="blueView" class="canvasWrapper">
+							<!--canvas></canvas-->
+						</div>
+					</a>
+				</li>
+				<li>
+					<a class="pink perspective" href="#red">
+						<div id="redView" class="canvasWrapper">
+							<!--canvas></canvas-->
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		
 		<script src="./public/js/vendor/jquery-1.11.2.min.js"></script>
 		<script src="./public/js/vendor/typedarrays.js"></script>
 		<script src="./public/js/vendor/requestAnimationFramePolyfill.js"></script>

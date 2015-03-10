@@ -33,13 +33,13 @@ jQuery(document).ready(function ($) {
 	/**
 	 * Toggles counter to hide/show it.
 	 */
-	$('.counterWrapper').on('click', 'a', function(event){
+	$('#toggleCounter').on('click', function(event){
 		event.preventDefault();
-		if ($('#toggleArrow').text() === "<") {
-			$('#toggleArrow').text(">");
-			$('.counter').show();
-		} else if ($('#toggleArrow').text() === ">") {
+		if ($('#toggleArrow').text() === ">") {
 			$('#toggleArrow').text("<");
+			$('.counter').show();
+		} else if ($('#toggleArrow').text() === "<") {
+			$('#toggleArrow').text(">");
 			$('.counter').hide();
 		}
 	});
