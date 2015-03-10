@@ -12,13 +12,13 @@ body{
 	background: #E1F5FF;
 	font-family: Arial, "MS Trebuchet", sans-serif;
 	color: white;
-	overflow: hidden;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-khtml-user-select: none;
 	-o-user-select: none;
 	user-select: none;
+	-webkit-tap-highlight-color:transparent;
 }
 body a {
 	color: white;
@@ -27,8 +27,15 @@ body a {
 #ThreeJScontainer {
 	float: left;
 	width: 82%;
-	height: 100%;
+	height: 90%;
+	margin:0;
+	padding: 0;
 	position: relative;
+}
+
+#ThreeJScontainer canvas {
+	width: 100% !important;
+	height: 98% !important;
 }
 
 /* -- Helpers -- */
@@ -60,6 +67,7 @@ body a {
 	width: 100%;
 	padding-top: 100%;
 	position: relative;
+	background: #C2E9F9;
 }
 #menu a {
 	display: block;
@@ -210,7 +218,6 @@ body a {
 .color-random.chosen{
 	background-position: 0% 99.8% !important;
 }
-
 #erase.chosen  {
 	background-position: 0 16.286%;
 }
@@ -229,7 +236,7 @@ body a {
 #settings.faded  {
 	background-position: 100% 67.144%;
 }
-#colors {  
+#colors {
 	background-position: 0 49.857%;
 }
 #colors.faded  {
@@ -256,7 +263,7 @@ body a {
 /* -- Modal -- */
 .modal {
 	display: none;
-	position: absolute;
+	position: fixed;
 	background: rgba(0,0,0,0.5);
 	border-left: 2px solid rgba(0,0,0,0.75);
 	left: 9%;
@@ -283,16 +290,15 @@ body a {
 	margin: auto auto;
 	height: 100%;
 }
-#baseModal, 
-#resetConfirmModal, 
+#baseModal,  
 #colorsModal, 
 #settingsModal {
 	display: table-cell;
 	vertical-align: middle;
 }
-#baseModal > div, 
-#resetConfirmModal > div, 
-#colorsModal > div, 
+#baseModal > div,
+#resetConfirmModal > div,
+#colorsModal > div,
 #settingsModal > div,
 #FormModal > form {
 	display: inline-block;
@@ -322,7 +328,7 @@ body a {
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 2.5vw;
-	line-height: 8vw; 
+	line-height: 8vw;
 	vertical-align:bottom;
 }
 #settingsModal .get {
@@ -370,6 +376,7 @@ body a {
 	width: 100%;
 	padding-top: 100%;
 	position: relative;
+	background: #C2E9F9;
 }
 .perspective {
 	display: block;
@@ -450,6 +457,18 @@ body a {
 	margin: 10px;
 	width: 13.5%;
 	padding-top: 11%;
+	/*width: 14%;
+	padding-top: 14%;*/
+}
+.canvasWrapper {
+	height:100%;
+	width:100%;
+	position: absolute;
+	left:0;
+	overflow: hidden;
+}
+#perspectiveModal canvas, #preview canvas{
+	background: #E1F5FF;
 }
 
 #FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
@@ -568,8 +587,6 @@ body a {
 	}
 }
 
-
-
 /* Portrait orientation */
 @media (orientation: portrait) {
 	#colorsModal a {
@@ -665,7 +682,7 @@ body a {
 	}
 	#settingsModal div a span {
 		font-size: 4vw;
-		line-height: 9vw; 
+		line-height: 9vw;
 	}
 
 	#colors {
