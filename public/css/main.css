@@ -12,6 +12,7 @@ body{
 	-khtml-user-select: none;
 	-o-user-select: none;
 	user-select: none;
+	overflow: hidden;
 }
 body a {
 	color: white;
@@ -21,8 +22,8 @@ body a {
 	position: relative;
 	width: 90%;
 	float: left;
-	height: 90%;
-	margin:0;
+	height: 100%;
+	margin: 0;
 	padding: 0;
 }
 .perspective canvas, #perspective {
@@ -49,8 +50,8 @@ body a {
 	margin: 0;
 	padding: 0;
 	width: 10%;
-	float: left;
 	height: 100%;
+	float: left;
 	background: #C2E9F9;
 }
 #menu a {
@@ -553,6 +554,9 @@ body a {
 
 /* Smaller devices border-radius */
 @media (max-width:960px) {
+	body {
+		overflow: scroll;
+	}
 	#settingsModal > div, #baseModal div div a, #baseModal div div #sizePreview, #preview {
 		border-radius: 20px;
 	}
@@ -569,6 +573,9 @@ body a {
 
 /* Portrait orientation */
 @media (orientation: portrait) {
+	body {
+		overflow: scroll;
+	}
 	#colorsModal a {
 		margin: 0;
 		border-width: 5px;
