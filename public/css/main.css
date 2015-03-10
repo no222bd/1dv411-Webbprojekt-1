@@ -12,6 +12,7 @@ body{
 	-khtml-user-select: none;
 	-o-user-select: none;
 	user-select: none;
+	-webkit-tap-highlight-color:transparent;
 }
 body a {
 	color: white;
@@ -24,7 +25,7 @@ body a {
 	height: 90%;
 	margin:0;
 	padding: 0;
-	-webkit-tap-highlight-color:transparent;
+	
 }
 .perspective canvas, #perspective {
 	transform: scaleX(-1);
