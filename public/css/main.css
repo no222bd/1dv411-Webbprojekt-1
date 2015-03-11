@@ -25,6 +25,7 @@ body a {
 	text-decoration: none;
 }
 #ThreeJScontainer {
+	z-index: 5;
 	float: left;
 	width: 82%;
 	height: 90%;
@@ -379,6 +380,7 @@ body a {
 	background: #C2E9F9;
 }
 .perspective {
+	cursor: default;
 	display: block;
 	position: absolute;
 	top: 0;
