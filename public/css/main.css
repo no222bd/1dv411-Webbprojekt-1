@@ -290,8 +290,8 @@ body a {
 	margin: auto auto;
 	height: 100%;
 }
-#baseModal,  
-#colorsModal, 
+#baseModal,
+#colorsModal,
 #settingsModal {
 	display: table-cell;
 	vertical-align: middle;
@@ -560,6 +560,81 @@ body a {
 	background-color:#FFF;
 }
 
+/* Help modal ---------------------------------------------------------------------*/
+#helpModal {
+	background-color: #333;
+	border: 5px solid #aaa;
+	border-radius: 25px;
+	width: 80%;
+	margin: 50px auto;
+	heig ht: 100%;
+	over flow: scroll;
+	text-align: center;
+}
+#helpModal > h1 {
+	background-color: #aaa;
+	col or: blue;
+	padding:5px 0 10px 0;
+	margin: 0;
+	border-radius: 15px 15px 0 0;
+}
+#helpContent {
+	text-align: left;
+	overflow: scroll;
+}
+.helpTopic {
+	border-bottom: 2px solid #aaa;
+	overflow: auto;
+	padding-bottom: 25px;
+	margin: 25px;
+}
+.topicIconBox {
+	width: 10%;
+	padding-top: 10%;
+	position: relative;
+	float: left;
+}
+.topicIcon {
+	position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+	background-image: url('../img/Ikoner.png');
+}
+#cubeIcon {
+	background-size: 200%;
+	background-position: 100% 0;
+}
+#eraseIcon {
+	background-position: 100% 16.286%;
+	background-size: 200%;
+}
+#baseIcon {
+	background-position: 0 33.715%;
+	background-size: 200%;
+}
+#settingsIcon {
+	background-position: 0 67.144%;
+	background-size: 200%;
+}
+#colorsIcon {
+	background-position: 0 49.857%;
+	background-size: 200%;
+}
+.topicHeader {
+	width: 87%;
+	float: right;
+	margin-top: 0;
+}
+.topicText {
+	width: 87%;
+	float: right;
+	clear: right;
+}
+/* Help modal end ---------------------------------------------------------------------*/
+
+
 /* Smaller devices orientation */
 @media (orientation: landscape) and (max-width:1200px) {
 	#colorsModal a {
@@ -614,7 +689,7 @@ body a {
 		width: 100%;
 		height: 100%;
 	}
-	
+
 /* Perspective container and modal */
 	#togglePerspective {
 		font-size: 5vw;
@@ -665,7 +740,7 @@ body a {
 		height: 90%;
 		margin: 5%;
 	}
-	
+
 /* Modals */
 	.modal {
 		border-left: none;
