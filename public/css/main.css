@@ -1,6 +1,12 @@
 html{
 	height: 100%;
 }
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 body{
 	height: 100%;
 	background: #E1F5FF;
@@ -14,22 +20,23 @@ body{
 	user-select: none;
 	-webkit-tap-highlight-color:transparent;
 }
+#ThreeJScontainer canvas {
+	vertical-align: middle !important;
+}
 body a {
 	color: white;
 	text-decoration: none;
 }
 #ThreeJScontainer {
-	position: relative;
-	width: 90%;
+	z-index: 5;
 	float: left;
-	height: 90%;
-	margin:0;
+	width: 82%;
+	height: 100%;
+	margin: 0;
 	padding: 0;
-	
+	position: relative;
 }
-.perspective canvas, #perspective {
-	transform: scaleX(-1);
-}
+
 /* -- Helpers -- */
 
 /* Use this class whenever body unselectable doesn't work */
@@ -50,17 +57,25 @@ body a {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	width: 10%;
+	width: 9%;
 	float: left;
 	height: 100%;
+	float: left;
+	background: #C2E9F9;
+}
+#menu > li {
+	width: 100%;
+	padding-top: 100%;
+	position: relative;
 	background: #C2E9F9;
 }
 #menu a {
 	display: block;
-	width: 80%;
-	padding-top: 77%;
-	position: relative;
-	margin:0 10% 5px 10%;
+	position: absolute;
+	top: 0;
+	width: 90%;
+	height: 90%;
+	margin: 5%;
 }
 
 #cube, #erase, #base, #settings, #colors {
@@ -203,7 +218,6 @@ body a {
 .color-random.chosen{
 	background-position: 0% 99.8% !important;
 }
-
 #erase.chosen  {
 	background-position: 0 16.286%;
 }
@@ -229,36 +243,21 @@ body a {
 	background-position: 100%  49.857%;
 }
 
-#perspective.chosen-view {
-	width: 100px;
-	height: 100px;
-	background: #E1F5FF no-repeat;
-	padding-top: 0;
-	margin-left:10%;
-	background-size: 100%;
-	margin-bottom:5px;
-}
-
-/* -- Counter -- */
-.counterWrapper {
-	width: 150px;
-	height: 40px;
-	top: 1em;
-	position: absolute;
-	right: 1em;
-	font-weight: 900;
-	font-size: 1em;
-	text-align: right;
-}
 #sizePreview {
 	cursor: default;
 }
-.counter p, .counterWrapper a {
-	margin: 0 0 2px 2px;
+
+#toggleCounter {
+	top: 1em;
+	position: absolute;
+	left: 2%;
+	font-weight: 900;
+	text-align: left;
 	color:black;
-	display: inline;
-	position: relative;
 	font-size: 2vw;
+}
+#toggleCounter p {
+	display: inline;
 }
 
 /* -- Modal -- */
@@ -267,11 +266,11 @@ body a {
 	position: fixed;
 	background: rgba(0,0,0,0.5);
 	border-left: 2px solid rgba(0,0,0,0.75);
-	left: 10%;
+	left: 9%;
 	right: 0;
 	top: 0;
 	bottom: 0;
-	z-index: 100;
+	z-index: 1000;
 }
 .modal > div {
 	display: none;
@@ -282,17 +281,18 @@ body a {
 .modal .open{
 	display: table;
 }
+.size-auto{
+	width: 80%;
+}
 .container {
 	text-align: center;
 	width: 65%;
 	margin: auto auto;
 	height: 100%;
 }
-#baseModal,
-#resetConfirmModal,
-#colorsModal,
-#settingsModal,
-#perspectiveModal {
+#baseModal,  
+#colorsModal, 
+#settingsModal {
 	display: table-cell;
 	vertical-align: middle;
 }
@@ -300,8 +300,7 @@ body a {
 #resetConfirmModal > div,
 #colorsModal > div,
 #settingsModal > div,
-#FormModal > form,
-#perspectiveModal > div {
+#FormModal > form {
 	display: inline-block;
 	position: relative;
 	margin: 1%;
@@ -310,6 +309,7 @@ body a {
 	vertical-align: middle;
 }
 /* -- Settings modal icons/divs -- */
+
 #settingsModal > div  {
 	background-image: url('../img/settings-icons.png');
 	background-size: 200%;
@@ -324,7 +324,6 @@ body a {
 	font-size: 4vw;
 	line-height: 23vw;
 }
-
 #settingsModal div a span{
 	text-transform: uppercase;
 	font-weight: bold;
@@ -332,7 +331,6 @@ body a {
 	line-height: 8vw;
 	vertical-align:bottom;
 }
-
 #settingsModal .get {
 	background-position:0 0 ;
 }
@@ -346,27 +344,73 @@ body a {
 	background-position:100% 100%;
 }
 
-#perspectiveModal > div {
-	padding-top: 0;
-	width: 25%;
-	padding-bottom:25%;
-	border-radius: 5%;
-	background:#C2E9F9;
-
+/* Perspecive container and modal */
+.perspective canvas, #perspective {
+	transform: scaleX(-1);
 }
-#confirmdeclinebuttons p {
-	font-weight: bold;
+#togglePerspective {
+	font-weight: 900;
 	font-size: 2vw;
+	color: black;
+	position: absolute;
+	bottom: auto;
+	left: auto;
+	top: 1em;
+	right: 11%;
+	z-index: 250;
 }
-#confirmdeclinebuttons div a {
+#togglePerspective.close {
+	right: 2%;
+}
+#perspectives {
+	list-style-type: none;
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 9%;
+	height: 100%;
+	background: #C2E9F9;
+	position: relative;
+}
+#perspectives > li {
+	width: 100%;
+	padding-top: 100%;
+	position: relative;
+	background: #C2E9F9;
+}
+.perspective {
+	cursor: default;
 	display: block;
-	height: 27%;
-	margin-bottom: 2%;
-	background-color: #555;
-	border: 2px solid #333;
-	border-radius: 40px;
-	font-size: 2vw;
+	position: absolute;
+	top: 0;
+	width: 90%;
+	height: 90%;
+	margin: 5%;
 }
+.canvasWrapper {
+	width:100%;
+	height:100%;
+	border-bottom: 4px solid #C2E9F9;
+}
+#perspectives li a canvas, #preview canvas{
+	background: #E1F5FF;
+}
+#greenView {
+	border-bottom-color: #009944;
+}
+#yellowView {
+	border-bottom-color: #F39800;
+}
+#blueView {
+	border-bottom-color: #0068B7;
+}
+#redView {
+	border-bottom-color: #E27BFE;
+}
+.canvasWrapper canvas {
+	background: transparent !important;
+}
+
 #baseModal div div a, #baseModal div div #sizePreview, #preview {
 	display: block;
 	height: 25%;
@@ -408,44 +452,20 @@ body a {
 	border: 10px solid #333;
 	border-radius: 15px;
 	margin: 10px;
-	width: 14%;
-	padding-top: 14%;
+	width: 13.5%;
+	padding-top: 11%;
+	/*width: 14%;
+	padding-top: 14%;*/
 }
 .canvasWrapper {
 	height:100%;
 	width:100%;
 	position: absolute;
 	left:0;
-	border-radius: 5%;
 	overflow: hidden;
-}
-
-#perspectiveModal .green {
-	display:block;
-	margin:0 auto;
 }
 #perspectiveModal canvas, #preview canvas{
 	background: #E1F5FF;
-}
-
-/* colors for the view-frames*/
-
-.top, .red, .blue, .yellow, .green {
-	border: 10px solid #C2E9F9;
-}
-
-.red {
-	border-bottom-color: #E60012;
-}
-
-.blue {
-	border-bottom-color: #0068B7;
-}
-.yellow {
-	border-bottom-color: #F39800;
-}
-.green {
-	border-bottom-color: #009944;
 }
 
 #FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
@@ -467,7 +487,6 @@ body a {
 	background: #ffffff;
 	color: #555 !important;
 }
-
 #alert{
 	font-size: 1.5vw;
 	height: 1.5vw;
@@ -488,8 +507,7 @@ body a {
 .color.yellow {
 	background-color:#FFF100;
 }
-.color.lgreen
-{
+.color.lgreen {
 	background-color:#8FC31F;
 }
 .color.green {
@@ -544,9 +562,6 @@ body a {
 
 /* Smaller devices orientation */
 @media (orientation: landscape) and (max-width:1200px) {
-	.red, .blue, .green , .top , .yellow {
-		border-width:5px;
-	}
 	#colorsModal a {
 		margin: 0;
 		border-width:5px;
@@ -576,30 +591,85 @@ body a {
 		border-width: 5px;
 	}
 	#menu {
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 100%;
-		height: auto;
-	}
-	#menu a {
-		width: 100%;
-		height: 100%;
-		margin-top: 0;
-		padding-top:100%;
+		height: 20%;
+		background: transparent;
 	}
 	#menu li {
+		z-index: 150;
 		float: left;
-		width: 12%;
-		margin-top:5%;
+		width: 20%;
+		padding-top: 19%;
+		background: #C2E9F9;
+	}
+	#menu a {
+		width: 90%;
+		height: 90%;
+		margin-top: 5%;
 	}
 	#ThreeJScontainer {
 		width: 100%;
-		height: 80%;
+		height: 100%;
 	}
-	/* Modals */
+	
+/* Perspective container and modal */
+	#togglePerspective {
+		font-size: 5vw;
+		top: auto;
+		right: auto;
+		left: 1em;
+	}
+	#togglePerspective.close {
+		bottom: 2%;
+	}
+	#perspectives {
+		width: 100%;
+		height: 20%;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		background: transparent;
+	}
+	#perspectives li {
+		z-index: 150;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 20%;
+		padding-top: 20%;
+		background: #C2E9F9;
+	}
+	#perspectives li:nth-of-type(2) {
+		left: 20%;
+	}
+	#perspectives li:nth-of-type(3) {
+		left: 40%;
+	}
+	#perspectives li:nth-of-type(4) {
+		left: 60%;
+	}
+	#perspectives li:nth-of-type(5) {
+		left: 80%;
+	}
+	.perspective {
+		width: 100%;
+		height: 100%;
+		padding: 0%;
+		margin: 0;
+	}
+	.canvasWrapper {
+		width: 90%;
+		height: 90%;
+		margin: 5%;
+	}
+	
+/* Modals */
 	.modal {
 		border-left: none;
-		border-top: 2px solid rgba(0,0,0,0.75);
 		left: 0;
-		margin-top: 24%;
 	}
 	.container {
 		width: 100%;
@@ -612,9 +682,6 @@ body a {
 		line-height: 9vw;
 	}
 
-	.red, .blue, .green , .top , .yellow {
-		border-width:5px;
-	}
 	#colors {
 		top: 50%;
 	}
@@ -622,19 +689,96 @@ body a {
 		font-size:7vw;
 		line-height:10vw;
 	}
-	.counter p, .counterWrapper a {
+	#toggleCounter {
+		left: 1em;
+		top: 4%;
 		font-size: 5vw;
 	}
 }
+
+/* Placing of toggles in portrait must be hard coded */
+@media (orientation: portrait) and (max-width:700px) {
+	#toggleCounter {
+		top: 140px;
+	}
+	#togglePerspective {
+		bottom: 140px;
+	}
+}
+@media (orientation: portrait) and (max-width:650px) {
+	#toggleCounter {
+		top: 130px;
+	}
+	#togglePerspective {
+		bottom: 130px;
+	}
+}
+@media (orientation: portrait) and (max-width:600px) {
+	#toggleCounter {
+		top: 120px;
+	}
+	#togglePerspective {
+		bottom: 120px;
+	}
+}
+@media (orientation: portrait) and (max-width:550px) {
+	#toggleCounter {
+		top: 110px;
+	}
+	#togglePerspective {
+		bottom: 110px;
+	}
+}
+@media (orientation: portrait) and (max-width:500px) {
+	#toggleCounter {
+		top: 100px;
+	}
+	#togglePerspective {
+		bottom: 100px;
+	}
+}
+@media (orientation: portrait) and (max-width:450px) {
+	#toggleCounter {
+		top: 90px;
+	}
+	#togglePerspective {
+		bottom: 90px;
+	}
+}
+@media (orientation: portrait) and (max-width:400px) {
+	#toggleCounter {
+		top: 80px;
+	}
+	#togglePerspective {
+		bottom: 80px;
+	}
+}
+@media (orientation: portrait) and (max-width:350px) {
+	#toggleCounter {
+		top: 70px;
+	}
+	#togglePerspective {
+		bottom: 70px;
+	}
+}
+@media (orientation: portrait) and (max-width:300px) {
+	#toggleCounter {
+		top: 60px;
+	}
+	#togglePerspective {
+		bottom: 60px;
+	}
+}
+
 @media print {
-	#menu, .counter{
+	#menu, #toggleCounter, #togglePerspective {
 		display: none;
 	}
-	html, body{
+	html, body {
 		height: auto;
 		background: #ffffff;
 	}
-	#ThreeJScontainer{
+	#ThreeJScontainer {
 		width: auto;
 	}
 }

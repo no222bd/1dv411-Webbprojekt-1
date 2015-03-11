@@ -33,13 +33,13 @@ jQuery(document).ready(function ($) {
 	/**
 	 * Toggles counter to hide/show it.
 	 */
-	$('.counterWrapper').on('click', 'a', function(event){
+	$('#toggleCounter').on('click', function(event){
 		event.preventDefault();
-		if ($('#toggleArrow').text() === "<") {
-			$('#toggleArrow').text(">");
-			$('.counter').show();
-		} else if ($('#toggleArrow').text() === ">") {
+		if ($('#toggleArrow').text() === ">") {
 			$('#toggleArrow').text("<");
+			$('.counter').show();
+		} else if ($('#toggleArrow').text() === "<") {
+			$('#toggleArrow').text(">");
 			$('.counter').hide();
 		}
 	});
@@ -59,6 +59,32 @@ jQuery(document).ready(function ($) {
 			handleModalWindow($(this));
 			//Corrects the size of perspectives!
 			cb.renderPerspectives();
+		}
+	});
+	
+	/**
+	 * Prevent link tags in perspectivs container from working
+	 */
+	$('#perspectives').on('click', 'a', function(event) {
+		event.preventDefault();
+	});
+	
+	/**
+	 * Creates functionality for hiding perspectives 
+	 */
+	$('#togglePerspective').on('click', function(event) {
+		event.preventDefault();
+		var toggleElement = $('#togglePerspective');
+		var perspectivesContainer = $('#perspectives');
+		
+		if(toggleElement.hasClass('open')) {
+			perspectivesContainer.hide();
+			toggleElement.attr('class', 'close');
+			toggleElement.text("<");
+		} else {
+			perspectivesContainer.show();
+			toggleElement.attr('class', 'open');
+			toggleElement.text(">");
 		}
 	});
 
@@ -190,12 +216,15 @@ jQuery(document).ready(function ($) {
 		}
 		return false;
 	});
-
+	
+	// Remove before mergeing
+	
+/*
 	/**
 	 * Sets perspective.
 	 * @param {jQuery element} element
 	 */
-	function setPerspective(element) {
+/*	function setPerspective(element) {
 		var perspective = element.attr("href");
 		cb.perspective(perspective);
 		closeModal();
@@ -219,6 +248,8 @@ jQuery(document).ready(function ($) {
 			target.css("background-image", "url(" + canvas.toDataURL() + ")");
 		}
 	});
+*/
+
 
 	/**
 	 * Sets base size.
@@ -251,7 +282,7 @@ jQuery(document).ready(function ($) {
 		cb.renderPerspectives();
 		$('#ThreeJScontainer').trigger('updateView');
 	}
-
+	
 	/**
 	 * Sets color of cube.
 	 * @param  {jQuery element} element

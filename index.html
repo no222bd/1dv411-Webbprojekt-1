@@ -19,7 +19,6 @@
 					<div>
 						<div class="innerBox">
 							<span id="preview">
-								
 							</span>
 							<a id="reset" href="#reset">RENSA</a>
 						</div>
@@ -30,46 +29,6 @@
 							<span id="sizePreview" class="unselectable">10</span>
 							<a class="sizeControl" href="#down">&#8681;</a>
 						</div>
-					</div>
-				</div>
-			</div>
-			<!-- PERSPECTIVE -->
-			<div id="perspectiveContainer" class="container">
-				<div id="perspectiveModal">
-					<div class="green">
-						<a class="perspective" href="#green">
-							<div id="greenView"  class="canvasWrapper">
-								<!--canvas></canvas-->
-							</div>
-						</a>
-					</div>
-					<div class="yellow">
-						<a class="perspective" href="#yellow">
-							<div id="yellowView" class="canvasWrapper">
-								<!--canvas></canvas-->
-							</div>
-						</a>
-					</div>	
-					<div class="top">
-						<a class="perspective" href="#top">
-							<div id="topView" class="canvasWrapper">
-								<!--canvas></canvas-->
-							</div>
-						</a>
-					</div>		
-					<div class="blue">
-						<a class="perspective" href="#blue">
-							<div id="blueView" class="canvasWrapper">
-								<!--canvas></canvas-->
-							</div>
-						</a>
-					</div>
-					<div class="red">
-						<a class="perspective" href="#red">
-							<div id="redView" class="canvasWrapper">
-								<!--canvas></canvas-->
-							</div>
-						</a>
 					</div>
 				</div>
 			</div>
@@ -140,27 +99,63 @@
 				<a id="base" class="modalOption clear" href="#baseContainer"></a>
 			</li>
 			<li>
-				<a id="perspective" class="modalOption" href="#perspectiveContainer"></a>
-			</li>
-			<li>
 				<a id="colors" class="modalOption" href="#colorsContainer"></a>
 			</li>
 			<li>
 				<a id="settings" class="modalOption" href="#settingsContainer"></a>
 			</li>
 		</ul>
-
+		
+		<!-- Construction Area -->
 		<div id="ThreeJScontainer" onclick="void(0)">
-			<div class="counterWrapper">
-				<a href="#toggleCounter">
-					<span id='toggleArrow'>></span>
-					<span class="counter">
-						<p><span id="counter">0</span></p>
-					</span>
-				</a>
-			</div>
+			<a id="toggleCounter" href="#toggleCounter">
+				<span class="counter">
+					<p><span id="counter">0</span></p>
+				</span>
+				<span id='toggleArrow'>&lt;</span>
+			</a>
 		</div>
-
+		
+		<!-- Perspective -->
+		<a id="togglePerspective" class="open" href="#togglePerspective">&gt;</a>
+		<ul id="perspectives" class="container">
+			<li>
+				<a class="green perspective" href="#green">
+					<div id="greenView"  class="canvasWrapper">
+						<!--canvas></canvas-->
+					</div>
+				</a>
+			</li>
+			<li>
+				<a class="yellow perspective" href="#yellow">
+					<div id="yellowView" class="canvasWrapper">
+						<!--canvas></canvas-->
+					</div>
+				</a>
+			</li>
+			<li>
+				<a class="top perspective" href="#top">
+					<div id="topView" class="canvasWrapper">
+						<!--canvas></canvas-->
+					</div>
+				</a>
+			</li>
+			<li>
+				<a class="pink perspective" href="#red">
+					<div id="redView" class="canvasWrapper">
+						<!--canvas></canvas-->
+					</div>
+				</a>
+			</li>
+			<li>
+				<a class="blue perspective" href="#blue">
+					<div id="blueView" class="canvasWrapper">
+						<!--canvas></canvas-->
+					</div>
+				</a>
+			</li>
+		</ul>
+		
 		<script src="./public/js/vendor/jquery-1.11.2.min.js"></script>
 		<script src="./public/js/vendor/typedarrays.js"></script>
 		<script src="./public/js/vendor/requestAnimationFramePolyfill.js"></script>
