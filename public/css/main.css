@@ -20,6 +20,9 @@ body{
 	user-select: none;
 	-webkit-tap-highlight-color:transparent;
 }
+#ThreeJScontainer canvas {
+	vertical-align: middle !important;
+}
 body a {
 	color: white;
 	text-decoration: none;
@@ -28,15 +31,10 @@ body a {
 	z-index: 5;
 	float: left;
 	width: 82%;
-	height: 90%;
-	margin:0;
+	height: 100%;
+	margin: 0;
 	padding: 0;
 	position: relative;
-}
-
-#ThreeJScontainer canvas {
-	width: 100% !important;
-	height: 98% !important;
 }
 
 /* -- Helpers -- */
@@ -62,6 +60,7 @@ body a {
 	width: 9%;
 	float: left;
 	height: 100%;
+	float: left;
 	background: #C2E9F9;
 }
 #menu > li {
@@ -395,10 +394,6 @@ body a {
 }
 #perspectives li a canvas, #preview canvas{
 	background: #E1F5FF;
-}
-.perspective {
-	width: 100%
-	height: auto;
 }
 #greenView {
 	border-bottom-color: #009944;
