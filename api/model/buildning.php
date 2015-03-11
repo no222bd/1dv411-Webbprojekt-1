@@ -53,7 +53,7 @@ Class Building{
 			if(strlen($name) <= 50) {
 				if(!$this->modelExists($name)) {
 					$this->removeError($key);
-					$this->name = $name;
+					$this->name = strtolower($name);
 					return true;
 				}else{
 					$errors[] = 'A buildning with that name already exists';

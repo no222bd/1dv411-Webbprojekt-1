@@ -41,7 +41,7 @@ class CubeController {
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function show($id, Application $app) {
-		$data = $this->building->get($id);
+		$data = $this->building->get(strtolower($id));
 		if($data) {
 			return $app->json(array('data' => $data), 200);
 		}
@@ -54,7 +54,7 @@ class CubeController {
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function create(Request $request, Application $app) {
-		$this->building->setName($request->get('name'));
+		$this->building->setName(strtolower($request->get('name')));
 		$this->building->setModel($request->get('model'));
 		if($this->building->haveErrors()) {
 			return $app->json(array('message' => 'Your model could not be created.', 'errors' => $this->building->getErrors()), 400);

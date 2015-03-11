@@ -145,9 +145,15 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		setBase();
 		scene = createScene();
 		for(var i = 0, cubes = model.cubes.length; i < cubes; i++) {
-			material = new THREE.MeshBasicMaterial({
-				map:textures[model.cubes[i].color.toUpperCase()] || THREE.ImageUtils.loadTexture(texturePath.path+model.cubes[i].color.toUpperCase()+texturePath.extention)
-			});
+			if(Detector.webgl) {
+				material = new THREE.MeshBasicMaterial({
+					map:textures[model.cubes[i].color.toUpperCase()] || THREE.ImageUtils.loadTexture(texturePath.path+model.cubes[i].color.toUpperCase()+texturePath.extention)
+				});
+			}else{
+				material = new THREE.MeshBasicMaterial({
+					color: '#'+model.cubes[i].color
+				});
+			}
 
 			voxel = new THREE.Mesh(cubeGeo, material);
 			voxel.position.x = model.cubes[i].x;
