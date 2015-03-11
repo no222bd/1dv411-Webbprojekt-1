@@ -342,15 +342,16 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			&& Math.round(intersect.point.y) < (step * (baseSize / (step / 2)))
 		) {
 			var voxel = new THREE.Mesh(cubeGeo, cubeMaterial);
-			voxel.position.copy(intersect.point).add(intersect.face.normal);
+			var facenormal = intersect.face.normal.clone().multiplyScalar(step/2);
+			voxel.position.copy(intersect.point).add(facenormal);
 			// checks if basePlane have uneven number of cubes...
 			if((baseSize / (step/2)) % 2 !== 0) {
+				var y = voxel.position.y;
 				voxel.position.divideScalar(step).round().multiplyScalar(step);
-				voxel.position.y = Math.floor(intersect.point.y / step) * step + (step / 2);
+				voxel.position.y = Math.abs(Math.floor(y / step) * step + (step / 2));
 			} else {
 				voxel.position.divideScalar(step).floor().multiplyScalar(step).addScalar(step / 2);
 			}
-
 			if(voxel.position.y > 0 && !cubeExists(voxel.position)) {
 				scene.add(voxel);
 				objects.push(voxel);
