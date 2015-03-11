@@ -21,6 +21,7 @@ describe("Builder.BuildingSaver", function () {
 		var clearedAll = {};
 		
 		for (var id in all) {
+			id = id.trim().toLowerCase();
 			if (!buildings[id] && id != "name4") {
 				clearedAll[id] = all[id];
 			}
@@ -54,6 +55,20 @@ describe("Builder.BuildingSaver", function () {
 			
 			// act
 			buildingSaver.saveNewBuilding("name2", "qwerty");
+			
+			// assert
+			expect(Object.keys(buildingSaver._getAllBuildings().length == temp.length)).toBeTruthy();
+		});
+		
+		it("should not save with already existing name (case-insensitive)", function () {
+			// act
+			var temp = buildingSaver._getAllBuildings();
+			
+			// assert
+			expect(Object.keys(temp).length >= 3).toBeTruthy();
+			
+			// act
+			buildingSaver.saveNewBuilding("NAME2", "qwerty");
 			
 			// assert
 			expect(Object.keys(buildingSaver._getAllBuildings().length == temp.length)).toBeTruthy();

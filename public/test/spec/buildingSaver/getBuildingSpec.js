@@ -21,6 +21,7 @@ describe("Builder.BuildingSaver", function () {
 		var clearedAll = {};
 		
 		for (var id in all) {
+			id = id.trim().toLowerCase();
 			if (!buildings[id]) {
 				clearedAll[id] = all[id];
 			}
@@ -34,6 +35,14 @@ describe("Builder.BuildingSaver", function () {
 		it("should get one building", function () {
 			// act
 			var result = buildingSaver.getBuilding("name2");
+			
+			// assert
+			expect(typeof result == "object").toBeTruthy();
+		});
+		
+		it("should get one building (case-insensitive)", function () {
+			// act
+			var result = buildingSaver.getBuilding("NAME2");
 			
 			// assert
 			expect(typeof result == "object").toBeTruthy();

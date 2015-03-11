@@ -21,6 +21,14 @@ describe("Builder.BuildingSaver", function () {
 			expect(result).toBeTruthy();
 		});
 		
+		it("should find existing building case-insensitive", function () {
+			// act
+			var result = buildingSaver._checkIfBuildingExists("NAME2", buildings);
+			
+			// assert
+			expect(result).toBeTruthy();
+		});
+		
 		it("should not find unexisting building", function () {
 			// act
 			var result = buildingSaver._checkIfBuildingExists("name4", buildings);

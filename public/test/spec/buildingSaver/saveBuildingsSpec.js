@@ -25,6 +25,7 @@ describe("Builder.BuildingSaver", function () {
 		var clearedAll = {};
 		
 		for (var id in all) {
+			id = id.trim().toLowerCase();
 			if (!buildings[id] && !oneMoreBuilding[id]) {
 				clearedAll[id] = all[id];
 			}
@@ -58,6 +59,20 @@ describe("Builder.BuildingSaver", function () {
 			
 			// act
 			buildingSaver.saveBuildings({name2: { model: "qwerty", date: "2015-03-03" }});
+			
+			// assert
+			expect(Object.keys(buildingSaver._getAllBuildings().length == temp.length)).toBeTruthy();
+		});
+		
+		it("should not save already existing building (case-insensitive)", function () {
+			// act
+			var temp = buildingSaver._getAllBuildings();
+			
+			// assert
+			expect(Object.keys(temp).length >= 3).toBeTruthy();
+			
+			// act
+			buildingSaver.saveBuildings({NAME2: { model: "qwerty", date: "2015-03-03" }});
 			
 			// assert
 			expect(Object.keys(buildingSaver._getAllBuildings().length == temp.length)).toBeTruthy();

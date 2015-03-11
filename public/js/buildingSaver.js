@@ -46,6 +46,8 @@
 		 */
 		function checkIfBuildingExists(name, all) {
 			for (var id in all) {
+				id = id.trim().toLowerCase();
+				name = name.trim().toLowerCase();
 				if (id == name) { return true; }
 			};
 			return false;
@@ -100,6 +102,11 @@
 		 */
 		this.getBuilding = function(id) {
 			var building, all = getAllBuildings();
+			console.log("New");
+			
+			id = id.trim().toLowerCase();
+			
+			console.log(all);
 			if (all) {
 				return all[id];
 			} else {
@@ -117,6 +124,8 @@
 			var all = getAllBuildings() || {};
 			
 			for (var id in buildings) {
+				id = id.trim().toLowerCase();
+				
 				if (!checkIfBuildingExists(id, all)) {
 					all[id] = buildings[id];
 				}
@@ -127,6 +136,7 @@
 		};
 		
 		this.saveNewBuilding = function(name, model) {
+			var name = name.trim().toLowerCase();
 			if (checkIfBuildingExists(name, getAllBuildings())) {
 				return false;
 			}

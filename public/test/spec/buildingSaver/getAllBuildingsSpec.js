@@ -21,6 +21,7 @@ describe("Builder.BuildingSaver", function () {
 		var clearedAll = {};
 		
 		for (var id in all) {
+			id = id.trim().toLowerCase();
 			if (!buildings[id]) {
 				clearedAll[id] = all[id];
 			}
