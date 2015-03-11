@@ -369,15 +369,13 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 */
 	function cubeExists(voxelPosition){
 		for(var i= 1; i < objects.length; i++){
-			if(
-				voxelPosition.x == objects[i].position.x &&
-				voxelPosition.z == objects[i].position.z &&
-				voxelPosition.y == objects[i].position.y
+			if( voxelPosition.equals(objects[i].position)
 			){
 				return true;
 			}
-			return false;
 		}
+		
+			return false;
 	}
 
 	/**
