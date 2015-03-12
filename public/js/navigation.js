@@ -24,11 +24,17 @@ jQuery(document).ready(function ($) {
 	/**
 	 * Generates random cube colors per cube placed.
 	 */
-	$("#ThreeJScontainer").on("mousedown", function () {
+	document.querySelector("#ThreeJScontainer").addEventListener("mousedown", function () {
+		console.time("start click");
 		if (chosenColor == "#random") {
 			cb.setCubeMaterial(chooseRandomColorFromColors());
 		}
 	});
+	/*$("#ThreeJScontainer").on("mousedown", function () {
+		if (chosenColor == "#random") {
+			cb.setCubeMaterial(chooseRandomColorFromColors());
+		}
+	});*/
 
 	/**
 	 * Toggles counter to hide/show it.
