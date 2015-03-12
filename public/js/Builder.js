@@ -10,7 +10,6 @@ var BUILDER = outerWindow.BUILDER;
  * @constructor
  */
 BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colorChoices) {
-
 	/* Private members */
 
 	var step,
@@ -34,6 +33,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		self = this,
 		colors = colorChoices || [],
 		textures = {},
+		stats,
 		texturePath = {
 			extention: '.png',
 			path: 'public/img/textures/'
@@ -80,10 +80,21 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
 		controls.noPan = true;
 		setZoom();
+		stats = new Stats();
+		stats.setMode(1); // 0: fps, 1: ms
 
+		// align top-left
+		stats.domElement.style.position = 'absolute';
+		stats.domElement.style.left = '0px';
+		stats.domElement.style.top = '0px';
+		stats.domElement.style["z-index"] = 1000;
+
+		document.body.appendChild( stats.domElement );
 		jQueryContainer.append(renderer.domElement);
-		jQueryContainer.on( "mousedown", onDocumentMouseTouch);
-		jQueryContainer.on( "mouseup", onDocumentMouseTouch);
+		//jQueryContainer.on( "mousedown", onDocumentMouseTouch);
+		jQueryContainer[0].addEventListener("mousedown", onDocumentMouseTouch);
+		//jQueryContainer.on( "mouseup", onDocumentMouseTouch);
+		jQueryContainer[0].addEventListener("mouseup", onDocumentMouseTouch);
 
 		createPerspectives();
 		render();
@@ -285,7 +296,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				cubeMaterial = new THREE.MeshBasicMaterial({
 					//Either take it from the hash, but we can't know if it's there yet
 					//Or just load the texture right here, if it's missing
-					map: textures[colorHex.toUpperCase().substring(1)] || THREE.ImageUtils.loadTexture(texturePath.path + colorHex.toUpperCase().substring(1) + texturePath.extention)
+					map: textures[colorHex.toUpperCase()] || THREE.ImageUtils.loadTexture(texturePath.path + colorHex.toUpperCase().substring(1) + texturePath.extention)
 				});
 			}else{
 				cubeMaterial = new THREE.MeshBasicMaterial({
@@ -355,10 +366,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			if(voxel.position.y > 0 && !cubeExists(voxel.position)) {
 				scene.add(voxel);
 				objects.push(voxel);
-				updateCounter();
-				views.forEach(function(element, index, array) {
-					element.render();
-				});
+				setTimeout(function(){
+					updateCounter();	
+				}, 0);
+				setTimeout(function(){
+					views.forEach(function(element, index, array) {	
+							element.render();
+					});
+				}, 0);
 			}
 		}
 	}
@@ -375,8 +390,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				return true;
 			}
 		}
-		
-			return false;
+		return false;
 	}
 
 	/**
@@ -484,7 +498,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		} else {
 			renderer = new THREE.CanvasRenderer({alpha: true});
 		}
-
 		// E9F9FF
 		renderer.setClearColor( 0x000000, 0 );
 		renderer.setPixelRatio(window.devicePixelRatio || 1);
@@ -517,18 +530,24 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		if (intersect.object != basePlane) {
 			scene.remove(intersect.object);
 			objects.splice(objects.indexOf(intersect.object), 1);
-			updateCounter();
-			views.forEach(function(element, index, array) {
+
+			setTimeout(function(){
+				updateCounter();	
+			}, 0);
+			setTimeout(function(){
+				views.forEach(function(element, index, array) {
 				element.render();
 			});
+			}, 0);
 		}
 	}
 
 	/**
 	 * Called to render object
 	 */
-	function render() {;
+	function render() {
 		requestAnimationFrame(render);
+		stats.update();
 		renderer.render(scene, camera);
 	};
 
@@ -607,7 +626,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			x : event.pageX - jQueryContainer.offset().left,
 			y : event.pageY - jQueryContainer.offset().top
 		};
-
 		if (event.type === "mousedown") {
 			// save mouse position
 			mouseposition.x = targetPosition.x;
@@ -619,30 +637,26 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			} else {
 				mouse.set((targetPosition.x / jQueryContainer.width() ) * 2 - 1, -(targetPosition.y / jQueryContainer.height() ) * 2 + 1);
 				raycaster.setFromCamera(mouse, camera);
-				var intersects = raycaster.intersectObjects(objects);
 
+				var intersects = raycaster.intersectObjects(objects);
 				if (intersects.length > 0) {
 					// if click was inside 3D object
 					var intersect = intersects[0];
 					switch(event.button) {
-					case 0:
-						// left mouse button adds cube if buildMode == true, removes if false
-						buildMode ? addCube(intersect) : removeCube(intersect);
-						jQueryContainer.trigger(UIevent);
-						break;
-					case 2:
-						// right mouse button removes cube
-						removeCube(intersect);
-						jQueryContainer.trigger(UIevent);
-						break;
+						case 0:
+							// left mouse button adds cube if buildMode == true, removes if false
+							buildMode ? addCube(intersect) : removeCube(intersect);
+							break;
+						case 2:
+							// right mouse button removes cube
+							removeCube(intersect);
+							break;
 					}
 				}
 			}
 		}
 	}
-
 	init();
-
 	/* OBS. For testing only! Do not use in application!!! */
 	// TODO: Remove before deploying
 
