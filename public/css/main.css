@@ -783,6 +783,7 @@ body a {
 		height: 100%;
 		margin: 0;
 		padding: 0;
+		padding-bottom: 20%;
 	}
 	#ThreeJScontainer canvas {
 		width: 100% !important;
