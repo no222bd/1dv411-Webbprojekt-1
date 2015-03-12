@@ -37,7 +37,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		texturePath = {
 			extention: '.png',
 			path: 'public/img/textures/'
-		}, clickstart;
+		};
 
 
 	/**
@@ -631,7 +631,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			mouseposition.x = targetPosition.x;
 			mouseposition.y = targetPosition.y;
 		} else if (event.type === "mouseup") {
-			clickstart = new Date();
 			if (mouseposition.x != targetPosition.x || mouseposition.y != targetPosition.y) {
 				// if mouse has moved since mousedown event
 				return;
@@ -724,9 +723,7 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	 * Renders scene.
 	 */
 	this.render = function() {
-		console.time("view");
 		renderer.render(scene, camera);
-		console.timeEnd("view");
 	};
 
 	/**

@@ -30,11 +30,6 @@ jQuery(document).ready(function ($) {
 			cb.setCubeMaterial(chooseRandomColorFromColors());
 		}
 	});
-	/*$("#ThreeJScontainer").on("mousedown", function () {
-		if (chosenColor == "#random") {
-			cb.setCubeMaterial(chooseRandomColorFromColors());
-		}
-	});*/
 
 	/**
 	 * Toggles counter to hide/show it.
@@ -222,40 +217,6 @@ jQuery(document).ready(function ($) {
 		}
 		return false;
 	});
-	
-	// Remove before mergeing
-	
-/*
-	/**
-	 * Sets perspective.
-	 * @param {jQuery element} element
-	 */
-/*	function setPerspective(element) {
-		var perspective = element.attr("href");
-		cb.perspective(perspective);
-		closeModal();
-	}
-
-	$(".perspective .canvasWrapper").on("click", function (event) {
-		event.preventDefault();
-		var target = $("#perspective");
-		target.css("background-image", "url(" + this.firstChild.toDataURL() + ")");
-		target.removeClass("top red yellow green blue").addClass("chosen-view " + $(this).parents("div").attr("class"));
-		$("#menu").data("target", $(this).attr("id"));
-	});
-
-	$('#topView').trigger('click');
-
-	$("#ThreeJScontainer").on("updateView", function () {
-		var menuTargetId = $("#menu").data("target");
-		if (menuTargetId !== undefined) {
-			var target = $("#perspective");
-			var canvas = $("#" + menuTargetId).children()[0];
-			target.css("background-image", "url(" + canvas.toDataURL() + ")");
-		}
-	});
-*/
-
 
 	/**
 	 * Sets base size.
