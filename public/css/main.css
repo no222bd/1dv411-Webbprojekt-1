@@ -272,6 +272,9 @@ body a {
 	bottom: 0;
 	z-index: 1000;
 }
+.focusedModal {
+	position: absolute;
+}
 .modal > div {
 	display: none;
 }
