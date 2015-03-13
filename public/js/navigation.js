@@ -13,7 +13,7 @@ jQuery(document).ready(function ($) {
 	});
 
 	$("#Name").on('focus', function(event) {
-		$(".modal").toggleClass('focusedModal');
+		//$(".modal").toggleClass('focusedModal');
 	});
 
 	var cb = new BUILDER.ConstructionArea($("#ThreeJScontainer"), perspectives, colorsArray);
@@ -279,7 +279,6 @@ jQuery(document).ready(function ($) {
 	 * Sets a resize event handler.
 	 */
 	$(window).resize(function (event) {
-		alert("RESIZE :)");
 		cb.resize();
 	});
 
