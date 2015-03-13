@@ -311,25 +311,36 @@ body a {
 /* -- Settings modal icons/divs -- */
 
 #settingsModal > div  {
-	background-image: url('../img/settings-icons.png');
-	background-size: 200%;
+	background:#555;
 	border: 2px solid #333;
 	border-radius: 40px;
 	width: 36%;
-	padding-top: 36%;
+	padding-top: 36%; 
+	overflow:hidden;
 }
 #settingsModal div a {
+	height:100%; 
+}
+#settingsModal div a .icon{
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 4vw;
 	line-height: 23vw;
+	height:77%;
+	
 }
-#settingsModal div a span{
+#settingsModal div a .name{
+	width:100%;
+	margin:0 auto;
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 2.5vw;
-	line-height: 8vw;
-	vertical-align:bottom;
+	line-height: 5vw;
+	height:23%;
+	position:absolute; 
+	background:#555;
 }
 #settingsModal .get {
 	background-position:0 0 ;
