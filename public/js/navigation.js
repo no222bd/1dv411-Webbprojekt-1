@@ -279,6 +279,7 @@ jQuery(document).ready(function ($) {
 	 * Sets a resize event handler.
 	 */
 	$(window).resize(function (event) {
+		alert("RESIZE :)");
 		cb.resize();
 	});
 
