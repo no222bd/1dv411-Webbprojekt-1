@@ -611,7 +611,8 @@ body a {
 	padding-bottom: 25px;
 }
 #helpContent td.subTopic {
-	padding-left: 10%;
+	padding-left: 15%;
+	background-color: #444;
 }
 .topicIconBox {
 	width: 10%;
@@ -646,6 +647,10 @@ body a {
 #colorsIcon {
 	background-position: 0 49.857%;
 	background-size: 200%;
+}
+#clearIcon {
+	background-image: url('../img/clearBase-icon.png');
+	background-size: 100%;
 }
 #loadIcon {
 	background-image: url('../img/settings-icons.png');
