@@ -274,6 +274,7 @@ body a {
 }
 .focusedModal {
 	position: absolute;
+	overflow: visible;
 }
 .modal > div {
 	display: none;
