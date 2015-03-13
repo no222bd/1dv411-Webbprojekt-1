@@ -1,5 +1,5 @@
 html{
-	height: 100%; 
+	height: 100%;
 }
 html {
   box-sizing: border-box;
@@ -270,7 +270,7 @@ body a {
 	right: 0;
 	top: 0;
 	bottom: 0;
-	z-index: 1000; 
+	z-index: 1000;
 }
 .modal > div {
 	display: none;
@@ -568,7 +568,7 @@ body a {
 	width:85%;
 	margin: 50px auto;
 	height:80%;
-	text-align: center; 
+	text-align: center;
 	cursor:default;
 }
 #helpModal > h1 {
@@ -580,21 +580,21 @@ body a {
 }
 #helpContent {
 	width:100%;
-	height:93%; 
+	height:93%;
 	text-align: left;
 }
- 
+
 #helpContent tbody {
     height: 100%;
   	overflow-y: scroll; /* has to be scroll, not auto */
-  	-webkit-overflow-scrolling: touch; 
+  	-webkit-overflow-scrolling: touch;
 }
 #helpContent td {
     padding: 2%;
     line-height:28px;
 }
 
-#helpContent thead > tr, tbody{ 
+#helpContent thead > tr, tbody{
     display:block;}
 
 .helpTopic {
@@ -636,6 +636,21 @@ body a {
 #colorsIcon {
 	background-position: 0 49.857%;
 	background-size: 200%;
+}
+#loadIcon {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
+	background-position:0 0 ;
+}
+#saveIcon {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
+	background-position:100% 0;
+}
+#printIcon {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
+	background-position:0 100%;
 }
 .topicHeader {
 	padding-top:20px;
