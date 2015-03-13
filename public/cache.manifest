@@ -17,6 +17,8 @@ font/fontello.woff
 img/cube_colors.png
 img/Ikoner.png
 img/smiley.png
+img/random-color.png
+img/settings-icons.png
 #img/textures
 img/textures/000000.png
 img/textures/0068B7.png
@@ -48,6 +50,7 @@ js/vendor/jquery-1.11.2.min.js
 js/vendor/typedarrays.js
 js/vendor/requestAnimationFramePolyfill.js
 js/vendor/three.min.js
+js/vendor/stats.min.js
 js/vendor/Projector.js
 js/vendor/Detector.js
 js/vendor/CanvasRenderer.js
