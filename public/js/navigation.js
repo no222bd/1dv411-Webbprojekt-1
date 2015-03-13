@@ -25,7 +25,6 @@ jQuery(document).ready(function ($) {
 	 * Generates random cube colors per cube placed.
 	 */
 	document.querySelector("#ThreeJScontainer").addEventListener("mousedown", function () {
-		console.time("start click");
 		if (chosenColor == "#random") {
 			cb.setCubeMaterial(chooseRandomColorFromColors());
 		}

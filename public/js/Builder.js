@@ -45,7 +45,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 * Init is a constructor for this object.
 	 */
 	function init() {// TODO - Make this public ?
-		console.time("init");
 		if(!(jQueryContainer instanceof jQuery)){
 			throw new Error();
 		}
@@ -101,7 +100,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		jQueryContainer[0].addEventListener("mouseup", onDocumentMouseTouch);
 
 		createPerspectives();
-		console.timeEnd("init");
 		setTimeout(function(){
 			render();	
 		}, 1000);
@@ -297,12 +295,10 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 * @returns {boolean}
 	 */
 	this.setCubeMaterial = function(colorHex) {
-		console.time("setCubeMaterial");
 		var pattern = new RegExp("^#([A-Fa-f0-9]{6})$");
 		if(pattern.test(colorHex)) {
 			if(Detector.webgl) {
 				if(materials[colorHex] == undefined){
-					console.log("Creating materials");
 					cubeMaterial = new THREE.MeshBasicMaterial({
 						//Either take it from the hash, but we can't know if it's there yet
 						//Or just load the texture right here, if it's missing
@@ -310,7 +306,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 					});
 					materials[colorHex] = cubeMaterial;	
 				} else {
-					console.log("Getting materials from cache");
 					cubeMaterial = materials[colorHex];
 				}
 			}else{
@@ -327,7 +322,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			// TODO: Remove before deploying
 
 			this._cubeMaterial = cubeMaterial;
-			console.timeEnd("setCubeMaterial");
 			/* End of testing code */
 			return true;
 		}
@@ -391,7 +385,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				}, 0);
 				
 			}
-			console.timeEnd("start click");
 		}
 	}
 	/**
@@ -558,7 +551,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 */
 	function render() {
 		requestAnimationFrame(render);
-		//stats.update();
+		stats.update();
 		renderer.render(scene, camera);
 	};
 
@@ -670,9 +663,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	init();
 	setInterval(function(){
 		requestAnimationFrame(function(){
-			console.time("render 0");
-			views[0].render();	
-			console.timeEnd("render 0");
+			views[0].render();
 		});
 	}, 400);
 	setInterval(function(){
