@@ -282,6 +282,7 @@ jQuery(document).ready(function ($) {
 	 * @param  {jQuery element} element
 	 */
 	function handleBuildOption(element) {
+		closeModal();
 		if (element.hasClass('chosen')) {
 			return;
 		} else {
