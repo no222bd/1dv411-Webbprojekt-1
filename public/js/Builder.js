@@ -33,6 +33,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		self = this,
 		colors = colorChoices || [],
 		textures = {},
+		materials = {},
 		stats,
 		texturePath = {
 			extention: '.png',
@@ -44,6 +45,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 * Init is a constructor for this object.
 	 */
 	function init() {// TODO - Make this public ?
+		console.time("init");
 		if(!(jQueryContainer instanceof jQuery)){
 			throw new Error();
 		}
@@ -52,10 +54,12 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				throw new Error();
 			}
 		}
-		colors.forEach(function(colorValue){
-			THREE.ImageUtils.loadTexture(texturePath.path+colorValue.toUpperCase().substring(1)+texturePath.extention, undefined, function(texture){
-				textures[colorValue] = texture;
-			});
+		colors.forEach(function(colorValue){		
+			requestAnimationFrame(function(){
+				THREE.ImageUtils.loadTexture(texturePath.path+colorValue.toUpperCase().substring(1)+texturePath.extention, undefined, function(texture){
+					textures[colorValue] = texture;
+				});
+			});	
 		});
 		self.setCubeMaterial('#FBE430');
 
@@ -97,7 +101,10 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		jQueryContainer[0].addEventListener("mouseup", onDocumentMouseTouch);
 
 		createPerspectives();
-		render();
+		console.timeEnd("init");
+		setTimeout(function(){
+			render();	
+		}, 1000);
 	}
 
 	/* Public functions */
@@ -290,24 +297,37 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 * @returns {boolean}
 	 */
 	this.setCubeMaterial = function(colorHex) {
+		console.time("setCubeMaterial");
 		var pattern = new RegExp("^#([A-Fa-f0-9]{6})$");
 		if(pattern.test(colorHex)) {
 			if(Detector.webgl) {
-				cubeMaterial = new THREE.MeshBasicMaterial({
-					//Either take it from the hash, but we can't know if it's there yet
-					//Or just load the texture right here, if it's missing
-					map: textures[colorHex.toUpperCase()] || THREE.ImageUtils.loadTexture(texturePath.path + colorHex.toUpperCase().substring(1) + texturePath.extention)
-				});
+				if(materials[colorHex] == undefined){
+					console.log("Creating materials");
+					cubeMaterial = new THREE.MeshBasicMaterial({
+						//Either take it from the hash, but we can't know if it's there yet
+						//Or just load the texture right here, if it's missing
+						map: textures[colorHex.toUpperCase()] || THREE.ImageUtils.loadTexture(texturePath.path + colorHex.toUpperCase().substring(1) + texturePath.extention)
+					});
+					materials[colorHex] = cubeMaterial;	
+				} else {
+					console.log("Getting materials from cache");
+					cubeMaterial = materials[colorHex];
+				}
 			}else{
-				cubeMaterial = new THREE.MeshBasicMaterial({
-					color: colorHex
-				});
+				if(materials[colorHex] == undefined){
+					cubeMaterial = new THREE.MeshBasicMaterial({
+						color: colorHex
+					});
+					materials[colorHex] = cubeMaterial;	
+				} else {
+					cubeMaterial = materials[colorHex];
+				}
 			}
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 			// TODO: Remove before deploying
 
 			this._cubeMaterial = cubeMaterial;
-
+			console.timeEnd("setCubeMaterial");
 			/* End of testing code */
 			return true;
 		}
@@ -369,15 +389,11 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				setTimeout(function(){
 					updateCounter();	
 				}, 0);
-				setTimeout(function(){
-					views.forEach(function(element, index, array) {	
-							element.render();
-					});
-				}, 0);
+				
 			}
+			console.timeEnd("start click");
 		}
 	}
-
 	/**
 	 * Checks if a cube already are in a position.
 	 * @param voxelPosition
@@ -534,11 +550,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			setTimeout(function(){
 				updateCounter();	
 			}, 0);
-			setTimeout(function(){
-				views.forEach(function(element, index, array) {
-				element.render();
-			});
-			}, 0);
 		}
 	}
 
@@ -547,7 +558,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 */
 	function render() {
 		requestAnimationFrame(render);
-		stats.update();
+		//stats.update();
 		renderer.render(scene, camera);
 	};
 
@@ -657,6 +668,38 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		}
 	}
 	init();
+	setInterval(function(){
+		requestAnimationFrame(function(){
+			console.time("render 0");
+			views[0].render();	
+			console.timeEnd("render 0");
+		});
+	}, 400);
+	setInterval(function(){
+		requestAnimationFrame(function(){
+			views[1].render();	
+		});
+	}, 400);
+	setInterval(function(){
+		requestAnimationFrame(function(){
+			views[2].render();	
+		});
+	}, 400);
+	setInterval(function(){
+		requestAnimationFrame(function(){
+			views[3].render();	
+		});
+	}, 400);
+	setInterval(function(){
+		requestAnimationFrame(function(){
+			views[4].render();	
+		});
+	}, 400);
+	setInterval(function(){
+		requestAnimationFrame(function(){
+			views[5].render();	
+		});
+	}, 400);
 	/* OBS. For testing only! Do not use in application!!! */
 	// TODO: Remove before deploying
 
