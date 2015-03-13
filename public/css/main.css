@@ -321,26 +321,15 @@ body a {
 #settingsModal div a {
 	height:100%; 
 }
-#settingsModal div a .icon{
+#settingsModal div a {
 	background-image: url('../img/settings-icons.png');
 	background-size: 200%;
 	text-transform: uppercase;
 	font-weight: bold;
-	font-size: 4vw;
+	font-size: 3vw;
 	line-height: 23vw;
 	height:77%;
-	
-}
-#settingsModal div a .name{
-	width:100%;
-	margin:0 auto;
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 2.5vw;
-	line-height: 5vw;
-	height:23%;
-	position:absolute; 
-	background:#555;
+	padding-top:35%;
 }
 #settingsModal .get {
 	background-position:0 0 ;
