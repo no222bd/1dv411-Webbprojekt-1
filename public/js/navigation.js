@@ -114,6 +114,7 @@ jQuery(document).ready(function ($) {
 		} else {
 			if ($(this).attr('href') == '#import' || $(this).attr('href') == '#save') {
 				handleModalWindow($(this));
+				$("#Name").focus();
 			}
 			if($(this).attr('href') == '#print'){
 				closeModal();
