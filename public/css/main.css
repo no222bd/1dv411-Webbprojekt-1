@@ -263,7 +263,7 @@ body a {
 /* -- Modal -- */
 .modal {
 	display: none;
-	position: fixed;
+	position: absolute;
 	background: rgba(0,0,0,0.5);
 	border-left: 2px solid rgba(0,0,0,0.75);
 	left: 9%;
@@ -271,10 +271,6 @@ body a {
 	top: 0;
 	bottom: 0;
 	z-index: 1000;
-}
-.focusedModal {
-	position: absolute;
-	overflow: visible;
 }
 .modal > div {
 	display: none;
