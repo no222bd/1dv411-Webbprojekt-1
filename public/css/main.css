@@ -488,6 +488,7 @@ body a {
 	text-align: center;
 	vertical-align: middle;
 	padding-top: 2%;
+	padding-bottom: 2%;
 	position: relative;
 }
 #FormModal form input[type="text"]{
@@ -495,9 +496,7 @@ body a {
 	color: #555 !important;
 }
 #alert{
-	font-size: 1.5vw;
 	cursor: default;
-	padding-bottom: 2%;
 }
 #alert:empty{
 	visibility: hidden;
