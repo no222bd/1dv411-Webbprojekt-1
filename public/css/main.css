@@ -440,8 +440,7 @@ body a {
 	border-radius: 40px;
 	overflow: hidden;
 	padding-top: 0;
-	border-left: none;
-	border-top: none;
+	border: none;
 }
 #preview canvas{
 	border-radius: 40px !important;
