@@ -34,6 +34,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		colors = colorChoices || [],
 		textures = {},
 		materials = {},
+		renderCount = 0,
 		stats,
 		texturePath = {
 			extention: '.png',
@@ -380,6 +381,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			if(voxel.position.y > 0 && !cubeExists(voxel.position)) {
 				scene.add(voxel);
 				objects.push(voxel);
+				renderCount = 6;
 				setTimeout(function(){
 					updateCounter();	
 				}, 0);
@@ -661,35 +663,54 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		}
 	}
 	init();
-	setInterval(function(){
-		requestAnimationFrame(function(){
-			views[0].render();
-		});
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+	        if (renderCount > 0) {
+	            views[0].render();
+	            renderCount -= 1;
+	        }
+	    });
 	}, 400);
-	setInterval(function(){
-		requestAnimationFrame(function(){
-			views[1].render();	
-		});
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+
+	        if (renderCount > 0) {
+	            views[1].render();
+	            renderCount -= 1;
+	        }
+	    });
 	}, 400);
-	setInterval(function(){
-		requestAnimationFrame(function(){
-			views[2].render();	
-		});
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+	        if (renderCount > 0) {
+	            views[2].render();
+	            renderCount -= 1;
+	        }
+	    });
 	}, 400);
-	setInterval(function(){
-		requestAnimationFrame(function(){
-			views[3].render();	
-		});
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+	        if (renderCount > 0) {
+	            views[3].render();
+	            renderCount -= 1;
+	        }
+	    });
 	}, 400);
-	setInterval(function(){
-		requestAnimationFrame(function(){
-			views[4].render();	
-		});
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+	        if (renderCount > 0) {
+	            views[4].render();
+	            renderCount -= 1;
+	        }
+	    });
 	}, 400);
-	setInterval(function(){
-		requestAnimationFrame(function(){
-			views[5].render();	
-		});
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+	        if (renderCount > 0) {
+	            views[5].render();
+	            renderCount -= 1;
+	        }
+	    });
 	}, 400);
 	/* OBS. For testing only! Do not use in application!!! */
 	// TODO: Remove before deploying
