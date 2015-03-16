@@ -429,7 +429,7 @@ body a {
 	margin-bottom: 8%;
 	background-color: #555;
 	border: 2px solid #333;
-	border-radius: 40px;
+	border-radius: 35px;
 	font-size: 4vw;
 	line-height:5.5vw;
 	color: white;
@@ -441,14 +441,12 @@ body a {
 	height: 100%;
 	width: 100%;
 	position: relative;
-	border-radius: 40px;
 	overflow: hidden;
 	padding-top: 0;
-	border-left: none;
-	border-top: none;
+	border: none;
 }
 #preview canvas{
-	border-radius: 40px !important;
+	border-radius: 35px !important;
 	border: 2px solid #333;
 }
 .innerBox {
