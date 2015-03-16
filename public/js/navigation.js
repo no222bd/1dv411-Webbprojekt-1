@@ -3,6 +3,11 @@ jQuery(document).ready(function ($) {
 
 	//colorsArray holds all the colors that are awailable in the UI color selector
 	var colorsArray = [];
+
+	if ($("#alert").text() !== null) {
+		$("#alert").toggleClass('sadSmiley');
+	}
+
 	/**
 	 * Populates colorsArray with colors from colorsModal.
 	 */
@@ -24,7 +29,8 @@ jQuery(document).ready(function ($) {
 	/**
 	 * Generates random cube colors per cube placed.
 	 */
-	$("#ThreeJScontainer").on("mousedown", function () {
+	document.querySelector("#ThreeJScontainer").addEventListener("mousedown", function () {
+		console.time("start click");
 		if (chosenColor == "#random") {
 			cb.setCubeMaterial(chooseRandomColorFromColors());
 		}
@@ -141,7 +147,7 @@ jQuery(document).ready(function ($) {
 		var buildingSaver = new BUILDER.BuildingSaver();
 		var alert = $('#alert');
 		if (name == '' || name == null || name == undefined) {
-			alert.text('Namnet är för kort :(');
+			alert.text('Namnet är för kort');
 		} else {
 			if (name.length <= 50) {
 				if ($(this).val() == 'Hämta') {
@@ -165,7 +171,7 @@ jQuery(document).ready(function ($) {
 										closeModal();
 									} else {
 										console.log("Could not find that building.");
-										alert.text('Byggnaden hittades inte :(');
+										alert.text('Byggnaden hittades inte');
 									}
 								}
 							}
@@ -177,7 +183,7 @@ jQuery(document).ready(function ($) {
 							cb.loadModel(result);
 							closeModal();
 						} else {
-							alert.text('Byggnaden hittades inte :(');
+							alert.text('Byggnaden hittades inte');
 						}
 					}
 				} else {
@@ -196,10 +202,10 @@ jQuery(document).ready(function ($) {
 									closeModal();
 								},
 								400: function (result) {
-									alert.text('Namnet finns redan :(');
+									alert.text('Namnet finns redan');
 								},
 								503: function (result) {
-									alert.text('Ett fel inträffade, försök igen :(');
+									alert.text('Ett fel inträffade, försök igen');
 								}
 							}
 						});
@@ -209,50 +215,16 @@ jQuery(document).ready(function ($) {
 						if (buildingSaver.saveNewBuilding(name, dataString)) {
 							closeModal();
 						} else {
-							alert.text('Namnet finns redan :(');
+							alert.text('Namnet finns redan');
 						}
 					}
 				}
 			}else{
-				alert.text('Namnet är för långt :(');
+				alert.text('Namnet är för långt');
 			}
 		}
 		return false;
 	});
-
-	// Remove before mergeing
-
-/*
-	/**
-	 * Sets perspective.
-	 * @param {jQuery element} element
-	 */
-/*	function setPerspective(element) {
-		var perspective = element.attr("href");
-		cb.perspective(perspective);
-		closeModal();
-	}
-
-	$(".perspective .canvasWrapper").on("click", function (event) {
-		event.preventDefault();
-		var target = $("#perspective");
-		target.css("background-image", "url(" + this.firstChild.toDataURL() + ")");
-		target.removeClass("top red yellow green blue").addClass("chosen-view " + $(this).parents("div").attr("class"));
-		$("#menu").data("target", $(this).attr("id"));
-	});
-
-	$('#topView').trigger('click');
-
-	$("#ThreeJScontainer").on("updateView", function () {
-		var menuTargetId = $("#menu").data("target");
-		if (menuTargetId !== undefined) {
-			var target = $("#perspective");
-			var canvas = $("#" + menuTargetId).children()[0];
-			target.css("background-image", "url(" + canvas.toDataURL() + ")");
-		}
-	});
-*/
-
 
 	/**
 	 * Sets base size.
@@ -318,6 +290,7 @@ jQuery(document).ready(function ($) {
 	 * @param  {jQuery element} element
 	 */
 	function handleBuildOption(element) {
+		closeModal();
 		if (element.hasClass('chosen')) {
 			return;
 		} else {
