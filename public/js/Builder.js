@@ -268,6 +268,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			createPerspectives();
 			updateCounter();
 
+			renderCount = 6;
+
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 			/* Remove before deploy! */
 
@@ -342,6 +344,15 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 		/* End of testing code */
 	};
+
+	this.shouldRenderPerspectives = function(should){
+		console.log(should);
+		views.forEach(function(view){
+			view.shouldRender(should);
+		});
+		//Ugly fix
+		views[5].shouldRender(true);
+	}
 
 	/* Private functions */
 
@@ -542,6 +553,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			scene.remove(intersect.object);
 			objects.splice(objects.indexOf(intersect.object), 1);
 
+			renderCount = 6;
+
 			setTimeout(function(){
 				updateCounter();	
 			}, 0);
@@ -666,49 +679,42 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	setInterval(function() {
 	    requestAnimationFrame(function() {
 	        if (renderCount > 0) {
-	            views[0].render();
-	            renderCount -= 1;
-	        }
-	    });
-	}, 400);
-	setInterval(function() {
-	    requestAnimationFrame(function() {
-
-	        if (renderCount > 0) {
-	            views[1].render();
-	            renderCount -= 1;
+	            views[0].render() && renderCount--;
 	        }
 	    });
 	}, 400);
 	setInterval(function() {
 	    requestAnimationFrame(function() {
 	        if (renderCount > 0) {
-	            views[2].render();
-	            renderCount -= 1;
+	            views[1].render() && renderCount--;
 	        }
 	    });
 	}, 400);
 	setInterval(function() {
 	    requestAnimationFrame(function() {
 	        if (renderCount > 0) {
-	            views[3].render();
-	            renderCount -= 1;
+	            views[2].render() && renderCount--;
 	        }
 	    });
 	}, 400);
 	setInterval(function() {
 	    requestAnimationFrame(function() {
 	        if (renderCount > 0) {
-	            views[4].render();
-	            renderCount -= 1;
+	            views[3].render() && renderCount--;
 	        }
 	    });
 	}, 400);
 	setInterval(function() {
 	    requestAnimationFrame(function() {
 	        if (renderCount > 0) {
-	            views[5].render();
-	            renderCount -= 1;
+	            views[4].render() && renderCount--;
+	        }
+	    });
+	}, 400);
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+	        if (renderCount > 0) {
+	            views[5].render() && renderCount--;
 	        }
 	    });
 	}, 400);
@@ -774,11 +780,16 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
  * @constructor
  */
 BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
+	var renderView = true;
 	/**
 	 * Renders scene.
 	 */
 	this.render = function() {
-		renderer.render(scene, camera);
+		if(renderView){
+			renderer.render(scene, camera);	
+			return true;
+		} 
+		return false;
 	};
 
 	/**
@@ -808,6 +819,11 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 		JQueryElement.empty();
 		JQueryElement.append(renderer.domElement);
 	};
+
+	this.shouldRender = function(_boolean){
+		console.log(_boolean);
+		renderView = _boolean;
+	}
 
 	/* OBS. For testing only! Do not use in application!!! */
 	// TODO: Remove before deploying
