@@ -147,7 +147,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	this.loadModel = function(jsonString) {
 		var model;
 		var voxel;
-		var material;
+		var temp = cubeMaterial;
 
 		if(typeof jsonString === "object"){
 			model = jsonString;
@@ -162,17 +162,10 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		setBase();
 		scene = createScene();
 		for(var i = 0, cubes = model.cubes.length; i < cubes; i++) {
-			if(Detector.webgl) {
-				material = new THREE.MeshBasicMaterial({
-					map:textures[model.cubes[i].color.toUpperCase()] || THREE.ImageUtils.loadTexture(texturePath.path+model.cubes[i].color.toUpperCase()+texturePath.extention)
-				});
-			}else{
-				material = new THREE.MeshBasicMaterial({
-					color: '#'+model.cubes[i].color
-				});
-			}
+			var hexColor = "#" + model.cubes[i].color;			
+			self.setCubeMaterial(hexColor);
 
-			voxel = new THREE.Mesh(cubeGeo, material);
+			voxel = new THREE.Mesh(cubeGeo, materials[hexColor]);
 			voxel.position.x = model.cubes[i].x;
 			voxel.position.y = model.cubes[i].y;
 			voxel.position.z = model.cubes[i].z;
@@ -182,11 +175,11 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		}
 
 		updateCounter();
-
-		views.forEach(function(element, index, array) {
-			element.render();
-		});
-
+		createPerspectives();
+		self.renderPerspectives();
+		
+		cubeMaterial = temp;
+		
 		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 		// TODO: Remove before deploying
 
@@ -352,7 +345,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		});
 		//Ugly fix
 		views[5].shouldRender(true);
-	}
+	};
 
 	/* Private functions */
 
@@ -823,7 +816,7 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	this.shouldRender = function(_boolean){
 		console.log(_boolean);
 		renderView = _boolean;
-	}
+	};
 
 	/* OBS. For testing only! Do not use in application!!! */
 	// TODO: Remove before deploying
