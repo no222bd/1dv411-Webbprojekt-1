@@ -436,7 +436,7 @@ body a {
 	line-height:5.5vw;
 	color: white;
 	vertical-align: middle;
-	padding-top: 2%;
+	padding-top: 0;
 	font-weight: bold;
 }
 #preview {
