@@ -297,8 +297,8 @@ body a {
 	margin: auto auto;
 	height: 100%;
 }
-#baseModal,  
-#colorsModal, 
+#baseModal,
+#colorsModal,
 #settingsModal {
 	display: table-cell;
 	vertical-align: middle;
@@ -322,11 +322,11 @@ body a {
 	border: 2px solid #333;
 	border-radius: 40px;
 	width: 36%;
-	padding-top: 36%; 
+	padding-top: 36%;
 	overflow:hidden;
 }
 #settingsModal div a {
-	height:100%; 
+	height:100%;
 }
 #settingsModal div a {
 	background-image: url('../img/settings-icons.png');
@@ -354,6 +354,10 @@ body a {
 /* Perspecive container and modal */
 .perspective canvas, #perspective {
 	transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	-ms-transform: scaleX(-1);
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
 }
 #togglePerspective {
 	font-weight: 900;
@@ -620,7 +624,7 @@ body a {
 		width: 100%;
 		height: 100%;
 	}
-	
+
 /* Perspective container and modal */
 	#togglePerspective {
 		font-size: 5vw;
@@ -671,7 +675,7 @@ body a {
 		height: 90%;
 		margin: 5%;
 	}
-	
+
 /* Modals */
 	.modal {
 		border-left: none;
@@ -811,7 +815,7 @@ body a {
 	.canvasWrapper {
 		border-top: 2% solid transparent;
 		border-right: 2% solid transparent;
-		border-left: 2% solid transparent;	
+		border-left: 2% solid transparent;
 		border-bottom-width: 2%;
 		width: 96%;
 		height: 96%;
