@@ -80,99 +80,101 @@
 			<!-- HELP -->
 			<div id="helpModal">
 				<h1>Hjälp</h1>
-				<table id="helpContent">
-					<tbody>
-						<tr class="bottomBorder">
-							<td class="helpTopic">
+				<div id="helpContentContainer">
+					<table id="helpContent">
+						<tbody>
+							<tr class="bottomBorder">
+								<td class="helpTopic">
+									<div class="topicIconBox">
+										<span id="cubeIcon" class="topicIcon"></span>
+									</div>
+									<h2 class="topicHeader">Lägg till kub</h2>
+									<div class="topicText">
+										Om du har kuben vald (markeras med gul ram) så går det att lägga till kuber på byggytan.
+									</div>
+								</td>
+							</tr>
+							<tr class="bottomBorder">
+								<td class="helpTopic">
 								<div class="topicIconBox">
-									<span id="cubeIcon" class="topicIcon"></span>
-								</div>
-								<h2 class="topicHeader">Lägg till kub</h2>
+									<span id="eraseIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Ta bort kub</h2>
 								<div class="topicText">
-									Om du har kuben vald (markeras med gul ram) så går det att lägga till kuber på byggytan.
-								</div>
-							</td>
-						</tr>
-						<tr class="bottomBorder">
-							<td class="helpTopic">
-							<div class="topicIconBox">
-								<span id="eraseIcon" class="topicIcon"></span>
-							</div><h2 class="topicHeader">Ta bort kub</h2>
-							<div class="topicText">
-								Om du har suddet valt (markeras med gul ram) är det bara att klicka på de kuber som du vill ta bort.
-								Om du använder en datormus så behöver du inte växla över till suddgummit utan kan kan använda dig av höger musknapp för att ta bort en kub.
-							</div></td>
-						</tr>
-						<tr>
-							<td class="helpTopic">
-							<div class="topicIconBox">
-								<span id="baseIcon" class="topicIcon"></span>
-							</div><h2 class="topicHeader">Ändra storlek</h2>
-							<div class="topicText">
-								Här kan du ändra basplattans storlek mellan 1-10 genom att trycka på uppåt-och nedåtknapparna som visas i popup-fönstret.
-								Observera att en ändring här resulterar i att byggytan ransas på eventuella kuber.
-							</div></td>
-						</tr>
-						<tr class="bottomBorder">
-							<td class="helpTopic subTopic">
-							<div class="topicIconBox">
-								<span id="clearIcon" class="topicIcon"></span>
-							</div><h2 class="topicHeader">Rensa basplattan</h2>
-							<div class="topicText">
-								Denna knapp rensar byggutan från kuber.
-							</div></td>
-						</tr>
-						<tr class="bottomBorder">
-							<td class="helpTopic">
-							<div class="topicIconBox">
-								<span id="colorsIcon" class="topicIcon"></span>
-							</div><h2 class="topicHeader">Färgpaletten</h2>
-							<div class="topicText">
-								Här finns möjligheten att byta färg på din kub. Det finns en färg som har ett regnbåge-mönster, om du väljer den så får varje kub du lägger till en slumpad färg.
-							</div></td>
-						</tr>
-						<tr>
-							<td class="helpTopic">
-							<div class="topicIconBox">
-								<span id="settingsIcon" class="topicIcon"></span>
-							</div><h2 class="topicHeader">Inställningar</h2>
-							<div class="topicText">
-								Under inställningar hittar du möjligheterna att hantera dina modeller samt skriva ut dem.
-							</div></td>
-						</tr>
-						<tr>
-							<td class="helpTopic subTopic">
-							<div class="topicIconBox">
-								<span id="loadIcon" class="topicIcon"></span>
-							</div><h2 class="topicHeader">Hämta modell</h2>
-							<div class="topicText">
-								Hämta en tidigare sparad modell.
-								Om man befinner sig offline så är det endast möjligt att hämta lokalt sparade modeller.
-								Om man är online så är det möjligt att hämta modeller från den gemensamma servern.
-								I det fall en lokal modell har samma namn som en modell lagrad på servern så kommer den sistnämnda att hämtas.
-							</div></td>
-						</tr>
-						<tr>
-							<td class="helpTopic subTopic">
-							<div class="topicIconBox">
-								<span id="saveIcon" class="topicIcon"></span>
-							</div><h2 class="topicHeader">Spara modell</h2>
-							<div class="topicText">
-								Spara en skapade modell. Om man befinner sig offline så kommer modellen enbart att lagras lokalt på enheten.
-								Befinner man sig online så kommer modellen att lagras både lokalt och på den gemensamma servern.
-							</div></td>
-						</tr>
-						<tr>
-							<td class="helpTopic subTopic">
-							<div class="topicIconBox">
-								<span id="printIcon" class="topicIcon"></span>
-							</div><h2 class="topicHeader">Skriv ut</h2>
-							<div class="topicText">
-								Skriv ut den aktuella modellen.
-							</div></td>
-						</tr>
-					</tbody>
-				</table>
+									Om du har suddet valt (markeras med gul ram) är det bara att klicka på de kuber som du vill ta bort.
+									Om du använder en datormus så behöver du inte växla över till suddgummit utan kan kan använda dig av höger musknapp för att ta bort en kub.
+								</div></td>
+							</tr>
+							<tr>
+								<td class="helpTopic">
+								<div class="topicIconBox">
+									<span id="baseIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Ändra storlek</h2>
+								<div class="topicText">
+									Här kan du ändra basplattans storlek mellan 1-10 genom att trycka på uppåt-och nedåtknapparna som visas i popup-fönstret.
+									Observera att en ändring här resulterar i att byggytan ransas på eventuella kuber.
+								</div></td>
+							</tr>
+							<tr class="bottomBorder">
+								<td class="helpTopic subTopic">
+								<div class="topicIconBox">
+									<span id="clearIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Rensa basplattan</h2>
+								<div class="topicText">
+									Denna knapp rensar byggutan från kuber.
+								</div></td>
+							</tr>
+							<tr class="bottomBorder">
+								<td class="helpTopic">
+								<div class="topicIconBox">
+									<span id="colorsIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Färgpaletten</h2>
+								<div class="topicText">
+									Här finns möjligheten att byta färg på din kub. Det finns en färg som har ett regnbåge-mönster, om du väljer den så får varje kub du lägger till en slumpad färg.
+								</div></td>
+							</tr>
+							<tr>
+								<td class="helpTopic">
+								<div class="topicIconBox">
+									<span id="settingsIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Inställningar</h2>
+								<div class="topicText">
+									Under inställningar hittar du möjligheterna att hantera dina modeller samt skriva ut dem.
+								</div></td>
+							</tr>
+							<tr>
+								<td class="helpTopic subTopic">
+								<div class="topicIconBox">
+									<span id="loadIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Hämta modell</h2>
+								<div class="topicText">
+									Hämta en tidigare sparad modell.
+									Om man befinner sig offline så är det endast möjligt att hämta lokalt sparade modeller.
+									Om man är online så är det möjligt att hämta modeller från den gemensamma servern.
+									I det fall en lokal modell har samma namn som en modell lagrad på servern så kommer den sistnämnda att hämtas.
+								</div></td>
+							</tr>
+							<tr>
+								<td class="helpTopic subTopic">
+								<div class="topicIconBox">
+									<span id="saveIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Spara modell</h2>
+								<div class="topicText">
+									Spara en skapade modell. Om man befinner sig offline så kommer modellen enbart att lagras lokalt på enheten.
+									Befinner man sig online så kommer modellen att lagras både lokalt och på den gemensamma servern.
+								</div></td>
+							</tr>
+							<tr>
+								<td class="helpTopic subTopic">
+								<div class="topicIconBox">
+									<span id="printIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Skriv ut</h2>
+								<div class="topicText">
+									Skriv ut den aktuella modellen.
+								</div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 				<div id="helpBottom"></div>
 			</div>
 			<!-- HELP end -->
