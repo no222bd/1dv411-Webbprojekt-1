@@ -262,6 +262,7 @@ body a {
 	text-align: left;
 	color:black;
 	font-size: 2vw;
+	padding: 1vw 2vw;
 }
 #toggleCounter p {
 	display: inline;
@@ -369,6 +370,7 @@ body a {
 	top: 1em;
 	right: 11%;
 	z-index: 250;
+	padding: 1vw 2vw;
 }
 #togglePerspective.close {
 	right: 2%;
