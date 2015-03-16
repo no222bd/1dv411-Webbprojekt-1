@@ -562,7 +562,7 @@ body a {
 
 /* Help modal ---------------------------------------------------------------------*/
 #helpModal {
-	position: relative;
+	position: absolute;
 	top: 10%;
 	left: 7.5%;
 	width:85%;
@@ -571,8 +571,12 @@ body a {
 	cursor:default;
 }
 #helpModal > h1 {
+	position: absolute;
+	height: 40px;
+	width: 100%;
+	top: 0;
+	left: 0;
 	background-color: #aaa;
-	padding:5px 0 5px 0;
 	margin: 0;
 	border-radius: 10px 10px 0 0;
 }
@@ -582,6 +586,8 @@ body a {
 	bottom: 10px;
 	left: 0;
 	width: 100%;
+	border-left: 5px solid #aaa;
+	border-right: 5px solid #aaa;
 	overflow-y: scroll; /* has to be scroll, not auto */
   	-webkit-overflow-scrolling: touch;
 }
@@ -591,10 +597,13 @@ body a {
 	height:100%;
 	text-align: left;
 	background-color: #333;
-	border-left: 5px solid #aaa;
-	border-right: 5px solid #aaa;
 }
 #helpBottom {
+	position: absolute;
+	height: 10px;
+	width: 100%;
+	bottom: 0;
+	left: 0;
 	height:10px;
 	background-color: #333;
 	border-left: 5px solid #aaa;
@@ -605,8 +614,6 @@ body a {
 #helpContent tbody {
 	position: relative;
     height: auto;
-  	/*overflow-y: scroll; /* has to be scroll, not auto */
-  	/*-webkit-overflow-scrolling: touch;*/
 }
 #helpContent td {
     padding: 2%;
