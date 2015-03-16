@@ -30,7 +30,6 @@ jQuery(document).ready(function ($) {
 	 * Generates random cube colors per cube placed.
 	 */
 	document.querySelector("#ThreeJScontainer").addEventListener("mousedown", function () {
-		console.time("start click");
 		if (chosenColor == "#random") {
 			cb.setCubeMaterial(chooseRandomColorFromColors());
 		}
@@ -85,10 +84,12 @@ jQuery(document).ready(function ($) {
 		
 		if(toggleElement.hasClass('open')) {
 			perspectivesContainer.hide();
+			cb.shouldRenderPerspectives(false);
 			toggleElement.attr('class', 'close');
 			toggleElement.text("<");
 		} else {
 			perspectivesContainer.show();
+			cb.shouldRenderPerspectives(true);
 			toggleElement.attr('class', 'open');
 			toggleElement.text(">");
 		}

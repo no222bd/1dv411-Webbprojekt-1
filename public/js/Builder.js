@@ -33,6 +33,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		self = this,
 		colors = colorChoices || [],
 		textures = {},
+		materials = {},
+		renderCount = 0,
 		stats,
 		texturePath = {
 			extention: '.png',
@@ -52,10 +54,12 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				throw new Error();
 			}
 		}
-		colors.forEach(function(colorValue){
-			THREE.ImageUtils.loadTexture(texturePath.path+colorValue.toUpperCase().substring(1)+texturePath.extention, undefined, function(texture){
-				textures[colorValue] = texture;
-			});
+		colors.forEach(function(colorValue){		
+			requestAnimationFrame(function(){
+				THREE.ImageUtils.loadTexture(texturePath.path+colorValue.toUpperCase().substring(1)+texturePath.extention, undefined, function(texture){
+					textures[colorValue] = texture;
+				});
+			});	
 		});
 		self.setCubeMaterial('#FBE430');
 
@@ -97,7 +101,9 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		jQueryContainer[0].addEventListener("mouseup", onDocumentMouseTouch);
 
 		createPerspectives();
-		render();
+		setTimeout(function(){
+			render();	
+		}, 1000);
 	}
 
 	/* Public functions */
@@ -262,6 +268,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			createPerspectives();
 			updateCounter();
 
+			renderCount = 6;
+
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 			/* Remove before deploy! */
 
@@ -293,21 +301,30 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		var pattern = new RegExp("^#([A-Fa-f0-9]{6})$");
 		if(pattern.test(colorHex)) {
 			if(Detector.webgl) {
-				cubeMaterial = new THREE.MeshBasicMaterial({
-					//Either take it from the hash, but we can't know if it's there yet
-					//Or just load the texture right here, if it's missing
-					map: textures[colorHex.toUpperCase()] || THREE.ImageUtils.loadTexture(texturePath.path + colorHex.toUpperCase().substring(1) + texturePath.extention)
-				});
+				if(materials[colorHex] == undefined){
+					cubeMaterial = new THREE.MeshBasicMaterial({
+						//Either take it from the hash, but we can't know if it's there yet
+						//Or just load the texture right here, if it's missing
+						map: textures[colorHex.toUpperCase()] || THREE.ImageUtils.loadTexture(texturePath.path + colorHex.toUpperCase().substring(1) + texturePath.extention)
+					});
+					materials[colorHex] = cubeMaterial;	
+				} else {
+					cubeMaterial = materials[colorHex];
+				}
 			}else{
-				cubeMaterial = new THREE.MeshBasicMaterial({
-					color: colorHex
-				});
+				if(materials[colorHex] == undefined){
+					cubeMaterial = new THREE.MeshBasicMaterial({
+						color: colorHex
+					});
+					materials[colorHex] = cubeMaterial;	
+				} else {
+					cubeMaterial = materials[colorHex];
+				}
 			}
 			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
 			// TODO: Remove before deploying
 
 			this._cubeMaterial = cubeMaterial;
-
 			/* End of testing code */
 			return true;
 		}
@@ -327,6 +344,15 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 		/* End of testing code */
 	};
+
+	this.shouldRenderPerspectives = function(should){
+		console.log(should);
+		views.forEach(function(view){
+			view.shouldRender(should);
+		});
+		//Ugly fix
+		views[5].shouldRender(true);
+	}
 
 	/* Private functions */
 
@@ -366,18 +392,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			if(voxel.position.y > 0 && !cubeExists(voxel.position)) {
 				scene.add(voxel);
 				objects.push(voxel);
+				renderCount = 6;
 				setTimeout(function(){
 					updateCounter();	
 				}, 0);
-				setTimeout(function(){
-					views.forEach(function(element, index, array) {	
-							element.render();
-					});
-				}, 0);
+				
 			}
 		}
 	}
-
 	/**
 	 * Checks if a cube already are in a position.
 	 * @param voxelPosition
@@ -531,13 +553,10 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			scene.remove(intersect.object);
 			objects.splice(objects.indexOf(intersect.object), 1);
 
+			renderCount = 6;
+
 			setTimeout(function(){
 				updateCounter();	
-			}, 0);
-			setTimeout(function(){
-				views.forEach(function(element, index, array) {
-				element.render();
-			});
 			}, 0);
 		}
 	}
@@ -657,6 +676,48 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		}
 	}
 	init();
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+	        if (renderCount > 0) {
+	            views[0].render() && renderCount--;
+	        }
+	    });
+	}, 400);
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+	        if (renderCount > 0) {
+	            views[1].render() && renderCount--;
+	        }
+	    });
+	}, 400);
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+	        if (renderCount > 0) {
+	            views[2].render() && renderCount--;
+	        }
+	    });
+	}, 400);
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+	        if (renderCount > 0) {
+	            views[3].render() && renderCount--;
+	        }
+	    });
+	}, 400);
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+	        if (renderCount > 0) {
+	            views[4].render() && renderCount--;
+	        }
+	    });
+	}, 400);
+	setInterval(function() {
+	    requestAnimationFrame(function() {
+	        if (renderCount > 0) {
+	            views[5].render() && renderCount--;
+	        }
+	    });
+	}, 400);
 	/* OBS. For testing only! Do not use in application!!! */
 	// TODO: Remove before deploying
 
@@ -719,11 +780,16 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
  * @constructor
  */
 BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
+	var renderView = true;
 	/**
 	 * Renders scene.
 	 */
 	this.render = function() {
-		renderer.render(scene, camera);
+		if(renderView){
+			renderer.render(scene, camera);	
+			return true;
+		} 
+		return false;
 	};
 
 	/**
@@ -753,6 +819,11 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 		JQueryElement.empty();
 		JQueryElement.append(renderer.domElement);
 	};
+
+	this.shouldRender = function(_boolean){
+		console.log(_boolean);
+		renderView = _boolean;
+	}
 
 	/* OBS. For testing only! Do not use in application!!! */
 	// TODO: Remove before deploying
