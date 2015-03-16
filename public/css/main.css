@@ -704,10 +704,24 @@ body a {
 		top: 4%;
 		font-size: 5vw;
 	}
+
+	/*---------------------------*/
+
+	#toggleCounter {
+		margin-top: 20%;
+	}
+
+	#togglePerspective {
+		margin-bottom: 20%;
+		bottom: 0;
+		top: auto;
+	}
+
+	/*------------------------------------------*/
 }
 
 /* Placing of toggles in portrait must be hard coded */
-@media (orientation: portrait) and (max-width:700px) {
+/*@media (orientation: portrait) and (max-width:700px) {
 	#toggleCounter {
 		top: 140px;
 	}
@@ -778,7 +792,7 @@ body a {
 	#togglePerspective {
 		bottom: 60px;
 	}
-}
+}*/
 
 @media print {
 	#menu, #toggleCounter, #togglePerspective {
