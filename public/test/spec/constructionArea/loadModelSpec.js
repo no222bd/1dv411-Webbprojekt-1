@@ -16,11 +16,7 @@ describe("Builder.ConstructionArea", function () {
 			cube.position.z = -25;
 			builder._objects[1] = cube;
 			var json = builder._saveModel();
-			
-			builder._views.forEach(function(element, index, array) {
-				spyOn(element, 'render');
-			});
-			
+
 			// act
 			builder._loadModel({model: json});
 			
@@ -33,13 +29,7 @@ describe("Builder.ConstructionArea", function () {
 			expect(builder._objects[1].position.x).toBe(-25);
 			expect(builder._objects[1].position.y).toBe(25);
 			expect(builder._objects[1].position.z).toBe(-25);
-			
-			
-			// check that views.render have been called
-			builder._views.forEach(function(element, index, array) {
-				expect(element.render).toHaveBeenCalled();
-			});
-			
+
 		});
 		
 	});
