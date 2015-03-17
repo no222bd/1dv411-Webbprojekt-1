@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 39
+# 48
 
 CACHE:
 #css
@@ -17,6 +17,7 @@ font/fontello.woff
 img/cube_colors.png
 img/Ikoner.png
 img/smiley.png
+img/smiley-happy.png
 img/random-color.png
 img/settings-icons.png
 #img/textures
