@@ -45,7 +45,8 @@ describe("Builder.ConstructionArea", function () {
 			builder._mouseposition.y = 1;
 			builder._onDocumentMouseTouch(event);
 			// Testing intersect length.
-			expect(builder._objects.length).toEqual(1);
+			console.log(builder._objects);
+			expect(builder._objects.length).toEqual(2);
 		});
 
 		it("should remove cube", function () {
