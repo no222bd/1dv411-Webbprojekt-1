@@ -197,7 +197,7 @@ jQuery(document).ready(function ($) {
 								201: function (result) {
 									// save in localStorage
 									buildingSaver.saveBuildings(JSON.parse(result.data));
-									closeModal();
+									alert.text('Byggnaden sparades.');
 								},
 								400: function (result) {
 									alert.text('Namnet finns redan');
