@@ -211,7 +211,7 @@ jQuery(document).ready(function ($) {
 					} else {
 						// save building in localStorage
 						if (buildingSaver.saveNewBuilding(name, dataString)) {
-							closeModal();
+							alert.text('Byggnaden sparades.');
 						} else {
 							alert.text('Namnet finns redan');
 						}
