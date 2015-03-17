@@ -92,6 +92,21 @@ body a {
 	margin: 5%;
 }
 
+
+.preloadingRandomIcon{
+	background-image: url('../img/random-color.png');
+} 
+.preloadingRensa { 
+	background-image: url('../img/clearBase-icon.png');
+	}
+	
+.preloadingSettingsSprite {
+	background-image: url('../img/settings-icons.png');
+}
+.preloadingSettingsSprite, .preloadingRandomIcon, .preloadingRensa{
+	background-repeat: no-repeat;
+	background-position: -9999px -9999px;
+}
 #cube, #erase, #base, #settings, #colors {
 	background-image: url('../img/Ikoner.png');
 	background-size: 200%;
@@ -455,6 +470,22 @@ body a {
 	padding-top: 0;
 	font-weight: bold;
 }
+#baseModal div div a {
+		overflow:hidden;
+}
+#baseModal .up, #baseModal .down {
+		width:25%; 
+		padding:12%;
+		background-size: 200%;
+		background-image: url('../img/Ikoner.png');
+}
+#baseModal .up {
+	background-position: 200% 88%;
+}
+#baseModal .down {
+	background-position: 100% 88%;
+}
+
 #preview {
 	height: 100%;
 	width: 100%;
@@ -596,17 +627,22 @@ body a {
 }
 #helpModal > h1 {
 	position: absolute;
-	height: 40px;
+	padding:5px 0 15px 0;
 	width: 100%;
+	height:50px,
 	top: 0;
 	left: 0;
 	background-color: #aaa;
 	margin: 0;
 	border-radius: 10px 10px 0 0;
 }
+#helpModal h1 span{
+	font-size:0.6em;
+	color:#555;
+}
 #helpContentContainer {
 	position: absolute;
-	top: 40px;
+	top: 45px;
 	bottom: 10px;
 	left: 0;
 	width: 100%;
@@ -666,6 +702,17 @@ body a {
 	position: relative;
 	float: left;
 }
+.subTopicIconBox, .rensaIcon {
+	width: 10%;
+	padding-top: 8%;
+	margin-top:1%;
+	position: relative;
+	float: left;
+}
+.rensaIcon{
+	width:18%; margin-right:2%;
+	margin-left:-1%;
+}
 .topicIcon {
 	position: absolute;
     top: 0;
@@ -697,6 +744,7 @@ body a {
 #clearIcon {
 	background-image: url('../img/clearBase-icon.png');
 	background-size: 100%;
+	background-repeat:no-repeat;
 }
 #loadIcon {
 	background-image: url('../img/settings-icons.png');
@@ -713,17 +761,21 @@ body a {
 	background-size: 200%;
 	background-position:0 100%;
 }
-.topicHeader {
+.topicHeader, .topicHeaderRensa {
 	padding-top:20px;
 	width: 87%;
 	float: right;
 	margin-top: 0;
 }
-.topicText {
+.topicText, .topicTextRensa {
 	width: 87%;
 	float: right;
 	clear: right;
 }
+.topicTextRensa, .topicHeaderRensa  {
+	width: 80%;
+}
+
 /* Help modal end ---------------------------------------------------------------------*/
 
 

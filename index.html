@@ -45,9 +45,9 @@
 					</div>
 					<div>
 						<div id="resize" class="innerBox">
-							<a class="sizeControl" href="#up">&#8593;</a>
+							<a class="sizeControl" href="#up"><span class="up"></span></a>
 							<span id="sizePreview" class="unselectable">10</span>
-							<a class="sizeControl" href="#down">&#8595;</a>
+							<a class="sizeControl" href="#down"><span class="down"></span></a>
 						</div>
 					</div>
 				</div>
@@ -100,7 +100,7 @@
 
 			<!-- HELP -->
 			<div id="helpModal">
-				<h1>Hjälp</h1>
+				<h1>Hjälp <span>Scrolla för att se mer...</span></h1> 
 				<div id="helpContentContainer">
 					<table id="helpContent">
 						<tbody>
@@ -137,11 +137,11 @@
 							</tr>
 							<tr class="bottomBorder">
 								<td class="helpTopic subTopic">
-								<div class="topicIconBox">
+								<div class="rensaIcon">
 									<span id="clearIcon" class="topicIcon"></span>
-								</div><h2 class="topicHeader">Rensa basplattan</h2>
-								<div class="topicText">
-									Denna knapp rensar byggutan från kuber.
+								</div><h2 class="topicHeaderRensa">Rensa basplattan</h2>
+								<div class="topicTextRensa">
+									Denna knapp rensar byggytan från kuber.
 								</div></td>
 							</tr>
 							<tr class="bottomBorder">
@@ -164,7 +164,7 @@
 							</tr>
 							<tr>
 								<td class="helpTopic subTopic">
-								<div class="topicIconBox">
+								<div class="subTopicIconBox">
 									<span id="loadIcon" class="topicIcon"></span>
 								</div><h2 class="topicHeader">Hämta modell</h2>
 								<div class="topicText">
@@ -176,7 +176,7 @@
 							</tr>
 							<tr>
 								<td class="helpTopic subTopic">
-								<div class="topicIconBox">
+								<div class="subTopicIconBox">
 									<span id="saveIcon" class="topicIcon"></span>
 								</div><h2 class="topicHeader">Spara modell</h2>
 								<div class="topicText">
@@ -186,7 +186,7 @@
 							</tr>
 							<tr>
 								<td class="helpTopic subTopic">
-								<div class="topicIconBox">
+								<div class="subTopicIconBox">
 									<span id="printIcon" class="topicIcon"></span>
 								</div><h2 class="topicHeader">Skriv ut</h2>
 								<div class="topicText">
@@ -223,9 +223,12 @@
 			</li>
 			<li>
 				<a id="colors" class="modalOption" href="#colorsContainer"></a>
+				<span class="preloadingRandomIcon"></span>
 			</li>
 			<li>
 				<a id="settings" class="modalOption" href="#settingsContainer"></a>
+				<span class="preloadingSettingsSprite"></span>
+				<span class="preloadingRensa"></span>
 			</li>
 		</ul>
 
