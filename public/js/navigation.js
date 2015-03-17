@@ -66,22 +66,22 @@ jQuery(document).ready(function ($) {
 			cb.renderPerspectives();
 		}
 	});
-	
+
 	/**
 	 * Prevent link tags in perspectivs container from working
 	 */
 	$('#perspectives').on('click', 'a', function(event) {
 		event.preventDefault();
 	});
-	
+
 	/**
-	 * Creates functionality for hiding perspectives 
+	 * Creates functionality for hiding perspectives
 	 */
 	$('#togglePerspective').on('click', function(event) {
 		event.preventDefault();
 		var toggleElement = $('#togglePerspective');
 		var perspectivesContainer = $('#perspectives');
-		
+
 		if(toggleElement.hasClass('open')) {
 			perspectivesContainer.hide();
 			cb.shouldRenderPerspectives(false);
@@ -131,7 +131,31 @@ jQuery(document).ready(function ($) {
 				$('#ThreeJScontainer').trigger('updateView');
 				closeModal();
 			}
+			if ($(this).attr('href') == '#help') {
+				handleModalWindow($(this));
+			}
 		}
+	});
+	
+	/**
+	 * Hides offline info in save/import form if online
+	 */
+	if (navigator.onLine) {
+		$('#formOfflineInfo').hide();
+	}
+	
+	/**
+	 * Hides offline info in save/import form if going online
+	 */
+	$(window).on('online', function(event) {
+		$('#formOfflineInfo').hide();
+	});
+	
+	/**
+	 * Shows offline info in save/import form if going offline
+	 */
+	$(window).on('offline', function(event) {
+		$('#formOfflineInfo').show();
 	});
 
 	/**
@@ -255,7 +279,7 @@ jQuery(document).ready(function ($) {
 		cb.renderPerspectives();
 		$('#ThreeJScontainer').trigger('updateView');
 	}
-	
+
 	/**
 	 * Sets color of cube.
 	 * @param  {jQuery element} element
@@ -316,7 +340,9 @@ jQuery(document).ready(function ($) {
 				}
 				href = '#FormModal';
 			}
-
+			if (href == '#help') {
+				href = '#helpModal';
+			}
 			$('#modal').toggleClass('open');
 			$(href).toggleClass('open');
 			$('#alert').text('');
