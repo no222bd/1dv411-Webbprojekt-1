@@ -316,6 +316,11 @@ body a {
 	padding-top: 40%;
 	vertical-align: middle;
 }
+
+#FormModal > form {
+	width: 60%;
+	padding-top: 25%;
+}
 /* -- Settings modal icons/divs -- */
 
 #settingsModal > div  {
@@ -490,16 +495,16 @@ body a {
 	text-align: center;
 	vertical-align: middle;
 	padding-top: 2%;
+	padding-bottom: 2%;
 	position: relative;
 }
 #FormModal form input[type="text"]{
 	background: #ffffff;
 	color: #555 !important;
+	margin-bottom: 2%;
 }
 #alert{
-	font-size: 1.5vw;
 	cursor: default;
-	padding-bottom: 2%;
 }
 #alert:empty{
 	visibility: hidden;

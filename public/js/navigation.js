@@ -133,6 +133,27 @@ jQuery(document).ready(function ($) {
 			}
 		}
 	});
+	
+	/**
+	 * Hides offline info in save/import form if online
+	 */
+	if (navigator.onLine) {
+		$('#formOfflineInfo').hide();
+	}
+	
+	/**
+	 * Hides offline info in save/import form if going online
+	 */
+	$(window).on('online', function(event) {
+		$('#formOfflineInfo').hide();
+	});
+	
+	/**
+	 * Shows offline info in save/import form if going offline
+	 */
+	$(window).on('offline', function(event) {
+		$('#formOfflineInfo').show();
+	});
 
 	/**
 	 * Send GET to /api/{name} where name is model name.
