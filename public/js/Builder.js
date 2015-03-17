@@ -339,7 +339,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	};
 
 	this.shouldRenderPerspectives = function(should){
-		console.log(should);
 		views.forEach(function(view){
 			view.shouldRender(should);
 		});
@@ -814,7 +813,6 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	};
 
 	this.shouldRender = function(_boolean){
-		console.log(_boolean);
 		renderView = _boolean;
 	};
 
