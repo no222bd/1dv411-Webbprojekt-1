@@ -365,7 +365,7 @@ jQuery(document).ready(function ($) {
 				}
 				href = '#FormModal';
 
-				if( navigator.userAgent.match(/iPhone|iPad|iPod/i) ) {
+				if( navigator.userAgent.match(/(iPad|iPhone|iPod touch);.*CPU.*OS 7_\d/i) ) {
 			        // Position modal absolute and bump it down to the scrollPosition
 			        $('#modal')
 			            .css({

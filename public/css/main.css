@@ -1,13 +1,11 @@
-html{
-	height: 100%;
-}
 html {
-  box-sizing: border-box;
+	height: 100%;
+  	box-sizing: border-box;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
-body{
+body {
 	height: 100%;
 	background: #E1F5FF;
 	font-family: Arial, "MS Trebuchet", sans-serif;
@@ -293,7 +291,7 @@ body a {
 /* -- Modal -- */
 .modal {
 	display: none;
-	position: absolute;
+	position: fixed;
 	background: rgba(0,0,0,0.5);
 	border-left: 2px solid rgba(0,0,0,0.75);
 	left: 9%;
