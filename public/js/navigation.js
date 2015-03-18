@@ -4,10 +4,6 @@ jQuery(document).ready(function ($) {
 	//colorsArray holds all the colors that are awailable in the UI color selector
 	var colorsArray = [];
 
-	if ($("#alert").text() !== null) {
-		$("#alert").toggleClass('sadSmiley');
-	}
-
 	/**
 	 * Populates colorsArray with colors from colorsModal.
 	 */
@@ -40,11 +36,11 @@ jQuery(document).ready(function ($) {
 	 */
 	$('#toggleCounter').on('click', function(event){
 		event.preventDefault();
-		if ($('#toggleArrow').text() === ">") {
-			$('#toggleArrow').text("<");
+		if ($('#toggleArrow').text() === "→") {
+			$('#toggleArrow').text("←");
 			$('.counter').show();
-		} else if ($('#toggleArrow').text() === "<") {
-			$('#toggleArrow').text(">");
+		} else if ($('#toggleArrow').text() === "←") {
+			$('#toggleArrow').text("→");
 			$('.counter').hide();
 		}
 	});
@@ -66,32 +62,50 @@ jQuery(document).ready(function ($) {
 			cb.renderPerspectives();
 		}
 	});
-	
+
 	/**
 	 * Prevent link tags in perspectivs container from working
 	 */
 	$('#perspectives').on('click', 'a', function(event) {
 		event.preventDefault();
 	});
-	
+
 	/**
-	 * Creates functionality for hiding perspectives 
+	 * Creates functionality for hiding perspectives
 	 */
-	$('#togglePerspective').on('click', function(event) {
+	$('#togglePerspectiveLandscape').on('click', function(event) {
 		event.preventDefault();
-		var toggleElement = $('#togglePerspective');
+		var toggleElement = $('#togglePerspectiveLandscape');
 		var perspectivesContainer = $('#perspectives');
-		
+
 		if(toggleElement.hasClass('open')) {
 			perspectivesContainer.hide();
 			cb.shouldRenderPerspectives(false);
 			toggleElement.attr('class', 'close');
-			toggleElement.text("<");
+			toggleElement.text("←");
 		} else {
 			perspectivesContainer.show();
 			cb.shouldRenderPerspectives(true);
 			toggleElement.attr('class', 'open');
-			toggleElement.text(">");
+			toggleElement.text("→");
+		}
+	});
+	
+	$('#togglePerspectivePortrait').on('click', function(event) {
+		event.preventDefault();
+		var toggleElement = $('#togglePerspectivePortrait');
+		var perspectivesContainer = $('#perspectives');
+
+		if(toggleElement.hasClass('open')) {
+			perspectivesContainer.hide();
+			cb.shouldRenderPerspectives(false);
+			toggleElement.attr('class', 'close');
+			toggleElement.text("↑");
+		} else {
+			perspectivesContainer.show();
+			cb.shouldRenderPerspectives(true);
+			toggleElement.attr('class', 'open');
+			toggleElement.text("↓");
 		}
 	});
 
@@ -131,6 +145,9 @@ jQuery(document).ready(function ($) {
 				$('#ThreeJScontainer').trigger('updateView');
 				closeModal();
 			}
+			if ($(this).attr('href') == '#help') {
+				handleModalWindow($(this));
+			}
 		}
 	});
 	
@@ -167,6 +184,7 @@ jQuery(document).ready(function ($) {
 		var alert = $('#alert');
 		if (name == '' || name == null || name == undefined) {
 			alert.text('Namnet är för kort');
+			$("#alert").toggleClass('sadSmiley');
 		} else {
 			if (name.length <= 50) {
 				if ($(this).val() == 'Hämta') {
@@ -178,6 +196,7 @@ jQuery(document).ready(function ($) {
 							url: requestUrl,
 							statusCode: {
 								200: function (result) {
+									buildingSaver.saveNewBuilding(name, result.data.model, false);
 									cb.loadModel(result.data);
 									closeModal();
 								},
@@ -185,12 +204,11 @@ jQuery(document).ready(function ($) {
 									// check in localStorage
 									var result = buildingSaver.getBuilding(name);
 									if (result) {
-										//console.log(result);
 										cb.loadModel(result);
 										closeModal();
 									} else {
-										console.log("Could not find that building.");
 										alert.text('Byggnaden hittades inte');
+										$("#alert").toggleClass('sadSmiley');
 									}
 								}
 							}
@@ -203,6 +221,7 @@ jQuery(document).ready(function ($) {
 							closeModal();
 						} else {
 							alert.text('Byggnaden hittades inte');
+							$("#alert").toggleClass('sadSmiley');
 						}
 					}
 				} else {
@@ -218,28 +237,36 @@ jQuery(document).ready(function ($) {
 								201: function (result) {
 									// save in localStorage
 									buildingSaver.saveBuildings(JSON.parse(result.data));
-									closeModal();
+									alert.text('Byggnaden sparades');
+									$("#alert").toggleClass('happySmiley');
+									$("#Name").val('');
 								},
 								400: function (result) {
 									alert.text('Namnet finns redan');
+									$("#alert").toggleClass('sadSmiley');
 								},
 								503: function (result) {
 									alert.text('Ett fel inträffade, försök igen');
+									$("#alert").toggleClass('sadSmiley');
 								}
 							}
 						});
 						// if offline
 					} else {
 						// save building in localStorage
-						if (buildingSaver.saveNewBuilding(name, dataString)) {
-							closeModal();
+						if (buildingSaver.saveNewBuilding(name, dataString, true)) {
+							alert.text('Byggnaden sparades lokalt');
+							$("#alert").toggleClass('happySmiley');
+							$("#Name").val('');
 						} else {
 							alert.text('Namnet finns redan');
+							$("#alert").toggleClass('sadSmiley');
 						}
 					}
 				}
 			}else{
 				alert.text('Namnet är för långt');
+				$("#alert").toggleClass('sadSmiley');
 			}
 		}
 		return false;
@@ -276,7 +303,7 @@ jQuery(document).ready(function ($) {
 		cb.renderPerspectives();
 		$('#ThreeJScontainer').trigger('updateView');
 	}
-	
+
 	/**
 	 * Sets color of cube.
 	 * @param  {jQuery element} element
@@ -337,7 +364,9 @@ jQuery(document).ready(function ($) {
 				}
 				href = '#FormModal';
 			}
-
+			if (href == '#help') {
+				href = '#helpModal';
+			}
 			$('#modal').toggleClass('open');
 			$(href).toggleClass('open');
 			$('#alert').text('');
@@ -355,6 +384,8 @@ jQuery(document).ready(function ($) {
 		$(openModal).removeClass('open');
 		$('#modal').removeClass('open');
 		$('.modalOption').removeClass('faded');
+		$('#alert').removeClass('sadSmiley');
+		$('#alert').removeClass('happySmiley');
 
 		$("#Name").val("");
 
