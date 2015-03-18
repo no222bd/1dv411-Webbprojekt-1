@@ -102,11 +102,7 @@
 		 */
 		this.getBuilding = function(id) {
 			var building, all = getAllBuildings();
-			console.log("New");
-			
 			id = id.trim().toLowerCase();
-			
-			console.log(all);
 			if (all) {
 				return all[id];
 			} else {
@@ -135,14 +131,16 @@
 			saveAllBuildings(checkDate(all));
 		};
 		
-		this.saveNewBuilding = function(name, model) {
+		this.saveNewBuilding = function(name, model, compress) {
 			var name = name.trim().toLowerCase();
 			if (checkIfBuildingExists(name, getAllBuildings())) {
 				return false;
 			}
 			
 			var building = {};
-			var model = LZString.compressToBase64(model);
+			if (compress) {
+				var model = LZString.compressToBase64(model);
+			}
 			var now = createDateString(new Date());
 			building[name] = { model: model, date: now };
 			self.saveBuildings(building);

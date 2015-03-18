@@ -39,6 +39,20 @@ body a {
 
 /* -- Helpers -- */
 
+.sadSmiley {
+	background-image: url('../img/smiley.png');
+	background-repeat: no-repeat;
+	background-position: 95%;
+	background-size: 10%;
+}
+
+.happySmiley {
+	background-image: url('../img/smiley-happy.png');
+	background-repeat: no-repeat;
+	background-position: 95%;
+	background-size: 10%;
+}
+
 /* Use this class whenever body unselectable doesn't work */
 .unselectable {
 	-webkit-user-select: none;
@@ -78,6 +92,21 @@ body a {
 	margin: 5%;
 }
 
+
+.preloadingRandomIcon{
+	background-image: url('../img/random-color.png');
+} 
+.preloadingRensa { 
+	background-image: url('../img/clearBase-icon.png');
+	}
+	
+.preloadingSettingsSprite {
+	background-image: url('../img/settings-icons.png');
+}
+.preloadingSettingsSprite, .preloadingRandomIcon, .preloadingRensa{
+	background-repeat: no-repeat;
+	background-position: -9999px -9999px;
+}
 #cube, #erase, #base, #settings, #colors {
 	background-image: url('../img/Ikoner.png');
 	background-size: 200%;
@@ -248,13 +277,14 @@ body a {
 }
 
 #toggleCounter {
-	top: 1em;
+	top: 0;
+	left: 0;
 	position: absolute;
-	left: 2%;
 	font-weight: 900;
 	text-align: left;
 	color:black;
 	font-size: 2vw;
+	padding: 1vw 2vw;
 }
 #toggleCounter p {
 	display: inline;
@@ -290,8 +320,8 @@ body a {
 	margin: auto auto;
 	height: 100%;
 }
-#baseModal,  
-#colorsModal, 
+#baseModal,
+#colorsModal,
 #settingsModal {
 	display: table-cell;
 	vertical-align: middle;
@@ -308,28 +338,33 @@ body a {
 	padding-top: 40%;
 	vertical-align: middle;
 }
+
+#FormModal > form {
+	width: 60%;
+	padding-top: 25%;
+}
 /* -- Settings modal icons/divs -- */
 
 #settingsModal > div  {
-	background-image: url('../img/settings-icons.png');
-	background-size: 200%;
+	background:#555;
 	border: 2px solid #333;
 	border-radius: 40px;
 	width: 36%;
 	padding-top: 36%;
+	overflow:hidden;
 }
 #settingsModal div a {
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 4vw;
-	line-height: 23vw;
+	height:100%;
 }
-#settingsModal div a span{
+#settingsModal div a {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
 	text-transform: uppercase;
 	font-weight: bold;
-	font-size: 2.5vw;
-	line-height: 8vw;
-	vertical-align:bottom;
+	font-size: 3vw;
+	line-height: 23vw;
+	height:77%;
+	padding-top:35%;
 }
 #settingsModal .get {
 	background-position:0 0 ;
@@ -347,20 +382,29 @@ body a {
 /* Perspecive container and modal */
 .perspective canvas, #perspective {
 	transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	-ms-transform: scaleX(-1);
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
 }
-#togglePerspective {
+#togglePerspectiveLandscape,
+#togglePerspectivePortrait {
 	font-weight: 900;
 	font-size: 2vw;
 	color: black;
 	position: absolute;
 	bottom: auto;
 	left: auto;
-	top: 1em;
-	right: 11%;
 	z-index: 250;
+	padding: 1vw 2vw;
+	right: 9%;
+	top: 0;
 }
-#togglePerspective.close {
-	right: 2%;
+#togglePerspectiveLandscape.close {
+	right: 0;
+}
+#togglePerspectivePortrait {
+	display: none;
 }
 #perspectives {
 	list-style-type: none;
@@ -418,26 +462,40 @@ body a {
 	margin-bottom: 8%;
 	background-color: #555;
 	border: 2px solid #333;
-	border-radius: 40px;
+	border-radius: 35px;
 	font-size: 4vw;
 	line-height:5.5vw;
 	color: white;
 	vertical-align: middle;
-	padding-top: 2%;
+	padding-top: 0;
 	font-weight: bold;
 }
+#baseModal div div a {
+		overflow:hidden;
+}
+#baseModal .up, #baseModal .down {
+		width:25%; 
+		padding:12%;
+		background-size: 200%;
+		background-image: url('../img/Ikoner.png');
+}
+#baseModal .up {
+	background-position: 200% 88%;
+}
+#baseModal .down {
+	background-position: 100% 88%;
+}
+
 #preview {
 	height: 100%;
 	width: 100%;
 	position: relative;
-	border-radius: 40px;
 	overflow: hidden;
 	padding-top: 0;
-	border-left: none;
-	border-top: none;
+	border: none;
 }
 #preview canvas{
-	border-radius: 40px !important;
+	border-radius: 35px !important;
 	border: 2px solid #333;
 }
 .innerBox {
@@ -454,8 +512,6 @@ body a {
 	margin: 10px;
 	width: 13.5%;
 	padding-top: 11%;
-	/*width: 14%;
-	padding-top: 14%;*/
 }
 .canvasWrapper {
 	height:100%;
@@ -481,17 +537,16 @@ body a {
 	text-align: center;
 	vertical-align: middle;
 	padding-top: 2%;
+	padding-bottom: 2%;
 	position: relative;
 }
 #FormModal form input[type="text"]{
 	background: #ffffff;
 	color: #555 !important;
+	margin-bottom: 2%;
 }
 #alert{
-	font-size: 1.5vw;
-	height: 1.5vw;
 	cursor: default;
-	padding-bottom: 2%;
 }
 #alert:empty{
 	visibility: hidden;
@@ -560,6 +615,170 @@ body a {
 	background-color:#FFF;
 }
 
+/* Help modal ---------------------------------------------------------------------*/
+#helpModal {
+	position: absolute;
+	top: 10%;
+	left: 7.5%;
+	width:85%;
+	height:80%;
+	text-align: center;
+	cursor:default;
+}
+#helpModal > h1 {
+	position: absolute;
+	padding:5px 0 15px 0;
+	width: 100%;
+	height:50px,
+	top: 0;
+	left: 0;
+	background-color: #aaa;
+	margin: 0;
+	border-radius: 10px 10px 0 0;
+}
+#helpModal h1 span{
+	font-size:0.6em;
+	color:#555;
+}
+#helpContentContainer {
+	position: absolute;
+	top: 45px;
+	bottom: 10px;
+	left: 0;
+	width: 100%;
+	border-left: 5px solid #aaa;
+	border-right: 5px solid #aaa;
+	overflow-y: scroll; /* has to be scroll, not auto */
+  	-webkit-overflow-scrolling: touch;
+}
+#helpContent {
+	position: relative;
+	width:100%;
+	height:100%;
+	text-align: left;
+	background-color: #333;
+}
+#helpBottom {
+	position: absolute;
+	height: 10px;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	height:10px;
+	background-color: #333;
+	border-left: 5px solid #aaa;
+	border-right: 5px solid #aaa;
+	border-bottom: 5px solid #aaa;
+	border-radius: 0 0 10px 10px;
+}
+#helpContent tbody {
+	position: relative;
+    height: auto;
+}
+#helpContent td {
+    padding: 2%;
+    line-height:28px;
+}
+#helpContent thead > tr, tbody{
+    display:block;
+}
+.bottomBorder {
+	position: relative;
+	border-bottom: 2px solid #aaa;
+}
+
+.helpTopic {
+	position: relative;
+	overflow: auto;
+	padding-bottom: 25px;
+}
+#helpContent td.subTopic {
+	padding-left: 15%;
+	background-color: #444;
+}
+.topicIconBox {
+	width: 10%;
+	padding-top: 10%;
+	position: relative;
+	float: left;
+}
+.subTopicIconBox, .rensaIcon {
+	width: 10%;
+	padding-top: 8%;
+	margin-top:1%;
+	position: relative;
+	float: left;
+}
+.rensaIcon{
+	width:18%; margin-right:2%;
+	margin-left:-1%;
+}
+.topicIcon {
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+	background-image: url('../img/Ikoner.png');
+}
+#cubeIcon {
+	background-size: 200%;
+	background-position: 100% 0;
+}
+#eraseIcon {
+	background-position: 100% 16.286%;
+	background-size: 200%;
+}
+#baseIcon {
+	background-position: 0 33.715%;
+	background-size: 200%;
+}
+#settingsIcon {
+	background-position: 0 67.144%;
+	background-size: 200%;
+}
+#colorsIcon {
+	background-position: 0 49.857%;
+	background-size: 200%;
+}
+#clearIcon {
+	background-image: url('../img/clearBase-icon.png');
+	background-size: 100%;
+	background-repeat:no-repeat;
+}
+#loadIcon {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
+	background-position:0 0 ;
+}
+#saveIcon {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
+	background-position:100% 0;
+}
+#printIcon {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
+	background-position:0 100%;
+}
+.topicHeader, .topicHeaderRensa {
+	padding-top:20px;
+	width: 87%;
+	float: right;
+	margin-top: 0;
+}
+.topicText, .topicTextRensa {
+	width: 87%;
+	float: right;
+	clear: right;
+}
+.topicTextRensa, .topicHeaderRensa  {
+	width: 80%;
+}
+
+/* Help modal end ---------------------------------------------------------------------*/
+
+
 /* Smaller devices orientation */
 @media (orientation: landscape) and (max-width:1200px) {
 	#colorsModal a {
@@ -614,16 +833,23 @@ body a {
 		width: 100%;
 		height: 100%;
 	}
-	
+
 /* Perspective container and modal */
-	#togglePerspective {
+	#togglePerspectivePortrait {
+		display: block;
 		font-size: 5vw;
 		top: auto;
 		right: auto;
-		left: 1em;
+		left: 0;
+		margin-bottom: 20%;
+		bottom: 0;
 	}
-	#togglePerspective.close {
-		bottom: 2%;
+	#togglePerspectivePortrait.close {
+		bottom: 0;
+		margin-bottom: 0;
+	}
+	#togglePerspectiveLandscape {
+		display: none;
 	}
 	#perspectives {
 		width: 100%;
@@ -665,7 +891,7 @@ body a {
 		height: 90%;
 		margin: 5%;
 	}
-	
+
 /* Modals */
 	.modal {
 		border-left: none;
@@ -681,7 +907,6 @@ body a {
 		font-size: 4vw;
 		line-height: 9vw;
 	}
-
 	#colors {
 		top: 50%;
 	}
@@ -690,83 +915,10 @@ body a {
 		line-height:10vw;
 	}
 	#toggleCounter {
-		left: 1em;
-		top: 4%;
 		font-size: 5vw;
-	}
-}
-
-/* Placing of toggles in portrait must be hard coded */
-@media (orientation: portrait) and (max-width:700px) {
-	#toggleCounter {
-		top: 140px;
-	}
-	#togglePerspective {
-		bottom: 140px;
-	}
-}
-@media (orientation: portrait) and (max-width:650px) {
-	#toggleCounter {
-		top: 130px;
-	}
-	#togglePerspective {
-		bottom: 130px;
-	}
-}
-@media (orientation: portrait) and (max-width:600px) {
-	#toggleCounter {
-		top: 120px;
-	}
-	#togglePerspective {
-		bottom: 120px;
-	}
-}
-@media (orientation: portrait) and (max-width:550px) {
-	#toggleCounter {
-		top: 110px;
-	}
-	#togglePerspective {
-		bottom: 110px;
-	}
-}
-@media (orientation: portrait) and (max-width:500px) {
-	#toggleCounter {
-		top: 100px;
-	}
-	#togglePerspective {
-		bottom: 100px;
-	}
-}
-@media (orientation: portrait) and (max-width:450px) {
-	#toggleCounter {
-		top: 90px;
-	}
-	#togglePerspective {
-		bottom: 90px;
-	}
-}
-@media (orientation: portrait) and (max-width:400px) {
-	#toggleCounter {
-		top: 80px;
-	}
-	#togglePerspective {
-		bottom: 80px;
-	}
-}
-@media (orientation: portrait) and (max-width:350px) {
-	#toggleCounter {
-		top: 70px;
-	}
-	#togglePerspective {
-		bottom: 70px;
-	}
-}
-@media (orientation: portrait) and (max-width:300px) {
-	#toggleCounter {
-		top: 60px;
-	}
-	#togglePerspective {
-		bottom: 60px;
+		left: 0;
+		top: 0;
+		margin-top: 20%;
 	}
 }
 
@@ -805,7 +957,7 @@ body a {
 	.canvasWrapper {
 		border-top: 2% solid transparent;
 		border-right: 2% solid transparent;
-		border-left: 2% solid transparent;	
+		border-left: 2% solid transparent;
 		border-bottom-width: 2%;
 		width: 96%;
 		height: 96%;
