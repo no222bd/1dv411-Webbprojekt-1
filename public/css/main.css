@@ -93,11 +93,11 @@ body a {
 
 .preloadingRandomIcon{
 	background-image: url('../img/random-color.png');
-} 
-.preloadingRensa { 
+}
+.preloadingRensa {
 	background-image: url('../img/clearBase-icon.png');
 	}
-	
+
 .preloadingSettingsSprite {
 	background-image: url('../img/settings-icons.png');
 }
@@ -360,7 +360,7 @@ body a {
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 3vw;
-	line-height: 23vw;
+	line-height: 7.75em;
 	height:77%;
 	padding-top:35%;
 }
@@ -472,7 +472,7 @@ body a {
 		overflow:hidden;
 }
 #baseModal .up, #baseModal .down {
-		width:25%; 
+		width:25%;
 		padding:12%;
 		background-size: 200%;
 		background-image: url('../img/Ikoner.png');
@@ -899,7 +899,7 @@ body a {
 		width: 100%;
 	}
 	#settingsModal div a {
-		line-height: 37vw;
+		line-height: 12.95em;
 	}
 	#settingsModal div a span {
 		font-size: 4vw;
