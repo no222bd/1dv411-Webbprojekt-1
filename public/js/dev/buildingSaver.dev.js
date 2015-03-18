@@ -148,6 +148,15 @@
 			self.saveBuildings(building);
 			return true;
 		};
+		
+		// OBS!!! For testing purpose only!!! Do not use in application!!!
+		// TODO: Remove before deploy!
+		this._checkDate = checkDate;
+		this._checkIfBuildingExists = checkIfBuildingExists;
+		this._createDateString = createDateString;
+		this._getAllBuildings = getAllBuildings;
+		this._saveAllBuildings = saveAllBuildings;
+		// End
 	};
 
 }(window));

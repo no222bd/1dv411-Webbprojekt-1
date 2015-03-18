@@ -95,7 +95,9 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 		document.body.appendChild( stats.domElement );
 		jQueryContainer.append(renderer.domElement);
+		//jQueryContainer.on( "mousedown", onDocumentMouseTouch);
 		jQueryContainer[0].addEventListener("mousedown", onDocumentMouseTouch);
+		//jQueryContainer.on( "mouseup", onDocumentMouseTouch);
 		jQueryContainer[0].addEventListener("mouseup", onDocumentMouseTouch);
 
 		createPerspectives();
@@ -177,6 +179,13 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		self.renderPerspectives();
 		
 		cubeMaterial = temp;
+		
+		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+		// TODO: Remove before deploying
+
+		this._objects = objects;
+
+		/* End of testing code */
 	};
 
 	/**
@@ -254,6 +263,13 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 
 			renderCount = 6;
 
+			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+			/* Remove before deploy! */
+
+			this._baseSize = baseSize;
+
+			/* End of testing code */
+
 			return true;
 		}
 
@@ -298,6 +314,11 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 					cubeMaterial = materials[colorHex];
 				}
 			}
+			/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+			// TODO: Remove before deploying
+
+			this._cubeMaterial = cubeMaterial;
+			/* End of testing code */
 			return true;
 		}
 		return false;
@@ -308,9 +329,17 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 */
 	this.toggleBuildMode = function() {
 		buildMode = !buildMode;
+
+		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+		// TODO: Remove before deploying
+
+		this._buildMode = buildMode;
+
+		/* End of testing code */
 	};
 
 	this.shouldRenderPerspectives = function(should){
+		console.log(should);
 		views.forEach(function(view){
 			view.shouldRender(should);
 		});
@@ -538,6 +567,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 * Change base size.
 	 */
 	function setBase() {
+		// create foundation
+		//var geo = new THREE.PlaneBufferGeometry(baseSize * 2, baseSize * 2);
+		//geo.applyMatrix(new THREE.Matrix4().makeRotationX(-Math.PI / 2));
+		//var m = new THREE.MeshBasicMaterial({
+		// color : 0xA0E0B9
+		//});
+		//var f = new THREE.Mesh(geo, m);
+		//foundation = f;
 
 		var grid = new THREE.Geometry();
 
@@ -674,6 +711,57 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	        }
 	    });
 	}, 400);
+	/* OBS. For testing only! Do not use in application!!! */
+	// TODO: Remove before deploying
+
+	// members
+	this._jQueryContainer = jQueryContainer;
+	this._step = step;
+	this._baseSize = baseSize;
+	this._objects = objects;
+	this._cubeGeo = cubeGeo;
+	this._scene = scene;
+	this._camera = camera;
+	this._renderer = renderer;
+	this._cubeMaterial = cubeMaterial;
+	this._raycaster = raycaster;
+	this._mouseposition = mouseposition;
+	this._mouse = mouse;
+	this._baseGrid = baseGrid;
+	this._basePlane = basePlane;
+	this._controls = controls;
+	this._views = views;
+	this._self = self;
+	this._buildMode = buildMode;
+	this._texturePath = texturePath;
+
+	// functions
+	this._init = init;
+	this._onDocumentMouseTouch = onDocumentMouseTouch;
+	this._addCube = addCube;
+	this._removeCube = removeCube;
+	this._setCubeMaterial = this.setCubeMaterial;
+	this._createScene = createScene;
+	this._createRenderer = createRenderer;
+	this._createCamera = createCamera;
+	this._setBase = setBase;
+	this._createColorLines = createColorLines;
+	this._updateCounter = updateCounter;
+	this._render = render;
+	this._renderPerspectives = this.renderPerspectives;
+	this._enableOrDisableOrbit = this.enableOrDisableOrbit;
+	this._saveModel = this.saveModel;
+	this._loadModel = this.loadModel;
+	this._toggleBuildMode = this.toggleBuildMode;
+	this._createPerspectives = createPerspectives;
+	this._clearCubes = this.clearCubes;
+	this._resize = this.resize;
+	this._perspective = this.perspective;
+	this._clearCubes = this.clearCubes;
+	this._setZoom = setZoom;
+	this._cubeExists = cubeExists;
+
+	/* End of testing code */
 };
 
 /**
@@ -726,8 +814,20 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	};
 
 	this.shouldRender = function(_boolean){
+		console.log(_boolean);
 		renderView = _boolean;
 	};
+
+	/* OBS. For testing only! Do not use in application!!! */
+	// TODO: Remove before deploying
+
+	// members
+	this._renderer = renderer;
+	this._camera = camera;
+	this._JQueryElement = JQueryElement;
+	this._scene = scene;
+	this._baseSize = baseSize;
+	/* End of testing code */
 };
 
 }(window));

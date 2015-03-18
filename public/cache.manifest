@@ -1,11 +1,9 @@
 CACHE MANIFEST
-# 39
+# 40
 
 CACHE:
 #css
-css/normalize.css
-css/main.css
-css/fontello.css
+css/styles.min.css
 
 #font
 font/fontello.eot
@@ -41,21 +39,9 @@ img/textures/FED06F.png
 img/textures/FFFFFF.png
 
 #js
-js/appcache.js
-js/Builder.js
-js/buildingSaver.js
-js/navigation.js
+js/kubus.min.js
 #js/vendor
-js/vendor/jquery-1.11.2.min.js
-js/vendor/typedarrays.js
-js/vendor/requestAnimationFramePolyfill.js
-js/vendor/three.min.js
-js/vendor/stats.min.js
-js/vendor/Projector.js
-js/vendor/Detector.js
-js/vendor/CanvasRenderer.js
-js/vendor/OrbitControls.js
-js/vendor/lz-string.min.js
+js/vendor/vendor.min.js
 
 NETWORK:
 *
