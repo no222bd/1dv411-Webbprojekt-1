@@ -522,7 +522,7 @@ body a {
 	background: #E1F5FF;
 }
 
-#FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
+#FormModal form input[type="text"], #FormModal form a, #alert{
 	display: block;
 	height: 25%;
 	width: 100%;

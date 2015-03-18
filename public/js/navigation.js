@@ -188,7 +188,7 @@ jQuery(document).ready(function ($) {
 			$("#alert").toggleClass('sadSmiley');
 		} else {
 			if (name.length <= 50) {
-				if ($(this).val() == 'Hämta') {
+				if ($(this).text() == 'Hämta') {
 					if (navigator.onLine) {
 						// check api first
 						var requestUrl = "api/" + name;
@@ -359,9 +359,9 @@ jQuery(document).ready(function ($) {
 		if (areOpen) {
 			if (href == '#save' || href == '#import') {
 				if (href == '#save') {
-					$("#Submit").val('Spara');
+					$("#Submit").text('Spara');
 				} else {
-					$("#Submit").val('Hämta');
+					$("#Submit").text('Hämta');
 				}
 				href = '#FormModal';
 
