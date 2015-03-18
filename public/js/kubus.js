@@ -3,6 +3,7 @@ jQuery(document).ready(function() {
 		window.applicationCache.swapCache();
 	});
 });
+
 (function(outerWindow){
 	"use strict";
 
@@ -40,7 +41,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		textures = {},
 		materials = {},
 		renderCount = 0,
-		stats,
 		texturePath = {
 			extention: '.png',
 			path: 'public/img/textures/'
@@ -59,12 +59,12 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				throw new Error();
 			}
 		}
-		colors.forEach(function(colorValue){		
+		colors.forEach(function(colorValue){
 			requestAnimationFrame(function(){
 				THREE.ImageUtils.loadTexture(texturePath.path+colorValue.toUpperCase().substring(1)+texturePath.extention, undefined, function(texture){
 					textures[colorValue] = texture;
 				});
-			});	
+			});
 		});
 		self.setCubeMaterial('#FBE430');
 
@@ -89,23 +89,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
 		controls.noPan = true;
 		setZoom();
-		stats = new Stats();
-		stats.setMode(1); // 0: fps, 1: ms
 
-		// align top-left
-		stats.domElement.style.position = 'absolute';
-		stats.domElement.style.left = '0px';
-		stats.domElement.style.top = '0px';
-		stats.domElement.style["z-index"] = 1000;
-
-		document.body.appendChild( stats.domElement );
 		jQueryContainer.append(renderer.domElement);
 		jQueryContainer[0].addEventListener("mousedown", onDocumentMouseTouch);
 		jQueryContainer[0].addEventListener("mouseup", onDocumentMouseTouch);
 
 		createPerspectives();
 		setTimeout(function(){
-			render();	
+			render();
 		}, 1000);
 	}
 
@@ -158,14 +149,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			model = JSON.parse(jsonString);
 		}
 		model = JSON.parse(LZString.decompressFromBase64(model.model));
-		
+
 		objects = [];
 		baseSize = model.baseSize * (step / 2);
 
 		setBase();
 		scene = createScene();
 		for(var i = 0, cubes = model.cubes.length; i < cubes; i++) {
-			var hexColor = "#" + model.cubes[i].color;			
+			var hexColor = "#" + model.cubes[i].color;
 			self.setCubeMaterial(hexColor);
 
 			voxel = new THREE.Mesh(cubeGeo, materials[hexColor]);
@@ -180,7 +171,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		updateCounter();
 		createPerspectives();
 		self.renderPerspectives();
-		
+
 		cubeMaterial = temp;
 	};
 
@@ -289,7 +280,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 						//Or just load the texture right here, if it's missing
 						map: textures[colorHex.toUpperCase()] || THREE.ImageUtils.loadTexture(texturePath.path + colorHex.toUpperCase().substring(1) + texturePath.extention)
 					});
-					materials[colorHex] = cubeMaterial;	
+					materials[colorHex] = cubeMaterial;
 				} else {
 					cubeMaterial = materials[colorHex];
 				}
@@ -298,7 +289,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 					cubeMaterial = new THREE.MeshBasicMaterial({
 						color: colorHex
 					});
-					materials[colorHex] = cubeMaterial;	
+					materials[colorHex] = cubeMaterial;
 				} else {
 					cubeMaterial = materials[colorHex];
 				}
@@ -363,9 +354,9 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				objects.push(voxel);
 				renderCount = 6;
 				setTimeout(function(){
-					updateCounter();	
+					updateCounter();
 				}, 0);
-				
+
 			}
 		}
 	}
@@ -525,7 +516,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			renderCount = 6;
 
 			setTimeout(function(){
-				updateCounter();	
+				updateCounter();
 			}, 0);
 		}
 	}
@@ -535,7 +526,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 */
 	function render() {
 		requestAnimationFrame(render);
-		stats.update();
 		renderer.render(scene, camera);
 	};
 
@@ -696,9 +686,9 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	 */
 	this.render = function() {
 		if(renderView){
-			renderer.render(scene, camera);	
+			renderer.render(scene, camera);
 			return true;
-		} 
+		}
 		return false;
 	};
 
@@ -736,37 +726,38 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 };
 
 }(window));
+
 (function(outerWindow){
 	"use strict";
 
 	outerWindow.BUILDER = outerWindow.BUILDER || {};
 	var BUILDER = outerWindow.BUILDER;
-	
+
 	/**
-	 * Handles saving and loading buildings to localStorage. 
+	 * Handles saving and loading buildings to localStorage.
 	 */
 	BUILDER.BuildingSaver = function() {
-		
+
 		var keyLocalStorage = "buildings";
 		var self = this;
-		
+
 		/**
 		 * Checks that all stored building have valid dates.
-		 * 
+		 *
  		 * @param Object all A object with all saved buildings in localStorage
  		 * @return Object An object with all the valid buildings
 		 */
 		function checkDate(all) {
 			var ret = {};
 			var counter = 0;
-			
+
 			for (var id in all) {
 				var created = new Date(all[id].date);
 				// 30 days in milliseconds = 60 * 60 * 24 * 30 * 1000
 				var validUntil = new Date(created.getTime() + 2592000000);
 				var now = new Date();
 				now.setHours(0, 0, 0, 0);
-				
+
 				if (validUntil >= now.getTime()) {
 					if (counter >= 250) { break; } // size limit for localStorage
 					ret[id] = all[id];
@@ -775,11 +766,11 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 			}
 			return ret;
 		};
-		
+
 		/**
 		 * Check if name alrady exists in localStorage.
 		 *
-		 * @param String name 
+		 * @param String name
 		 * @return Boolean TRUE if building already exists
 		 */
 		function checkIfBuildingExists(name, all) {
@@ -790,28 +781,28 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 			};
 			return false;
 		};
-		
+
 		/**
 		 * Creates a date (now) in format YYYY-MM-DD
 		 * @return String Ex: 1999-12-31
 		 */
 		function createDateString(date) {
 			var dd = date.getDate();
-			if ( dd < 10 ) { 
+			if ( dd < 10 ) {
 				dd = '0' + dd;
 			}
 			var mm = date.getMonth() + 1;
-			if ( mm < 10 ) { 
+			if ( mm < 10 ) {
 				mm = '0' + mm;
 			}
 			var yyyy = date.getFullYear();
-			
+
 			return yyyy + "-" + mm + "-" + dd;
 		};
-		
+
 		/**
 		 * Returns an object with all buildings in localStorage.
-		 * 
+		 *
 		 * @return Object {"building":{"model":"qwerty","date":"1999-12-31"}} or FALSE
 		 */
 		function getAllBuildings() {
@@ -821,17 +812,17 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 				return false;
 			}
 		};
-		
+
 		/**
-		 * JSON stringifies and stores an object of buildings in localStorage. 
-		 * 
+		 * JSON stringifies and stores an object of buildings in localStorage.
+		 *
 		 * @param Object all An object with all buildings to be stored in localStorage
 		 * @return Void
 		 */
 		function saveAllBuildings(all) {
 			localStorage.setItem(keyLocalStorage, JSON.stringify(all));
 		};
-		
+
 		/**
 		 * Fetches a building from localStorage.
 		 *
@@ -841,9 +832,9 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 		this.getBuilding = function(id) {
 			var building, all = getAllBuildings();
 			console.log("New");
-			
+
 			id = id.trim().toLowerCase();
-			
+
 			console.log(all);
 			if (all) {
 				return all[id];
@@ -851,34 +842,34 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 				return false;
 			}
 		};
-		
+
 		/**
 		 * Adds one building in localStorage
 		 *
 		 * @param Object building {"building":{"model":"qwerty","date":"1999-12-31"}}
-		 * @return Void 
+		 * @return Void
 		 */
 		this.saveBuildings = function(buildings) {
 			var all = getAllBuildings() || {};
-			
+
 			for (var id in buildings) {
 				id = id.trim().toLowerCase();
-				
+
 				if (!checkIfBuildingExists(id, all)) {
 					all[id] = buildings[id];
 				}
 			};
-			
+
 			// checks dates before saving
 			saveAllBuildings(checkDate(all));
 		};
-		
+
 		this.saveNewBuilding = function(name, model) {
 			var name = name.trim().toLowerCase();
 			if (checkIfBuildingExists(name, getAllBuildings())) {
 				return false;
 			}
-			
+
 			var building = {};
 			var model = LZString.compressToBase64(model);
 			var now = createDateString(new Date());
@@ -889,15 +880,12 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	};
 
 }(window));
+
 jQuery(document).ready(function ($) {
 	var perspectives = [$("#topView"), $("#blueView"), $("#redView"), $("#yellowView"), $("#greenView"), $("#preview")];
 
 	//colorsArray holds all the colors that are awailable in the UI color selector
 	var colorsArray = [];
-
-	if ($("#alert").text() !== null) {
-		$("#alert").toggleClass('sadSmiley');
-	}
 
 	/**
 	 * Populates colorsArray with colors from colorsModal.
@@ -931,11 +919,11 @@ jQuery(document).ready(function ($) {
 	 */
 	$('#toggleCounter').on('click', function(event){
 		event.preventDefault();
-		if ($('#toggleArrow').text() === ">") {
-			$('#toggleArrow').text("<");
+		if ($('#toggleArrow').text() === "→") {
+			$('#toggleArrow').text("←");
 			$('.counter').show();
-		} else if ($('#toggleArrow').text() === "<") {
-			$('#toggleArrow').text(">");
+		} else if ($('#toggleArrow').text() === "←") {
+			$('#toggleArrow').text("→");
 			$('.counter').hide();
 		}
 	});
@@ -957,32 +945,50 @@ jQuery(document).ready(function ($) {
 			cb.renderPerspectives();
 		}
 	});
-	
+
 	/**
 	 * Prevent link tags in perspectivs container from working
 	 */
 	$('#perspectives').on('click', 'a', function(event) {
 		event.preventDefault();
 	});
-	
+
 	/**
-	 * Creates functionality for hiding perspectives 
+	 * Creates functionality for hiding perspectives
 	 */
-	$('#togglePerspective').on('click', function(event) {
+	$('#togglePerspectiveLandscape').on('click', function(event) {
 		event.preventDefault();
-		var toggleElement = $('#togglePerspective');
+		var toggleElement = $('#togglePerspectiveLandscape');
 		var perspectivesContainer = $('#perspectives');
-		
+
 		if(toggleElement.hasClass('open')) {
 			perspectivesContainer.hide();
 			cb.shouldRenderPerspectives(false);
 			toggleElement.attr('class', 'close');
-			toggleElement.text("<");
+			toggleElement.text("←");
 		} else {
 			perspectivesContainer.show();
 			cb.shouldRenderPerspectives(true);
 			toggleElement.attr('class', 'open');
-			toggleElement.text(">");
+			toggleElement.text("→");
+		}
+	});
+
+	$('#togglePerspectivePortrait').on('click', function(event) {
+		event.preventDefault();
+		var toggleElement = $('#togglePerspectivePortrait');
+		var perspectivesContainer = $('#perspectives');
+
+		if(toggleElement.hasClass('open')) {
+			perspectivesContainer.hide();
+			cb.shouldRenderPerspectives(false);
+			toggleElement.attr('class', 'close');
+			toggleElement.text("↑");
+		} else {
+			perspectivesContainer.show();
+			cb.shouldRenderPerspectives(true);
+			toggleElement.attr('class', 'open');
+			toggleElement.text("↓");
 		}
 	});
 
@@ -1011,6 +1017,7 @@ jQuery(document).ready(function ($) {
 		} else {
 			if ($(this).attr('href') == '#import' || $(this).attr('href') == '#save') {
 				handleModalWindow($(this));
+				$("#Name").focus();
 			}
 			if($(this).attr('href') == '#print'){
 				closeModal();
@@ -1022,23 +1029,26 @@ jQuery(document).ready(function ($) {
 				$('#ThreeJScontainer').trigger('updateView');
 				closeModal();
 			}
+			if ($(this).attr('href') == '#help') {
+				handleModalWindow($(this));
+			}
 		}
 	});
-	
+
 	/**
 	 * Hides offline info in save/import form if online
 	 */
 	if (navigator.onLine) {
 		$('#formOfflineInfo').hide();
 	}
-	
+
 	/**
 	 * Hides offline info in save/import form if going online
 	 */
 	$(window).on('online', function(event) {
 		$('#formOfflineInfo').hide();
 	});
-	
+
 	/**
 	 * Shows offline info in save/import form if going offline
 	 */
@@ -1058,9 +1068,10 @@ jQuery(document).ready(function ($) {
 		var alert = $('#alert');
 		if (name == '' || name == null || name == undefined) {
 			alert.text('Namnet är för kort');
+			$("#alert").toggleClass('sadSmiley');
 		} else {
 			if (name.length <= 50) {
-				if ($(this).val() == 'Hämta') {
+				if ($(this).text() == 'Hämta') {
 					if (navigator.onLine) {
 						// check api first
 						var requestUrl = "api/" + name;
@@ -1069,6 +1080,7 @@ jQuery(document).ready(function ($) {
 							url: requestUrl,
 							statusCode: {
 								200: function (result) {
+									buildingSaver.saveNewBuilding(name, result.data.model, false);
 									cb.loadModel(result.data);
 									closeModal();
 								},
@@ -1076,12 +1088,11 @@ jQuery(document).ready(function ($) {
 									// check in localStorage
 									var result = buildingSaver.getBuilding(name);
 									if (result) {
-										//console.log(result);
 										cb.loadModel(result);
 										closeModal();
 									} else {
-										console.log("Could not find that building.");
 										alert.text('Byggnaden hittades inte');
+										$("#alert").toggleClass('sadSmiley');
 									}
 								}
 							}
@@ -1094,6 +1105,7 @@ jQuery(document).ready(function ($) {
 							closeModal();
 						} else {
 							alert.text('Byggnaden hittades inte');
+							$("#alert").toggleClass('sadSmiley');
 						}
 					}
 				} else {
@@ -1109,28 +1121,36 @@ jQuery(document).ready(function ($) {
 								201: function (result) {
 									// save in localStorage
 									buildingSaver.saveBuildings(JSON.parse(result.data));
-									closeModal();
+									alert.text('Byggnaden sparades');
+									$("#alert").toggleClass('happySmiley');
+									$("#Name").val('');
 								},
 								400: function (result) {
 									alert.text('Namnet finns redan');
+									$("#alert").toggleClass('sadSmiley');
 								},
 								503: function (result) {
 									alert.text('Ett fel inträffade, försök igen');
+									$("#alert").toggleClass('sadSmiley');
 								}
 							}
 						});
 						// if offline
 					} else {
 						// save building in localStorage
-						if (buildingSaver.saveNewBuilding(name, dataString)) {
-							closeModal();
+						if (buildingSaver.saveNewBuilding(name, dataString, true)) {
+							alert.text('Byggnaden sparades lokalt');
+							$("#alert").toggleClass('happySmiley');
+							$("#Name").val('');
 						} else {
 							alert.text('Namnet finns redan');
+							$("#alert").toggleClass('sadSmiley');
 						}
 					}
 				}
 			}else{
 				alert.text('Namnet är för långt');
+				$("#alert").toggleClass('sadSmiley');
 			}
 		}
 		return false;
@@ -1167,7 +1187,7 @@ jQuery(document).ready(function ($) {
 		cb.renderPerspectives();
 		$('#ThreeJScontainer').trigger('updateView');
 	}
-	
+
 	/**
 	 * Sets color of cube.
 	 * @param  {jQuery element} element
@@ -1222,13 +1242,39 @@ jQuery(document).ready(function ($) {
 		if (areOpen) {
 			if (href == '#save' || href == '#import') {
 				if (href == '#save') {
-					$("#Submit").val('Spara');
+					$("#Submit").text('Spara');
 				} else {
-					$("#Submit").val('Hämta');
+					$("#Submit").text('Hämta');
 				}
 				href = '#FormModal';
-			}
 
+				if( navigator.userAgent.match(/(iPad|iPhone|iPod touch);.*CPU.*OS 7_\d/i) ) {
+			        // Position modal absolute and bump it down to the scrollPosition
+			        $('#modal')
+			            .css({
+			                position: 'absolute',
+			                marginTop: $(window).scrollTop() + 'px',
+			                bottom: 'auto'
+			            });
+			        // Position backdrop absolute and make it span the entire page
+			        //
+			        // Also dirty, but we need to tap into the backdrop after Boostrap
+			        // positions it but before transitions finish.
+			        //
+			        setTimeout( function() {
+			            $('#modal').css({
+			                height: Math.max(
+			                    document.body.scrollHeight, document.documentElement.scrollHeight,
+			                    document.body.offsetHeight, document.documentElement.offsetHeight,
+			                    document.body.clientHeight, document.documentElement.clientHeight
+			                ) + 'px'
+			            });
+			        }, 0);
+			    }
+			}
+			if (href == '#help') {
+				href = '#helpModal';
+			}
 			$('#modal').toggleClass('open');
 			$(href).toggleClass('open');
 			$('#alert').text('');
@@ -1246,6 +1292,8 @@ jQuery(document).ready(function ($) {
 		$(openModal).removeClass('open');
 		$('#modal').removeClass('open');
 		$('.modalOption').removeClass('faded');
+		$('#alert').removeClass('sadSmiley');
+		$('#alert').removeClass('happySmiley');
 
 		$("#Name").val("");
 

@@ -35,7 +35,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		textures = {},
 		materials = {},
 		renderCount = 0,
-		stats,
 		texturePath = {
 			extention: '.png',
 			path: 'public/img/textures/'
@@ -54,12 +53,12 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				throw new Error();
 			}
 		}
-		colors.forEach(function(colorValue){		
+		colors.forEach(function(colorValue){
 			requestAnimationFrame(function(){
 				THREE.ImageUtils.loadTexture(texturePath.path+colorValue.toUpperCase().substring(1)+texturePath.extention, undefined, function(texture){
 					textures[colorValue] = texture;
 				});
-			});	
+			});
 		});
 		self.setCubeMaterial('#FBE430');
 
@@ -84,23 +83,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
 		controls.noPan = true;
 		setZoom();
-		stats = new Stats();
-		stats.setMode(1); // 0: fps, 1: ms
 
-		// align top-left
-		stats.domElement.style.position = 'absolute';
-		stats.domElement.style.left = '0px';
-		stats.domElement.style.top = '0px';
-		stats.domElement.style["z-index"] = 1000;
-
-		document.body.appendChild( stats.domElement );
 		jQueryContainer.append(renderer.domElement);
 		jQueryContainer[0].addEventListener("mousedown", onDocumentMouseTouch);
 		jQueryContainer[0].addEventListener("mouseup", onDocumentMouseTouch);
 
 		createPerspectives();
 		setTimeout(function(){
-			render();	
+			render();
 		}, 1000);
 	}
 
@@ -153,14 +143,14 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			model = JSON.parse(jsonString);
 		}
 		model = JSON.parse(LZString.decompressFromBase64(model.model));
-		
+
 		objects = [];
 		baseSize = model.baseSize * (step / 2);
 
 		setBase();
 		scene = createScene();
 		for(var i = 0, cubes = model.cubes.length; i < cubes; i++) {
-			var hexColor = "#" + model.cubes[i].color;			
+			var hexColor = "#" + model.cubes[i].color;
 			self.setCubeMaterial(hexColor);
 
 			voxel = new THREE.Mesh(cubeGeo, materials[hexColor]);
@@ -175,7 +165,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		updateCounter();
 		createPerspectives();
 		self.renderPerspectives();
-		
+
 		cubeMaterial = temp;
 	};
 
@@ -284,7 +274,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 						//Or just load the texture right here, if it's missing
 						map: textures[colorHex.toUpperCase()] || THREE.ImageUtils.loadTexture(texturePath.path + colorHex.toUpperCase().substring(1) + texturePath.extention)
 					});
-					materials[colorHex] = cubeMaterial;	
+					materials[colorHex] = cubeMaterial;
 				} else {
 					cubeMaterial = materials[colorHex];
 				}
@@ -293,7 +283,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 					cubeMaterial = new THREE.MeshBasicMaterial({
 						color: colorHex
 					});
-					materials[colorHex] = cubeMaterial;	
+					materials[colorHex] = cubeMaterial;
 				} else {
 					cubeMaterial = materials[colorHex];
 				}
@@ -358,9 +348,9 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 				objects.push(voxel);
 				renderCount = 6;
 				setTimeout(function(){
-					updateCounter();	
+					updateCounter();
 				}, 0);
-				
+
 			}
 		}
 	}
@@ -520,7 +510,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			renderCount = 6;
 
 			setTimeout(function(){
-				updateCounter();	
+				updateCounter();
 			}, 0);
 		}
 	}
@@ -530,7 +520,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 */
 	function render() {
 		requestAnimationFrame(render);
-		stats.update();
 		renderer.render(scene, camera);
 	};
 
@@ -691,9 +680,9 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	 */
 	this.render = function() {
 		if(renderView){
-			renderer.render(scene, camera);	
+			renderer.render(scene, camera);
 			return true;
-		} 
+		}
 		return false;
 	};
 

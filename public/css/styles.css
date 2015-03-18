@@ -425,771 +425,982 @@ td,
 th {
   padding: 0;
 }
-html{
-  height: 100%;
-}
+
 html {
-  box-sizing: border-box;
+	height: 100%;
+  	box-sizing: border-box;
 }
 *, *:before, *:after {
   box-sizing: inherit;
 }
-body{
-  height: 100%;
-  background: #E1F5FF;
-  font-family: Arial, "MS Trebuchet", sans-serif;
-  color: white;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -khtml-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  -webkit-tap-highlight-color:transparent;
+body {
+	height: 100%;
+	background: #E1F5FF;
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	color: white;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color:transparent;
 }
 #ThreeJScontainer canvas {
-  vertical-align: middle !important;
+	vertical-align: middle !important;
 }
 body a {
-  color: white;
-  text-decoration: none;
+	color: white;
+	text-decoration: none;
 }
 #ThreeJScontainer {
-  z-index: 5;
-  float: left;
-  width: 82%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  position: relative;
+	z-index: 5;
+	float: left;
+	width: 82%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	position: relative;
 }
 
 /* -- Helpers -- */
 
 .sadSmiley {
-  background-image: url('../img/smiley.png');
-  background-repeat: no-repeat;
-  background-position: 95%;
-  background-size: 10%;
+	background-image: url('../img/smiley.png');
+	background-repeat: no-repeat;
+	background-position: 95%;
+	background-size: 10%;
+}
+
+.happySmiley {
+	background-image: url('../img/smiley-happy.png');
+	background-repeat: no-repeat;
+	background-position: 95%;
+	background-size: 10%;
 }
 
 /* Use this class whenever body unselectable doesn't work */
 .unselectable {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -khtml-user-select: none;
-  -o-user-select: none;
-  user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	-o-user-select: none;
+	user-select: none;
 }
 .clear {
-  clear: both;
+	clear: both;
 }
 
 /* -- Menu --  */
 #menu {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 9%;
-  float: left;
-  height: 100%;
-  float: left;
-  background: #C2E9F9;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 9%;
+	float: left;
+	height: 100%;
+	float: left;
+	background: #C2E9F9;
 }
 #menu > li {
-  width: 100%;
-  padding-top: 100%;
-  position: relative;
-  background: #C2E9F9;
+	width: 100%;
+	padding-top: 100%;
+	position: relative;
+	background: #C2E9F9;
 }
 #menu a {
-  display: block;
-  position: absolute;
-  top: 0;
-  width: 90%;
-  height: 90%;
-  margin: 5%;
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 90%;
+	height: 90%;
+	margin: 5%;
 }
 
+
+.preloadingRandomIcon{
+	background-image: url('../img/random-color.png');
+}
+.preloadingRensa {
+	background-image: url('../img/clearBase-icon.png');
+	}
+
+.preloadingSettingsSprite {
+	background-image: url('../img/settings-icons.png');
+}
+.preloadingSettingsSprite, .preloadingRandomIcon, .preloadingRensa{
+	background-repeat: no-repeat;
+	background-position: -9999px -9999px;
+}
 #cube, #erase, #base, #settings, #colors {
-  background-image: url('../img/Ikoner.png');
-  background-size: 200%;
+	background-image: url('../img/Ikoner.png');
+	background-size: 200%;
 }
 #cube.chosen {
-  background-position: 0 0;
+	background-position: 0 0;
 }
 #cube {
-  background-position: 100% 0;
+	background-position: 100% 0;
 }
 
 .color-E60012, .color-F39800, .color-8FC31F, .color-009944, .color-009E96,
 .color-00A0E9, .color-0068B7, .color-601986, .color-7F3E09, .color-F7C6EB,
 .color-BE0081, .color-FDE3C5, .color-E27BFE, .color-E5004F, .color-C6FFF0,
 .color-FED06F, .color-000000, .color-FFFFFF, .color-random{
-  background-image: url('../img/cube_colors.png') !important;
+	background-image: url('../img/cube_colors.png') !important;
 }
 /* orange */
 .color-F39800{
-  background-position: 100% 5.55% !important;
+	background-position: 100% 5.55% !important;
 }
 .color-F39800.chosen{
-  background-position: 0% 5.55% !important;
+	background-position: 0% 5.55% !important;
 }
 /* bright green */
 .color-8FC31F{
-  background-position: 100% 11.1% !important;
+	background-position: 100% 11.1% !important;
 }
 .color-8FC31F.chosen{
-  background-position: 0% 11.1% !important;
+	background-position: 0% 11.1% !important;
 }
 /* green */
 .color-009944{
-  background-position: 100% 16.65% !important;
+	background-position: 100% 16.65% !important;
 }
 .color-009944.chosen{
-  background-position: 0% 16.65% !important;
+	background-position: 0% 16.65% !important;
 }
 /* green blue */
 .color-009E96{
-  background-position: 100% 22.2% !important;
+	background-position: 100% 22.2% !important;
 }
 .color-009E96.chosen{
-  background-position: 0% 22.2% !important;
+	background-position: 0% 22.2% !important;
 }
 /* blue */
 .color-00A0E9{
-  background-position: 100% 27.75% !important;
+	background-position: 100% 27.75% !important;
 }
 .color-00A0E9.chosen{
-  background-position: 0% 27.75% !important;
+	background-position: 0% 27.75% !important;
 }
 /* dark blue */
 .color-0068B7{
-  background-position: 100% 33.3% !important;
+	background-position: 100% 33.3% !important;
 }
 .color-0068B7.chosen{
-  background-position: 0% 33.3% !important;
+	background-position: 0% 33.3% !important;
 }
 /* purple */
 .color-601986{
-  background-position: 100% 38.85% !important;
+	background-position: 100% 38.85% !important;
 }
 .color-601986.chosen{
-  background-position: 0% 38.85% !important;
+	background-position: 0% 38.85% !important;
 }
 /* brown */
 .color-7F3E09{
-   background-position: 100% 44.4% !important;
+	 background-position: 100% 44.4% !important;
 }
 .color-7F3E09.chosen{
-   background-position:00% 44.4% !important;
+	 background-position:00% 44.4% !important;
 }
 /* bright pink */
 .color-F7C6EB{
-  background-position: 100% 49.9% !important;
+	background-position: 100% 49.9% !important;
 }
 .color-F7C6EB.chosen{
-  background-position: 0% 49.9% !important;
+	background-position: 0% 49.9% !important;
 }
 /* bright purple */
 .color-BE0081{
-  background-position: 100% 55.45% !important;
+	background-position: 100% 55.45% !important;
 }
 .color-BE0081.chosen{
-  background-position: 0% 55.45% !important;
+	background-position: 0% 55.45% !important;
 }
 /* off white */
 .color-FDE3C5{
-  background-position: 100% 61% !important;
+	background-position: 100% 61% !important;
 }
 .color-FDE3C5.chosen{
-  background-position: 0% 61% !important;
+	background-position: 0% 61% !important;
 }
 /* light purple */
 .color-E27BFE{
-  background-position-y: 66.55% !important;
+	background-position-y: 66.55% !important;
 }
 /* vine red */
 .color-E5004F{
-  background-position: 100% 72.05% !important;
+	background-position: 100% 72.05% !important;
 }
 .color-E5004F.chosen{
-  background-position: 0% 72.05% !important;
+	background-position: 0% 72.05% !important;
 }
 /* blue white */
 .color-C6FFF0{
-  background-position: 100% 77.6% !important;
+	background-position: 100% 77.6% !important;
 }
 .color-C6FFF0.chosen{
-  background-position: 0% 77.6% !important;
+	background-position: 0% 77.6% !important;
 }
 /* beige */
 .color-FED06F{
-  background-position: 100% 83.15% !important;
+	background-position: 100% 83.15% !important;
 }
 .color-FED06F.chosen{
-  background-position: 0% 83.15% !important;
+	background-position: 0% 83.15% !important;
 }
 /* black */
 .color-000000{
-  background-position: 100% 88.7% !important;
+	background-position: 100% 88.7% !important;
 }
 .color-000000.chosen{
-  background-position: 0% 88.7% !important;
+	background-position: 0% 88.7% !important;
 }
 /* white */
 .color-FFFFFF{
-  background-position: 100% 94.25% !important;
+	background-position: 100% 94.25% !important;
 }
 .color-FFFFFF.chosen{
-  background-position: 0% 94.25% !important;
+	background-position: 0% 94.25% !important;
 }
 /* random */
 .color-random{
-  background-position: 100% 99.8% !important;
+	background-position: 100% 99.8% !important;
 }
 .color-random.chosen{
-  background-position: 0% 99.8% !important;
+	background-position: 0% 99.8% !important;
 }
 #erase.chosen  {
-  background-position: 0 16.286%;
+	background-position: 0 16.286%;
 }
 #erase {
-  background-position: 100% 16.286%;
+	background-position: 100% 16.286%;
 }
 #base {
-  background-position: 0 33.715%;
+	background-position: 0 33.715%;
 }
 #base.faded  {
-  background-position: 100% 33.715%;
+	background-position: 100% 33.715%;
 }
 #settings {
-  background-position: 0 67.144%;
+	background-position: 0 67.144%;
 }
 #settings.faded  {
-  background-position: 100% 67.144%;
+	background-position: 100% 67.144%;
 }
 #colors {
-  background-position: 0 49.857%;
+	background-position: 0 49.857%;
 }
 #colors.faded  {
-  background-position: 100%  49.857%;
+	background-position: 100%  49.857%;
 }
 
 #sizePreview {
-  cursor: default;
+	cursor: default;
 }
 
 #toggleCounter {
-  top: 0;
-  left: 0;
-  position: absolute;
-  font-weight: 900;
-  text-align: left;
-  color:black;
-  font-size: 2vw;
-  padding: 1vw 2vw;
+	top: 0;
+	left: 0;
+	position: absolute;
+	font-weight: 900;
+	text-align: left;
+	color:black;
+	font-size: 2vw;
+	padding: 1vw 2vw;
 }
 #toggleCounter p {
-  display: inline;
+	display: inline;
 }
 
 /* -- Modal -- */
 .modal {
-  display: none;
-  position: fixed;
-  background: rgba(0,0,0,0.5);
-  border-left: 2px solid rgba(0,0,0,0.75);
-  left: 9%;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 1000;
+	display: none;
+	position: fixed;
+	background: rgba(0,0,0,0.5);
+	border-left: 2px solid rgba(0,0,0,0.75);
+	left: 9%;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 1000;
 }
 .modal > div {
-  display: none;
+	display: none;
 }
 .open {
-  display: block;
+	display: block;
 }
 .modal .open{
-  display: table;
+	display: table;
 }
 .size-auto{
-  width: 80%;
+	width: 80%;
 }
 .container {
-  text-align: center;
-  width: 65%;
-  margin: auto auto;
-  height: 100%;
+	text-align: center;
+	width: 65%;
+	margin: auto auto;
+	height: 100%;
 }
 #baseModal,
 #colorsModal,
 #settingsModal {
-  display: table-cell;
-  vertical-align: middle;
+	display: table-cell;
+	vertical-align: middle;
 }
 #baseModal > div,
 #resetConfirmModal > div,
 #colorsModal > div,
 #settingsModal > div,
 #FormModal > form {
-  display: inline-block;
-  position: relative;
-  margin: 1%;
-  width: 40%;
-  padding-top: 40%;
-  vertical-align: middle;
+	display: inline-block;
+	position: relative;
+	margin: 1%;
+	width: 40%;
+	padding-top: 40%;
+	vertical-align: middle;
 }
 
 #FormModal > form {
-  width: 60%;
-  padding-top: 25%;
+	width: 60%;
+	padding-top: 25%;
 }
 /* -- Settings modal icons/divs -- */
 
 #settingsModal > div  {
-  background:#555;
-  border: 2px solid #333;
-  border-radius: 40px;
-  width: 36%;
-  padding-top: 36%;
-  overflow:hidden;
+	background:#555;
+	border: 2px solid #333;
+	border-radius: 40px;
+	width: 36%;
+	padding-top: 36%;
+	overflow:hidden;
 }
 #settingsModal div a {
-  height:100%;
+	height:100%;
 }
 #settingsModal div a {
-  background-image: url('../img/settings-icons.png');
-  background-size: 200%;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 3vw;
-  line-height: 23vw;
-  height:77%;
-  padding-top:35%;
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 3vw;
+	line-height: 7.75em;
+	height:77%;
+	padding-top:35%;
 }
 #settingsModal .get {
-  background-position:0 0 ;
+	background-position:0 0 ;
 }
 #settingsModal .save {
-  background-position:100% 0;
+	background-position:100% 0;
 }
 #settingsModal .print {
-  background-position:0 100%;
+	background-position:0 100%;
 }
 #settingsModal .help {
-  background-position:100% 100%;
+	background-position:100% 100%;
 }
 
 /* Perspecive container and modal */
 .perspective canvas, #perspective {
-  transform: scaleX(-1);
-  -webkit-transform: scaleX(-1);
-  -ms-transform: scaleX(-1);
-  -moz-transform: scaleX(-1);
-  -o-transform: scaleX(-1);
+	transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	-ms-transform: scaleX(-1);
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
 }
-#togglePerspective {
-  font-weight: 900;
-  font-size: 2vw;
-  color: black;
-  position: absolute;
-  bottom: auto;
-  left: auto;
-  z-index: 250;
-  padding: 1vw 2vw;
-  right: 9%;
-  top: 0;
+#togglePerspectiveLandscape,
+#togglePerspectivePortrait {
+	font-weight: 900;
+	font-size: 2vw;
+	color: black;
+	position: absolute;
+	bottom: auto;
+	left: auto;
+	z-index: 250;
+	padding: 1vw 2vw;
+	right: 9%;
+	top: 0;
 }
-#togglePerspective.close {
-  right: 0;
+#togglePerspectiveLandscape.close {
+	right: 0;
+}
+#togglePerspectivePortrait {
+	display: none;
 }
 #perspectives {
-  list-style-type: none;
-  float: left;
-  margin: 0;
-  padding: 0;
-  width: 9%;
-  height: 100%;
-  background: #C2E9F9;
-  position: relative;
+	list-style-type: none;
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 9%;
+	height: 100%;
+	background: #C2E9F9;
+	position: relative;
 }
 #perspectives > li {
-  width: 100%;
-  padding-top: 100%;
-  position: relative;
-  background: #C2E9F9;
+	width: 100%;
+	padding-top: 100%;
+	position: relative;
+	background: #C2E9F9;
 }
 .perspective {
-  cursor: default;
-  display: block;
-  position: absolute;
-  top: 0;
-  width: 90%;
-  height: 90%;
-  margin: 5%;
+	cursor: default;
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 90%;
+	height: 90%;
+	margin: 5%;
 }
 .canvasWrapper {
-  width:100%;
-  height:100%;
-  border-bottom: 4px solid #C2E9F9;
+	width:100%;
+	height:100%;
+	border-bottom: 4px solid #C2E9F9;
 }
 #perspectives li a canvas, #preview canvas {
-  background: #E1F5FF;
+	background: #E1F5FF;
 }
 #greenView {
-  border-bottom-color: #009944;
+	border-bottom-color: #009944;
 }
 #yellowView {
-  border-bottom-color: #F39800;
+	border-bottom-color: #F39800;
 }
 #blueView {
-  border-bottom-color: #0068B7;
+	border-bottom-color: #0068B7;
 }
 #redView {
-  border-bottom-color: #E27BFE;
+	border-bottom-color: #E27BFE;
 }
 .canvasWrapper canvas {
-  background: transparent !important;
+	background: transparent !important;
 }
 
 #baseModal div div a, #baseModal div div #sizePreview, #preview {
-  display: block;
-  height: 25%;
-  width: 100%;
-  margin-bottom: 8%;
-  background-color: #555;
-  border: 2px solid #333;
-  border-radius: 35px;
-  font-size: 4vw;
-  line-height:5.5vw;
-  color: white;
-  vertical-align: middle;
-  padding-top: 2%;
-  font-weight: bold;
+	display: block;
+	height: 25%;
+	width: 100%;
+	margin-bottom: 8%;
+	background-color: #555;
+	border: 2px solid #333;
+	border-radius: 35px;
+	font-size: 4vw;
+	line-height:5.5vw;
+	color: white;
+	vertical-align: middle;
+	padding-top: 0;
+	font-weight: bold;
 }
-#preview {
-  height: 100%;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  padding-top: 0;
-  border: none;
+#baseModal div div a {
+		overflow:hidden;
 }
-#preview canvas{
-  border-radius: 35px !important;
-  border: 2px solid #333;
+#baseModal .up, #baseModal .down {
+		width:25%;
+		padding:12%;
+		background-size: 200%;
+		background-image: url('../img/Ikoner.png');
 }
-.innerBox {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+#baseModal .up {
+	background-position: 200% 88%;
 }
-#colorsModal a {
-  display:inline-block;
-  border: 10px solid #333;
-  border-radius: 15px;
-  margin: 10px;
-  width: 13.5%;
-  padding-top: 11%;
-}
-.canvasWrapper {
-  height:100%;
-  width:100%;
-  position: absolute;
-  left:0;
-  overflow: hidden;
-}
-#perspectiveModal canvas, #preview canvas{
-  background: #E1F5FF;
+#baseModal .down {
+	background-position: 100% 88%;
 }
 
-#FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
-  display: block;
-  height: 25%;
-  width: 100%;
-  margin-bottom: 8%;
-  background-color: #555;
-  border: 2px solid #333;
-  border-radius: 40px;
-  font-size: 2vw;
-  color: white !important;
-  text-align: center;
-  vertical-align: middle;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  position: relative;
+#preview {
+	height: 100%;
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	padding-top: 0;
+	border: none;
+}
+#preview canvas{
+	border-radius: 35px !important;
+	border: 2px solid #333;
+}
+.innerBox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+#colorsModal a {
+	display:inline-block;
+	border: 10px solid #333;
+	border-radius: 15px;
+	margin: 10px;
+	width: 13.5%;
+	padding-top: 11%;
+}
+.canvasWrapper {
+	height:100%;
+	width:100%;
+	position: absolute;
+	left:0;
+	overflow: hidden;
+}
+#perspectiveModal canvas, #preview canvas{
+	background: #E1F5FF;
+}
+
+#FormModal form input[type="text"], #FormModal form a, #alert{
+	display: block;
+	height: 25%;
+	width: 100%;
+	margin-bottom: 8%;
+	background-color: #555;
+	border: 2px solid #333;
+	border-radius: 40px;
+	font-size: 2vw;
+	color: white !important;
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	position: relative;
 }
 #FormModal form input[type="text"]{
-  background: #ffffff;
-  color: #555 !important;
-  margin-bottom: 2%;
+	background: #ffffff;
+	color: #555 !important;
+	margin-bottom: 2%;
 }
 #alert{
-  cursor: default;
+	cursor: default;
 }
 #alert:empty{
-  visibility: hidden;
+	visibility: hidden;
 }
 
 /* Colors for colormodal options */
 .color.red {
-  background-color:#E60012;
+	background-color:#E60012;
 }
 .color.orange {
-  background-color:#F39800;
+	background-color:#F39800;
 }
 .color.yellow {
-  background-color:#FFF100;
+	background-color:#FFF100;
 }
 .color.lgreen {
-  background-color:#8FC31F;
+	background-color:#8FC31F;
 }
 .color.green {
-  background-color:#009944;
+	background-color:#009944;
 }
 .color.blueGreen {
-  background-color:#009E96;
+	background-color:#009E96;
 }
 .color.lblue {
-  background-color:#00A0E9;
+	background-color:#00A0E9;
 }
 .color.blue {
-  background-color:#0068B7;
+	background-color:#0068B7;
 }
 .color.purple {
-  background-color:#601986;
+	background-color:#601986;
 }
 .color.brown {
-  background-color:#7F3E09;
+	background-color:#7F3E09;
 }
 .color.llPink {
-  background-color:#F7C6EB;
+	background-color:#F7C6EB;
 }
 .color.pink {
-  background-color:#BE0081;
+	background-color:#BE0081;
 }
 .color.vanilla {
-  background-color:#FDE3C5;
+	background-color:#FDE3C5;
 }
 .color.lPink {
-  background-color:#E27BFE;
+	background-color:#E27BFE;
 }
 .color.lRed {
-  background-color:#E5004F;
+	background-color:#E5004F;
 }
 .color.random {
-  background-image: url('../img/random-color.png');
-  background-size:contain;
+	background-image: url('../img/random-color.png');
+	background-size:contain;
 }
 .color.turquoise {
-  background-color:#C6FFF0;
+	background-color:#C6FFF0;
 }
 .color.dYellow {
-  background-color:#FED06F;
+	background-color:#FED06F;
 }
 .color.black {
-  background-color:#000;
+	background-color:#000;
 }
 .color.white {
-  background-color:#FFF;
+	background-color:#FFF;
 }
+
+/* Help modal ---------------------------------------------------------------------*/
+#helpModal {
+	position: absolute;
+	top: 10%;
+	left: 7.5%;
+	width:85%;
+	height:80%;
+	text-align: center;
+	cursor:default;
+}
+#helpModal > h1 {
+	position: absolute;
+	padding:5px 0 15px 0;
+	width: 100%;
+	height:50px,
+	top: 0;
+	left: 0;
+	background-color: #aaa;
+	margin: 0;
+	border-radius: 10px 10px 0 0;
+}
+#helpModal h1 span{
+	font-size:0.6em;
+	color:#555;
+}
+#helpContentContainer {
+	position: absolute;
+	top: 45px;
+	bottom: 10px;
+	left: 0;
+	width: 100%;
+	border-left: 5px solid #aaa;
+	border-right: 5px solid #aaa;
+	overflow-y: scroll; /* has to be scroll, not auto */
+  	-webkit-overflow-scrolling: touch;
+}
+#helpContent {
+	position: relative;
+	width:100%;
+	height:100%;
+	text-align: left;
+	background-color: #333;
+}
+#helpBottom {
+	position: absolute;
+	height: 10px;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	height:10px;
+	background-color: #333;
+	border-left: 5px solid #aaa;
+	border-right: 5px solid #aaa;
+	border-bottom: 5px solid #aaa;
+	border-radius: 0 0 10px 10px;
+}
+#helpContent tbody {
+	position: relative;
+    height: auto;
+}
+#helpContent td {
+    padding: 2%;
+    line-height:28px;
+}
+#helpContent thead > tr, tbody{
+    display:block;
+}
+.bottomBorder {
+	position: relative;
+	border-bottom: 2px solid #aaa;
+}
+
+.helpTopic {
+	position: relative;
+	overflow: auto;
+	padding-bottom: 25px;
+}
+#helpContent td.subTopic {
+	padding-left: 15%;
+	background-color: #444;
+}
+.topicIconBox {
+	width: 10%;
+	padding-top: 10%;
+	position: relative;
+	float: left;
+}
+.subTopicIconBox, .rensaIcon {
+	width: 10%;
+	padding-top: 8%;
+	margin-top:1%;
+	position: relative;
+	float: left;
+}
+.rensaIcon{
+	width:18%; margin-right:2%;
+	margin-left:-1%;
+}
+.topicIcon {
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+	background-image: url('../img/Ikoner.png');
+}
+#cubeIcon {
+	background-size: 200%;
+	background-position: 100% 0;
+}
+#eraseIcon {
+	background-position: 100% 16.286%;
+	background-size: 200%;
+}
+#baseIcon {
+	background-position: 0 33.715%;
+	background-size: 200%;
+}
+#settingsIcon {
+	background-position: 0 67.144%;
+	background-size: 200%;
+}
+#colorsIcon {
+	background-position: 0 49.857%;
+	background-size: 200%;
+}
+#clearIcon {
+	background-image: url('../img/clearBase-icon.png');
+	background-size: 100%;
+	background-repeat:no-repeat;
+}
+#loadIcon {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
+	background-position:0 0 ;
+}
+#saveIcon {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
+	background-position:100% 0;
+}
+#printIcon {
+	background-image: url('../img/settings-icons.png');
+	background-size: 200%;
+	background-position:0 100%;
+}
+.topicHeader, .topicHeaderRensa {
+	padding-top:20px;
+	width: 87%;
+	float: right;
+	margin-top: 0;
+}
+.topicText, .topicTextRensa {
+	width: 87%;
+	float: right;
+	clear: right;
+}
+.topicTextRensa, .topicHeaderRensa  {
+	width: 80%;
+}
+
+/* Help modal end ---------------------------------------------------------------------*/
+
 
 /* Smaller devices orientation */
 @media (orientation: landscape) and (max-width:1200px) {
-  #colorsModal a {
-    margin: 0;
-    border-width:5px;
-  }
+	#colorsModal a {
+		margin: 0;
+		border-width:5px;
+	}
 }
 
 /* Smaller devices border-radius */
 @media (max-width:960px) {
-  #settingsModal > div, #baseModal div div a, #baseModal div div #sizePreview, #preview {
-    border-radius: 20px;
-  }
-  #preview canvas{
-    border-radius: 20px !important;
-  }
-  #FormModal > form{
-    width: 90%;
-  }
-  #FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
-    font-size: 16px !important;
-  }
+	#settingsModal > div, #baseModal div div a, #baseModal div div #sizePreview, #preview {
+		border-radius: 20px;
+	}
+	#preview canvas{
+		border-radius: 20px !important;
+	}
+	#FormModal > form{
+		width: 90%;
+	}
+	#FormModal form input[type="text"], #FormModal form input[type="submit"], #alert{
+		font-size: 16px !important;
+	}
 }
 
 /* Portrait orientation */
 @media (orientation: portrait) {
-  #colorsModal a {
-    margin: 0;
-    border-width: 5px;
-  }
-  #menu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 20%;
-    background: transparent;
-  }
-  #menu li {
-    z-index: 150;
-    float: left;
-    width: 20%;
-    padding-top: 19%;
-    background: #C2E9F9;
-  }
-  #menu a {
-    width: 90%;
-    height: 90%;
-    margin-top: 5%;
-  }
-  #ThreeJScontainer {
-    width: 100%;
-    height: 100%;
-  }
+	#colorsModal a {
+		margin: 0;
+		border-width: 5px;
+	}
+	#menu {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 20%;
+		background: transparent;
+	}
+	#menu li {
+		z-index: 150;
+		float: left;
+		width: 20%;
+		padding-top: 19%;
+		background: #C2E9F9;
+	}
+	#menu a {
+		width: 90%;
+		height: 90%;
+		margin-top: 5%;
+	}
+	#ThreeJScontainer {
+		width: 100%;
+		height: 100%;
+	}
 
 /* Perspective container and modal */
-  #togglePerspective {
-    font-size: 5vw;
-    top: auto;
-    right: auto;
-    left: 0;
-    margin-bottom: 20%;
-    bottom: 0;
-  }
-  #togglePerspective.close {
-    bottom: 0;
-    margin-bottom: 0;
-  }
-  #perspectives {
-    width: 100%;
-    height: 20%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background: transparent;
-  }
-  #perspectives li {
-    z-index: 150;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 20%;
-    padding-top: 20%;
-    background: #C2E9F9;
-  }
-  #perspectives li:nth-of-type(2) {
-    left: 20%;
-  }
-  #perspectives li:nth-of-type(3) {
-    left: 40%;
-  }
-  #perspectives li:nth-of-type(4) {
-    left: 60%;
-  }
-  #perspectives li:nth-of-type(5) {
-    left: 80%;
-  }
-  .perspective {
-    width: 100%;
-    height: 100%;
-    padding: 0%;
-    margin: 0;
-  }
-  .canvasWrapper {
-    width: 90%;
-    height: 90%;
-    margin: 5%;
-  }
+	#togglePerspectivePortrait {
+		display: block;
+		font-size: 5vw;
+		top: auto;
+		right: auto;
+		left: 0;
+		margin-bottom: 20%;
+		bottom: 0;
+	}
+	#togglePerspectivePortrait.close {
+		bottom: 0;
+		margin-bottom: 0;
+	}
+	#togglePerspectiveLandscape {
+		display: none;
+	}
+	#perspectives {
+		width: 100%;
+		height: 20%;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		background: transparent;
+	}
+	#perspectives li {
+		z-index: 150;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 20%;
+		padding-top: 20%;
+		background: #C2E9F9;
+	}
+	#perspectives li:nth-of-type(2) {
+		left: 20%;
+	}
+	#perspectives li:nth-of-type(3) {
+		left: 40%;
+	}
+	#perspectives li:nth-of-type(4) {
+		left: 60%;
+	}
+	#perspectives li:nth-of-type(5) {
+		left: 80%;
+	}
+	.perspective {
+		width: 100%;
+		height: 100%;
+		padding: 0%;
+		margin: 0;
+	}
+	.canvasWrapper {
+		width: 90%;
+		height: 90%;
+		margin: 5%;
+	}
 
 /* Modals */
-  .modal {
-    border-left: none;
-    left: 0;
-  }
-  .container {
-    width: 100%;
-  }
-  #settingsModal div a {
-    line-height: 37vw;
-  }
-  #settingsModal div a span {
-    font-size: 4vw;
-    line-height: 9vw;
-  }
-  #colors {
-    top: 50%;
-  }
-  #baseModal div div a, #baseModal div div #sizePreview, #preview {
-    font-size:7vw;
-    line-height:10vw;
-  }
-  #toggleCounter {
-    font-size: 5vw;
-    left: 0;
-    top: 0;
-    margin-top: 20%;
-  }
+	.modal {
+		border-left: none;
+		left: 0;
+	}
+	.container {
+		width: 100%;
+	}
+	#settingsModal div a {
+		line-height: 12.95em;
+	}
+	#settingsModal div a span {
+		font-size: 4vw;
+		line-height: 9vw;
+	}
+	#colors {
+		top: 50%;
+	}
+	#baseModal div div a, #baseModal div div #sizePreview, #preview {
+		font-size:7vw;
+		line-height:10vw;
+	}
+	#toggleCounter {
+		font-size: 5vw;
+		left: 0;
+		top: 0;
+		margin-top: 20%;
+	}
 }
 
 @media print {
-  #menu, #toggleCounter, #togglePerspective {
-    display: none;
-  }
-  html, body {
-    height: auto;
-    background: #ffffff;
-  }
-  #ThreeJScontainer {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    padding-bottom: 20%;
-  }
-  #ThreeJScontainer canvas {
-    width: 100% !important;
-    height: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  #perspectives {
-    width: 100%;
-    height: 20%;
-  }
-  #perspectives li {
-    width: 20%;
-    padding-top: 20%;
-    margin: 0;
-    float: left;
-  }
-  .perspective,
-  .canvasWrapper {
-    border-top: 2% solid transparent;
-    border-right: 2% solid transparent;
-    border-left: 2% solid transparent;
-    border-bottom-width: 2%;
-    width: 96%;
-    height: 96%;
-    padding: 0;
-    margin: 0;
-  }
-  #topView {
-    border-bottom: none;
-    padding-bottom: 2%;
-  }
-  .canvasWrapper canvas {
-    width: 100% !important;
-    height: 100% !important;
-  }
+	#menu, #toggleCounter, #togglePerspective {
+		display: none;
+	}
+	html, body {
+		height: auto;
+		background: #ffffff;
+	}
+	#ThreeJScontainer {
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		padding-bottom: 20%;
+	}
+	#ThreeJScontainer canvas {
+		width: 100% !important;
+		height: 100% !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	#perspectives {
+		width: 100%;
+		height: 20%;
+	}
+	#perspectives li {
+		width: 20%;
+		padding-top: 20%;
+		margin: 0;
+		float: left;
+	}
+	.perspective,
+	.canvasWrapper {
+		border-top: 2% solid transparent;
+		border-right: 2% solid transparent;
+		border-left: 2% solid transparent;
+		border-bottom-width: 2%;
+		width: 96%;
+		height: 96%;
+		padding: 0;
+		margin: 0;
+	}
+	#topView {
+		border-bottom: none;
+		padding-bottom: 2%;
+	}
+	.canvasWrapper canvas {
+		width: 100% !important;
+		height: 100% !important;
+	}
 }
+
+
 @font-face {
   font-family: 'fontello';
   src: url('../font/fontello.eot?11461858');
@@ -1210,38 +1421,38 @@ body a {
   }
 }
 */
- 
+
  [class^="icon-"]:before, [class*=" icon-"]:before {
   font-family: "fontello";
   font-style: normal;
   font-weight: normal;
   speak: none;
- 
+
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
   margin-right: .2em;
   text-align: center;
   /* opacity: .8; */
- 
+
   /* For safety - reset parent styles, that can break glyph codes*/
   font-variant: normal;
   text-transform: none;
-     
+
   /* fix buttons height, for twitter bootstrap */
   line-height: 1em;
- 
+
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
   margin-left: .2em;
- 
+
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
- 
+
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
- 
+
 .icon-eraser:before { content: '\e800'; } /* '' */
 .icon-pencil:before { content: '\e801'; } /* '' */
 .icon-brush:before { content: '\e802'; } /* '' */
