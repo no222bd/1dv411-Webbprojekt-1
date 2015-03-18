@@ -134,6 +134,7 @@ jQuery(document).ready(function ($) {
 		} else {
 			if ($(this).attr('href') == '#import' || $(this).attr('href') == '#save') {
 				handleModalWindow($(this));
+				$("#Name").focus();
 			}
 			if($(this).attr('href') == '#print'){
 				closeModal();
@@ -187,7 +188,7 @@ jQuery(document).ready(function ($) {
 			$("#alert").toggleClass('sadSmiley');
 		} else {
 			if (name.length <= 50) {
-				if ($(this).val() == 'Hämta') {
+				if ($(this).text() == 'Hämta') {
 					if (navigator.onLine) {
 						// check api first
 						var requestUrl = "api/" + name;
@@ -358,11 +359,35 @@ jQuery(document).ready(function ($) {
 		if (areOpen) {
 			if (href == '#save' || href == '#import') {
 				if (href == '#save') {
-					$("#Submit").val('Spara');
+					$("#Submit").text('Spara');
 				} else {
-					$("#Submit").val('Hämta');
+					$("#Submit").text('Hämta');
 				}
 				href = '#FormModal';
+
+				if( navigator.userAgent.match(/(iPad|iPhone|iPod touch);.*CPU.*OS 7_\d/i) ) {
+			        // Position modal absolute and bump it down to the scrollPosition
+			        $('#modal')
+			            .css({
+			                position: 'absolute',
+			                marginTop: $(window).scrollTop() + 'px',
+			                bottom: 'auto'
+			            });
+			        // Position backdrop absolute and make it span the entire page
+			        //
+			        // Also dirty, but we need to tap into the backdrop after Boostrap 
+			        // positions it but before transitions finish.
+			        //
+			        setTimeout( function() {
+			            $('#modal').css({
+			                height: Math.max(
+			                    document.body.scrollHeight, document.documentElement.scrollHeight,
+			                    document.body.offsetHeight, document.documentElement.offsetHeight,
+			                    document.body.clientHeight, document.documentElement.clientHeight
+			                ) + 'px'
+			            });
+			        }, 0);
+			    }
 			}
 			if (href == '#help') {
 				href = '#helpModal';
