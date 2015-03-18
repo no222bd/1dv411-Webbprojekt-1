@@ -16,8 +16,9 @@ Contact:
 From:
 
 Maria Nygren
-Contact:
-From:
+- Created the icons used in the application.
+Contact:mianygren[at]hotmail.com
+From:Örebro, Sverige
 
 Nils-Jakob Olsson
 Contact:
