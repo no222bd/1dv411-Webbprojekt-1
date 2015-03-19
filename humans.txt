@@ -9,24 +9,24 @@ From: Lahti, Finland
 
 Christoffer Holmgren
 Contact: christoffer.holmgren[at]gmail.com
-From: Falun, Sverige
+From: Falun, Sweden
 
 Jennifer Nord
 Contact: jennifer.nord[at]live.se
-From: Göteborg, Sverige
+From: Göteborg, Sweden
 
 Maria Nygren
 - Created the icons used in the application.
 Contact:mianygren[at]hotmail.com
-From: Örebro, Sverige
+From: Örebro, Sweden
 
 Nils-Jakob Olsson
 Contact: no222bd[at]student.lnu.se
-From: Malmö, Sverige
+From: Malmö, Sweden
 
 David Söderberg
-Contact:
-From:
+Contact: info@davidsouthmountain.se
+From: Vislanda, Sweden
 
 /* THANKS */
 Client: Jorryt van Bommel, Karlstad University
@@ -39,4 +39,4 @@ Contact: tobias.olsson[at]lnu.se
 Release: 20/3/2015
 Language: Swedish
 Doctype: HTML5
-Tools: Aptana Studio, Git, GitHub
+Tools: Aptana Studio, Git, GitHub, Webstorm, PHPstorm
