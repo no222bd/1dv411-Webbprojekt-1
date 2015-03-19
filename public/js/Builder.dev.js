@@ -192,16 +192,23 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 * Renders model perspectives
 	 */
 	this.renderPerspectives = function() {
+		console.log("Rendered perspectives");
 		views.forEach(function(element, index, array) {
             element.setSize();
             element.render();
         });
+	};
+	this.resizePerspectives = function() {
+		views.forEach(function(element){
+			element.setSize();
+		});
 	};
 
 	/**
 	 * Updates camera and renderer settings to new element sizes.
 	 */
 	this.resize = function() {
+		console.log("Resized");
 		camera.aspect = jQueryContainer.width() / jQueryContainer.height();
 		camera.updateProjectionMatrix();
 		renderer.setSize(jQueryContainer.width(), jQueryContainer.height());
@@ -344,6 +351,10 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		});
 		//Ugly fix
 		views[5].shouldRender(true);
+		if(should){
+			renderCount = 6;
+			self.resizePerspectives();
+		}
 	};
 
 	/* Private functions */
@@ -788,6 +799,8 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 	 * Set size for camera.
 	 */
 	this.setSize = function() {
+		console.trace();
+		console.log("Set size");
 		var viewSite = baseSize * 2 - 10;
 		if (JQueryElement.attr("id") == "topView") {
 			viewSite = baseSize * 2 + baseSize / 20;

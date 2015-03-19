@@ -50,7 +50,7 @@ jQuery(document).ready(function ($) {
 	 */
 	$('#menu').on('click', 'a', function (event) {
 		event.preventDefault();
-
+		console.log($(this));
 		/**
 		 * If buildOption class do handleBuildOption, else do handleModalWindow.
 		 */

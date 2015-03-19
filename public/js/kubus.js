@@ -545,7 +545,6 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		controls = new THREE.OrbitControls(camera, renderer.domElement);
 		controls.noPan = true;
 		setZoom();
-
 		jQueryContainer.append(renderer.domElement);
 		//jQueryContainer.on( "mousedown", onDocumentMouseTouch);
 		jQueryContainer[0].addEventListener("mousedown", onDocumentMouseTouch);
@@ -555,7 +554,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		createPerspectives();
 		setTimeout(function(){
 			render();	
-		}, 300);
+		}, 1000);
 	}
 
 	/* Public functions */
@@ -642,6 +641,11 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
             element.render();
         });
 	};
+	this.resizePerspectives = function() {
+		views.forEach(function(element){
+			element.setSize();
+		});
+	};
 
 	/**
 	 * Updates camera and renderer settings to new element sizes.
@@ -706,6 +710,8 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 			createPerspectives();
 			updateCounter();
 
+			renderCount = 6;
+
 			return true;
 		}
 
@@ -760,6 +766,13 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 	 */
 	this.toggleBuildMode = function() {
 		buildMode = !buildMode;
+
+		/* OBS! This is code for testing purpose only. Do not use in applicatoin!!! */
+		// TODO: Remove before deploying
+
+		this._buildMode = buildMode;
+
+		/* End of testing code */
 	};
 
 	this.shouldRenderPerspectives = function(should){
@@ -770,6 +783,7 @@ BUILDER.ConstructionArea = function(jQueryContainer, perspectivesContainer, colo
 		views[5].shouldRender(true);
 		if(should){
 			renderCount = 6;
+			self.resizePerspectives();
 		}
 	};
 
@@ -1193,6 +1207,7 @@ BUILDER.View = function(renderer, camera, JQueryElement, scene, baseSize) {
 };
 
 }(window));
+
 jQuery(document).ready(function() {
 	$(window.applicationCache).on("updateready", function(event) {
 		window.applicationCache.swapCache();
