@@ -1,0 +1,1462 @@
+@font-face {
+  font-family: 'fontello';
+  src: url('../font/fontello.eot?11461858');
+  src: url('../font/fontello.eot?11461858#iefix') format('embedded-opentype'),
+       url('../font/fontello.woff?11461858') format('woff'),
+       url('../font/fontello.ttf?11461858') format('truetype'),
+       url('../font/fontello.svg?11461858#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?11461858#fontello') format('svg');
+  }
+}
+*/
+ 
+ [class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+     
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.icon-eraser:before { content: '\e800'; } /* '' */
+.icon-pencil:before { content: '\e801'; } /* '' */
+.icon-brush:before { content: '\e802'; } /* '' */
+.icon-cube:before { content: '\e803'; } /* '' */
+.icon-cubes:before { content: '\e804'; } /* '' */
+.icon-trash:before { content: '\e805'; } /* '' */
+.icon-floppy:before { content: '\e806'; } /* '' */
+.icon-cog:before { content: '\e807'; } /* '' */
+.icon-info:before { content: '\e808'; } /* '' */
+.icon-download-alt:before { content: '\e809'; } /* '' */
+html {
+  height: 100%;
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  height: 100%;
+  background: #E1F5FF;
+  font-family: Arial, "MS Trebuchet", sans-serif;
+  color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -khtml-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color:transparent;
+}
+#ThreeJScontainer canvas {
+  vertical-align: middle !important;
+}
+body a {
+  color: white;
+  text-decoration: none;
+}
+#ThreeJScontainer {
+  z-index: 5;
+  float: left;
+  width: 82%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* -- Helpers -- */
+
+.sadSmiley {
+  background-image: url('../img/smiley.png');
+  background-repeat: no-repeat;
+  background-position: 95%;
+  background-size: 10%;
+}
+
+.happySmiley {
+  background-image: url('../img/smiley-happy.png');
+  background-repeat: no-repeat;
+  background-position: 95%;
+  background-size: 10%;
+}
+
+/* Use this class whenever body unselectable doesn't work */
+.unselectable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -khtml-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.clear {
+  clear: both;
+}
+
+/* -- Menu --  */
+#menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 9%;
+  float: left;
+  height: 100%;
+  float: left;
+  background: #C2E9F9;
+}
+#menu > li {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  background: #C2E9F9;
+}
+#menu a {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 90%;
+  height: 90%;
+  margin: 5%;
+}
+
+
+.preloadingRandomIcon{
+  background-image: url('../img/random-color.png');
+}
+.preloadingRensa {
+  background-image: url('../img/clearBase-icon.png');
+  }
+
+.preloadingSettingsSprite {
+  background-image: url('../img/settings-icons.png');
+}
+.preloadingSettingsSprite, .preloadingRandomIcon, .preloadingRensa{
+  background-repeat: no-repeat;
+  background-position: -9999px -9999px;
+}
+#cube, #erase, #base, #settings, #colors {
+  background-image: url('../img/Ikoner.png');
+  background-size: 200%;
+}
+#cube.chosen {
+  background-position: 0 0;
+}
+#cube {
+  background-position: 100% 0;
+}
+
+.color-E60012, .color-F39800, .color-8FC31F, .color-009944, .color-009E96,
+.color-00A0E9, .color-0068B7, .color-601986, .color-7F3E09, .color-F7C6EB,
+.color-BE0081, .color-FDE3C5, .color-E27BFE, .color-E5004F, .color-C6FFF0,
+.color-FED06F, .color-000000, .color-FFFFFF, .color-random{
+  background-image: url('../img/cube_colors.png') !important;
+}
+/* orange */
+.color-F39800{
+  background-position: 100% 5.55% !important;
+}
+.color-F39800.chosen{
+  background-position: 0% 5.55% !important;
+}
+/* bright green */
+.color-8FC31F{
+  background-position: 100% 11.1% !important;
+}
+.color-8FC31F.chosen{
+  background-position: 0% 11.1% !important;
+}
+/* green */
+.color-009944{
+  background-position: 100% 16.65% !important;
+}
+.color-009944.chosen{
+  background-position: 0% 16.65% !important;
+}
+/* green blue */
+.color-009E96{
+  background-position: 100% 22.2% !important;
+}
+.color-009E96.chosen{
+  background-position: 0% 22.2% !important;
+}
+/* blue */
+.color-00A0E9{
+  background-position: 100% 27.75% !important;
+}
+.color-00A0E9.chosen{
+  background-position: 0% 27.75% !important;
+}
+/* dark blue */
+.color-0068B7{
+  background-position: 100% 33.3% !important;
+}
+.color-0068B7.chosen{
+  background-position: 0% 33.3% !important;
+}
+/* purple */
+.color-601986{
+  background-position: 100% 38.85% !important;
+}
+.color-601986.chosen{
+  background-position: 0% 38.85% !important;
+}
+/* brown */
+.color-7F3E09{
+   background-position: 100% 44.4% !important;
+}
+.color-7F3E09.chosen{
+   background-position:00% 44.4% !important;
+}
+/* bright pink */
+.color-F7C6EB{
+  background-position: 100% 49.9% !important;
+}
+.color-F7C6EB.chosen{
+  background-position: 0% 49.9% !important;
+}
+/* bright purple */
+.color-BE0081{
+  background-position: 100% 55.45% !important;
+}
+.color-BE0081.chosen{
+  background-position: 0% 55.45% !important;
+}
+/* off white */
+.color-FDE3C5{
+  background-position: 100% 61% !important;
+}
+.color-FDE3C5.chosen{
+  background-position: 0% 61% !important;
+}
+/* light purple */
+.color-E27BFE{
+  background-position-y: 66.55% !important;
+}
+/* vine red */
+.color-E5004F{
+  background-position: 100% 72.05% !important;
+}
+.color-E5004F.chosen{
+  background-position: 0% 72.05% !important;
+}
+/* blue white */
+.color-C6FFF0{
+  background-position: 100% 77.6% !important;
+}
+.color-C6FFF0.chosen{
+  background-position: 0% 77.6% !important;
+}
+/* beige */
+.color-FED06F{
+  background-position: 100% 83.15% !important;
+}
+.color-FED06F.chosen{
+  background-position: 0% 83.15% !important;
+}
+/* black */
+.color-000000{
+  background-position: 100% 88.7% !important;
+}
+.color-000000.chosen{
+  background-position: 0% 88.7% !important;
+}
+/* white */
+.color-FFFFFF{
+  background-position: 100% 94.25% !important;
+}
+.color-FFFFFF.chosen{
+  background-position: 0% 94.25% !important;
+}
+/* random */
+.color-random{
+  background-position: 100% 99.8% !important;
+}
+.color-random.chosen{
+  background-position: 0% 99.8% !important;
+}
+#erase.chosen  {
+  background-position: 0 16.286%;
+}
+#erase {
+  background-position: 100% 16.286%;
+}
+#base {
+  background-position: 0 33.715%;
+}
+#base.faded  {
+  background-position: 100% 33.715%;
+}
+#settings {
+  background-position: 0 67.144%;
+}
+#settings.faded  {
+  background-position: 100% 67.144%;
+}
+#colors {
+  background-position: 0 49.857%;
+}
+#colors.faded  {
+  background-position: 100%  49.857%;
+}
+
+#sizePreview {
+  cursor: default;
+}
+
+#toggleCounter {
+  top: 0;
+  left: 0;
+  position: absolute;
+  font-weight: 900;
+  text-align: left;
+  color:black;
+  font-size: 2vw;
+  padding: 1vw 2vw;
+}
+#toggleCounter p {
+  display: inline;
+}
+
+/* -- Modal -- */
+.modal {
+  display: none;
+  position: fixed;
+  background: rgba(0,0,0,0.5);
+  border-left: 2px solid rgba(0,0,0,0.75);
+  left: 9%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+.modal > div {
+  display: none;
+}
+.open {
+  display: block;
+}
+.modal .open{
+  display: table;
+}
+.size-auto{
+  width: 80%;
+}
+.container {
+  text-align: center;
+  width: 65%;
+  margin: auto auto;
+  height: 100%;
+}
+#baseModal,
+#colorsModal,
+#settingsModal {
+  display: table-cell;
+  vertical-align: middle;
+}
+#baseModal > div,
+#resetConfirmModal > div,
+#colorsModal > div,
+#settingsModal > div,
+#FormModal > form {
+  display: inline-block;
+  position: relative;
+  margin: 1%;
+  width: 40%;
+  padding-top: 40%;
+  vertical-align: middle;
+}
+
+#FormModal > form {
+  width: 60%;
+  padding-top: 25%;
+}
+/* -- Settings modal icons/divs -- */
+
+#settingsModal > div  {
+  background:#555;
+  border: 2px solid #333;
+  border-radius: 40px;
+  width: 36%;
+  padding-top: 36%;
+  overflow:hidden;
+}
+#settingsModal div a {
+  height:100%;
+}
+#settingsModal div a {
+  background-image: url('../img/settings-icons.png');
+  background-size: 200%;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 3vw;
+  line-height: 7.75em;
+  height:77%;
+  padding-top:35%;
+}
+#settingsModal .get {
+  background-position:0 0 ;
+}
+#settingsModal .save {
+  background-position:100% 0;
+}
+#settingsModal .print {
+  background-position:0 100%;
+}
+#settingsModal .help {
+  background-position:100% 100%;
+}
+
+/* Perspecive container and modal */
+.perspective canvas, #perspective {
+  transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+}
+#togglePerspectiveLandscape,
+#togglePerspectivePortrait {
+  font-weight: 900;
+  font-size: 2vw;
+  color: black;
+  position: absolute;
+  bottom: auto;
+  left: auto;
+  z-index: 250;
+  padding: 1vw 2vw;
+  right: 9%;
+  top: 0;
+}
+#togglePerspectiveLandscape.close {
+  right: 0;
+}
+#togglePerspectivePortrait {
+  display: none;
+}
+#perspectives {
+  list-style-type: none;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 9%;
+  height: 100%;
+  background: #C2E9F9;
+  position: relative;
+}
+#perspectives > li {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  background: #C2E9F9;
+}
+.perspective {
+  cursor: default;
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 90%;
+  height: 90%;
+  margin: 5%;
+}
+.canvasWrapper {
+  width:100%;
+  height:100%;
+  border-bottom: 4px solid #C2E9F9;
+}
+#perspectives li a canvas, #preview canvas {
+  background: #E1F5FF;
+}
+#greenView {
+  border-bottom-color: #009944;
+}
+#yellowView {
+  border-bottom-color: #F39800;
+}
+#blueView {
+  border-bottom-color: #0068B7;
+}
+#redView {
+  border-bottom-color: #E27BFE;
+}
+.canvasWrapper canvas {
+  background: transparent !important;
+}
+
+#baseModal div div a, #baseModal div div #sizePreview, #preview {
+  display: block;
+  height: 25%;
+  width: 100%;
+  margin-bottom: 8%;
+  background-color: #555;
+  border: 2px solid #333;
+  border-radius: 35px;
+  font-size: 4vw;
+  line-height:5.5vw;
+  color: white;
+  vertical-align: middle;
+  padding-top: 0;
+  font-weight: bold;
+}
+#baseModal div div a {
+    overflow:hidden;
+}
+#baseModal .up, #baseModal .down {
+    width:25%;
+    padding:12%;
+    background-size: 200%;
+    background-image: url('../img/Ikoner.png');
+}
+#baseModal .up {
+  background-position: 200% 88%;
+}
+#baseModal .down {
+  background-position: 100% 88%;
+}
+
+#preview {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding-top: 0;
+  border: none;
+}
+#preview canvas{
+  border-radius: 35px !important;
+  border: 2px solid #333;
+}
+.innerBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+#colorsModal a {
+  display:inline-block;
+  border: 10px solid #333;
+  border-radius: 15px;
+  margin: 10px;
+  width: 13.5%;
+  padding-top: 11%;
+}
+.canvasWrapper {
+  height:100%;
+  width:100%;
+  position: absolute;
+  left:0;
+  overflow: hidden;
+}
+#perspectiveModal canvas, #preview canvas{
+  background: #E1F5FF;
+}
+
+#FormModal form input[type="text"], #FormModal form a, #alert{
+  display: block;
+  height: 25%;
+  width: 100%;
+  margin-bottom: 8%;
+  background-color: #555;
+  border: 2px solid #333;
+  border-radius: 40px;
+  font-size: 2vw;
+  color: white !important;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  position: relative;
+}
+#FormModal form input[type="text"]{
+  background: #ffffff;
+  color: #555 !important;
+  margin-bottom: 2%;
+}
+#alert{
+  cursor: default;
+}
+#alert:empty{
+  visibility: hidden;
+}
+
+/* Colors for colormodal options */
+.color.red {
+  background-color:#E60012;
+}
+.color.orange {
+  background-color:#F39800;
+}
+.color.yellow {
+  background-color:#FFF100;
+}
+.color.lgreen {
+  background-color:#8FC31F;
+}
+.color.green {
+  background-color:#009944;
+}
+.color.blueGreen {
+  background-color:#009E96;
+}
+.color.lblue {
+  background-color:#00A0E9;
+}
+.color.blue {
+  background-color:#0068B7;
+}
+.color.purple {
+  background-color:#601986;
+}
+.color.brown {
+  background-color:#7F3E09;
+}
+.color.llPink {
+  background-color:#F7C6EB;
+}
+.color.pink {
+  background-color:#BE0081;
+}
+.color.vanilla {
+  background-color:#FDE3C5;
+}
+.color.lPink {
+  background-color:#E27BFE;
+}
+.color.lRed {
+  background-color:#E5004F;
+}
+.color.random {
+  background-image: url('../img/random-color.png');
+  background-size:contain;
+}
+.color.turquoise {
+  background-color:#C6FFF0;
+}
+.color.dYellow {
+  background-color:#FED06F;
+}
+.color.black {
+  background-color:#000;
+}
+.color.white {
+  background-color:#FFF;
+}
+
+/* Help modal ---------------------------------------------------------------------*/
+#helpModal {
+  position: absolute;
+  top: 10%;
+  left: 7.5%;
+  width:85%;
+  height:80%;
+  text-align: center;
+  cursor:default;
+}
+#helpModal > h1 {
+  position: absolute;
+  padding:5px 0 15px 0;
+  width: 100%;
+  height:50px,
+  top: 0;
+  left: 0;
+  background-color: #aaa;
+  margin: 0;
+  border-radius: 10px 10px 0 0;
+}
+#helpModal h1 span{
+  font-size:0.6em;
+  color:#555;
+}
+#helpContentContainer {
+  position: absolute;
+  top: 45px;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  border-left: 5px solid #aaa;
+  border-right: 5px solid #aaa;
+  overflow-y: scroll; /* has to be scroll, not auto */
+    -webkit-overflow-scrolling: touch;
+}
+#helpContent {
+  position: relative;
+  width:100%;
+  height:100%;
+  text-align: left;
+  background-color: #333;
+}
+#helpBottom {
+  position: absolute;
+  height: 10px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  height:10px;
+  background-color: #333;
+  border-left: 5px solid #aaa;
+  border-right: 5px solid #aaa;
+  border-bottom: 5px solid #aaa;
+  border-radius: 0 0 10px 10px;
+}
+#helpContent tbody {
+  position: relative;
+    height: auto;
+}
+#helpContent td {
+    padding: 2%;
+    line-height:28px;
+}
+#helpContent thead > tr, tbody{
+    display:block;
+}
+.bottomBorder {
+  position: relative;
+  border-bottom: 2px solid #aaa;
+}
+
+.helpTopic {
+  position: relative;
+  overflow: auto;
+  padding-bottom: 25px;
+}
+#helpContent td.subTopic {
+  padding-left: 15%;
+  background-color: #444;
+}
+.topicIconBox {
+  width: 10%;
+  padding-top: 10%;
+  position: relative;
+  float: left;
+}
+.subTopicIconBox, .rensaIcon {
+  width: 10%;
+  padding-top: 8%;
+  margin-top:1%;
+  position: relative;
+  float: left;
+}
+.rensaIcon{
+  width:18%; margin-right:2%;
+  margin-left:-1%;
+}
+.topicIcon {
+  position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  background-image: url('../img/Ikoner.png');
+}
+#cubeIcon {
+  background-size: 200%;
+  background-position: 100% 0;
+}
+#eraseIcon {
+  background-position: 100% 16.286%;
+  background-size: 200%;
+}
+#baseIcon {
+  background-position: 0 33.715%;
+  background-size: 200%;
+}
+#settingsIcon {
+  background-position: 0 67.144%;
+  background-size: 200%;
+}
+#colorsIcon {
+  background-position: 0 49.857%;
+  background-size: 200%;
+}
+#clearIcon {
+  background-image: url('../img/clearBase-icon.png');
+  background-size: 100%;
+  background-repeat:no-repeat;
+}
+#loadIcon {
+  background-image: url('../img/settings-icons.png');
+  background-size: 200%;
+  background-position:0 0 ;
+}
+#saveIcon {
+  background-image: url('../img/settings-icons.png');
+  background-size: 200%;
+  background-position:100% 0;
+}
+#printIcon {
+  background-image: url('../img/settings-icons.png');
+  background-size: 200%;
+  background-position:0 100%;
+}
+.topicHeader, .topicHeaderRensa {
+  padding-top:20px;
+  width: 87%;
+  float: right;
+  margin-top: 0;
+}
+.topicText, .topicTextRensa {
+  width: 87%;
+  float: right;
+  clear: right;
+}
+.topicTextRensa, .topicHeaderRensa  {
+  width: 80%;
+}
+
+/* Help modal end ---------------------------------------------------------------------*/
+
+
+/* Smaller devices orientation */
+@media (orientation: landscape) and (max-width:1200px) {
+  #colorsModal a {
+    margin: 0;
+    border-width:5px;
+  }
+}
+
+/* Smaller devices border-radius */
+@media (max-width:960px) {
+  #settingsModal > div, #baseModal div div a, #baseModal div div #sizePreview, #preview {
+    border-radius: 20px;
+  }
+  #preview canvas{
+    border-radius: 20px !important;
+  }
+  #FormModal > form{
+    width: 90%;
+  }
+  #FormModal form input[type="text"], #FormModal form a, #alert {
+    font-size: 16px !important;
+  }
+}
+
+/* Portrait orientation */
+@media (orientation: portrait) {
+  #colorsModal a {
+    margin: 0;
+    border-width: 5px;
+  }
+  #menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background: transparent;
+  }
+  #menu li {
+    z-index: 150;
+    float: left;
+    width: 20%;
+    padding-top: 19%;
+    background: #C2E9F9;
+  }
+  #menu a {
+    width: 90%;
+    height: 90%;
+    margin-top: 5%;
+  }
+  #ThreeJScontainer {
+    width: 100%;
+    height: 100%;
+  }
+
+/* Perspective container and modal */
+  #togglePerspectivePortrait {
+    display: block;
+    font-size: 5vw;
+    top: auto;
+    right: auto;
+    left: 0;
+    margin-bottom: 20%;
+    bottom: 0;
+  }
+  #togglePerspectivePortrait.close {
+    bottom: 0;
+    margin-bottom: 0;
+  }
+  #togglePerspectiveLandscape {
+    display: none;
+  }
+  #perspectives {
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: transparent;
+  }
+  #perspectives li {
+    z-index: 150;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 20%;
+    padding-top: 20%;
+    background: #C2E9F9;
+  }
+  #perspectives li:nth-of-type(2) {
+    left: 20%;
+  }
+  #perspectives li:nth-of-type(3) {
+    left: 40%;
+  }
+  #perspectives li:nth-of-type(4) {
+    left: 60%;
+  }
+  #perspectives li:nth-of-type(5) {
+    left: 80%;
+  }
+  .perspective {
+    width: 100%;
+    height: 100%;
+    padding: 0%;
+    margin: 0;
+  }
+  .canvasWrapper {
+    width: 90%;
+    height: 90%;
+    margin: 5%;
+  }
+
+/* Modals */
+  .modal {
+    border-left: none;
+    left: 0;
+  }
+  .container {
+    width: 100%;
+  }
+  #settingsModal div a {
+    line-height: 12.95em;
+  }
+  #settingsModal div a span {
+    font-size: 4vw;
+    line-height: 9vw;
+  }
+  #colors {
+    top: 50%;
+  }
+  #baseModal div div a, #baseModal div div #sizePreview, #preview {
+    font-size:7vw;
+    line-height:10vw;
+  }
+  #toggleCounter {
+    font-size: 5vw;
+    left: 0;
+    top: 0;
+    margin-top: 20%;
+  }
+}
+
+@media print {
+  #menu, #toggleCounter, #togglePerspective {
+    display: none;
+  }
+  html, body {
+    height: auto;
+    background: #ffffff;
+  }
+  #ThreeJScontainer {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 20%;
+  }
+  #ThreeJScontainer canvas {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  #perspectives {
+    width: 100%;
+    height: 20%;
+  }
+  #perspectives li {
+    width: 20%;
+    padding-top: 20%;
+    margin: 0;
+    float: left;
+  }
+  .perspective,
+  .canvasWrapper {
+    border-top: 2% solid transparent;
+    border-right: 2% solid transparent;
+    border-left: 2% solid transparent;
+    border-bottom-width: 2%;
+    width: 96%;
+    height: 96%;
+    padding: 0;
+    margin: 0;
+  }
+  #topView {
+    border-bottom: none;
+    padding-bottom: 2%;
+  }
+  .canvasWrapper canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+
+html {
+  font-family: sans-serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+
+body {
+  margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block; /* 1 */
+  vertical-align: baseline; /* 2 */
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+ */
+
+[hidden],
+template {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+
+b,
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+
+img {
+  border: 0;
+}
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Contain overflow in all browsers.
+ */
+
+pre {
+  overflow: auto;
+}
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit; /* 1 */
+  font: inherit; /* 2 */
+  margin: 0; /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+
+button {
+  overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button; /* 2 */
+  cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+input {
+  line-height: normal;
+}
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+ *    (include `-moz` to future-proof).
+ */
+
+input[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box; /* 2 */
+  box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+
+legend {
+  border: 0; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+
+optgroup {
+  font-weight: bold;
+}
+
+/* Tables
+   ========================================================================== */
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
