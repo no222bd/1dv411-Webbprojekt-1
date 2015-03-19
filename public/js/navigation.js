@@ -174,11 +174,19 @@ jQuery(document).ready(function ($) {
 	});
 
 	/**
+	 * Trigging submit event on form. 
+	 */
+	$("#Submit").on('click', function (event) {
+		event.preventDefault();
+		$("#saveImportForm").submit();
+	});
+
+	/**
 	 * Send GET to /api/{name} where name is model name.
 	 * When successful, gets JSON, value with key "data" should be sent to
 	 * the model through cb.loadModel();
 	 */
-	$("#Submit").on('click', function (event) {
+	$("#saveImportForm").on('submit', function (event) {	
 		event.preventDefault();
 		var name = $.trim($("#Name").val());
 		var buildingSaver = new BUILDER.BuildingSaver();
@@ -188,7 +196,7 @@ jQuery(document).ready(function ($) {
 			$("#alert").attr('class', 'sadSmiley');
 		} else {
 			if (name.length <= 50) {
-				if ($(this).text() == 'Hämta') {
+				if ($('#Submit').text() == 'Hämta') {
 					if (navigator.onLine) {
 						// check api first
 						var requestUrl = "api/" + name;
