@@ -448,7 +448,7 @@ jQuery(document).ready(function ($) {
 	/*
 	 * Show infomessage about using iOS7
 	 */
-	// if(navigator.userAgent.match(/(iPad|iPhone|iPod touch);.*CPU.*OS 7_\d/i)) {
-	// 	$('<div style="font-weight:bold;margin-bottom:2%">P.g.a. iOS7 kan du uppleva problem med funktionerna Spara/Hämta.</div>').insertBefore( $('#formOfflineInfo') );
-	// }
+	if(navigator.userAgent.match(/(iPad|iPhone|iPod touch);.*CPU.*OS 7_\d/i)) {
+		$('<div style="font-weight:bold;margin-bottom:2%">P.g.a. iOS7 kan du uppleva problem med funktionerna Spara/Hämta.</div>').insertBefore( $('#formOfflineInfo') );
+	}
 });
