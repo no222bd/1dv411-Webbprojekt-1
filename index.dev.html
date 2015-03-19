@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="sv" manifest="./public/cache.manifest">
+	<head>
+		<meta charset="utf-8">
+		<title>Kubus</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="stylesheet" href="./public/css/normalize.css">
+		<link rel="stylesheet" href="./public/css/main.css">
+		<link rel="stylesheet" href="./public/css/fontello.css">
+		<!-- Favicons and apple-touch-icons etc-->
+		<!--[if IE]><link rel="shortcut icon" href="/favicons/favicon.ico"><![endif]-->
+		<link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="favicons/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="favicons/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="favicons/apple-touch-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+		<link rel="icon" type="image/png" href="favicons/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="favicons/favicon-194x194.png" sizes="194x194">
+		<link rel="icon" type="image/png" href="favicons/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="favicons/android-chrome-192x192.png" sizes="192x192">
+		<link rel="icon" type="image/png" href="favicons/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="favicons/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffc40d">
+		<meta name="msapplication-TileImage" content="favicons/mstile-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+		<meta name="description" content="Kubus är ett läromedel för matematikundervisning i förskolan och lågstadiet. Med Kubus kan eleven bygga och undersöka mönster och former i 2D och 3D direkt i klassrummets iPad eller dator. Kubus fugerar bra att använda tillsammans med andra läromedel, exempelvis fysiska byggklossar eller ritblock och penna." >
+	</head>
+	<body>
+		<!-- *** MODAL *** -->
+		<div id="modal" class="modal">
+			<!-- BASE -->
+			<div id="baseContainer" class="container">
+				<div id="baseModal">
+					<div>
+						<div class="innerBox">
+							<span id="preview"> </span>
+							<a id="reset" href="#reset">RENSA</a>
+						</div>
+					</div>
+					<div>
+						<div id="resize" class="innerBox">
+							<a class="sizeControl" href="#up"><span class="up"></span></a>
+							<span id="sizePreview" class="unselectable">10</span>
+							<a class="sizeControl" href="#down"><span class="down"></span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- COLORS -->
+			<div id="colorsContainer" class="container">
+				<div id="colorsModal">
+					<a id="colorRed" class="color red" href="#E60012"></a>
+					<a id="colorOrange" class="color orange" href="#F39800"></a>
+					<a id="colorYellow" class="color yellow" href="#FBE430"></a>
+					<a id="colorLGreen" class="color lgreen" href="#8FC31F"></a>
+					<a id="colorGreen" class="color green" href="#009944"></a>
+
+					<a id="colorBlueGreen" class="color blueGreen" href="#009E96"></a>
+					<a id="colorLBlue" class="color lblue" href="#00A0E9"></a>
+					<a id="colorBlue" class="color blue" href="#0068B7"></a>
+					<a id="colorPurple" class="color purple" href="#601986"></a>
+					<a id="colorBrown" class="color brown" href="#7F3E09"></a>
+
+					<a id="colorLLPink" class="color llPink" href="#F7C6EB"></a>
+					<a id="colorPink" class="color pink" href="#BE0081"></a>
+					<a id="colorVanilla" class="color vanilla" href="#FDE3C5"></a>
+					<a id="colorLPink" class="color lPink" href="#E27BFE"></a>
+					<a id="colorLRed" class="color lRed" href="#E5004F"></a>
+
+					<a id="colorturquoise" class="color turquoise" href="#C6FFF0"></a>
+					<a id="colorDYellow" class="color dYellow" href="#FED06F"></a>
+					<a id="colorBlack" class="color black" href="#000000"></a>
+					<a id="colorWhite" class="color white" href="#FFFFFF"></a>
+					<a id="colorRandom" class="color random" href="#random"></a>
+				</div>
+			</div>
+			<!-- SETTINGS -->
+			<div id="settingsContainer" class="container">
+				<div id="settingsModal">
+					<div>
+						<a class="innerBox get" href="#import">Hämta</a>
+					</div>
+					<div>
+						<a class="innerBox save" href="#save">Spara</a>
+					</div>
+					<div>
+						<a class="innerBox print" href="#print">Skriv ut</a>
+					</div>
+					<div>
+						<a class="innerBox help" href="#help">Hjälp</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- HELP -->
+			<div id="helpModal">
+				<h1>Hjälp <span>Scrolla för att se mer...</span></h1>
+				<div id="helpContentContainer">
+					<table id="helpContent">
+						<tbody>
+							<tr class="bottomBorder">
+								<td class="helpTopic">
+									<div class="topicIconBox">
+										<span id="cubeIcon" class="topicIcon"></span>
+									</div>
+									<h2 class="topicHeader">Lägg till kub</h2>
+									<div class="topicText">
+										Om du har kuben vald (markeras med gul ram) så går det att lägga till kuber på byggytan.
+									</div>
+								</td>
+							</tr>
+							<tr class="bottomBorder">
+								<td class="helpTopic">
+								<div class="topicIconBox">
+									<span id="eraseIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Ta bort kub</h2>
+								<div class="topicText">
+									Om du har suddet valt (markeras med gul ram) är det bara att klicka på de kuber som du vill ta bort.
+									Om du använder en datormus så behöver du inte växla över till suddgummit utan kan kan använda dig av höger musknapp för att ta bort en kub.
+								</div></td>
+							</tr>
+							<tr>
+								<td class="helpTopic">
+								<div class="topicIconBox">
+									<span id="baseIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Ändra storlek</h2>
+								<div class="topicText">
+									Här kan du ändra basplattans storlek mellan 1-10 genom att trycka på uppåt-och nedåtknapparna som visas i popup-fönstret.
+									Observera att en ändring här resulterar i att byggytan ransas på eventuella kuber.
+								</div></td>
+							</tr>
+							<tr class="bottomBorder">
+								<td class="helpTopic subTopic">
+								<div class="rensaIcon">
+									<span id="clearIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeaderRensa">Rensa basplattan</h2>
+								<div class="topicTextRensa">
+									Denna knapp rensar byggytan från kuber.
+								</div></td>
+							</tr>
+							<tr class="bottomBorder">
+								<td class="helpTopic">
+								<div class="topicIconBox">
+									<span id="colorsIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Färgpaletten</h2>
+								<div class="topicText">
+									Här finns möjligheten att byta färg på din kub. Det finns en färg som har ett regnbåge-mönster, om du väljer den så får varje kub du lägger till en slumpad färg.
+								</div></td>
+							</tr>
+							<tr>
+								<td class="helpTopic">
+								<div class="topicIconBox">
+									<span id="settingsIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Inställningar</h2>
+								<div class="topicText">
+									Under inställningar hittar du möjligheterna att hantera dina modeller samt skriva ut dem.
+								</div></td>
+							</tr>
+							<tr>
+								<td class="helpTopic subTopic">
+								<div class="subTopicIconBox">
+									<span id="loadIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Hämta modell</h2>
+								<div class="topicText">
+									Hämta en tidigare sparad modell.
+									Om man befinner sig offline så är det endast möjligt att hämta lokalt sparade modeller.
+									Om man är online så är det möjligt att hämta modeller från den gemensamma lagringsplatsen.
+									I det fall en lokal modell har samma namn som en modell lagrad på den gemensamma lagringsplatsen så kommer den sistnämnda att hämtas.
+								</div></td>
+							</tr>
+							<tr>
+								<td class="helpTopic subTopic">
+								<div class="subTopicIconBox">
+									<span id="saveIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Spara modell</h2>
+								<div class="topicText">
+									Spara en skapade modell. Om man befinner sig offline så kommer modellen enbart att lagras lokalt på enheten.
+									Befinner man sig online så kommer modellen att lagras både lokalt och på den gemensamma lagringsplatsen. Modellen sparas i 30 dagar.
+								</div></td>
+							</tr>
+							<tr>
+								<td class="helpTopic subTopic">
+								<div class="subTopicIconBox">
+									<span id="printIcon" class="topicIcon"></span>
+								</div><h2 class="topicHeader">Skriv ut</h2>
+								<div class="topicText">
+									Skriv ut den aktuella modellen.
+								</div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div id="helpBottom"></div>
+			</div>
+			<!-- HELP end -->
+
+			<div id="FormModal" class="container">
+				<form id="saveImportForm">
+					<div id="alert"></div>
+					<div id="formOfflineInfo">Sparar/Hämtar endast lokalt på enheten.</div>
+					<input id="Name" type="text" placeholder="Namn" maxlength="50" />
+					<a id="Submit" href="#Submit">Hämta</a>
+				</form>
+			</div>
+		</div>
+
+		<!-- *** MENU *** -->
+		<ul id="menu">
+			<li>
+				<a id="cube" class="buildOption chosen" href="#cube"></a>
+			</li>
+			<li>
+				<a id="erase" class="buildOption" href="#erase"></a>
+			</li>
+			<li>
+				<a id="base" class="modalOption clear" href="#baseContainer"></a>
+			</li>
+			<li>
+				<a id="colors" class="modalOption" href="#colorsContainer"></a>
+				<span class="preloadingRandomIcon"></span>
+			</li>
+			<li>
+				<a id="settings" class="modalOption" href="#settingsContainer"></a>
+				<span class="preloadingSettingsSprite"></span>
+				<span class="preloadingRensa"></span>
+			</li>
+		</ul>
+
+		<!-- Construction Area -->
+		<div id="ThreeJScontainer" onclick="void(0)">
+			<a id="toggleCounter" href="#toggleCounter">
+				<span class="counter">
+					<p>
+						<span id="counter">0</span>
+					</p>
+				</span>
+				<span id='toggleArrow'>&#8592;</span>
+			</a>
+		</div>
+
+		<!-- Perspective -->
+		<a id="togglePerspectiveLandscape" class="open" href="#togglePerspective">&#8594;</a>
+		<a id="togglePerspectivePortrait" class="open" href="#togglePerspective">&#8595;</a>
+		<ul id="perspectives" class="container">
+			<li>
+				<a class="green perspective" href="#green">
+				<div id="greenView"  class="canvasWrapper">
+					<!--canvas></canvas-->
+				</div> </a>
+			</li>
+			<li>
+				<a class="yellow perspective" href="#yellow">
+				<div id="yellowView" class="canvasWrapper">
+					<!--canvas></canvas-->
+				</div> </a>
+			</li>
+			<li>
+				<a class="top perspective" href="#top">
+				<div id="topView" class="canvasWrapper">
+					<!--canvas></canvas-->
+				</div> </a>
+			</li>
+			<li>
+				<a class="pink perspective" href="#red">
+				<div id="redView" class="canvasWrapper">
+					<!--canvas></canvas-->
+				</div> </a>
+			</li>
+			<li>
+				<a class="blue perspective" href="#blue">
+				<div id="blueView" class="canvasWrapper">
+					<!--canvas></canvas-->
+				</div> </a>
+			</li>
+		</ul>
+
+		<script src="./public/js/vendor/jquery-1.11.2.min.js"></script>
+		<script src="./public/js/vendor/typedarrays.js"></script>
+		<script src="./public/js/vendor/requestAnimationFramePolyfill.js"></script>
+		<script src="./public/js/vendor/three.min.js"></script>
+		<script src="./public/js/vendor/Projector.js"></script>
+		<script src="./public/js/vendor/Detector.js"></script>
+		<script src="./public/js/vendor/CanvasRenderer.js"></script>
+		<script src="./public/js/vendor/OrbitControls.js"></script>
+		<script src="./public/js/vendor/stats.min.js"></script>
+		<script src="./public/js/vendor/lz-string.min.js"></script>
+		<script src="./public/js/Builder.js"></script>
+		<script src="./public/js/buildingSaver.js"></script>
+		<script src="./public/js/navigation.js"></script>
+		<script src="./public/js/appcache.js"></script>
+	</body>
+</html>
