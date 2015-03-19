@@ -185,7 +185,7 @@ jQuery(document).ready(function ($) {
 		var alert = $('#alert');
 		if (name == '' || name == null || name == undefined) {
 			alert.text('Namnet är för kort');
-			$("#alert").toggleClass('sadSmiley');
+			$("#alert").attr('class', 'sadSmiley');
 		} else {
 			if (name.length <= 50) {
 				if ($(this).text() == 'Hämta') {
@@ -209,8 +209,20 @@ jQuery(document).ready(function ($) {
 										closeModal();
 									} else {
 										alert.text('Byggnaden hittades inte');
-										$("#alert").toggleClass('sadSmiley');
+										$("#alert").attr('class', 'sadSmiley');
 									}
+								},
+								404: function (result) {
+									alert.text('Ett fel inträffade, försök igen');
+									$("#alert").attr('class', 'sadSmiley');
+								},
+								500: function (result) {
+									alert.text('Ett fel inträffade, försök igen');
+									$("#alert").attr('class', 'sadSmiley');
+								},
+								503: function (result) {
+									alert.text('Ett fel inträffade, försök igen');
+									$("#alert").attr('class', 'sadSmiley');
 								}
 							}
 						});
@@ -222,7 +234,7 @@ jQuery(document).ready(function ($) {
 							closeModal();
 						} else {
 							alert.text('Byggnaden hittades inte');
-							$("#alert").toggleClass('sadSmiley');
+							$("#alert").attr('class', 'sadSmiley');
 						}
 					}
 				} else {
@@ -239,16 +251,24 @@ jQuery(document).ready(function ($) {
 									// save in localStorage
 									buildingSaver.saveBuildings(JSON.parse(result.data));
 									alert.text('Byggnaden sparades');
-									$("#alert").toggleClass('happySmiley');
+									$("#alert").attr('class', 'happySmiley');
 									$("#Name").val('');
 								},
 								400: function (result) {
 									alert.text('Namnet finns redan');
-									$("#alert").toggleClass('sadSmiley');
+									$("#alert").attr('class', 'sadSmiley');
+								},
+								404: function (result) {
+									alert.text('Ett fel inträffade, försök igen');
+									$("#alert").attr('class', 'sadSmiley');
+								},
+								500: function (result) {
+									alert.text('Ett fel inträffade, försök igen');
+									$("#alert").attr('class', 'sadSmiley');
 								},
 								503: function (result) {
 									alert.text('Ett fel inträffade, försök igen');
-									$("#alert").toggleClass('sadSmiley');
+									$("#alert").attr('class', 'sadSmiley');
 								}
 							}
 						});
@@ -257,17 +277,17 @@ jQuery(document).ready(function ($) {
 						// save building in localStorage
 						if (buildingSaver.saveNewBuilding(name, dataString, true)) {
 							alert.text('Byggnaden sparades lokalt');
-							$("#alert").toggleClass('happySmiley');
+							$("#alert").attr('class', 'happySmiley');
 							$("#Name").val('');
 						} else {
 							alert.text('Namnet finns redan');
-							$("#alert").toggleClass('sadSmiley');
+							$("#alert").attr('class', 'sadSmiley');
 						}
 					}
 				}
 			}else{
 				alert.text('Namnet är för långt');
-				$("#alert").toggleClass('sadSmiley');
+				$("#alert").attr('class', 'sadSmiley');
 			}
 		}
 		return false;
