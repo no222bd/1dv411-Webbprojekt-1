@@ -90,7 +90,7 @@ jQuery(document).ready(function ($) {
 			toggleElement.text("→");
 		}
 	});
-	
+
 	$('#togglePerspectivePortrait').on('click', function(event) {
 		event.preventDefault();
 		var toggleElement = $('#togglePerspectivePortrait');
@@ -151,21 +151,21 @@ jQuery(document).ready(function ($) {
 			}
 		}
 	});
-	
+
 	/**
 	 * Hides offline info in save/import form if online
 	 */
 	if (navigator.onLine) {
 		$('#formOfflineInfo').hide();
 	}
-	
+
 	/**
 	 * Hides offline info in save/import form if going online
 	 */
 	$(window).on('online', function(event) {
 		$('#formOfflineInfo').hide();
 	});
-	
+
 	/**
 	 * Shows offline info in save/import form if going offline
 	 */
@@ -395,7 +395,7 @@ jQuery(document).ready(function ($) {
 			            });
 			        // Position backdrop absolute and make it span the entire page
 			        //
-			        // Also dirty, but we need to tap into the backdrop after Boostrap 
+			        // Also dirty, but we need to tap into the backdrop after Boostrap
 			        // positions it but before transitions finish.
 			        //
 			        setTimeout( function() {
@@ -444,4 +444,11 @@ jQuery(document).ready(function ($) {
 	function chooseRandomColorFromColors() {
 		return colorsArray[Math.floor((Math.random() * (colorsArray.length - 1)))];
 	}
+
+	/*
+	 * Show infomessage about using iOS7
+	 */
+	// if(navigator.userAgent.match(/(iPad|iPhone|iPod touch);.*CPU.*OS 7_\d/i)) {
+	// 	$('<div style="font-weight:bold;margin-bottom:2%">P.g.a. iOS7 kan du uppleva problem med funktionerna Spara/Hämta.</div>').insertBefore( $('#formOfflineInfo') );
+	// }
 });
