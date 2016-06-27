@@ -10,7 +10,7 @@ Jennifer Nord (jn222iw)
 David Söderberg (ds222hz)  
 
 ## Körbar applikation
-http://matematikdidaktik.davidsouthmountain.se/
+http://www2.kau.se/jorrbomm/kubus/
 
 ## Installations instruktioner
 1. Ladda ner repo
